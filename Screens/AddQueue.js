@@ -3,7 +3,8 @@ import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import { LinearGradient, Constants } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 
-const Notification = (props) => {
+
+const AddQueue = (props) => {
     return (
             <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
                 <View style={Styles.Container}>
@@ -11,13 +12,12 @@ const Notification = (props) => {
                         <TouchableHighlight style={Styles.Icon} onPress={() => props.navigation.openDrawer()}>
                             <Ionicons name="ios-menu" size={30} color="#87daf3"  />
                         </TouchableHighlight>
-                        <Text style={{color : '#87daf3' , fontSize: 23 , fontWeight: 'bold' , paddingLeft: 125 , marginTop: 15 }} >แจ้งเตือน</Text>
+                        <Text style={{color : '#87daf3' , fontSize: 23 , fontWeight: 'bold' , paddingLeft: 130 , marginTop: 15 }} >แอดคิว</Text>
                         </View>
                 </View>
             </LinearGradient>
     );
 }
-
 
 const Styles = StyleSheet.create({
     Container: {
@@ -34,4 +34,4 @@ const Styles = StyleSheet.create({
     }
 });
 
-export default Notification
+export default AddQueue;

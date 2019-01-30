@@ -2524,6 +2524,11 @@ extend-shallow@^3.0.0, extend-shallow@^3.0.2:
     assign-symbols "^1.0.0"
     is-extendable "^1.0.1"
 
+extends@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/extends/-/extends-0.0.4.tgz#2cab5fce148956b73cff6dc35d487492db68c399"
+  integrity sha1-LKtfzhSJVrc8/23DXUh0kttow5k=
+
 external-editor@^2.0.1, external-editor@^2.0.4:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/external-editor/-/external-editor-2.2.0.tgz#045511cfd8d133f3846673d1047c154e214ad3d5"

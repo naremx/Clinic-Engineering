@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableHighlight,ActivityIndicator,Image,ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TouchableHighlight,ActivityIndicator,Image,ScrollView,TouchableOpacity,Button } from 'react-native';
 import { LinearGradient, Constants } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { TextInput } from 'react-native-gesture-handler';
@@ -14,7 +14,7 @@ export default class Search extends React.Component{
     }
 }
     componentDidMount () {
-        return fetch('https://facebook.github.io/react-native/movies.json')
+        fetch('https://facebook.github.io/react-native/movies.json')
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
@@ -23,7 +23,7 @@ export default class Search extends React.Component{
                 })
             })
         .catch((error) => {
-            console.log(error)
+            console.log('error')
         });
     }
     render() {
@@ -35,7 +35,7 @@ export default class Search extends React.Component{
             )
         } else {
             let movies = this.state.dataSource.map((val,key) => {
-                return (   
+                return (  
                     <View key={key} style={Styles.item}>
                         <View style={Styles.ContainerContacts}>
                             <View style={Styles.FlexContainer}>
@@ -51,28 +51,28 @@ export default class Search extends React.Component{
             });
             return (
                 <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
-                <View style={Styles.Container}>
-                    <View style={Styles.Header} >
-                        <TouchableHighlight style={Styles.Icon} onPress={() => props.navigation.openDrawer()}>
-                            <Ionicons name="ios-menu" size={30} color="#87daf3"  />
-                        </TouchableHighlight>
-                        <Text style={{color : '#87daf3' , fontSize: 23 , fontWeight: 'bold' , paddingLeft: 140 , marginTop: 15 }} >ค้นหา</Text>
-                        </View>
-                    <View>
-                         <LinearGradient colors ={['#fafafa','#ffffff']} style={Styles.InputBoxSearch}>
-                         <Ionicons name="ios-search" size={30} color="#a69beb" style={Styles.InputIconSearch} />
-                            <TextInput style={Styles.Input} placeholder='ชื่ออาจารย์ / ชื่อภาควิชา / ชื่อวิทยานิพนธ์' placeholderTextColor='#d2d2d2' underlineColorAndroid='transparent' />
-                        </LinearGradient>
-                    </View>
-                    <ScrollView> 
-                        <View style={Styles.FlexContainer}>
-                            <View style={{flexDirection: 'column'}}>
-                                {movies}
+                    <View style={Styles.Container}>
+                        <View style={Styles.Header} >
+                            <TouchableHighlight style={Styles.Icon} onPress={() => props.navigation.openDrawer()}>
+                                <Ionicons name="ios-menu" size={30} color="#87daf3"  />
+                            </TouchableHighlight>
+                            <Text style={{color : '#87daf3' , fontSize: 23 , fontWeight: 'bold' , paddingLeft: 140 , marginTop: 15 }} >ค้นหา</Text>
                             </View>
+                        <View>
+                            <LinearGradient colors ={['#fafafa','#ffffff']} style={Styles.InputBoxSearch}>
+                            <Ionicons name="ios-search" size={30} color="#a69beb" style={Styles.InputIconSearch} />
+                                <TextInput style={Styles.Input} placeholder='ชื่ออาจารย์ / ชื่อภาควิชา / ชื่อวิทยานิพนธ์' placeholderTextColor='#d2d2d2' underlineColorAndroid='transparent' />
+                            </LinearGradient>
                         </View>
-                    </ScrollView> 
-                </View>
-            </LinearGradient>
+                        <ScrollView> 
+                            <View style={Styles.FlexContainer}>
+                                <View style={{flexDirection: 'column'}}>
+                                    {movies}
+                                </View>
+                            </View>
+                        </ScrollView> 
+                    </View>
+                </LinearGradient>
             );
         }
     }

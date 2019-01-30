@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import { LinearGradient, Constants } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
+import { Actions } from 'react-native-router-flux';
 
 
 const Home = (props) => {
@@ -14,6 +15,7 @@ const Home = (props) => {
                         </TouchableHighlight>
                         <Text style={{color : '#87daf3' , fontSize: 23 , fontWeight: 'bold' , paddingLeft: 130 , marginTop: 15 }} >หน้าหลัก</Text>
                         </View>
+                    <Text onPress={()=> Actions.search()}>
                 </View>
             </LinearGradient>
     );
