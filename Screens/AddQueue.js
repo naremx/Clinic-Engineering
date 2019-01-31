@@ -8,12 +8,7 @@ const AddQueue = (props) => {
     return (
             <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
                 <View style={Styles.Container}>
-                    <View style={Styles.Header} >
-                        <TouchableHighlight style={Styles.Icon} onPress={() => props.navigation.openDrawer()}>
-                            <Ionicons name="ios-menu" size={30} color="#87daf3"  />
-                        </TouchableHighlight>
-                        <Text style={{color : '#87daf3' , fontSize: 23 , fontWeight: 'bold' , paddingLeft: 130 , marginTop: 15 }} >แอดคิว</Text>
-                        </View>
+
                 </View>
             </LinearGradient>
     );

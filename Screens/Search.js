@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, TouchableHighlight,ActivityIndicator,Image,Scro
 import { LinearGradient, Constants } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { TextInput } from 'react-native-gesture-handler';
+import { Actions } from 'react-native-router-flux';
+
 
 
 export default class Search extends React.Component{
@@ -35,29 +37,25 @@ export default class Search extends React.Component{
             )
         } else {
             let movies = this.state.dataSource.map((val,key) => {
-                return (  
-                    <View key={key} style={Styles.item}>
-                        <View style={Styles.ContainerContacts}>
-                            <View style={Styles.FlexContainer}>
-                                <Image style={Styles.drawerImage} source={require('./Advisor.png')} />
-                                <View style={Styles.Column}>
-                                    <Text style={{ marginLeft : 10 , color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' , marginTop: 20 }} >{val.title}</Text>
-                                    <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{val.releaseYear}</Text>
+                return ( 
+                    <TouchableOpacity onPress={()=> Actions.AddQueue()}>
+                        <View key={key} style={Styles.item}>
+                            <View style={Styles.ContainerContacts}>
+                                <View style={Styles.FlexContainer}>
+                                    <Image style={Styles.drawerImage} source={require('./Advisor.png')} />
+                                    <View style={Styles.Column}>
+                                        <Text style={{ marginLeft : 10 , color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' , marginTop: 20 }} >{val.title}</Text>
+                                        <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{val.releaseYear}</Text>
+                                    </View>
                                 </View>
                             </View>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                 )
             });
             return (
                 <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
                     <View style={Styles.Container}>
-                        <View style={Styles.Header} >
-                            <TouchableHighlight style={Styles.Icon} onPress={() => props.navigation.openDrawer()}>
-                                <Ionicons name="ios-menu" size={30} color="#87daf3"  />
-                            </TouchableHighlight>
-                            <Text style={{color : '#87daf3' , fontSize: 23 , fontWeight: 'bold' , paddingLeft: 140 , marginTop: 15 }} >ค้นหา</Text>
-                            </View>
                         <View>
                             <LinearGradient colors ={['#fafafa','#ffffff']} style={Styles.InputBoxSearch}>
                             <Ionicons name="ios-search" size={30} color="#a69beb" style={Styles.InputIconSearch} />
@@ -107,7 +105,6 @@ const Styles = StyleSheet.create({
         width: 350,
         height: 40,
         borderRadius: 25,
-        marginVertical: 20,
         justifyContent: 'center',
         paddingHorizontal: 20,
         marginLeft: 20,
