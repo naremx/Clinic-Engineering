@@ -1,39 +1,144 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
-import { LinearGradient, Constants } from 'expo';
+import { StyleSheet, Image, View, Dimensions , Text , ActivityIndicator, ScrollView } from 'react-native';
+import Carousel from 'react-native-banner-carousel';
+import { LinearGradient } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
-import { Actions } from 'react-native-router-flux';
 
+const BannerWidth = Dimensions.get('window').width;
+const BannerHeight = 200;
 
-const Home = (props) => {
-    return (
-            <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
-                <View style={Styles.Container}>
-                    <View style={Styles.Header} >
-                        <TouchableHighlight style={Styles.Icon} onPress={() => props.navigation.openDrawer()}>
-                            <Ionicons name="ios-menu" size={30} color="#87daf3"  />
-                        </TouchableHighlight>
-                        <Text style={{color : '#87daf3' , fontSize: 23 , fontWeight: 'bold' , paddingLeft: 130 , marginTop: 15 }} >หน้าหลัก</Text>
-                        </View>
-                    <Text onPress={()=> Actions.search()}>
+const images = [
+    "https://img.live/images/2019/02/05/1.md.png",
+    "https://img.live/images/2019/02/05/799739.md.jpg",
+    "https://img.live/images/2019/02/05/631371.md.jpg"
+];
+
+export default class App extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isLoading: true,
+            dataSource: null,
+    }
+}
+
+componentDidMount () {
+    fetch('http://www.json-generator.com/api/json/get/ccLAsEcOSq?indent=1')
+        .then((response) => response.json())
+        .then((responseJson) => {
+            this.setState({
+                isLoading: false,
+                dataSource: responseJson.book_array,
+            })
+        })
+    .catch((error) => {
+        console.log('error')
+    });
+}
+    renderPage(image, index) {
+        return (
+            <View key={index}>
+                <Image style={{ width: BannerWidth, height: BannerHeight }} source={{ uri: image }} />
+            </View>
+        );
+    }
+
+    render() {
+        if (this.state.isLoading) {
+            return(
+                <View>
+                    <ActivityIndicator/>
                 </View>
+            )
+        } else {
+            let List = this.state.dataSource.map((val,key) => {
+                return ( 
+                    
+                        <View key={key} style={Styles.item}>
+                            <View style={Styles.ContainerContacts}>
+                                <View style={Styles.FlexContainer}>
+                                    <Image style={Styles.drawerImage} source={{ uri: val.image }} />
+                                    <View style={Styles.Column}>
+                                        <Text style={{ marginLeft : 10 , color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' , marginTop: 20 }} >{val.book_title}</Text>
+                                        <Text style={{ marginLeft : 10 , color : '#777' }}>Computer Engineering</Text>
+                                        <View style={Styles.FlexContainer}>
+                                            <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
+                                            <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{val.author}</Text>
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>   
+                )
+            });
+        return (
+            <LinearGradient colors ={['#87daf3','#a69beb']} style={Styles.container}>
+            <ScrollView>
+                <View >
+                    <Carousel
+                        autoplay
+                        autoplayTimeout={5000}
+                        loop
+                        index={0}
+                        pageSize={BannerWidth}
+                    >
+                        {images.map((image, index) => this.renderPage(image, index))}
+                    </Carousel>
+                </View>
+                <View style={Styles.line}> 
+                    <Text style={{color: '#fff' , margin: 15 , fontSize : 20 , fontWeight: 'bold' }}>รายชื่ออาจารย์ที่ให้บริการวันนี้</Text>
+                </View>
+                <View style={{ marginTop : 10 }}>
+                    <View style={Styles.FlexContainer}>
+                        <View style={{flexDirection: 'column' , marginTop: 20}}>
+                            {List}
+                        </View>
+                    </View>
+                    
+                </View>
+            </ScrollView>
             </LinearGradient>
-    );
+        );
+    }
+}
 }
 
 const Styles = StyleSheet.create({
-    Container: {
-        height: '100%' ,
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
     },
-    Header: {
-        height: 60 ,
-        backgroundColor: '#fff'  ,
+    line:{
+        backgroundColor: '#fff',
+        height: 10,
+        shadowColor: '#777777',
+        shadowRadius: 10,
+        shadowOpacity: 0.6,
+        elevation: 4,
+    },
+    ContainerContacts: {
+        width: 370,
+        height: 120,
+        backgroundColor: 'white',
+        borderRadius: 18,
+        shadowColor: '#30C1DD',
+        shadowRadius: 10,
+        shadowOpacity: 0.6,
+        elevation: 6,
+    },
+    FlexContainer:{
+        flex:1 ,
         flexDirection: 'row'
     },
-    Icon: {
-        marginLeft: 10  ,
-        marginTop: 16
-    }
+    item:{
+        alignSelf: 'stretch',
+        margin: 10,
+    },
+    drawerImage: {
+        height: 90,
+        width: 90,
+        borderRadius: 100,
+        marginLeft: 20,
+        marginTop: 15,
+    },
 });
-
-export default Home;
