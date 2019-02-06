@@ -8,7 +8,6 @@ const AddQueue = (props) => {
     return (
             <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
                 <View style={Styles.Container}>
-
                 </View>
             </LinearGradient>
     );

@@ -10,21 +10,32 @@
     "@expo/vector-icons": "^9.0.0",
     "expo": "^32.0.0",
     "extends": "^0.0.4",
+    "firebase": "^5.8.2",
     "native-base": "^2.10.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-banner-carousel": "^1.0.3",
     "react-native-elements": "^1.0.0-beta7",
     "react-native-fcm": "^16.2.4",
     "react-native-fontawesome": "^6.0.1",
     "react-native-hide-show-password-input": "^1.0.7",
+    "react-native-image-slider": "^2.0.3",
     "react-native-modal": "^7.0.2",
     "react-native-navigation-bar": "^0.2.1",
     "react-native-router-flux": "^4.0.6",
+    "react-native-snap-carousel": "^3.7.5",
     "react-native-vector-icons": "^6.1.0",
-    "react-navigation": "^3.0.9"
+    "react-navigation": "^3.0.9",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
   },
+  "rnpm": {
+    "assets": [
+    "./assets/fonts/"
+    ]
+},
   "private": true
 }

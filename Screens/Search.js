@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableHighlight,ActivityIndicator,Image,ScrollView,TouchableOpacity,Button } from 'react-native';
+import { StyleSheet, View, Text,ActivityIndicator,Image,ScrollView } from 'react-native';
 import { LinearGradient, Constants } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { TextInput } from 'react-native-gesture-handler';
@@ -16,12 +16,12 @@ export default class Search extends React.Component{
     }
 }
     componentDidMount () {
-        fetch('https://facebook.github.io/react-native/movies.json')
+        fetch('http://www.json-generator.com/api/json/get/ccLAsEcOSq?indent=1')
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
                     isLoading: false,
-                    dataSource: responseJson.movies,
+                    dataSource: responseJson.book_array,
                 })
             })
         .catch((error) => {
@@ -36,27 +36,30 @@ export default class Search extends React.Component{
                 </View>
             )
         } else {
-            let movies = this.state.dataSource.map((val,key) => {
+            let List = this.state.dataSource.map((val,key) => {
                 return ( 
-                    <TouchableOpacity onPress={()=> Actions.AddQueue()}>
+                    
                         <View key={key} style={Styles.item}>
                             <View style={Styles.ContainerContacts}>
                                 <View style={Styles.FlexContainer}>
-                                    <Image style={Styles.drawerImage} source={require('./Advisor.png')} />
+                                    <Image style={Styles.drawerImage} source={{ uri: val.image }} />
                                     <View style={Styles.Column}>
-                                        <Text style={{ marginLeft : 10 , color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' , marginTop: 20 }} >{val.title}</Text>
-                                        <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{val.releaseYear}</Text>
+                                        <Text style={{ fontFamily:'supermarket' , marginLeft : 10 , color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' , marginTop: 20 }} >{val.book_title}</Text>
+                                        <Text style={{ marginLeft : 10 , color : '#777' }}>Computer Engineering</Text>
+                                        <View style={Styles.FlexContainer}>
+                                            <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
+                                            <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{val.author}</Text>
+                                        </View>
                                     </View>
                                 </View>
                             </View>
-                        </View>
-                    </TouchableOpacity>
+                        </View>   
                 )
             });
             return (
                 <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
                     <View style={Styles.Container}>
-                        <View>
+                        <View style={{ marginBottom: 10 }}>
                             <LinearGradient colors ={['#fafafa','#ffffff']} style={Styles.InputBoxSearch}>
                             <Ionicons name="ios-search" size={30} color="#a69beb" style={Styles.InputIconSearch} />
                                 <TextInput style={Styles.Input} placeholder='ชื่ออาจารย์ / ชื่อภาควิชา / ชื่อวิทยานิพนธ์' placeholderTextColor='#d2d2d2' underlineColorAndroid='transparent' />
@@ -65,7 +68,7 @@ export default class Search extends React.Component{
                         <ScrollView> 
                             <View style={Styles.FlexContainer}>
                                 <View style={{flexDirection: 'column'}}>
-                                    {movies}
+                                    {List}
                                 </View>
                             </View>
                         </ScrollView> 
@@ -124,7 +127,7 @@ const Styles = StyleSheet.create({
         width: 370,
         height: 120,
         backgroundColor: 'white',
-        borderRadius: 25,
+        borderRadius: 18,
         shadowColor: '#30C1DD',
         shadowRadius: 10,
         shadowOpacity: 0.6,
@@ -137,5 +140,5 @@ const Styles = StyleSheet.create({
     item:{
         alignSelf: 'stretch',
         margin: 10,
-    }
+    },
 });
