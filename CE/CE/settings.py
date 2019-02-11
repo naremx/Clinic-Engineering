@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.db.backends.postgresql',
     'Account.apps.AccountConfig',
     'reset_migrations',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +129,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'Account.User'
+
+ALLOWED_HOSTS = ['*']
