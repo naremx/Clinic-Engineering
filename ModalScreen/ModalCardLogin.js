@@ -6,6 +6,10 @@ import { Ionicons } from 'react-native-vector-icons'
 import * as Expo from 'expo';
 import * as firebase from 'firebase';
 
+import { getToken } from '../Actions';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+
 const firebaseConfig={
     apiKey: "AIzaSyAzqICgMHtT0GuYtnUMAUYZTPdirJ6hdr8",
     authDomain: "clinicengineering-88f23.firebaseapp.com",
@@ -16,7 +20,7 @@ const firebaseConfig={
 };
 firebase.initializeApp(firebaseConfig);
 
-export default class ModalCardLogin extends React.Component {
+class ModalCardLogin extends React.Component {
     componentDidMount(){
 
         firebase.auth().onAuthStateChanged((user) => {
@@ -40,9 +44,59 @@ export default class ModalCardLogin extends React.Component {
     constructor(){
         super()
         this.state = {
-            showMe:false
+            showMe:false ,
+            username: '' ,
+            password: ''
         }
     }
+    updateValue(text , field){
+        if(field == 'username'){
+            this.setState({
+                username : text
+            })
+        }
+        else if(field == 'password'){
+            this.setState({
+                password : text
+            })
+        }
+    }
+    submit()
+    {
+        let collection={}
+        collection.username=this.state.username,
+        collection.password=this.state.password
+        console.log(collection);
+
+        var url = 'http://192.168.43.212:8000/Account/' ;
+
+        fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(collection),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+        }).then(res => res.json())
+        .then((responseData) => selectUserRole(responseData))//this.UserData(responseData))
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));
+    }
+    // UserData(responseData){
+    //     this.props.dispatch({
+    //         type: 'Login' ,
+    //         payload: responseData
+    //     })
+    //}
+
+    selectUserRole(responseData) {
+        this.props.getToken(responseData.token, responseData.role);
+        if (role === 1) {
+            Actions.user();
+        } else {
+            Actions.Advisor();
+        }
+    }
+
   
     render() {
         const { ModalBoxLogin } = Styles;
@@ -57,14 +111,14 @@ export default class ModalCardLogin extends React.Component {
                       <Text style={{ fontFamily:'supermarket', color : '#495090' , fontSize: 23 , fontWeight: 'bold' }}>เข้าสู่ระบบ</Text>
                       <View style={Styles.row}>
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , marginTop: 20 , marginRight: 36 , marginLeft: -30 }} >อีเมล</Text>
-                        <TextInput style={Styles.inputBoxLogin}/>
+                        <TextInput style={Styles.inputBoxLogin} onChangeText={(text) => this.updateValue(text, 'username')}/>
                       </View>
                       <View style={Styles.row}>
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , marginTop: 20 , marginRight: 10 , marginLeft: -30 }} >รหัสผ่าน</Text>
-                        <TextInput style={Styles.inputBoxLogin}  secureTextEntry={true}/>
+                        <TextInput style={Styles.inputBoxLogin}  secureTextEntry={true} onChangeText={(text) => this.updateValue(text, 'password')}/>
                       </View>
                       <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.submit()}>
                           <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' }}>เข้าสู่ระบบ</Text>
                         </TouchableOpacity>
                       </LinearGradient>
@@ -93,6 +147,8 @@ export default class ModalCardLogin extends React.Component {
         );
     }
   };
+
+export default connect(null, { getToken })(ModalCardLogin);
 
 const Styles = StyleSheet.create({
 Container: {
