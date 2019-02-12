@@ -1,3 +1,3 @@
-export default getToken = ({ token, role }) => {
+export const getToken = (token, role) => {
     return { type: 'Login', payload: { token, role } };
 }

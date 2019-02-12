@@ -77,20 +77,14 @@ class ModalCardLogin extends React.Component {
             'Content-Type': 'application/json'
         }
         }).then(res => res.json())
-        .then((responseData) => selectUserRole(responseData))//this.UserData(responseData))
+        .then((responseData) => this.selectUserRole(responseData))
         .then(response => console.log('Success:', JSON.stringify(response)))
         .catch(error => console.error('Error:', error));
     }
-    // UserData(responseData){
-    //     this.props.dispatch({
-    //         type: 'Login' ,
-    //         payload: responseData
-    //     })
-    //}
 
     selectUserRole(responseData) {
         this.props.getToken(responseData.token, responseData.role);
-        if (role === 1) {
+        if (responseData.role === 3) {
             Actions.user();
         } else {
             Actions.Advisor();
