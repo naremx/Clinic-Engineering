@@ -11,4 +11,6 @@ class User(AbstractUser):
         (3,'User')
     )
 
-    user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, null=True)
+    # user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, null=True)
+    user_type = 3
+
