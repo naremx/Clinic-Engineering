@@ -1,8 +1,12 @@
 import React from 'react';
-import { StyleSheet, Image, View, Dimensions , Text , ActivityIndicator, ScrollView } from 'react-native';
+import { StyleSheet, Image, View, Dimensions , Text , ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-banner-carousel';
 import { LinearGradient } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
+import { Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux';
+
+import { CollectDataAction } from '../Actions';
 
 const BannerWidth = Dimensions.get('window').width;
 const BannerHeight = 200;
@@ -13,7 +17,7 @@ const images = [
     "https://img.live/images/2019/02/05/631371.md.jpg"
 ];
 
-export default class App extends React.Component {
+class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -21,6 +25,12 @@ export default class App extends React.Component {
             dataSource: null,
     }
 }
+
+CollectData(val){
+    this.props.CollectDataAction(val)
+    Actions.Calendar();
+    }
+    
 
 componentDidMount () {
     fetch('http://www.json-generator.com/api/json/get/ccLAsEcOSq?indent=1')
@@ -53,21 +63,22 @@ componentDidMount () {
         } else {
             let List = this.state.dataSource.map((val,key) => {
                 return ( 
-                    
                         <View key={key} style={Styles.item}>
-                            <View style={Styles.ContainerContacts}>
-                                <View style={Styles.FlexContainer}>
-                                    <Image style={Styles.drawerImage} source={{ uri: val.image }} />
-                                    <View style={Styles.Column}>
-                                        <Text style={{ marginLeft : 10 , color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' , marginTop: 20 }} >{val.book_title}</Text>
-                                        <Text style={{ marginLeft : 10 , color : '#777' }}>Computer Engineering</Text>
-                                        <View style={Styles.FlexContainer}>
-                                            <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
-                                            <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{val.author}</Text>
+                            <TouchableOpacity onPress={() => this.CollectData(val)}>
+                                <View style={Styles.ContainerContacts}>
+                                    <View style={Styles.FlexContainer}>
+                                        <Image style={Styles.drawerImage} source={{ uri: val.image }} />
+                                        <View style={Styles.Column}>
+                                            <Text style={{ marginLeft : 10 , color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' , marginTop: 20 }} >{val.book_title}</Text>
+                                            <Text style={{ marginLeft : 10 , color : '#777' }}>Computer Engineering</Text>
+                                            <View style={Styles.FlexContainer}>
+                                                <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
+                                                <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{val.author}</Text>
+                                            </View>
                                         </View>
                                     </View>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                         </View>   
                 )
             });
@@ -93,8 +104,7 @@ componentDidMount () {
                         <View style={{flexDirection: 'column' , marginTop: 20}}>
                             {List}
                         </View>
-                    </View>
-                    
+                    </View>     
                 </View>
             </ScrollView>
             </LinearGradient>
@@ -142,3 +152,6 @@ const Styles = StyleSheet.create({
         marginTop: 15,
     },
 });
+
+
+  export default connect(null, { CollectDataAction })(App);

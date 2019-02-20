@@ -20,7 +20,9 @@ import PhoneBook from './Screens/PhoneBook.js';
 import Contact from './ScreensUser/Contact.js';
 import Questions from './ScreensUser/Questions.js';
 import Conditions from './ScreensUser/Conditions.js'
-import AddQueue from './ScreensUser/AddQueue.js'
+import Calendar from './ScreensUser/Calendar.js';
+import AddQueue from './ScreensUser/AddQueue.js';
+import DetailAddQueue from './ScreensUser/DetailAddQueue.js';
 
 import AdvisorScheduleDate from './ScreensAdvisor/ScheduleDate.js';
 import AdvisorScheduleAss from './ScreensAdvisor/ScheduleAss.js';
@@ -48,7 +50,7 @@ class Routes extends React.Component{
                         <Scene key='AddQueue' component={AddQueue} title='แอดคิว'/>
                     </Scene>
 
-                    <Drawer key='auth' contentComponent={SideMenu}  drawerImage={require('./Image/menu.png')} initial>
+                    <Drawer key='auth' contentComponent={SideMenu}  drawerImage={require('./Image/menu.png')} >
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
@@ -66,7 +68,7 @@ class Routes extends React.Component{
                         </Scene>
                     </Drawer>
 
-                    <Drawer key='user' contentComponent={SideMenu}  drawerImage={require('./Image/menu.png')}>
+                    <Drawer key='user' contentComponent={SideMenu}  drawerImage={require('./Image/menu.png')}initial>
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
@@ -78,6 +80,18 @@ class Routes extends React.Component{
                                                 component={Home} 
                                                 title='หน้าหลัก' 
                                                 initial>
+                                        </Scene>
+                                        <Scene 
+                                                key='Calendar' 
+                                                component={Calendar} 
+                                                title='ปฏิทิน' 
+                                                >
+                                        </Scene>
+                                        <Scene 
+                                                key='AddQueue' 
+                                                component={AddQueue} 
+                                                title='เพิ่มคิว' 
+                                                >
                                         </Scene>
                                     </Scene>
 
@@ -98,13 +112,18 @@ class Routes extends React.Component{
                                             icon={TabIcon}
                                             title='แจ้งเตือน'>
                                     </Scene>
+                                    <Scene key='QueuePage' iconName="ios-people" icon={TabIcon} title='คิว'>
+                                        <Scene 
+                                                key='Queue' 
+                                                component={Queue}
+                                                title='คิว'>
+                                        </Scene>
 
-                                    <Scene 
-                                            key='Queue' 
-                                            component={Queue}
-                                            iconName="ios-people"
-                                            icon={TabIcon} 
-                                            title='คิว'>
+                                        <Scene 
+                                                key='DetailAddQueue' 
+                                                component={DetailAddQueue}
+                                                title='รายละเอียดคิว'>
+                                        </Scene>
                                     </Scene>
 
                                     <Scene 
