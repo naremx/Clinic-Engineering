@@ -11,7 +11,9 @@ from rest_framework.compat import coreapi, coreschema
 from rest_framework.response import Response
 from rest_framework.schemas import ManualSchema
 from rest_framework.views import APIView
-
+from django.core.mail import send_mail
+import smtplib
+from django.conf import settings
 from .serializer import UserSerializer
 from rest_framework import status
 
@@ -67,4 +69,29 @@ class register(APIView):
 
                 return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
             return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
+
+class logout(APIView):
+        def post(self, request):
+            return self.logout(request)
+
+        def logout(self, request):
+            try:
+                request.user.auth_token.delete()
+            except (AttributeError):
+            # except (AttributeError, ObjectDoesNotExist):
+                pass
+
+            logout(request)
+
+            return Response({"success": _("Successfully logged out.")},
+                        status=status.HTTP_200_OK)
+
+class fgpassword(APIView):
+       def get(self,request):
+            print(1)
+            subject = 'Thank you for registering to our site'
+            message = ' it  means a world to us '
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = ['mosaicpm@outlook.com',]
+            send_mail( subject, message, email_from, recipient_list )
 
