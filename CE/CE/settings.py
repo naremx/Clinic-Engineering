@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'reset_migrations',
     'rest_framework',
     'rest_framework.authtoken',
+    'AdvisorInfo',
 ]
 
 MIDDLEWARE = [

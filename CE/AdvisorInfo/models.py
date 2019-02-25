@@ -1,16 +1,20 @@
 # from django.contrib.auth.models import AbstractUser
-# from django.db import models
-#
-#
-# # Create your models here.
-#
-# class AdvisorData(AbstractUser):
-#     USER_TYPE_CHOICES=(
-#         (1,'Admin'),
-#         (2,'Adviser'),
-#         (3,'User')
-#     )
-#
-#     # user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, null=True)
-#     user_type = 3
-#
+from django.db import models
+
+
+# Create your models here.
+
+class AdvisorData(models.Model):
+    first_name = models.CharField(max_length=30,default='',blank=True)
+    last_name = models.CharField(max_length=30,default='',blank=True)
+    telephone = models.CharField(max_length=13,default='',blank=True)
+    department = models.CharField(max_length=30,default='',blank=True)
+    email = models.CharField(max_length=30,default='',blank=True)
+    tax_num = models.CharField(max_length=30,default='',blank=True)
+    gender = models.CharField(max_length=30,default='',blank=True)
+    expertise = models.CharField(max_length=30,default='',blank=True)
+    address = models.CharField(max_length=100,default='',blank=True)
+
+
+
+
