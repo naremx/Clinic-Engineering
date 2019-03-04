@@ -16,7 +16,7 @@ import smtplib
 from django.conf import settings
 from .serializer import UserSerializer
 from rest_framework import status
-
+from .models import User
 
 class contact(APIView):
     throttle_classes = ()
@@ -71,20 +71,16 @@ class register(APIView):
             return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
 
 class logout(APIView):
-        def post(self, request):
-            return self.logout(request)
 
-        def logout(self, request):
-            try:
+        def get(self, request):
+            # try:
                 request.user.auth_token.delete()
-            except (AttributeError):
-            # except (AttributeError, ObjectDoesNotExist):
-                pass
-
-            logout(request)
-
-            return Response({"success": _("Successfully logged out.")},
-                        status=status.HTTP_200_OK)
+            # except (AttributeError):
+            # # except (AttributeError, ObjectDoesNotExist):
+            #     pass
+            #
+            # return Response({"success": ("Successfully logged out.")},
+            #             status=status.HTTP_200_OK)
 
 class fgpassword(APIView):
        def get(self,request):
