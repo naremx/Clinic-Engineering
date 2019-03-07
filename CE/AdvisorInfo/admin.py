@@ -1,4 +1,8 @@
 from django.contrib import admin
-from .models import AdvisorData
+from .models import *
 # Register your models here.
-admin.site.register(AdvisorData)
+class AdvisorDataAdmin(admin.ModelAdmin):
+    list_display = ('first_name','email','telephone','department')
+
+
+admin.site.register(AdvisorData,AdvisorDataAdmin)

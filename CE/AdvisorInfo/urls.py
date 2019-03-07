@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import advisor,getaddata
+from .views import advisorcsv,getaddata
 
 
 urlpatterns = [
 
-    path('addata/', advisor, name="addata"),
+    path('addata/', advisorcsv, name="addata"),
     path('getaddata/',getaddata.as_view(),name="getaddata")
 ]
