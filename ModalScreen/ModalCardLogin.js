@@ -44,9 +44,9 @@ class ModalCardLogin extends React.Component {
     constructor(){
         super()
         this.state = {
-            showMe:false ,
+            showMe: false ,
             username: '' ,
-            password: ''
+            password: '' ,
         }
     }
     updateValue(text , field){
@@ -74,7 +74,8 @@ class ModalCardLogin extends React.Component {
         method: 'POST', 
         body: JSON.stringify(collection),
         headers:{
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json' ,
+            // 'Authorization': 'Token ${this.state.getToken}',
         }
         }).then(res => res.json())
         .then((responseData) => this.selectUserRole(responseData))
@@ -93,49 +94,55 @@ class ModalCardLogin extends React.Component {
 
   
     render() {
-        const { ModalBoxLogin } = Styles;
         console.log(this.state.visible)
         return(
             <View style={Styles.container}>
                 <Modal visible={this.state.showMe} onRequestClose ={()=>console.warn("this is close")} transparent animationType='fade'>
-                    <View style={Styles.ModalBoxLogin}>
-                      <TouchableOpacity onPress={() => this.setState({ showMe:false })}>
-                          <Ionicons name="ios-close-circle" size={30} style={Styles.IconCloseLogin} />
-                      </TouchableOpacity>
-                      <Text style={{ fontFamily:'supermarket', color : '#495090' , fontSize: 23 , fontWeight: 'bold' }}>เข้าสู่ระบบ</Text>
-                      <View style={Styles.row}>
-                        <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , marginTop: 20 , marginRight: 36 , marginLeft: -30 }} >อีเมล</Text>
-                        <TextInput style={Styles.inputBoxLogin} onChangeText={(text) => this.updateValue(text, 'username')}/>
-                      </View>
-                      <View style={Styles.row}>
-                        <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , marginTop: 20 , marginRight: 10 , marginLeft: -30 }} >รหัสผ่าน</Text>
-                        <TextInput style={Styles.inputBoxLogin}  secureTextEntry={true} onChangeText={(text) => this.updateValue(text, 'password')}/>
-                      </View>
-                      <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
-                        <TouchableOpacity onPress={() => this.submit()}>
-                          <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' }}>เข้าสู่ระบบ</Text>
-                        </TouchableOpacity>
-                      </LinearGradient>
-                        <View style={Styles.row}>
-                          <TouchableOpacity>
-                            <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold' , marginTop: 10}}>ลืมรหัสผ่าน</Text>
-                          </TouchableOpacity> 
-                          <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold' , marginTop: 10}}> | </Text> 
-                          <TouchableOpacity>
-                            <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold' , marginTop: 10}}>ลงทะเบียน</Text>
-                          </TouchableOpacity>
-                        </View>
-                        <Text style={{color : '#c0c0c0' , fontSize: 15 , marginTop: 5}}>_________________________________________________</Text>
-                        <TouchableOpacity onPress={() => this.loginWithFacebook()}>
-                            <View style={Styles.ButtonFacebook}>
-                            <Ionicons name="logo-facebook" size={40} style={Styles.IconFacebook} />
-                            <Text style={{color : '#fff' , fontSize: 16 , fontWeight: 'bold'}}>เข้าสู่ระบบด้วย FACEBOOK</Text>
+                    <View style={{ alignItems:'center', marginTop: 50 }}>
+                        <View style={Styles.ModalBoxLogin}>
+
+                            <View style={{ alignItems:'flex-end' }}>
+                                <TouchableOpacity onPress={() => this.setState({ showMe:false })}>
+                                    <Ionicons name="ios-close-circle" size={30} style={{ color: '#a9aae9' , paddingRight: 10 , paddingTop: 10 }} />
+                                </TouchableOpacity>
                             </View>
-                        </TouchableOpacity> 
+                            
+                        <Text style={{ color : '#495090' , fontSize: 23 , fontWeight: 'bold' , textAlign: 'center' }}>เข้าสู่ระบบ</Text>
+                        <View style={{ flexDirection: "row" }}>
+                            <View style={{ flexDirection: "column"  }}>
+                                <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , paddingTop : 20 , paddingLeft : 10 }} >อีเมล</Text>
+                                <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , paddingTop : 40 , paddingLeft : 10 }} >รหัสผ่าน</Text>
+                            </View>
+
+                            <View style={{ flexDirection: "column" , paddingLeft : 10 }}>
+                                <TextInput style={Styles.inputBoxLogin} onChangeText={(text) => this.updateValue(text, 'username')}/>
+                                <TextInput style={Styles.inputBoxLogin}  secureTextEntry={true} onChangeText={(text) => this.updateValue(text, 'password')}/>
+                            </View>
+                        </View>
+
+                        <View style={{ alignItems:'center'}}>
+                            <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
+                                <TouchableOpacity onPress={() => this.submit()}>
+                                <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>เข้าสู่ระบบ</Text>
+                                </TouchableOpacity>
+                            </LinearGradient>
+                        </View>
+
+
+                            <View style={{ flexDirection: "row" , paddingLeft : 100 , marginTop: 20}}>
+                                <TouchableOpacity>
+                                    <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold'}}>ลืมรหัสผ่าน</Text>
+                                </TouchableOpacity> 
+                                <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold'}}> | </Text> 
+                                <TouchableOpacity>
+                                    <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold'}}>ลงทะเบียน</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
                     </View>
                 </Modal>
                 <TouchableOpacity onPress={() => this.setState({ showMe:true })}>
-                  <Text style={{color : '#fff' , fontSize: 15 , fontWeight: 'bold' }}>เข้าสู่ระบบ</Text>
+                <Text style={{color : '#fff' , fontSize: 15 , fontWeight: 'bold' }}>เข้าสู่ระบบ</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -147,17 +154,13 @@ export default connect(null, { getToken })(ModalCardLogin);
 const Styles = StyleSheet.create({
 Container: {
     flex: 1,
-    alignItems: 'center',
     width: '100%',
     height: '100%',
 },  
 ModalBoxLogin:{
     width: 370,
-    height: 420,
+    height: 340,
     backgroundColor: '#ecf8ff',
-    alignItems: 'center',
-    marginLeft: 10,
-    marginTop: 80,
     borderRadius: 25,
     shadowColor: '#30C1DD',
     shadowRadius: 10,
@@ -177,8 +180,6 @@ inputBoxLogin:{
 },
 Button:{
     height: 50, 
-    alignItems: 'center', 
-    justifyContent: 'center', 
     width: 150 , 
     borderRadius: 20 , 
     marginTop: 20 , 
@@ -194,20 +195,6 @@ ButtonFacebook:{
     backgroundColor: '#3d5a96',
     marginTop: 20 ,
     flexDirection: "row"
-},
-IconFacebook:{
-    marginTop: 3,
-    marginLeft: 30,
-    marginRight: 15,
-    color: '#fff',
-},
-IconCloseLogin:{
-    color: '#a9aae9',
-    marginTop: 15,
-    marginLeft: 300
-}, 
-row:{
-    flexDirection: "row",
 },
 Header:{
     height: 60 ,

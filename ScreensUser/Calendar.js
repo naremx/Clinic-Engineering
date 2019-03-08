@@ -45,7 +45,13 @@ constructor(props) {
                     <View style={{ flexDirection: 'row' }}>
                         <Image style={Styles.drawerImage} source={{ uri: this.props.val.image }}  />
                         <View style={{ flexDirection: 'column' }}>
-                            <Text style={{ marginLeft : 10 , color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' , marginTop: 20 }} >{this.props.val.book_title}</Text>
+                            <Text style={{ 
+                                marginLeft : 10 ,
+                                color : '#3e48a3' ,
+                                fontSize: 15 ,
+                                fontWeight: 'bold' ,
+                                marginTop: 20 }} 
+                                >{this.props.val.book_title}</Text>
                             <Text style={{ marginLeft : 10 , color : '#777' }}>{this.props.chosenDate}</Text>
                             <View style={{ flexDirection: 'row' }}>
                                 <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
@@ -64,18 +70,24 @@ constructor(props) {
                     <View style={{ marginLeft : 20 }}>
                         <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' }}>ความถนัดเฉพาะทาง</Text> 
                         <Text style={{ color : '#777' }}>คอมพิวเตอร์</Text>
-                        <Text style={{ color : '#c0c0c0' , fontSize: 15}}>_______________________________________________</Text>
                         <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' }}>วิทยานิพนธ์</Text> 
                         <Text style={{ color : '#777' }}>เครื่องมือสำหรับแปลงเค้าร่างฐานข้อมูลเชิงสัมพันธ์เป็นเค้าร่างฐานข้อมูลเชิงวัตถุ</Text>
-                        <Text style={{ color : '#c0c0c0' , fontSize: 15}}>_______________________________________________</Text>
-                        <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' }}>เวลาที่สามารถนัดได้</Text>
+                        <Text style={{ color : '#c0c0c0' , fontSize: 15 , fontWeight: 'bold'}}>_______________________________________________</Text>
+                        <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' , marginTop: 20 }}>เวลาที่สามารถนัดได้</Text>
                         <Text style={{ color : '#777' , fontWeight: 'bold'}}>MONDAY : 09.00 - 10.00 น.</Text>
                     </View>
                     <View style={{ flex: 1 }}>
                         <TouchableOpacity onPress={this._showDateTimePicker}>
                         <Text style={Styles.ButtonChosen}>เลือกวันนัดคิว</Text>
                         </TouchableOpacity>
-                        <Text style={{ fontSize: 20 , color: '#655ba3' , marginLeft: 10 , marginTop: 20 , fontWeight: 'bold' }} >{this.state.chosenDate}</Text>
+                        <Text style={{ 
+                            fontSize: 20 ,
+                            color: '#655ba3' ,
+                            marginLeft: 10 ,
+                            marginTop: 20 ,
+                            fontWeight: 'bold',
+                            textAlign: 'center' }} 
+                            >{this.state.chosenDate}</Text>
                         <DateTimePicker
                         isVisible={this.state.isDateTimePickerVisible}
                         onConfirm={this._handleDatePicked}
@@ -96,6 +108,7 @@ constructor(props) {
 const Styles = StyleSheet.create({
     Container: {
         height: '100%' ,
+        alignItems:'center'
     },
     calendar: {
         paddingTop: 10,
@@ -110,7 +123,6 @@ const Styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOpacity: 0.6,
         elevation: 6,
-        marginLeft: 10
     },
     drawerImage: {
         height: 90,
@@ -135,7 +147,7 @@ const Styles = StyleSheet.create({
         height: 40,
         color: '#fff' ,
         fontSize: 20 , 
-        paddingLeft: 120 ,
+        textAlign: 'center' ,
         paddingTop: 5 ,
         fontWeight: 'bold' ,
         backgroundColor: '#87daf3',

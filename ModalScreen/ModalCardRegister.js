@@ -10,11 +10,9 @@ export default class ModalCardRegister extends React.Component {
           showMe:false ,
           first_name: '',
           last_name: '',
-        //   tel_number: '',
           email: '',
           password: '',
           username: ''
-        //   confirmpassword: '',
       }
   }
   updateValue(text , field){
@@ -28,11 +26,6 @@ export default class ModalCardRegister extends React.Component {
             last_name : text
         })
     }
-    // else if(field == 'tel_number'){
-    //     this.setState({
-    //         tel_number : text
-    //     })
-    // }
     else if(field == 'email'){
         this.setState({
             email : text
@@ -48,22 +41,15 @@ export default class ModalCardRegister extends React.Component {
             username : text
         })
     }
-    // else if(field == 'confirmpassword'){
-    //     this.setState({
-    //         confirmpassword : text
-    //     })
-    // }
 }
   submit()
   {
       let collection={}
       collection.first_name=this.state.first_name,
       collection.last_name=this.state.last_name,
-    //   collection.telephone=this.state.tel_number,
       collection.email=this.state.email,
       collection.password=this.state.password,
       collection.username=this.state.username,
-    //   collection.confirmpassword=this.state.confirmpassword,
       console.log(collection);
 
       var url = 'http://192.168.43.212:8000/Account/register' ;
@@ -80,37 +66,38 @@ export default class ModalCardRegister extends React.Component {
   }
   
   render() {
-      const { ModalBoxRegister } = Styles;
       console.log(this.state.visible)
       return(
         <View style={Styles.container}>
         <Modal visible={this.state.showMe} onRequestClose ={()=>console.warn("this is close")} transparent animationType='fade'>
-            <View style={Styles.ModalBoxRegister}>
-              <TouchableOpacity onPress={() => this.setState({ showMe:false })}>
-                  <Ionicons name="ios-close-circle" size={30} style={Styles.IconCloseLogin} />
-              </TouchableOpacity>
-              <Text style={{ color : '#495090' , fontSize: 23 , fontWeight: 'bold' , marginLeft: 130 }}>ลงทะเบียน</Text>
-                <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , marginTop: 10 , marginLeft: 20 }} >ชื่อผู้ใช้งาน</Text>
-                <TextInput style={Styles.inputBoxRegister} onChangeText={(text) => this.updateValue(text, 'username')}/>
-                <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , marginTop: 10 , marginLeft: 20 }} >ชื่อ</Text>
-                <TextInput style={Styles.inputBoxRegister} onChangeText={(text) => this.updateValue(text, 'first_name')}/>
-                <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , marginTop: 10 , marginLeft: 20 }} >นามสกุล</Text>
-                <TextInput style={Styles.inputBoxRegister}  onChangeText={(text) => this.updateValue(text, 'last_name')}/>
-                {/* <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , marginTop: 10 , marginLeft: 20 }} >เบอร์ติดต่อ</Text>
-                <TextInput style={Styles.inputBoxRegister}  onChangeText={(text) => this.updateValue(text, 'tel_number')}/> */}
-                <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , marginTop: 10 , marginLeft: 20  }} >อีเมล</Text>
-                <TextInput style={Styles.inputBoxRegister}  onChangeText={(text) => this.updateValue(text, 'email')}/>
-                <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , marginTop: 10 , marginLeft: 20 }} >รหัสผ่าน</Text>
-                <TextInput style={Styles.inputBoxRegister}  onChangeText={(text) => this.updateValue(text, 'password')}/>
-                {/* <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , marginTop: 10 , marginLeft: 20  }} >ยืนยันรหัสผ่าน</Text>
-                <TextInput style={Styles.inputBoxRegister} onChangeText={(text) => this.updateValue(text, 'confirmpassword')}/> */}
-            <View style= {{ marginLeft: 110 }}>
-              <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
-                <TouchableOpacity onPress={() => this.submit()}>
-                  <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' }}>เข้าสู่ระบบ</Text>
-                </TouchableOpacity>
-              </LinearGradient>
-            </View>
+            <View style={{ alignItems:'center', marginTop: 30 }}>
+                <View style={Styles.ModalBoxRegister}>
+                    <View style={{ alignItems:'flex-end' }}>
+                        <TouchableOpacity onPress={() => this.setState({ showMe:false })}>
+                            <Ionicons name="ios-close-circle" size={30} style={{ color: '#a9aae9' , paddingRight: 10 , paddingTop: 10 }} />
+                        </TouchableOpacity>
+                    </View>
+                <Text style={{ color : '#495090' , fontSize: 23 , fontWeight: 'bold', textAlign: 'center' }}>ลงทะเบียน</Text>
+                    <View style={{ margin : 30 }}>
+                        <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >ชื่อผู้ใช้งาน</Text>
+                        <TextInput style={Styles.inputBoxRegister} onChangeText={(text) => this.updateValue(text, 'username')}/>
+                        <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >ชื่อ</Text>
+                        <TextInput style={Styles.inputBoxRegister} onChangeText={(text) => this.updateValue(text, 'first_name')}/>
+                        <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >นามสกุล</Text>
+                        <TextInput style={Styles.inputBoxRegister}  onChangeText={(text) => this.updateValue(text, 'last_name')}/>
+                        <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >อีเมล</Text>
+                        <TextInput style={Styles.inputBoxRegister}  onChangeText={(text) => this.updateValue(text, 'email')}/>
+                        <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >รหัสผ่าน</Text>
+                        <TextInput style={Styles.inputBoxRegister}  onChangeText={(text) => this.updateValue(text, 'password')}/>
+                    </View>
+                <View style= {{ marginLeft: 110 }}>
+                <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
+                    <TouchableOpacity onPress={() => this.submit()}>
+                    <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , paddingTop: 10 }}>เข้าสู่ระบบ</Text>
+                    </TouchableOpacity>
+                </LinearGradient>
+                </View>
+                </View>
             </View>
         </Modal>
         <TouchableOpacity onPress={() => this.setState({ showMe:true })}>
@@ -132,10 +119,8 @@ Container: {
 },  
 ModalBoxRegister:{
     width: 370,
-    height: 700,
+    height: 600,
     backgroundColor: '#ecf8ff',
-    marginLeft: 10,
-    marginTop: 40,
     borderRadius: 25,
     shadowColor: '#30C1DD',
     shadowRadius: 10,
@@ -149,44 +134,18 @@ inputBoxRegister:{
     borderRadius: 15,
     borderColor:'#95a3e6',
     borderWidth: 1,
-    marginTop: 10,
-    marginLeft: 20,
     paddingHorizontal: 16,
     fontSize: 15,
 },
 Button:{
     height: 50, 
     alignItems: 'center', 
-    justifyContent: 'center', 
     width: 150 , 
     borderRadius: 20 , 
-    marginTop: 20 , 
     shadowColor: '#30C1DD',
     shadowRadius: 10,
     shadowOpacity: 0.6,
     elevation: 6,
-},
-ButtonFacebook:{
-    height: 50,
-    width: 310,
-    alignItems: 'center',
-    backgroundColor: '#3d5a96',
-    marginTop: 20 ,
-    flexDirection: "row"
-},
-IconFacebook:{
-    marginTop: 3,
-    marginLeft: 30,
-    marginRight: 15,
-    color: '#fff',
-},
-IconCloseLogin:{
-    color: '#a9aae9',
-    marginTop: 15,
-    marginLeft: 320
-}, 
-row:{
-    flexDirection: "row",
 },
 Header:{
     height: 60 ,

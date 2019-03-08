@@ -1,22 +1,30 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { LinearGradient, Constants } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
+import { connect } from 'react-redux'
 
 
-const Assignment = (props) => {
-    return (
+class Assignment extends React.Component{
+    Logout(token)
+    {
+        console.log(token)
+    }
+
+    render(){
+        return(
             <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
-                <View style={Styles.Container}>
-                    {/* <View style={Styles.Header} >
-                        <TouchableHighlight style={Styles.Icon} onPress={() => props.navigation.openDrawer()}>
-                            <Ionicons name="ios-menu" size={30} color="#87daf3"  />
-                        </TouchableHighlight>
-                        <Text style={{color : '#87daf3' , fontSize: 23 , fontWeight: 'bold' , paddingLeft: 155 , marginTop: 15 }} >งาน</Text>
-                        </View> */}
+            <View style={Styles.Container}>
+                <View style={{ alignItems : 'flex-end' }}>
+                    <TouchableOpacity onPress={() => this.Logout(this.props.token)}>
+                        <Text> ออกจากระบบ </Text>
+                    </TouchableOpacity>
+                    <Text>{this.props.val.author}</Text>
                 </View>
-            </LinearGradient>
-    );
+            </View>
+        </LinearGradient>
+        )
+    }
 }
 
 const Styles = StyleSheet.create({
@@ -34,4 +42,11 @@ const Styles = StyleSheet.create({
     }
 });
 
-export default Assignment;
+
+const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer }) => {
+    const { token,role } = LoginUser_Reducer;
+    const { val } = Add_Queue_Reducer;
+        return { token,role,val };
+  }
+
+export default connect(mapStateToProps)(Assignment);

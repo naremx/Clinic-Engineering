@@ -11,6 +11,8 @@ const LoginUser_Reducer = ( state = INITIAL_STATE , action ) => {
                     token: action.payload.token,
                     role: action.payload.role
                 };
+            case 'Logout' :
+                return INITIAL_STATE;
             default:
                 return state;
         }

@@ -7,7 +7,6 @@ export default class PhoneBook extends React.Component{
     return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
             <View style={Styles.Container}>
-                <Text>PhoneBook</Text>
             </View>
         </LinearGradient>
     );

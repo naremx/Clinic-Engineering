@@ -5,7 +5,6 @@ import { LinearGradient } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux';
-
 import { CollectDataAction } from '../Actions';
 
 const BannerWidth = Dimensions.get('window').width;
@@ -26,11 +25,26 @@ class App extends React.Component {
     }
 }
 
-CollectData(val){
-    this.props.CollectDataAction(val)
+async CollectData(val){
+    console.log(val)
+    await this.props.CollectDataAction(val)
     Actions.Calendar();
     }
     
+async Logout(token) {
+        console.log(token)
+        const response = await fetch(`http://192.168.43.212:8000/Account/logout` , {
+            headers: {
+                Authorization : `Token ${token}`,
+            }   
+                
+        });
+            this.props.dispatch({
+                type: 'Logout'
+            })
+            console.log(response)
+
+    }
 
 componentDidMount () {
     fetch('http://www.json-generator.com/api/json/get/ccLAsEcOSq?indent=1')
@@ -52,7 +66,6 @@ componentDidMount () {
             </View>
         );
     }
-
     render() {
         if (this.state.isLoading) {
             return(
@@ -63,15 +76,20 @@ componentDidMount () {
         } else {
             let List = this.state.dataSource.map((val,key) => {
                 return ( 
-                        <View key={key} style={Styles.item}>
+                        <View key={key} style={{ alignItems:'center', marginTop: 10 }}>
                             <TouchableOpacity onPress={() => this.CollectData(val)}>
                                 <View style={Styles.ContainerContacts}>
-                                    <View style={Styles.FlexContainer}>
+                                    <View style={{ flexDirection: 'row' }}>
                                         <Image style={Styles.drawerImage} source={{ uri: val.image }} />
                                         <View style={Styles.Column}>
-                                            <Text style={{ marginLeft : 10 , color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' , marginTop: 20 }} >{val.book_title}</Text>
+                                            <Text style={{ 
+                                                marginLeft : 10 ,
+                                                color : '#3e48a3' ,
+                                                fontSize: 15 ,
+                                                fontWeight: 'bold' ,
+                                                marginTop: 20 }} >{val.book_title}</Text>
                                             <Text style={{ marginLeft : 10 , color : '#777' }}>Computer Engineering</Text>
-                                            <View style={Styles.FlexContainer}>
+                                            <View style={{ flexDirection: 'row' }}>
                                                 <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
                                                 <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{val.author}</Text>
                                             </View>
@@ -96,16 +114,11 @@ componentDidMount () {
                         {images.map((image, index) => this.renderPage(image, index))}
                     </Carousel>
                 </View>
-                <View style={Styles.line}> 
-                    <Text style={{color: '#fff' , margin: 15 , fontSize : 20 , fontWeight: 'bold' }}>รายชื่ออาจารย์ที่ให้บริการวันนี้</Text>
+                <View style={{ alignItems : 'flex-end' }}>
                 </View>
-                <View style={{ marginTop : 10 }}>
-                    <View style={Styles.FlexContainer}>
-                        <View style={{flexDirection: 'column' , marginTop: 20}}>
-                            {List}
-                        </View>
-                    </View>     
-                </View>
+                    <View style={{flexDirection: 'column' , alignItems:'center'}}>
+                        {List}
+                    </View>   
             </ScrollView>
             </LinearGradient>
         );
@@ -135,14 +148,7 @@ const Styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOpacity: 0.6,
         elevation: 6,
-    },
-    FlexContainer:{
-        flex:1 ,
-        flexDirection: 'row'
-    },
-    item:{
-        alignSelf: 'stretch',
-        margin: 10,
+
     },
     drawerImage: {
         height: 90,
@@ -153,5 +159,12 @@ const Styles = StyleSheet.create({
     },
 });
 
+export default connect(null, { CollectDataAction })(App);
 
-  export default connect(null, { CollectDataAction })(App);
+// const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer }) => {
+//     const { token,role } = LoginUser_Reducer;
+//     const { val } = Add_Queue_Reducer;
+//         return { token,role,val };
+//   }
+
+// export default connect(mapStateToProps)(App);

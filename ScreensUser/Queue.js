@@ -14,20 +14,34 @@ class Queue extends React.Component{
             <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
                 <View style={Styles.Container}>
                     <TouchableOpacity onPress={() => this.ShowDetailQueue(this.props.val)}>
-                        <View style={Styles.ContainerContacts}>
-                            <View style={{ flexDirection : 'row' }}>
-                                <Image style={Styles.drawerImage} source={{ uri: this.props.val.image }} />
-                                <View style={{ flexDirection : 'column' }}>
-                                    <View style={{ flexDirection : 'row' }}> 
-                                        <Text style={{ marginLeft : 10 , color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' , marginTop: 20 }} >{this.props.val.book_title}</Text>
-                                        <Text style={{ marginLeft : 10 , color : '#777' , marginTop: 20 }}>• รอยืนยัน </Text>
+                        <View style={{ alignItems:'center' }}>
+                            <View style={Styles.ContainerContacts}>
+                                <View style={{ flexDirection : 'row' }}>
+                                    <Image style={Styles.drawerImage} source={{ uri: this.props.val.image }} />
+                                    <View style={{ flexDirection : 'column' }}>
+                                        <View style={{ flexDirection : 'row' }}> 
+                                            <Text style={{ 
+                                                marginLeft : 10 ,
+                                                color : '#3e48a3' ,
+                                                fontSize: 15 ,
+                                                fontWeight: 'bold' ,
+                                                marginTop: 20 }} >{this.props.val.book_title}</Text>
+                                            <Text style={{ 
+                                                marginLeft : 10 ,
+                                                color : '#777' , 
+                                                marginTop: 20 }}>• รอยืนยัน </Text>
+                                        </View>
+                                        <Text style={{ marginLeft : 10 , color : '#777' }}>Computer Engineering</Text>
+                                        <View style={{ flexDirection : 'row' }}>
+                                            <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
+                                            <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{this.props.val.author}</Text>
+                                        </View>
+                                        <Text style={{ 
+                                            marginLeft : 10 , 
+                                            color : '#3e48a3' , 
+                                            fontSize: 13 , 
+                                            fontWeight: 'bold'}} >วันที่นัด : {this.props.chosenDate}</Text>
                                     </View>
-                                    <Text style={{ marginLeft : 10 , color : '#777' }}>Computer Engineering</Text>
-                                    <View style={{ flexDirection : 'row' }}>
-                                        <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
-                                        <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{this.props.val.author}</Text>
-                                    </View>
-                                    <Text style={{ marginLeft : 10 , color : '#3e48a3' , fontSize: 13 , fontWeight: 'bold'}} >วันที่นัด : {this.props.chosenDate}</Text>
                                 </View>
                             </View>
                         </View>
@@ -45,7 +59,6 @@ const Styles = StyleSheet.create({
     ContainerContacts: {
         width: 370,
         height: 120,
-        marginLeft: 10,
         backgroundColor: 'white',
         borderRadius: 18,
         shadowColor: '#30C1DD',

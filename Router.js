@@ -2,6 +2,8 @@ import React , {Component} from 'react';
 import { Router,Scene,Drawer,Tabs,Actions } from 'react-native-router-flux';
 import { StyleSheet,View,Image,TouchableOpacity,ActivityIndicator } from 'react-native';
 import { LinearGradient,Font} from 'expo';
+import { connect } from 'react-redux'
+import { Ionicons } from 'react-native-vector-icons'
 
 import Text from './Components/CustomText';
 import TabIcon from './TabIcon.js';
@@ -30,10 +32,14 @@ import AdvisorNotification from './ScreensAdvisor/Notification.js';
 import AdvisorQueue from './ScreensAdvisor/Queue.js';
 import AdvisorAssignment from './ScreensAdvisor/Assignment.js';
 
+import SlideMenuUser from './SlideMenu/SlideMenuUser';
+import SlideMenuAdvisor from './SlideMenu/SlideMenuAdvisor';
+import SlideMenu from './SlideMenu/SlideMenu';
+
 class Routes extends React.Component{
     render(){
         return (
-            <Router titleStyle={Styles.Title}>
+            <Router titleStyle={{color:'#87daf3', flex: 1 , textAlign: 'center', }}>
                 <Scene key='root' hideNavBar>
                     <Scene key='ContactRoot' >
                         <Scene key='Contact' component={Contact} title='ติดต่อเรา' initial/>
@@ -50,7 +56,7 @@ class Routes extends React.Component{
                         <Scene key='AddQueue' component={AddQueue} title='แอดคิว'/>
                     </Scene>
 
-                    <Drawer key='auth' contentComponent={SideMenu}  drawerImage={require('./Image/menu.png')} >
+                    <Drawer key='auth' contentComponent={SlideMenu}  drawerImage={require('./Image/menu.png')} >
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
@@ -68,7 +74,7 @@ class Routes extends React.Component{
                         </Scene>
                     </Drawer>
 
-                    <Drawer key='user' contentComponent={SideMenu}  drawerImage={require('./Image/menu.png')}initial>
+                    <Drawer key='user' contentComponent={SlideMenuUser}  drawerImage={require('./Image/menu.png')}  initial>
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
@@ -112,7 +118,7 @@ class Routes extends React.Component{
                                             icon={TabIcon}
                                             title='แจ้งเตือน'>
                                     </Scene>
-                                    <Scene key='QueuePage' iconName="ios-people" icon={TabIcon} title='คิว'>
+                                    <Scene key='QueuePage' iconName="ios-people" icon={TabIcon} title='คิวจ้า'>
                                         <Scene 
                                                 key='Queue' 
                                                 component={Queue}
@@ -137,7 +143,7 @@ class Routes extends React.Component{
                         </Scene>
                     </Drawer>
 
-                    <Drawer key='Advisor' contentComponent={SideMenu}  drawerImage={require('./Image/menu.png')} >
+                    <Drawer key='Advisor' contentComponent={SlideMenuAdvisor}  drawerImage={require('./Image/menu.png')}>
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
@@ -195,82 +201,10 @@ class Routes extends React.Component{
 }
 
 
-class SideMenu extends Component {
-    constructor(){
-        super();
-        this.state = {
-            fontLoaded: false
-        };
-    }
-    async componentDidMount() {
-        await Font.loadAsync({
-          'supermarket': require('./assets/fonts/supermarket.ttf'),
-          'LayijiMahaniyomV105': require('./assets/fonts/LayijiMahaniyomV105.ttf'),
-        });
-        this.setState({fontLoaded: true});
-      }
-      
-    render() {
-      return (
-        <View style={Styles.viewContainer}>
-            <LinearGradient colors ={['#87daf3','#a69beb']} style={Styles.Profile}>
-                <View style={{flexDirection: "row" , marginLeft: 20 , marginTop: 80}}>
-                    <Image
-                        style={Styles.drawerImage}
-                        source={require('./Image/user.png')} />
-                    <View style={{flexDirection: "column" , marginLeft: 20 , marginTop: 30}}>
-                        <ModalCardLogin/>
-                        <ModalCardRegister/>
-                    </View>
-                </View>
-            </LinearGradient>
-            <TouchableOpacity onPress={()=> Actions.ContactRoot()}>
-                {this.state.fontLoaded ? (
-                    <Text type="basic" style={{ color : '#a69beb' , fontSize: 20 , marginTop: 10 , marginLeft: 20  }}>ติดต่อเรา</Text>
-            ):(
-                <ActivityIndicator/>
-            )}
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=> Actions.QuestionsRoot()} >
-                {this.state.fontLoaded ? (
-                    <Text type="basic" style={{ color : '#a69beb' , fontSize: 20 , marginTop: 10 , marginLeft: 20  }}>คำถามที่พบบ่อย</Text>
-            ):(
-                <ActivityIndicator/>
-            )}
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=> Actions.ConditionsRoot()}>
-                {this.state.fontLoaded ? (
-                    <Text type="basic" style={{ color : '#a69beb' , fontSize: 20 , marginTop: 10 , marginLeft: 20  }}>เงื่อนไขและข้อตกลง</Text>
-            ):(
-                <ActivityIndicator/>
-            )}
-            </TouchableOpacity>
-        </View>
-      );
-    }
+const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer }) => {
+    const { token,role } = LoginUser_Reducer;
+    const { val } = Add_Queue_Reducer;
+        return { token,role,val };
   }
 
-
-
-const Styles = StyleSheet.create({
-viewContainer: {
-    flex: 1,
-    backgroundColor: '#fff'
-},
-Profile:{
-    height: 200,
-    width: 300,
-},
-Title:{
-    color:'#87daf3',
-    flex: 1,
-    textAlign: 'center',
-},
-drawerImage: {
-    height: 100,
-    width: 100,
-    borderRadius: 100,
-}
-});
-
-export default Routes
+export default connect(mapStateToProps)(Routes);
