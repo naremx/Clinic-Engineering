@@ -6,12 +6,13 @@ import pandas as pd
 
 
 def advisorcsv(request):
-    contact = pd.read_csv("contactfinal.csv")
+    contact = pd.read_csv("contact.csv")
 
     name = contact['name']
     email = contact['email']
     telephone = contact['telephone']
     department = contact['departmentcode']
+    gender = contact['prefix']
 
     count = 0
     for x in range(0, 508):
@@ -19,8 +20,11 @@ def advisorcsv(request):
             first_name=name[x],
             email=email[x],
             telephone=telephone[x],
-            department=department[x]
+            department=department[x],
+            gender=gender[x]
+
         )
+
         p.save()
 
 
