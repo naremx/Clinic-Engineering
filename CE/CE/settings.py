@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.db.backends.postgresql'
+    'django.db.backends.postgresql',
+    'Queue',
+
 ]
 
 MIDDLEWARE = [
