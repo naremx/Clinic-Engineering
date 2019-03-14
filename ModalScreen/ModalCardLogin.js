@@ -45,8 +45,8 @@ class ModalCardLogin extends React.Component {
         super()
         this.state = {
             showMe: false ,
-            username: '' ,
-            password: '' ,
+            username: 'pmmosaic' ,
+            password: 'pmmosaic' ,
         }
     }
     updateValue(text , field){
@@ -66,7 +66,6 @@ class ModalCardLogin extends React.Component {
         let collection={}
         collection.username=this.state.username,
         collection.password=this.state.password
-        console.log(collection);
 
         var url = 'http://192.168.43.212:8000/Account/' ;
 
@@ -94,7 +93,6 @@ class ModalCardLogin extends React.Component {
 
   
     render() {
-        console.log(this.state.visible)
         return(
             <View style={Styles.container}>
                 <Modal visible={this.state.showMe} onRequestClose ={()=>console.warn("this is close")} transparent animationType='fade'>
@@ -115,8 +113,8 @@ class ModalCardLogin extends React.Component {
                             </View>
 
                             <View style={{ flexDirection: "column" , paddingLeft : 10 }}>
-                                <TextInput style={Styles.inputBoxLogin} onChangeText={(text) => this.updateValue(text, 'username')}/>
-                                <TextInput style={Styles.inputBoxLogin}  secureTextEntry={true} onChangeText={(text) => this.updateValue(text, 'password')}/>
+                                <TextInput style={Styles.inputBoxLogin} onChangeText={(text) => this.updateValue(text, 'username')} value='pmmosaic'/>
+                                <TextInput style={Styles.inputBoxLogin}  secureTextEntry={true} onChangeText={(text) => this.updateValue(text, 'password')} value='pmmosaic'/>
                             </View>
                         </View>
 

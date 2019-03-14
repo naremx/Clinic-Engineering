@@ -74,7 +74,7 @@ class Routes extends React.Component{
                         </Scene>
                     </Drawer>
 
-                    <Drawer key='user' contentComponent={SlideMenuUser}  drawerImage={require('./Image/menu.png')}  initial>
+                    <Drawer key='user' contentComponent={SlideMenuUser}  drawerImage={require('./Image/menu.png')} initial>
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  

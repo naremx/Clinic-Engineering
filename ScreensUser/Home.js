@@ -1,11 +1,13 @@
 import React from 'react';
-import { StyleSheet, Image, View, Dimensions , Text , ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, View, Dimensions , Text , ScrollView, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-banner-carousel';
 import { LinearGradient } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux';
-import { CollectDataAction } from '../Actions';
+import axios from 'axios'
+
+
 
 const BannerWidth = Dimensions.get('window').width;
 const BannerHeight = 200;
@@ -16,115 +18,101 @@ const images = [
     "https://img.live/images/2019/02/05/631371.md.jpg"
 ];
 
+
 class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            isLoading: true,
-            dataSource: null,
+            isLoading: false,
+            dataSource: [],
     }
 }
-
-async CollectData(val){
+CollectData(val){
     console.log(val)
-    await this.props.CollectDataAction(val)
+    this.props.CollectDataAction(val)
     Actions.Calendar();
     }
-    
-async Logout(token) {
-        console.log(token)
-        const response = await fetch(`http://192.168.43.212:8000/Account/logout` , {
-            headers: {
-                Authorization : `Token ${token}`,
-            }   
-                
-        });
-            this.props.dispatch({
-                type: 'Logout'
-            })
-            console.log(response)
 
-    }
+renderPage(image, index) {
+    return (
+        <View key={index}>
+            <Image style={{ width: BannerWidth, height: BannerHeight }} source={{ uri: image }} />
+        </View>
+    );
+}
 
-componentDidMount () {
-    fetch('http://www.json-generator.com/api/json/get/ccLAsEcOSq?indent=1')
-        .then((response) => response.json())
-        .then((responseJson) => {
-            this.setState({
-                isLoading: false,
-                dataSource: responseJson.book_array,
-            })
+componentDidMount() {
+    try{
+        axios.get(`http://192.168.43.212:8000/advisor/getaddata/` , {
+        headers: {
+            Authorization : `Token ${this.props.token}`,
+        }
         })
-    .catch((error) => {
-        console.log('error')
-    });
+      .then(res => {
+        console.log('555',res.data)
+        this.setState({ dataSource : res.data});
+      })
+    }
+    catch(err){
+      console.log(err)
+    }
 }
-    renderPage(image, index) {
-        return (
-            <View key={index}>
-                <Image style={{ width: BannerWidth, height: BannerHeight }} source={{ uri: image }} />
+
+    renderText() {
+        if (this.state.dataSource.length > 0) {
+            return this.state.dataSource.map((val, index) => 
+            <View key={index} style={Styles.ContainerContacts}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
+                        <View style={Styles.Column}>
+                            <Text style={{ 
+                                marginLeft : 10 ,
+                                color : '#3e48a3' ,
+                                fontSize: 15 ,
+                                fontWeight: 'bold' ,
+                                marginTop: 20 }} >{val.first_name}</Text>
+                            <Text style={{ marginLeft : 10 , color : '#777' }}>{val.telephone}</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
+                                <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{val.department}</Text>
+                            </View>
+                        </View>
+                    </View>
+            
             </View>
-        );
+            );
+        }
     }
-    render() {
-        if (this.state.isLoading) {
-            return(
-                <View>
-                    <ActivityIndicator/>
-                </View>
-            )
-        } else {
-            let List = this.state.dataSource.map((val,key) => {
-                return ( 
-                        <View key={key} style={{ alignItems:'center', marginTop: 10 }}>
-                            <TouchableOpacity onPress={() => this.CollectData(val)}>
-                                <View style={Styles.ContainerContacts}>
-                                    <View style={{ flexDirection: 'row' }}>
-                                        <Image style={Styles.drawerImage} source={{ uri: val.image }} />
-                                        <View style={Styles.Column}>
-                                            <Text style={{ 
-                                                marginLeft : 10 ,
-                                                color : '#3e48a3' ,
-                                                fontSize: 15 ,
-                                                fontWeight: 'bold' ,
-                                                marginTop: 20 }} >{val.book_title}</Text>
-                                            <Text style={{ marginLeft : 10 , color : '#777' }}>Computer Engineering</Text>
-                                            <View style={{ flexDirection: 'row' }}>
-                                                <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
-                                                <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{val.author}</Text>
-                                            </View>
-                                        </View>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
+
+
+    render(){
+        return( 
+                <LinearGradient colors ={['#87daf3','#a69beb']} style={Styles.container}>
+                    <View >
+                        <Carousel
+                            autoplay
+                            autoplayTimeout={5000}
+                            loop
+                            index={0}
+                            pageSize={BannerWidth}
+                        >
+                            {images.map((image, index) => this.renderPage(image, index))}
+                        </Carousel>
+                    </View>
+                <ScrollView>
+                    <View style={{ alignItems : 'flex-end' }}>
+                    </View>
+                        <View style={{flexDirection: 'column' , alignItems:'center'}}>
+                            { this.renderText() }
                         </View>   
+                </ScrollView>
+                </LinearGradient>
                 )
-            });
-        return (
-            <LinearGradient colors ={['#87daf3','#a69beb']} style={Styles.container}>
-            <ScrollView>
-                <View >
-                    <Carousel
-                        autoplay
-                        autoplayTimeout={5000}
-                        loop
-                        index={0}
-                        pageSize={BannerWidth}
-                    >
-                        {images.map((image, index) => this.renderPage(image, index))}
-                    </Carousel>
-                </View>
-                <View style={{ alignItems : 'flex-end' }}>
-                </View>
-                    <View style={{flexDirection: 'column' , alignItems:'center'}}>
-                        {List}
-                    </View>   
-            </ScrollView>
-            </LinearGradient>
-        );
+
     }
 }
-}
+
+
 
 const Styles = StyleSheet.create({
     container: {
@@ -142,13 +130,13 @@ const Styles = StyleSheet.create({
     ContainerContacts: {
         width: 370,
         height: 120,
+        marginTop: 20,
         backgroundColor: 'white',
         borderRadius: 18,
         shadowColor: '#30C1DD',
         shadowRadius: 10,
         shadowOpacity: 0.6,
         elevation: 6,
-
     },
     drawerImage: {
         height: 90,
@@ -159,7 +147,17 @@ const Styles = StyleSheet.create({
     },
 });
 
-export default connect(null, { CollectDataAction })(App);
+
+
+const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer}) => {
+    const { token,role } = LoginUser_Reducer;
+    const { val } = Add_Queue_Reducer;
+        return { token,role,val };
+  }
+
+export default connect(mapStateToProps)(App);
+
+// export default connect(null, { CollectDataAction })(Test);
 
 // const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer }) => {
 //     const { token,role } = LoginUser_Reducer;
