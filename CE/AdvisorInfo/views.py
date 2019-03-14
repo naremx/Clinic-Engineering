@@ -11,7 +11,7 @@ def advisorcsv(request):
     name = contact['name']
     email = contact['email']
     telephone = contact['telephone']
-    department = contact['departmentcode']
+    department = contact['department']
     gender = contact['prefix']
 
     count = 0
@@ -22,9 +22,7 @@ def advisorcsv(request):
             telephone=telephone[x],
             department=department[x],
             gender=gender[x]
-
         )
-
         p.save()
 
 
@@ -50,6 +48,7 @@ class getaddata(APIView):
 
     def get(self, request):
         # create if for front request
-        Advisor_list = AdvisorData.objects.all().order_by('department')
+        Advisor_list = AdvisorData.objects.all()
         serializers = AdvisorDataSerializer(Advisor_list, many=True)
+        print(serializers.data)
         return Response(serializers.data)

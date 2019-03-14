@@ -9,5 +9,8 @@ class AdvisorDataSerializer(serializers.ModelSerializer):
     # email = serializers.CharField(source='username')
     class Meta:
         model = AdvisorData
-        fields = ('first_name', 'last_name','telephone','email','department','tax_number', 'gender', 'expertise','address')
-
+        # fields = '__all__'
+        fields = (
+        'first_name', 'last_name', 'telephone', 'email', 'department', 'tax_number', 'gender', 'expertise', 'address')
+        # fields = (
+        # 'first_name', 'telephone', 'department', 'email', 'tax_number', 'gender', 'expertise', 'address', 'last_name')
