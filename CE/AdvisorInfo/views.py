@@ -45,7 +45,7 @@ def advisorcsv(request):
 
 class getaddata(APIView):
     permission_classes = ()
-
+    
     def get(self, request):
         # create if for front request
         Advisor_list = AdvisorData.objects.all()
