@@ -17,7 +17,7 @@ class Queue extends React.Component{
                         <View style={{ alignItems:'center' }}>
                             <View style={Styles.ContainerContacts}>
                                 <View style={{ flexDirection : 'row' }}>
-                                    <Image style={Styles.drawerImage} source={{ uri: this.props.val.image }} />
+                                    <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
                                     <View style={{ flexDirection : 'column' }}>
                                         <View style={{ flexDirection : 'row' }}> 
                                             <Text style={{ 

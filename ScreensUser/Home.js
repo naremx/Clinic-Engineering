@@ -6,6 +6,7 @@ import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux';
 import axios from 'axios'
+import { DataAdvisorAction } from '../Actions';
 
 
 
@@ -29,7 +30,7 @@ class App extends React.Component {
 }
 CollectData(val){
     console.log(val)
-    this.props.CollectDataAction(val)
+    this.props.DataAdvisorAction(val)
     Actions.Calendar();
     }
 
@@ -58,10 +59,12 @@ componentDidMount() {
     }
 }
 
+
     renderText() {
         if (this.state.dataSource.length > 0) {
             return this.state.dataSource.map((val, index) => 
             <View key={index} style={Styles.ContainerContacts}>
+                <TouchableOpacity onPress={() => this.CollectData(val)}>
                     <View style={{ flexDirection: 'row' }}>
                         <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
                         <View style={Styles.Column}>
@@ -78,7 +81,7 @@ componentDidMount() {
                             </View>
                         </View>
                     </View>
-            
+                </TouchableOpacity>
             </View>
             );
         }
@@ -147,22 +150,13 @@ const Styles = StyleSheet.create({
     },
 });
 
+const mapDispatchToprops = dispatch => ({
+    DataAdvisorAction: (val) => dispatch(DataAdvisorAction(val))
+})
 
-
-const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer}) => {
+const mapStateToProps = ({ LoginUser_Reducer}) => {
     const { token,role } = LoginUser_Reducer;
-    const { val } = Add_Queue_Reducer;
-        return { token,role,val };
+        return { token,role };
   }
 
-export default connect(mapStateToProps)(App);
-
-// export default connect(null, { CollectDataAction })(Test);
-
-// const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer }) => {
-//     const { token,role } = LoginUser_Reducer;
-//     const { val } = Add_Queue_Reducer;
-//         return { token,role,val };
-//   }
-
-// export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps,mapDispatchToprops)(App);

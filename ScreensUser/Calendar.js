@@ -43,7 +43,7 @@ constructor(props) {
             <View style={Styles.Container}>
                 <View style={Styles.ContainerContacts}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Image style={Styles.drawerImage} source={{ uri: this.props.val.image }}  />
+                        <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
                         <View style={{ flexDirection: 'column' }}>
                             <Text style={{ 
                                 marginLeft : 10 ,
@@ -51,11 +51,11 @@ constructor(props) {
                                 fontSize: 15 ,
                                 fontWeight: 'bold' ,
                                 marginTop: 20 }} 
-                                >{this.props.val.book_title}</Text>
+                                >{this.props.val.first_name}</Text>
                             <Text style={{ marginLeft : 10 , color : '#777' }}>{this.props.chosenDate}</Text>
                             <View style={{ flexDirection: 'row' }}>
                                 <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
-                                <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{this.props.val.author}</Text>
+                                <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{this.props.val.department}</Text>
                             </View>
                             <View style={{flexDirection: "row" , marginLeft: 10 }}>
                                 <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
@@ -165,8 +165,8 @@ const mapDispatchToprops = dispatch => ({
     DatePickerAction: (chosenDate) => dispatch(DatePickerAction(chosenDate))
 })
 
-const mapStateToProps = ({ Add_Queue_Reducer }) => {
-    const { val } = Add_Queue_Reducer;
+const mapStateToProps = ({ Data_Advisor_Reducer }) => {
+    const { val } = Data_Advisor_Reducer;
     return { val };
   }
 

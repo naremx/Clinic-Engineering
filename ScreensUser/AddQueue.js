@@ -29,13 +29,30 @@ constructor(props) {
     }
     SentDateAddQueue(){
         let collection={}
-        collection.topic=this.state.topic,
+        collection.topic=this.state.topic
         collection.descriptions=this.state.descriptions
         collection.check=this.state.check
+        collection.date=this.props.chosenDate
+        collection.advisor=this.props.val.id
 
         console.log(collection);
         this.props.TopicQueueAction(collection)
         Actions.Queue();
+
+        var url = 'http://192.168.43.212:8000/queue/Queue' ;
+
+        fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(collection),
+        headers:{
+            'Content-Type': 'application/json' ,
+            Authorization : `Token ${this.props.token}`,
+            // 'Authorization': 'Token ${this.state.getToken}',
+        }
+        }).then(res => res.json())
+        .then((responseData) => this.selectUserRole(responseData))
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));
     }
     CheckBoxChange()
     {
@@ -159,10 +176,11 @@ const mapDispatchToprops = dispatch => ({
     TopicQueueAction: (collection) => dispatch(TopicQueueAction(collection))
 })
 
-const mapStateToProps = ({ Add_Queue_Reducer , Data_Datetime_Reducer }) => {
-    const { val } = Add_Queue_Reducer;
-    const {chosenDate} = Data_Datetime_Reducer;
-        return { chosenDate,val };
+const mapStateToProps = ({ Data_Advisor_Reducer , Data_Datetime_Reducer , LoginUser_Reducer}) => {
+    const { val } = Data_Advisor_Reducer;
+    const { chosenDate } = Data_Datetime_Reducer;
+    const { token } = LoginUser_Reducer;
+        return { chosenDate,val,token };
   }
 
 export default connect(mapStateToProps,mapDispatchToprops)(AddQueue);

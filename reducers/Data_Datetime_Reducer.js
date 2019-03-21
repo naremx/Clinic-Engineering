@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
     chosenDate: {},
 };
+
 const Data_Datetime_Reducer = ( state = INITIAL_STATE , action ) => {
         switch(action.type){
             case 'DATA_DATETIME' :
