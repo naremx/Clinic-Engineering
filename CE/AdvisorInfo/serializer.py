@@ -11,6 +11,6 @@ class AdvisorDataSerializer(serializers.ModelSerializer):
         model = AdvisorData
         # fields = '__all__'
         fields = (
-        'first_name', 'last_name', 'telephone', 'email', 'department', 'tax_number', 'gender', 'expertise', 'address')
+        'id','first_name', 'last_name', 'telephone', 'email', 'department', 'tax_number', 'gender', 'expertise', 'address')
         # fields = (
         # 'first_name', 'telephone', 'department', 'email', 'tax_number', 'gender', 'expertise', 'address', 'last_name')

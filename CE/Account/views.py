@@ -59,6 +59,7 @@ class contact(APIView):
         print(user.user_type)
         return Response({'token': token.key, 'role': user.user_type})
 
+
 class register(APIView):
 
         def post(self, request):

@@ -20,6 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('queue/', include('Queue.urls')),
     path('Account/', include('Account.urls')),
-    path('advisor/', include('AdvisorInfo.urls'))
+    path('advisor/', include('AdvisorInfo.urls')),
 ]
 

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Queue
+from .views import addqueue
 urlpatterns = [
-    path('Queue', Queue.as_view(), name="queue"),
+    path('Queue', addqueue.as_view(), name="queue"),
     ]
