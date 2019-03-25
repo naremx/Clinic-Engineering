@@ -67,7 +67,7 @@ class ModalCardLogin extends React.Component {
         collection.username=this.state.username,
         collection.password=this.state.password
 
-        var url = 'http://192.168.43.212:8000/Account/' ;
+        var url = 'http://10.66.13.208:8000/Account/' ;
 
         fetch(url, {
         method: 'POST', 
@@ -83,7 +83,8 @@ class ModalCardLogin extends React.Component {
     }
 
     selectUserRole(responseData) {
-        this.props.getToken(responseData.token, responseData.role);
+        console.log(responseData)
+        this.props.getToken(responseData.token , responseData.role );
         if (responseData.role === 3) {
             Actions.user();
         } else {

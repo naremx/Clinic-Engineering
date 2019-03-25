@@ -47,7 +47,6 @@ constructor(props) {
         headers:{
             'Content-Type': 'application/json' ,
             Authorization : `Token ${this.props.token}`,
-            // 'Authorization': 'Token ${this.state.getToken}',
         }
         }).then(res => res.json())
         .then((responseData) => this.selectUserRole(responseData))

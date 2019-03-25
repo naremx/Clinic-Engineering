@@ -1,24 +1,26 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, Image, TouchableOpacity, CheckBox } from 'react-native'
 import { LinearGradient, Constants } from 'expo'
 import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
+import call from 'react-native-phone-call';
+import sentemail from 'react-native-email'
 import { DatePickerAction } from '../Actions/DatePickerAction.js'
-
-
 
 class Calendar extends React.Component{
 constructor(props) {
     super(props);
     this.state = {
         isDateTimePickerVisible: false,
-        chosenDate: ''
+        chosenDate: '',
+        chosenTime: false
     };
     }
-    SentDateTime(chosenDate){
+    SentDateTime(chosenDate,chosenTime){
+        console.log(chosenDate,chosenTime)
         this.props.DatePickerAction(chosenDate)
         Actions.AddQueue();
     }
@@ -37,6 +39,24 @@ constructor(props) {
           
       })
     };
+    CheckBoxChange()
+    {
+        this.setState({
+            chosenTime:!this.state.chosenTime
+        })
+    }
+    callphone = (telephone) => {
+        const args = {
+          number: telephone
+        };
+    
+        call(args).catch(console.error);
+    }
+    handleEmail = (email) => {
+        console.log(email)
+        const to = email
+        sentemail(to).catch(console.error);
+    }
     render(){
       return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
@@ -59,10 +79,16 @@ constructor(props) {
                             </View>
                             <View style={{flexDirection: "row" , marginLeft: 10 }}>
                                 <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
-                                    <Ionicons name="ios-call" size={30} style={{ color:'#fff', marginTop: 12 , marginLeft: 20}} />
+                                    <Ionicons name="ios-call" size={30} style={{ 
+                                        color:'#fff', 
+                                        marginTop: 12 , 
+                                        marginLeft: 20}} onPress={() => this.callphone(this.props.val.telephone)}/>
                                 </LinearGradient>
                                 <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
-                                    <Ionicons name="ios-mail" size={30} style={{ color:'#fff', marginTop: 12 , marginLeft: 18}} />
+                                    <Ionicons name="ios-mail" size={30} style={{ 
+                                        color:'#fff', 
+                                        marginTop: 12 , 
+                                        marginLeft: 18}} onPress={() => this.handleEmail(this.props.val.email)}/>
                                 </LinearGradient>
                             </View>
                         </View>
@@ -74,7 +100,10 @@ constructor(props) {
                         <Text style={{ color : '#777' }}>เครื่องมือสำหรับแปลงเค้าร่างฐานข้อมูลเชิงสัมพันธ์เป็นเค้าร่างฐานข้อมูลเชิงวัตถุ</Text>
                         <Text style={{ color : '#c0c0c0' , fontSize: 15 , fontWeight: 'bold'}}>_______________________________________________</Text>
                         <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' , marginTop: 20 }}>เวลาที่สามารถนัดได้</Text>
-                        <Text style={{ color : '#777' , fontWeight: 'bold'}}>MONDAY : 09.00 - 10.00 น.</Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            <CheckBox  value={this.state.check} onChange={() => this.CheckBoxChange()}/>
+                            <Text style={{ color : '#777' , fontWeight: 'bold', marginTop: 7}}>09.00 - 10.00 น.</Text>
+                        </View>
                     </View>
                     <View style={{ flex: 1 }}>
                         <TouchableOpacity onPress={this._showDateTimePicker}>
@@ -95,7 +124,7 @@ constructor(props) {
                         mode={'datetime'}
                         />
                     </View>
-                    <TouchableOpacity onPress={() => this.SentDateTime(this.state.chosenDate)}>
+                    <TouchableOpacity onPress={() => this.SentDateTime(this.state.chosenDate,this.state.chosenTime)}>
                         <Ionicons name="ios-checkmark-circle" size={70} style={{ color:'#31dff9' , textAlign:'center', padding : 20 }} />
                     </TouchableOpacity>
                 </View>

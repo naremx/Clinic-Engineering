@@ -44,13 +44,13 @@ renderPage(image, index) {
 
 componentDidMount() {
     try{
-        axios.get(`http://192.168.43.212:8000/advisor/getaddata/` , {
+        axios.get(`http://10.66.13.208:8000/advisor/getaddata/` , {
         headers: {
             Authorization : `Token ${this.props.token}`,
         }
         })
       .then(res => {
-        console.log('555',res.data)
+        //console.log('555',res.data)
         this.setState({ dataSource : res.data});
       })
     }
@@ -105,6 +105,7 @@ componentDidMount() {
                 <ScrollView>
                     <View style={{ alignItems : 'flex-end' }}>
                     </View>
+                        <Text>{this.props.data}</Text>
                         <View style={{flexDirection: 'column' , alignItems:'center'}}>
                             { this.renderText() }
                         </View>   
@@ -155,8 +156,8 @@ const mapDispatchToprops = dispatch => ({
 })
 
 const mapStateToProps = ({ LoginUser_Reducer}) => {
-    const { token,role } = LoginUser_Reducer;
-        return { token,role };
+    const { token,role,data } = LoginUser_Reducer;
+        return { token,role,data };
   }
 
 export default connect(mapStateToProps,mapDispatchToprops)(App);
