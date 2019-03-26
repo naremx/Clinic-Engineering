@@ -16,9 +16,14 @@ class AdvisorData(models.Model):
     address = models.CharField(max_length=500, default='', blank=True)
 
 class time(models.Model):
-    nine = models.CharField(max_length=500, default='', blank=True)
-    ten = models.CharField(max_length=500, default='', blank=True)
-    eleven = models.CharField(max_length=500, default='', blank=True)
+    # nineam = models.CharField(max_length=500, default='', blank=True)
+    # tenam = models.CharField(max_length=500, default='', blank=True)
+    # elevenam = models.CharField(max_length=500, default='', blank=True)
+    # onepm = models.CharField(max_length=500, default='', blank=True)
+    # twopm = models.CharField(max_length=500, default='', blank=True)
+    # threepm = models.CharField(max_length=500, default='', blank=True)
+    morning = models.CharField(max_length=500, default='', blank=True)
+    afternoon = models.CharField(max_length=500, default='', blank=True)
 
 class available(models.Model):
     datetime = models.ForeignKey(time,on_delete=models.CASCADE,default='')

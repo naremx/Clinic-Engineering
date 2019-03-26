@@ -52,3 +52,5 @@ class getaddata(APIView):
         serializers = AdvisorDataSerializer(Advisor_list, many=True)
         print(serializers.data)
         return Response(serializers.data)
+
+
