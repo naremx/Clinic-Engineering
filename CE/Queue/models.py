@@ -10,3 +10,4 @@ class Queue(models.Model):
     detail = models.CharField(max_length=500, default='', blank=True)
     type = models.BooleanField(default=False)
     user = models.ForeignKey(User,on_delete=models.CASCADE,default='')
+    status = models.CharField(max_length=500, default='', blank=True)
