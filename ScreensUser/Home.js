@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, View, Dimensions , Text , ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, View, Dimensions , Text , ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import Carousel from 'react-native-banner-carousel';
 import { LinearGradient } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
@@ -7,6 +7,7 @@ import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux';
 import axios from 'axios'
 import { DataAdvisorAction } from '../Actions';
+
 
 
 
@@ -31,7 +32,7 @@ class App extends React.Component {
 CollectData(val){
     console.log(val)
     this.props.DataAdvisorAction(val)
-    Actions.Calendar();
+    Actions.DetailAdvisor();
     }
 
 renderPage(image, index) {
@@ -101,12 +102,22 @@ componentDidMount() {
                         >
                             {images.map((image, index) => this.renderPage(image, index))}
                         </Carousel>
+                        <View style={{alignItems:'center'}}>
+                        <LinearGradient colors ={['#fafafa','#ffffff']} style={Styles.InputBoxSearch}>
+                            <Ionicons name="ios-search" size={30} color="#a69beb" style={Styles.InputIconSearch} />
+                                <TextInput 
+                                    placeholder='ชื่ออาจารย์ / ชื่อภาควิชา / ชื่อวิทยานิพนธ์' 
+                                    placeholderTextColor='#d2d2d2' 
+                                    underlineColorAndroid='transparent' 
+                                />
+                        </LinearGradient>
+                        </View> 
                     </View>
                 <ScrollView>
                     <View style={{ alignItems : 'flex-end' }}>
                     </View>
                         <Text>{this.props.data}</Text>
-                        <View style={{flexDirection: 'column' , alignItems:'center'}}>
+                        <View style={{alignItems:'center'}}>
                             { this.renderText() }
                         </View>   
                 </ScrollView>
@@ -134,7 +145,7 @@ const Styles = StyleSheet.create({
     ContainerContacts: {
         width: 370,
         height: 120,
-        marginTop: 20,
+        marginTop: 15,
         backgroundColor: 'white',
         borderRadius: 18,
         shadowColor: '#30C1DD',
@@ -149,6 +160,23 @@ const Styles = StyleSheet.create({
         marginLeft: 20,
         marginTop: 15,
     },
+    InputIconSearch:{
+        position: 'absolute' ,
+        top: 5,
+        left: 315,
+    },
+    InputBoxSearch: {
+        width: 350,
+        height: 40,
+        borderRadius: 25,
+        justifyContent: 'center',
+        paddingHorizontal: 20,
+        marginTop: 15,
+        shadowColor: '#30C1DD',
+        shadowRadius: 10,
+        shadowOpacity: 0.6,
+        elevation: 6,
+    },
 });
 
 const mapDispatchToprops = dispatch => ({
@@ -159,5 +187,5 @@ const mapStateToProps = ({ LoginUser_Reducer}) => {
     const { token,role,data } = LoginUser_Reducer;
         return { token,role,data };
   }
-
+ 
 export default connect(mapStateToProps,mapDispatchToprops)(App);

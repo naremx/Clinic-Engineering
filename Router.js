@@ -8,9 +8,6 @@ import { Ionicons } from 'react-native-vector-icons'
 import Text from './Components/CustomText';
 import TabIcon from './TabIcon.js';
 
-import ModalCardRegister from './ModalScreen/ModalCardRegister.js';
-import ModalCardLogin from './ModalScreen/ModalCardLogin.js';
-
 import Home from './ScreensUser/Home.js';
 import Search from './ScreensUser/Search.js';
 import Notification from './ScreensUser/Notification.js';
@@ -22,7 +19,8 @@ import PhoneBook from './Screens/PhoneBook.js';
 import Contact from './ScreensUser/Contact.js';
 import Questions from './ScreensUser/Questions.js';
 import Conditions from './ScreensUser/Conditions.js'
-import Calendar from './ScreensUser/Calendar.js';
+import CalendarUser from './ScreensUser/CalendarUser.js';
+import DetailAdvisor from './ScreensUser/DetailAdvisor.js';
 import AddQueue from './ScreensUser/AddQueue.js';
 import DetailAddQueue from './ScreensUser/DetailAddQueue.js';
 
@@ -88,8 +86,14 @@ class Routes extends React.Component{
                                                 initial>
                                         </Scene>
                                         <Scene 
-                                                key='Calendar' 
-                                                component={Calendar} 
+                                                key='DetailAdvisor' 
+                                                component={DetailAdvisor} 
+                                                title='รายละเอียดอาจารย์' 
+                                                >
+                                        </Scene>
+                                        <Scene 
+                                                key='CalendarUser' 
+                                                component={CalendarUser} 
                                                 title='ปฏิทิน' 
                                                 >
                                         </Scene>

@@ -4,46 +4,18 @@ import { LinearGradient, Constants } from 'expo'
 import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
-import DateTimePicker from 'react-native-modal-datetime-picker';
-import moment from 'moment';
 import call from 'react-native-phone-call';
 import sentemail from 'react-native-email'
-import { DatePickerAction } from '../Actions/DatePickerAction.js'
 
-class Calendar extends React.Component{
+class DetailAdvisor extends React.Component{
 constructor(props) {
     super(props);
-    this.state = {
-        isDateTimePickerVisible: false,
-        chosenDate: '',
-        chosenTime: false
-    };
+    this.state = {};
     }
     SentDateTime(chosenDate,chosenTime){
         console.log(chosenDate,chosenTime)
         this.props.DatePickerAction(chosenDate)
         Actions.AddQueue();
-    }
-    _showDateTimePicker = () => this.setState({ 
-        isDateTimePickerVisible: true 
-      });
-  
-    _hideDateTimePicker = () => this.setState({ 
-        isDateTimePickerVisible: false
-       });
-  
-    _handleDatePicked = (datetime) => {
-      this.setState({
-          isDateTimePickerVisible: false ,
-          chosenDate: moment(datetime).format('MMMM, Do YYYY HH:mm'),
-          
-      })
-    };
-    CheckBoxChange()
-    {
-        this.setState({
-            chosenTime:!this.state.chosenTime
-        })
     }
     callphone = (telephone) => {
         const args = {
@@ -56,6 +28,9 @@ constructor(props) {
         console.log(email)
         const to = email
         sentemail(to).catch(console.error);
+    }
+    gotoCalendar(){
+        Actions.CalendarUser();
     }
     render(){
       return(
@@ -72,7 +47,6 @@ constructor(props) {
                                 fontWeight: 'bold' ,
                                 marginTop: 20 }} 
                                 >{this.props.val.first_name}</Text>
-                            <Text style={{ marginLeft : 10 , color : '#777' }}>{this.props.chosenDate}</Text>
                             <View style={{ flexDirection: 'row' }}>
                                 <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
                                 <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{this.props.val.department}</Text>
@@ -98,34 +72,9 @@ constructor(props) {
                         <Text style={{ color : '#777' }}>คอมพิวเตอร์</Text>
                         <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' }}>วิทยานิพนธ์</Text> 
                         <Text style={{ color : '#777' }}>เครื่องมือสำหรับแปลงเค้าร่างฐานข้อมูลเชิงสัมพันธ์เป็นเค้าร่างฐานข้อมูลเชิงวัตถุ</Text>
-                        <Text style={{ color : '#c0c0c0' , fontSize: 15 , fontWeight: 'bold'}}>_______________________________________________</Text>
-                        <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' , marginTop: 20 }}>เวลาที่สามารถนัดได้</Text>
-                        <View style={{ flexDirection: 'row' }}>
-                            <CheckBox  value={this.state.check} onChange={() => this.CheckBoxChange()}/>
-                            <Text style={{ color : '#777' , fontWeight: 'bold', marginTop: 7}}>09.00 - 10.00 น.</Text>
-                        </View>
                     </View>
-                    <View style={{ flex: 1 }}>
-                        <TouchableOpacity onPress={this._showDateTimePicker}>
+                    <TouchableOpacity onPress={() => this.gotoCalendar()}>
                         <Text style={Styles.ButtonChosen}>เลือกวันนัดคิว</Text>
-                        </TouchableOpacity>
-                        <Text style={{ 
-                            fontSize: 20 ,
-                            color: '#655ba3' ,
-                            marginLeft: 10 ,
-                            marginTop: 20 ,
-                            fontWeight: 'bold',
-                            textAlign: 'center' }} 
-                            >{this.state.chosenDate}</Text>
-                        <DateTimePicker
-                        isVisible={this.state.isDateTimePickerVisible}
-                        onConfirm={this._handleDatePicked}
-                        onCancel={this._hideDateTimePicker}
-                        mode={'datetime'}
-                        />
-                    </View>
-                    <TouchableOpacity onPress={() => this.SentDateTime(this.state.chosenDate,this.state.chosenTime)}>
-                        <Ionicons name="ios-checkmark-circle" size={70} style={{ color:'#31dff9' , textAlign:'center', padding : 20 }} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -139,10 +88,6 @@ const Styles = StyleSheet.create({
         height: '100%' ,
         alignItems:'center'
     },
-    calendar: {
-        paddingTop: 10,
-        height: 350
-      },
     ContainerContacts: {
         width: 370,
         height: 600,
@@ -190,13 +135,9 @@ const Styles = StyleSheet.create({
     },
 });
 
-const mapDispatchToprops = dispatch => ({
-    DatePickerAction: (chosenDate) => dispatch(DatePickerAction(chosenDate))
-})
-
 const mapStateToProps = ({ Data_Advisor_Reducer }) => {
     const { val } = Data_Advisor_Reducer;
     return { val };
   }
 
-export default connect(mapStateToProps,mapDispatchToprops)(Calendar);
+export default connect(mapStateToProps)(DetailAdvisor);
