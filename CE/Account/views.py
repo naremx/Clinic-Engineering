@@ -18,6 +18,7 @@ from .serializer import UserSerializer
 from rest_framework import status
 from .models import User
 
+
 class contact(APIView):
     throttle_classes = ()
     permission_classes = ()
@@ -93,6 +94,4 @@ class fgpassword(APIView):
             recipient_list = ['mosaicpm@outlook.com',]
             send_mail( subject, message, email_from, recipient_list )
 
-class addqueue(APIView):
-    def post(self,request):
-        print(1)
+

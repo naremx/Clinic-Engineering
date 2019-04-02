@@ -40,3 +40,6 @@ class available(models.Model):
     advisor = models.ForeignKey(AdvisorData, on_delete=models.CASCADE, default='')
     free_time = models.ForeignKey(time, on_delete=models.CASCADE, default='')
     is_display = models.BooleanField(default=True)
+
+    def __str__(self):
+        return str(self.free_date)+' '+str(self.free_time)+' '+str(self.advisor)

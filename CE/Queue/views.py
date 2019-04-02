@@ -30,7 +30,18 @@ class addqueue(APIView):
             date_time=dateutil.parser.parse(request.data['date']),
             detail=request.data['descriptions'],
             type=request.data['check'],
-            user=get_object_or_404(User, id=request.user.id)
+            user=get_object_or_404(User, id=request.user.id),
+
         )
         p.save()
         return Response(status=status.HTTP_201_CREATED)
+
+class confirm(APIView):
+    def post(self,request):
+        if request.data == 1:
+            Queue.objects.filter(id=request.data['id']).update(status='accepted')
+            available.object.filter(name=request.data['id']).update(is_display=False)
+
+        else:
+            addqueue.objects.filter(id=request.data['id']).update(status='rejected')
+
