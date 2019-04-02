@@ -21,5 +21,7 @@ urlpatterns = [
     path('queue/', include('Queue.urls')),
     path('Account/', include('Account.urls')),
     path('advisor/', include('AdvisorInfo.urls')),
+    path('history/', include('History.urls')),
+
 ]
 

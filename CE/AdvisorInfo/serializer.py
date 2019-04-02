@@ -23,4 +23,4 @@ class ShowAvailableSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = available
-        fields = ('free_date', 'start_time', 'end_time')
+        fields = ('free_date', 'start_time', 'end_time','id')

@@ -93,3 +93,6 @@ class fgpassword(APIView):
             recipient_list = ['mosaicpm@outlook.com',]
             send_mail( subject, message, email_from, recipient_list )
 
+class addqueue(APIView):
+    def post(self,request):
+        print(1)
