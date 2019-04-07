@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View,Text,TouchableOpacity,Modal,TextInput } from 'react-native';
+import { StyleSheet,View,Text,TouchableOpacity,Modal,TextInput,Alert } from 'react-native';
 import { LinearGradient } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 
@@ -87,8 +87,14 @@ class ModalCardLogin extends React.Component {
         this.props.getToken(responseData.token , responseData.role );
         if (responseData.role === 3) {
             Actions.user();
-        } else {
+        } else if (responseData.role === 2) {
             Actions.Advisor();
+        }
+        else{
+            Alert.alert(
+                'อีเมลหรือพาสเวิร์ดผิด',
+                'กรุณาตรวจสอบหรือกรอกใหม่อีกครั้ง',
+              );
         }
     }
 

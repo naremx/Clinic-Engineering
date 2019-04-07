@@ -1,12 +1,28 @@
 import React from 'react';
 import { StyleSheet,View,Text,TouchableOpacity } from 'react-native';
 import { LinearGradient,Constants } from 'expo';
+import axios from 'axios'
 
 export default class PhoneBook extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isLoading: false,
+      dataSource: [],
+
+    };
   }
+  componentDidMount() {
+    try{
+        axios.get(`http://10.66.13.208:8000/advisor/getaddata/`)
+      .then(res => {
+        this.setState({ dataSource : res.data});
+      })
+    }
+    catch(err){
+      console.log(err)
+    }
+}
    render(){  
 
     return(

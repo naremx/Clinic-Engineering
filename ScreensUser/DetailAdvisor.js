@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, CheckBox } from 'react-native'
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
 import { LinearGradient, Constants } from 'expo'
 import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux'
@@ -70,12 +70,16 @@ constructor(props) {
                     <View style={{ marginLeft : 20 }}>
                         <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' }}>ความถนัดเฉพาะทาง</Text> 
                         <Text style={{ color : '#777' }}>คอมพิวเตอร์</Text>
-                        <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' }}>วิทยานิพนธ์</Text> 
-                        <Text style={{ color : '#777' }}>เครื่องมือสำหรับแปลงเค้าร่างฐานข้อมูลเชิงสัมพันธ์เป็นเค้าร่างฐานข้อมูลเชิงวัตถุ</Text>
+                        <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' }}>วิทยานิพนธ์</Text>
+                        <ScrollView style={{ height : 200 }}>
+                            <Text style={{ color : '#777' }}>เครื่องมือสำหรับแปลงเค้าร่างฐานข้อมูลเชิงสัมพันธ์เป็นเค้าร่างฐานข้อมูลเชิงวัตถุ</Text>
+                        </ScrollView> 
                     </View>
-                    <TouchableOpacity onPress={() => this.gotoCalendar()}>
-                        <Text style={Styles.ButtonChosen}>เลือกวันนัดคิว</Text>
-                    </TouchableOpacity>
+                    <View style={{alignItems:'center'}}>
+                        <TouchableOpacity onPress={() => this.gotoCalendar()}>
+                            <Text style={Styles.ButtonChosen}>เลือกวันนัดคิว</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </LinearGradient>
@@ -117,7 +121,7 @@ const Styles = StyleSheet.create({
         elevation: 6,
     },
     ButtonChosen:{
-        width: 350,
+        width: 320,
         height: 40,
         color: '#fff' ,
         fontSize: 20 , 
@@ -125,9 +129,9 @@ const Styles = StyleSheet.create({
         paddingTop: 5 ,
         fontWeight: 'bold' ,
         backgroundColor: '#87daf3',
-        marginLeft: 10,
-        marginTop: 20,
-        borderRadius: 20,
+        marginTop: 120,
+        position: 'relative',
+        borderRadius: 10,
         shadowColor: '#30C1DD',
         shadowRadius: 10,
         shadowOpacity: 0.6,

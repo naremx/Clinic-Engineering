@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, StatusBar } from 'react-native'
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
 import { LinearGradient, Constants } from 'expo'
 import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux'
@@ -16,6 +16,7 @@ constructor(props) {
         selectedDate : '' ,
         selectedDateResult: [] ,
         selectedValue : [],
+        selectedValueDelete : []
     };
     this.onDayPress = this.onDayPress.bind(this);
     }
@@ -58,12 +59,18 @@ constructor(props) {
                 });
                 return arr;
             }, [] )
-        
+
+            const resultValueDelete = resultValueFinal.filter((elem, index, self) => self.findIndex(
+                (t) => {return (t.label === elem.label)}) === index)
+
             this.setState({
                 selectedDateResult: resultDate,
-                selectedValue: resultValueFinal
+                selectedValue: resultValueFinal,
+                selectedValueDelete: resultValueDelete
             })
           })
+
+          
 
         .then(response => console.log('Success:', JSON.stringify(response)))
         .catch(error => console.error('Error:', error));
@@ -71,25 +78,23 @@ constructor(props) {
     
     onDayPress = (day) => {
     this.setState({
-            selected: day.dateString
+            selected: {Day: day.dateString}
         })
+        console.log(this.state.selected)
     };
     onTimePress = (selected) => {
-        console.log(selected)
         this.setState({
-                selectedTime: selected
+                selectedTime: {Time: selected}
             })
-        };
-    SentDateTime(selected,selectedTime){
-        console.log(selected,selectedTime)
-        this.props.DatePickerAction(selected)
-        Actions.AddQueue();
     }
-    CheckBoxChange()
-    {
-        this.setState({
-            chosenTime:!this.state.chosenTime
-        })
+    SentDateTime(selected,selectedTime){
+        let collectionDateTime={}
+        collectionDateTime.selected = selected,
+        collectionDateTime.selectedTime = selectedTime
+        console.log(collectionDateTime)
+
+        this.props.DatePickerAction(collectionDateTime)
+        Actions.AddQueue();
     }
     render(){
         let dates = {};
@@ -119,23 +124,26 @@ constructor(props) {
                                 fontSize: 25 ,
                                 fontWeight: 'bold' ,
                                 marginTop: 20 }} >เลือกเวลาในการนัดคิว</Text>
-                    <CheckboxGroup
-                            callback={this.onTimePress}
-                            iconColor={"#00a2dd"}
-                            iconSize={20}
-                            checkedIcon="ios-checkbox-outline"
-                            uncheckedIcon="ios-square-outline"
-                            checkboxes={this.state.selectedValue}
-                            labelStyle={{
-                                color: '#333'
-                            }}
-                            rowStyle={{
-                                flexDirection: 'row'
-                            }}
-                            rowDirection={"column"}
-                            />
+                    <View style={{ flexDirection : "row" }}>
+                        <ScrollView style={{ height : 100 }}>
+                            <CheckboxGroup
+                                    callback={this.onTimePress}
+                                    iconColor={"#00a2dd"}
+                                    iconSize={20}
+                                    checkedIcon="ios-checkbox-outline"
+                                    uncheckedIcon="ios-square-outline"
+                                    checkboxes={this.state.selectedValueDelete}
+                                    labelStyle={{
+                                        color: '#333'
+                                    }}
+                                    rowStyle={{
+                                        flexDirection: 'row'
+                                    }}
+                                    />
+                            </ScrollView> 
+                    </View>
                     <TouchableOpacity onPress={() => this.SentDateTime(this.state.selected,this.state.selectedTime)}>
-                        <Ionicons name="ios-checkmark-circle" size={70} style={{ color:'#31dff9' , textAlign:'center', padding : 20 }} />
+                        <Ionicons name="ios-checkmark-circle" size={70} style={{ color:'#31dff9' , textAlign:'center', padding : 10 }} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -169,7 +177,7 @@ const Styles = StyleSheet.create({
 });
 
 const mapDispatchToprops = dispatch => ({
-    DatePickerAction: (selected) => dispatch(DatePickerAction(selected))
+    DatePickerAction: (collectionDateTime) => dispatch(DatePickerAction(collectionDateTime))
 })
 
 const mapStateToProps = ({ Data_Advisor_Reducer , LoginUser_Reducer }) => {

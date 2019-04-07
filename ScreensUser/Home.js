@@ -26,7 +26,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             isLoading: false,
-            dataSource: [],
+            dataSource: {},
     }
 }
 CollectData(val){
@@ -93,25 +93,37 @@ componentDidMount() {
         return( 
                 <LinearGradient colors ={['#87daf3','#a69beb']} style={Styles.container}>
                     <View >
-                        <Carousel
+                        <View style={Styles.ContainerSearch}>
+                            <View style={{marginLeft: 40}}>
+                            <LinearGradient colors ={['#fafafa','#ffffff']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}style={Styles.InputBoxSearch}>
+                                <Ionicons name="ios-search" size={30} color="#a69beb" style={Styles.InputIconSearch} />
+                                    <TextInput 
+                                        placeholder='ชื่ออาจารย์ / ชื่อภาควิชา / ชื่อวิทยานิพนธ์' 
+                                        placeholderTextColor='#a69beb' 
+                                        underlineColorAndroid='transparent' 
+                                    />
+                            </LinearGradient>
+                            <View style={{flexDirection: 'row' , marginTop : 25 }}>
+                                <Ionicons name="ios-happy" size={55} color="#a69beb" style={{ marginLeft: 3 }}/>
+                                <Ionicons name="ios-flask" size={55} color="#a69beb" style={{ marginLeft: 100 }}/>
+                                <Ionicons name="ios-book" size={55} color="#a69beb" style={{ marginLeft: 100 }}/>
+                            </View>
+                            <View style={{flexDirection: 'row' , marginTop : 10 }}>
+                                <Text style={{ color : '#a69beb'}}>ชื่ออาจารย์</Text>
+                                <Text style={{ marginLeft: 70, color : '#a69beb'}}>ชื่อภาควิชา</Text>
+                                <Text style={{ marginLeft: 70, color : '#a69beb'}}>ชื่อวิทยานิพนธ์</Text>
+                            </View>
+                            </View>
+                        </View>
+                    {/* <Carousel
                             autoplay
-                            autoplayTimeout={5000}
+                            autoplayTimeout={5000} 
                             loop
                             index={0}
                             pageSize={BannerWidth}
                         >
                             {images.map((image, index) => this.renderPage(image, index))}
-                        </Carousel>
-                        <View style={{alignItems:'center'}}>
-                        <LinearGradient colors ={['#fafafa','#ffffff']} style={Styles.InputBoxSearch}>
-                            <Ionicons name="ios-search" size={30} color="#a69beb" style={Styles.InputIconSearch} />
-                                <TextInput 
-                                    placeholder='ชื่ออาจารย์ / ชื่อภาควิชา / ชื่อวิทยานิพนธ์' 
-                                    placeholderTextColor='#d2d2d2' 
-                                    underlineColorAndroid='transparent' 
-                                />
-                        </LinearGradient>
-                        </View> 
+                        </Carousel> */}
                     </View>
                 <ScrollView>
                     <View style={{ alignItems : 'flex-end' }}>
@@ -153,6 +165,15 @@ const Styles = StyleSheet.create({
         shadowOpacity: 0.6,
         elevation: 6,
     },
+    ContainerSearch:{
+        width: 450,
+        height: 180,
+        backgroundColor: '#fff',
+        shadowColor: '#30C1DD',
+        shadowRadius: 10,
+        shadowOpacity: 0.6,
+        elevation: 6,
+    },
     drawerImage: {
         height: 90,
         width: 90,
@@ -162,7 +183,6 @@ const Styles = StyleSheet.create({
     },
     InputIconSearch:{
         position: 'absolute' ,
-        top: 5,
         left: 315,
     },
     InputBoxSearch: {
@@ -176,6 +196,8 @@ const Styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOpacity: 0.6,
         elevation: 6,
+        borderWidth: 2, 
+        borderColor: '#a69beb',
     },
 });
 

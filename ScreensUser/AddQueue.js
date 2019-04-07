@@ -32,7 +32,8 @@ constructor(props) {
         collection.topic=this.state.topic
         collection.descriptions=this.state.descriptions
         collection.check=this.state.check
-        collection.date=this.props.chosenDate
+        collection.date=this.props.collectionDateTime.selected.Day
+        collection.time=this.props.collectionDateTime.selectedTime.Time
         collection.advisor=this.props.val.id
 
         console.log(collection);
@@ -60,12 +61,13 @@ constructor(props) {
         })
     }
     render(){
+        console.log(this.props.collectionDateTime.selected.Day)
       return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
         <View style={Styles.Container}>
             <View style={Styles.ContainerContacts}>
                 <View style={{ alignItems:'flex-start' , marginLeft : 20 }}>
-                    <Text style={{ color : '#3e48a3' , fontSize: 25 , fontWeight: 'bold' , marginTop: 10 }} >{this.props.chosenDate}</Text>
+                    <Text style={{ color : '#3e48a3' , fontSize: 25 , fontWeight: 'bold' , marginTop: 10 }} >DATE : {this.props.collectionDateTime.selected.Day}</Text>
                     <Text style={{ color : '#777' , fontWeight: 'bold' }} >{this.props.val.book_title}</Text>
                     <Text style={{ color : '#777' }}>Computer Engineering</Text>
                     <Text style={{ color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold' , marginTop: 10 }} >หัวเรื่อง</Text>
@@ -177,9 +179,9 @@ const mapDispatchToprops = dispatch => ({
 
 const mapStateToProps = ({ Data_Advisor_Reducer , Data_Datetime_Reducer , LoginUser_Reducer}) => {
     const { val } = Data_Advisor_Reducer;
-    const { chosenDate } = Data_Datetime_Reducer;
+    const { collectionDateTime } = Data_Datetime_Reducer;
     const { token } = LoginUser_Reducer;
-        return { chosenDate,val,token };
+        return { collectionDateTime,val,token };
   }
 
 export default connect(mapStateToProps,mapDispatchToprops)(AddQueue);
