@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import AdvisorData
+from .models import AdvisorData, available
 
 
 class AdvisorDataSerializer(serializers.ModelSerializer):
@@ -11,6 +11,16 @@ class AdvisorDataSerializer(serializers.ModelSerializer):
         model = AdvisorData
         # fields = '__all__'
         fields = (
-        'first_name', 'last_name', 'telephone', 'email', 'department', 'tax_number', 'gender', 'expertise', 'address')
+            'id', 'first_name', 'last_name', 'telephone', 'email', 'department', 'tax_number', 'gender', 'expertise',
+            'address')
         # fields = (
         # 'first_name', 'telephone', 'department', 'email', 'tax_number', 'gender', 'expertise', 'address', 'last_name')
+
+
+class ShowAvailableSerializer(serializers.ModelSerializer):
+    start_time = serializers.TimeField(source='free_time.start_time')
+    end_time = serializers.TimeField(source='free_time.end_time')
+
+    class Meta:
+        model = available
+        fields = ('free_date', 'start_time', 'end_time','id')

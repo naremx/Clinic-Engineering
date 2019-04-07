@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'AdvisorInfo',
-    'django.db.backends.postgresql',
     'Queue',
+    'History',
 
 ]
 

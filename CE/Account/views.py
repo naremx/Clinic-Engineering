@@ -18,6 +18,7 @@ from .serializer import UserSerializer
 from rest_framework import status
 from .models import User
 
+
 class contact(APIView):
     throttle_classes = ()
     permission_classes = ()
@@ -55,9 +56,11 @@ class contact(APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
+        serializer = UserSerializer(user)
 
         print(user.user_type)
-        return Response({'token': token.key, 'role': user.user_type})
+        return Response({'token': token.key, 'role': user.user_type,'data':serializer.data})
+
 
 class register(APIView):
 
@@ -90,4 +93,5 @@ class fgpassword(APIView):
             email_from = settings.EMAIL_HOST_USER
             recipient_list = ['mosaicpm@outlook.com',]
             send_mail( subject, message, email_from, recipient_list )
+
 
