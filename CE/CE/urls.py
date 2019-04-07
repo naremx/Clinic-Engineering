@@ -22,6 +22,7 @@ urlpatterns = [
     path('Account/', include('Account.urls')),
     path('advisor/', include('AdvisorInfo.urls')),
     path('history/', include('History.urls')),
+    path('Admin/', include('Admin.urls')),
 
 ]
 
