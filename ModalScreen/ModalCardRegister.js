@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet,View,Text,TouchableOpacity,Modal,TextInput } from 'react-native';
-import { LinearGradient } from 'expo';
+import { LinearGradient,BlurView } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 
 export default class ModalCardRegister extends React.Component {
@@ -52,6 +52,8 @@ export default class ModalCardRegister extends React.Component {
       collection.username=this.state.username,
       console.log(collection);
 
+      this.setState({ showMe:false })
+
       var url = 'http://192.168.43.212:8000/Account/register' ;
 
       fetch(url, {
@@ -70,6 +72,7 @@ export default class ModalCardRegister extends React.Component {
       return(
         <View style={Styles.container}>
         <Modal visible={this.state.showMe} onRequestClose ={()=>console.warn("this is close")} transparent animationType='fade'>
+        <BlurView tint="dark" intensity={50} style={StyleSheet.absoluteFill}>
             <View style={{ alignItems:'center', marginTop: 30 }}>
                 <View style={Styles.ModalBoxRegister}>
                     <View style={{ alignItems:'flex-end' }}>
@@ -99,6 +102,7 @@ export default class ModalCardRegister extends React.Component {
                 </View>
                 </View>
             </View>
+        </BlurView>
         </Modal>
         <TouchableOpacity onPress={() => this.setState({ showMe:true })}>
           <Text style={{color : '#fff' , fontSize: 15 , fontWeight: 'bold' }}>ลงทะเบียน</Text>

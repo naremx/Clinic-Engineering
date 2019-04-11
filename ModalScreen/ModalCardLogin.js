@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet,View,Text,TouchableOpacity,Modal,TextInput,Alert } from 'react-native';
-import { LinearGradient } from 'expo';
+import { LinearGradient,BlurView } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 
 import * as Expo from 'expo';
@@ -67,6 +67,8 @@ class ModalCardLogin extends React.Component {
         collection.username=this.state.username,
         collection.password=this.state.password
 
+        this.setState({ showMe:false })
+
         var url = 'http://10.66.13.208:8000/Account/' ;
 
         fetch(url, {
@@ -103,6 +105,7 @@ class ModalCardLogin extends React.Component {
         return(
             <View style={Styles.container}>
                 <Modal visible={this.state.showMe} onRequestClose ={()=>console.warn("this is close")} transparent animationType='fade'>
+                <BlurView tint="dark" intensity={50} style={StyleSheet.absoluteFill}>
                     <View style={{ alignItems:'center', marginTop: 50 }}>
                         <View style={Styles.ModalBoxLogin}>
 
@@ -145,6 +148,7 @@ class ModalCardLogin extends React.Component {
                             </View>
                         </View>
                     </View>
+                </BlurView>
                 </Modal>
                 <TouchableOpacity onPress={() => this.setState({ showMe:true })}>
                 <Text style={{color : '#fff' , fontSize: 15 , fontWeight: 'bold' }}>เข้าสู่ระบบ</Text>
