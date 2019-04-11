@@ -1,7 +1,8 @@
-from .models import AdvisorData
+from .models import AdvisorData, available, time
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import AdvisorDataSerializer
+from .serializer import *
+from django.shortcuts import get_object_or_404
 import pandas as pd
 
 
@@ -45,10 +46,33 @@ def advisorcsv(request):
 
 class getaddata(APIView):
     permission_classes = ()
-    
+
     def get(self, request):
         # create if for front request
         Advisor_list = AdvisorData.objects.all()
         serializers = AdvisorDataSerializer(Advisor_list, many=True)
-        print(serializers.data)
         return Response(serializers.data)
+
+
+class showavailable(APIView):
+    def post(self, request):
+        print(request.data)
+        advisor_available = available.objects.filter(advisor__id=request.data)
+        serializers = ShowAvailableSerializer(advisor_available,many=True)
+        print(serializers)
+        return Response(serializers.data)
+
+class editavailable(APIView):
+    def post(self, request):
+        print(request.data)
+        import datetime
+        if available.objects.filter(free_date=request.data['date'], advisor__id=request.data['id'],
+                                    free_time=request.data['time']):
+            print('boom')
+        else:
+            p = available(
+                free_date=datetime.datetime.strptime(request.data['date'], "%Y-%m-%d").date(),
+                advisor=get_object_or_404(AdvisorData, id=request.data['id']),
+                free_time=get_object_or_404(time, )
+            )
+            p.save()
