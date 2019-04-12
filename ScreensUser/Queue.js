@@ -6,6 +6,63 @@ import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
 class Queue extends React.Component{
+
+        constructor(props){
+            super(props);
+            this.state = {
+                isLoading: false,
+                dataSource: {},
+            }
+        }    
+    componentDidMount() {
+        var url = 'http://10.66.13.208:8000/history/History/' ;
+    
+        fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(this.props.token),
+        headers:{
+            'Content-Type': 'application/json' ,
+            Authorization : `Token ${this.props.token}`,
+        }
+        }).then(res => res.json())
+        .then((responseData) => {
+            this.setState({
+                dataSource: responseData
+            });   
+            console.log('kk' ,responseData)
+          })
+    
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));
+    }
+
+    renderText() {
+        if (this.state.dataSource.length > 0) {
+            return this.state.dataSource.map((val, index) => 
+            <View key={index} style={Styles.ContainerContacts}>
+                <TouchableOpacity onPress={() => this.CollectData(val)}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
+                        <View style={Styles.Column}>
+                            <Text style={{ 
+                                marginLeft : 10 ,
+                                color : '#3e48a3' ,
+                                fontSize: 15 ,
+                                fontWeight: 'bold' ,
+                                marginTop: 20 }} >Topic : {val.topic}</Text>
+                            <Text style={{ marginLeft : 10 , color : '#777' }}>{val.date_time}</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Ionicons name="ios-notifications" size={15} style={{ color:'#87daf3' , marginLeft: 22}} />
+                                <Text style={{ marginLeft : 10 , color : '#87daf3' }}>Status : {val.status}</Text>
+                            </View>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            </View>
+            );
+        }
+    }
+
     ShowDetailQueue(val){
         Actions.DetailAddQueue();
     }
@@ -13,39 +70,9 @@ class Queue extends React.Component{
         return(
             <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
                 <View style={Styles.Container}>
-                    <TouchableOpacity onPress={() => this.ShowDetailQueue(this.props.val)}>
-                        <View style={{ alignItems:'center' }}>
-                            <View style={Styles.ContainerContacts}>
-                                <View style={{ flexDirection : 'row' }}>
-                                    <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
-                                    <View style={{ flexDirection : 'column' }}>
-                                        <View style={{ flexDirection : 'row' }}> 
-                                            <Text style={{ 
-                                                marginLeft : 10 ,
-                                                color : '#3e48a3' ,
-                                                fontSize: 15 ,
-                                                fontWeight: 'bold' ,
-                                                marginTop: 20 }} >{this.props.val.book_title}</Text>
-                                            <Text style={{ 
-                                                marginLeft : 10 ,
-                                                color : '#777' , 
-                                                marginTop: 20 }}>• รอยืนยัน </Text>
-                                        </View>
-                                        <Text style={{ marginLeft : 10 , color : '#777' }}>Computer Engineering</Text>
-                                        <View style={{ flexDirection : 'row' }}>
-                                            <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
-                                            <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{this.props.val.author}</Text>
-                                        </View>
-                                        <Text style={{ 
-                                            marginLeft : 10 , 
-                                            color : '#3e48a3' , 
-                                            fontSize: 13 , 
-                                            fontWeight: 'bold'}} >วันที่นัด : {this.props.chosenDate}</Text>
-                                    </View>
-                                </View>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
+                    <View style={{alignItems:'center'}}>
+                        { this.renderText() }
+                    </View> 
                 </View>
             </LinearGradient>
         )
@@ -65,6 +92,7 @@ const Styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOpacity: 0.6,
         elevation: 6,
+        marginTop: 20
     },
     drawerImage: {
         height: 90,
@@ -75,10 +103,11 @@ const Styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = ({ Add_Queue_Reducer , Data_Datetime_Reducer }) => {
+const mapStateToProps = ({ Add_Queue_Reducer , Data_Datetime_Reducer , LoginUser_Reducer }) => {
+    const { token,role } = LoginUser_Reducer;
     const { val } = Add_Queue_Reducer;
     const {chosenDate} = Data_Datetime_Reducer;
-        return { chosenDate,val };
+        return { chosenDate,val,token,role };
   }
 
 export default connect(mapStateToProps)(Queue);

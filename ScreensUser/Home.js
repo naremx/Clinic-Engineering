@@ -15,9 +15,7 @@ const BannerWidth = Dimensions.get('window').width;
 const BannerHeight = 200;
 
 const images = [
-    "https://img.live/images/2019/02/05/1.md.png",
-    "https://img.live/images/2019/02/05/799739.md.jpg",
-    "https://img.live/images/2019/02/05/631371.md.jpg"
+    "https://www.img.in.th/images/a691f37ca749a831e4362e41a336ec6f.png"
 ];
 
 
@@ -27,11 +25,11 @@ class App extends React.Component {
         this.state = {
             isLoading: false,
             dataSource: {},
-    }
+    }    
 }
 CollectData(val){
-    console.log(val)
     this.props.DataAdvisorAction(val)
+    console.log(val)
     Actions.DetailAdvisor();
     }
 
@@ -51,8 +49,8 @@ componentDidMount() {
         }
         })
       .then(res => {
-        //console.log('555',res.data)
         this.setState({ dataSource : res.data});
+        console.log(res.data)
       })
     }
     catch(err){
@@ -93,37 +91,40 @@ componentDidMount() {
         return( 
                 <LinearGradient colors ={['#87daf3','#a69beb']} style={Styles.container}>
                     <View >
+                    <Carousel
+                        autoplay
+                        autoplayTimeout={5000} 
+                        loop
+                        index={0}
+                        pageSize={BannerWidth}
+                    >
+                        {images.map((image, index) => this.renderPage(image, index))}
+                    </Carousel>
                         <View style={Styles.ContainerSearch}>
-                            <View style={{marginLeft: 40}}>
-                            <LinearGradient colors ={['#fafafa','#ffffff']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}style={Styles.InputBoxSearch}>
+                            <View style={{alignItems:'center'}}>
+                            <LinearGradient colors ={['#fafafa','#ffffff']} 
+                                            start={{x: 0.0, y: 1.0}} 
+                                            end={{x: 1.0, y: 1.0}}
+                                            style={Styles.InputBoxSearch}>
                                 <Ionicons name="ios-search" size={30} color="#a69beb" style={Styles.InputIconSearch} />
                                     <TextInput 
                                         placeholder='ชื่ออาจารย์ / ชื่อภาควิชา / ชื่อวิทยานิพนธ์' 
-                                        placeholderTextColor='#a69beb' 
+                                        placeholderTextColor='#b6b6b6' 
                                         underlineColorAndroid='transparent' 
                                     />
                             </LinearGradient>
-                            <View style={{flexDirection: 'row' , marginTop : 25 }}>
-                                <Ionicons name="ios-happy" size={55} color="#a69beb" style={{ marginLeft: 3 }}/>
-                                <Ionicons name="ios-flask" size={55} color="#a69beb" style={{ marginLeft: 100 }}/>
-                                <Ionicons name="ios-book" size={55} color="#a69beb" style={{ marginLeft: 100 }}/>
                             </View>
-                            <View style={{flexDirection: 'row' , marginTop : 10 }}>
-                                <Text style={{ color : '#a69beb'}}>ชื่ออาจารย์</Text>
-                                <Text style={{ marginLeft: 70, color : '#a69beb'}}>ชื่อภาควิชา</Text>
-                                <Text style={{ marginLeft: 70, color : '#a69beb'}}>ชื่อวิทยานิพนธ์</Text>
-                            </View>
-                            </View>
+                            <View style={{flexDirection: 'row' , marginTop : 10  }}>
+                                    <Ionicons name="ios-happy" size={40} color="#a69beb" style={{ marginLeft : 50 }} />
+                                    <Ionicons name="ios-flask" size={40} color="#a69beb" style={{ marginLeft : 100 }} />
+                                    <Ionicons name="ios-book"  size={40} color="#a69beb" style={{ marginLeft : 100 }} />
+                                </View>
+                                <View style={{flexDirection: 'row' , marginTop : 10 }}>
+                                    <Text style={{ color : '#a69beb' , marginLeft : 40 }}>ชื่ออาจารย์</Text>
+                                    <Text style={{ color : '#a69beb' , marginLeft : 60 }}>ชื่อภาควิชา</Text>
+                                    <Text style={{ color : '#a69beb' , marginLeft : 60 }}>ชื่อวิทยานิพนธ์</Text>
+                                </View>
                         </View>
-                    {/* <Carousel
-                            autoplay
-                            autoplayTimeout={5000} 
-                            loop
-                            index={0}
-                            pageSize={BannerWidth}
-                        >
-                            {images.map((image, index) => this.renderPage(image, index))}
-                        </Carousel> */}
                     </View>
                 <ScrollView>
                     <View style={{ alignItems : 'flex-end' }}>
@@ -167,9 +168,9 @@ const Styles = StyleSheet.create({
     },
     ContainerSearch:{
         width: 450,
-        height: 180,
+        height: 140,
         backgroundColor: '#fff',
-        shadowColor: '#30C1DD',
+        shadowColor: '#e5e5e5',
         shadowRadius: 10,
         shadowOpacity: 0.6,
         elevation: 6,
@@ -186,13 +187,14 @@ const Styles = StyleSheet.create({
         left: 315,
     },
     InputBoxSearch: {
-        width: 350,
+        width: 360,
         height: 40,
+        left: -20 ,
         borderRadius: 25,
         justifyContent: 'center',
         paddingHorizontal: 20,
         marginTop: 15,
-        shadowColor: '#30C1DD',
+        shadowColor: '#e5e5e5',
         shadowRadius: 10,
         shadowOpacity: 0.6,
         elevation: 6,

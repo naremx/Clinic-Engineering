@@ -6,8 +6,6 @@ import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { Calendar } from 'react-native-calendars';
 import { DatePickerAction } from '../Actions/DatePickerAction.js'
-import CheckboxGroup from 'react-native-checkbox-group'
-
 
 class CalendarUser extends React.Component{
 constructor(props) {
@@ -21,7 +19,7 @@ constructor(props) {
     this.onDayPress = this.onDayPress.bind(this);
     }
     componentDidMount() {
-        var url = 'http://10.66.13.208:8000/advisor/showavailable/' ;
+        var url = 'http://10.66.13.208:8000/advisor/Usshowavailable/' ;
 
         fetch(url, {
         method: 'POST', 
@@ -35,42 +33,17 @@ constructor(props) {
             this.setState({
                 selectedDate: responseData
             });
-            console.log(this.state.selectedDate)           
+            console.log('KK',responseData)
             const resultDate = this.state.selectedDate.reduce((arr,item) =>{
                 if( item.free_date){
                     arr.push(item.free_date);
                 }
                 return arr
             }, [])
-
-            const resultValue = this.state.selectedDate.reduce((arr,item) =>{
-                if(item.id){
-                    arr.value.push(item.id);
-                    arr.label.push(item.start_time)
-                }
-                return arr
-                
-            }, { label: [] , value: [] } )
-
-            const resultValueFinal = resultValue.label.reduce((arr,item,index) =>{
-                arr.push({
-                    label: item,
-                    value: resultValue.value[index]
-                });
-                return arr;
-            }, [] )
-
-            const resultValueDelete = resultValueFinal.filter((elem, index, self) => self.findIndex(
-                (t) => {return (t.label === elem.label)}) === index)
-
             this.setState({
                 selectedDateResult: resultDate,
-                selectedValue: resultValueFinal,
-                selectedValueDelete: resultValueDelete
             })
           })
-
-          
 
         .then(response => console.log('Success:', JSON.stringify(response)))
         .catch(error => console.error('Error:', error));
@@ -78,23 +51,17 @@ constructor(props) {
     
     onDayPress = (day) => {
     this.setState({
-            selected: {Day: day.dateString}
+            selected: {date: day.dateString}
         })
-        console.log(this.state.selected)
     };
-    onTimePress = (selected) => {
-        this.setState({
-                selectedTime: {Time: selected}
-            })
-    }
-    SentDateTime(selected,selectedTime){
+    SentDateTime(){
         let collectionDateTime={}
-        collectionDateTime.selected = selected,
-        collectionDateTime.selectedTime = selectedTime
+        collectionDateTime = this.state.selected,
+
         console.log(collectionDateTime)
 
         this.props.DatePickerAction(collectionDateTime)
-        Actions.AddQueue();
+        Actions.CalendarUserTime();
     }
     render(){
         let dates = {};
@@ -105,7 +72,7 @@ constructor(props) {
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
             <View style={Styles.Container}>
                 <View style={Styles.ContainerContacts}>
-                    <View style={{ marginTop : 5 }}>
+                    <View style={{ marginTop : 20 }}>
                         <Calendar
                             onDayPress={this.onDayPress}
                             style={Styles.calendar}
@@ -118,33 +85,11 @@ constructor(props) {
                             }}
                         />
                     </View>
-                    <Text style={{ 
-                                marginLeft : 10 ,
-                                color : '#3e48a3' ,
-                                fontSize: 25 ,
-                                fontWeight: 'bold' ,
-                                marginTop: 20 }} >เลือกเวลาในการนัดคิว</Text>
-                    <View style={{ flexDirection : "row" }}>
-                        <ScrollView style={{ height : 100 }}>
-                            <CheckboxGroup
-                                    callback={this.onTimePress}
-                                    iconColor={"#00a2dd"}
-                                    iconSize={20}
-                                    checkedIcon="ios-checkbox-outline"
-                                    uncheckedIcon="ios-square-outline"
-                                    checkboxes={this.state.selectedValueDelete}
-                                    labelStyle={{
-                                        color: '#333'
-                                    }}
-                                    rowStyle={{
-                                        flexDirection: 'row'
-                                    }}
-                                    />
-                            </ScrollView> 
+                    <View style={{alignItems:'center'}}>
+                        <TouchableOpacity onPress={() => this.SentDateTime()}>
+                            <Image style={{ marginTop: 50 }} source={require('../Image/selecttime.png')} />
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={() => this.SentDateTime(this.state.selected,this.state.selectedTime)}>
-                        <Ionicons name="ios-checkmark-circle" size={70} style={{ color:'#31dff9' , textAlign:'center', padding : 10 }} />
-                    </TouchableOpacity>
                 </View>
             </View>
         </LinearGradient>

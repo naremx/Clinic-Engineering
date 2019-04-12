@@ -71,10 +71,11 @@ constructor(props) {
                         <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' }}>ความถนัดเฉพาะทาง</Text> 
                         <Text style={{ color : '#777' }}>คอมพิวเตอร์</Text>
                         <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' }}>วิทยานิพนธ์</Text>
-                        <ScrollView style={{ height : 200 }}>
+                        <ScrollView style={{ height : 100 }}>
                             <Text style={{ color : '#777' }}>เครื่องมือสำหรับแปลงเค้าร่างฐานข้อมูลเชิงสัมพันธ์เป็นเค้าร่างฐานข้อมูลเชิงวัตถุ</Text>
                         </ScrollView> 
                     </View>
+                    <Image source={require('../Image/meeting.png')} />
                     <View style={{alignItems:'center'}}>
                         <TouchableOpacity onPress={() => this.gotoCalendar()}>
                             <Text style={Styles.ButtonChosen}>เลือกวันนัดคิว</Text>
@@ -129,7 +130,7 @@ const Styles = StyleSheet.create({
         paddingTop: 5 ,
         fontWeight: 'bold' ,
         backgroundColor: '#87daf3',
-        marginTop: 120,
+        marginTop: 20,
         position: 'relative',
         borderRadius: 10,
         shadowColor: '#30C1DD',
