@@ -19,6 +19,7 @@ from rest_framework import status
 from .models import User
 
 
+
 class contact(APIView):
     throttle_classes = ()
     permission_classes = ()
@@ -57,41 +58,40 @@ class contact(APIView):
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
         serializer = UserSerializer(user)
-
-        print(user.user_type)
-        return Response({'token': token.key, 'role': user.user_type,'data':serializer.data})
+        print(User.user_type)
+        return Response({'token': token.key, 'role': user.user_type, 'data': serializer.data})
 
 
 class register(APIView):
+    permission_classes = ()
 
-        def post(self, request):
-            print(request.data)
-            serializer = UserSerializer(data=request.data)
-            if serializer.is_valid(raise_exception=ValueError):
-                serializer.create(validated_data=request.data)
+    def post(self, request):
+        print(request.data)
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=ValueError):
+            serializer.create(validated_data=request.data)
+            return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
+        return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
 
-                return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
-            return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
 
 class logout(APIView):
 
-        def get(self, request):
-            # try:
-                request.user.auth_token.delete()
-            # except (AttributeError):
-            # # except (AttributeError, ObjectDoesNotExist):
-            #     pass
-            #
-            # return Response({"success": ("Successfully logged out.")},
-            #             status=status.HTTP_200_OK)
+    def get(self, request):
+        # try:
+        request.user.auth_token.delete()
+    # except (AttributeError):
+    # # except (AttributeError, ObjectDoesNotExist):
+    #     pass
+    #
+    # return Response({"success": ("Successfully logged out.")},
+    #             status=status.HTTP_200_OK)
+
 
 class fgpassword(APIView):
-       def get(self,request):
-            print(1)
-            subject = 'Thank you for registering to our site'
-            message = ' it  means a world to us '
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = ['mosaicpm@outlook.com',]
-            send_mail( subject, message, email_from, recipient_list )
-
-
+    def get(self, request):
+        print(1)
+        subject = 'Thank you for registering to our site'
+        message = ' it  means a world to us '
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = ['mosaicpm@outlook.com', ]
+        send_mail(subject, message, email_from, recipient_list)

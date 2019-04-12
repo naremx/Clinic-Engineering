@@ -9,6 +9,7 @@ from .serializer import *
 
 class showhistory(APIView):
     def post(self,request):
+        print(request.data)
         history = Queue.objects.filter(user__id = request.user.id)
         serializers = ShowHistorySerializer(history,many=True)
         print(serializers)
