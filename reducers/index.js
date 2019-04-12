@@ -3,6 +3,7 @@ import Add_Queue_Reducer from './Add_Queue_Reducer';
 import Data_Datetime_Reducer from './Data_Datetime_Reducer';
 import Topic_Queue_Reducer from './Topic_Queue_Reducer';
 import Data_Advisor_Reducer from './Data_Advisor_Reducer';
+import Advisor_Date_Reducer from './Advisor_Date_Reducer';
 
 import { combineReducers } from 'redux'
 
@@ -11,5 +12,6 @@ export default combineReducers({
     Add_Queue_Reducer,
     Data_Datetime_Reducer,
     Topic_Queue_Reducer,
-    Data_Advisor_Reducer
+    Data_Advisor_Reducer,
+    Advisor_Date_Reducer
 });
