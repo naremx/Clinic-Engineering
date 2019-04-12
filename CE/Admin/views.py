@@ -19,4 +19,11 @@ from rest_framework import status
 class login(APIView):
     def post(self, request):
         print(request.data)
-        
+        # serializer = self.serializer_class(data=request.data, context={'request': request})
+        # serializer.is_valid(raise_exception=True)
+        # user = serializer.validated_data['user']
+        # token, created = Token.objects.get_or_create(user=user)
+        # serializer = UserSerializer(user)
+        #
+        # print(user.user_type)
+        # return Response({'token': token.key, 'role': user.user_type,'data':serializer.data})

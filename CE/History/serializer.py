@@ -5,4 +5,4 @@ class ShowHistorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Queue
-        fields = ('name', 'topic', 'date_time','status','type')
+        fields = ('topic','date_time','status','type')

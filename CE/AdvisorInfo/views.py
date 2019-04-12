@@ -4,8 +4,10 @@ from rest_framework.views import APIView
 from .serializer import *
 from django.shortcuts import get_object_or_404
 import pandas as pd
+from Account.serializer import AdvisorSerializer
+import datetime
 
-
+import pandas as pd
 def advisorcsv(request):
     contact = pd.read_csv("contact.csv")
 
@@ -17,7 +19,26 @@ def advisorcsv(request):
 
     count = 0
     for x in range(0, 508):
+        # u = User(
+        #     first_name=name[x],
+        #     username=name[x],
+        #     password=1234
+        # )
+        # u.save()
+        # for i in contact:
+        list = {
+            'username': str(x) + str(email[x]),
+            # 'username': 'mm',
+            'password': '1234',
+            'user_type': '2'
+        }
+        # print(list)
+        serializer = AdvisorSerializer(data=list)
+        # print(serializers)
+        if serializer.is_valid(raise_exception=ValueError):
+            user_obj = serializer.create(validated_data=list)
         p = AdvisorData(
+            user=user_obj,
             first_name=name[x],
             email=email[x],
             telephone=telephone[x],
@@ -47,32 +68,96 @@ def advisorcsv(request):
 class getaddata(APIView):
     permission_classes = ()
 
+    # serializer = AdvisorSerializer(data=list)
+    # # print(serializers)
+    # if serializer.is_valid(raise_exception=ValueError):
+    #     user_obj = serializer.create(validated_data=list)
+    # p = AdvisorData(
+    #     user=user_obj,
+    #     first_name=name[x],
+    #     email=email[x],
+    #     telephone=telephone[x],
+    #     department=department[x],
+    #     gender=gender[x]
+    # )
+    # p.save()
     def get(self, request):
         # create if for front request
-        Advisor_list = AdvisorData.objects.all()
+        # list = available.objects.filter(advisor__id=16456)
+        # Advisor_list = AdvisorData.objects.all()
+        Advisor_list = AdvisorData.objects.filter(id=16456)
         serializers = AdvisorDataSerializer(Advisor_list, many=True)
         return Response(serializers.data)
 
 
-class showavailable(APIView):
+class Adshowavailable(APIView):
+    permission_classes = ()
     def post(self, request):
-        print(request.data)
-        advisor_available = available.objects.filter(advisor__id=request.data)
-        serializers = ShowAvailableSerializer(advisor_available,many=True)
+        print(request.user)
+        advisor_available = available.objects.filter(advisor__user=request.user)
+        # serializers = ShowAvailableSerializer(advisor_available, many=True)
+        serializers = ShowAvailableSerializer(advisor_available, many=True)
         print(serializers)
         return Response(serializers.data)
 
-class editavailable(APIView):
+class Usshowavailable(APIView):
     def post(self, request):
         print(request.data)
-        import datetime
-        if available.objects.filter(free_date=request.data['date'], advisor__id=request.data['id'],
-                                    free_time=request.data['time']):
-            print('boom')
-        else:
-            p = available(
-                free_date=datetime.datetime.strptime(request.data['date'], "%Y-%m-%d").date(),
-                advisor=get_object_or_404(AdvisorData, id=request.data['id']),
-                free_time=get_object_or_404(time, )
-            )
-            p.save()
+        advisor_available = available.objects.filter(advisor__id=request.data)
+        # serializers = ShowAvailableSerializer(advisor_available, many=True)
+        serializers = ShowAvailableSerializer(advisor_available, many=True)
+        print(serializers)
+        return Response(serializers.data)
+
+class createavailable(APIView):
+    permission_classes = ()
+
+    def post(self, request):
+        # print(1)
+        print(request.data)
+        print(request.user)
+        # print(request.data['free_date'][0])
+        # print(request.data['time']['selected'])
+        # print(type(request.data['time']['selected'][0]))
+        for x in request.data['free_date']:
+            for i in request.data['time']['selected']:
+
+                if available.objects.filter(free_date=x, advisor__user=request.user,
+                                            free_time=i, ):
+                    print(x, i)
+                else:
+                    print(3)
+                    p = available(
+                        free_date=datetime.datetime.strptime(x, "%Y-%m-%d").date(),
+                        advisor=get_object_or_404(AdvisorData, user=request.user),
+                        free_time=get_object_or_404(time, id=i)
+                    )
+                    p.save()
+        return Response(status=201)
+
+
+class editavailable(APIView):
+    def post(self, request):
+        # for x in request.data['free_date']:
+        #     for i in request.data['time']['selected']:
+        #
+        #         if available.objects.filter(free_date=x, advisor__user=request.user,
+        #                                     free_time=i, ):
+        #             available.object.filter(free_date=x, advisor__user=request.user,free_time=i).delete()
+        #         else:
+        #             p = available(
+        #                 free_date=datetime.datetime.strptime(x, "%Y-%m-%d").date(),
+        #                 advisor=get_object_or_404(AdvisorData, user=request.user),
+        #                 free_time=get_object_or_404(time, id=i)
+        #             )
+        #             p.save()
+        return Response(status=201)
+
+
+class deleteavailable(APIView):
+    def post(self, request):
+        # for x in request.data['time']:
+        for i in request.data['time']['selected']:
+            available.objects.filter(id=i, advisor__user=request.user, ).delete()
+
+        return Response(status=201)

@@ -25,7 +25,7 @@ SECRET_KEY = '^(5o_!re*4lrzy*eits*1(zib5e-*+8pftvlme_iz7nwxg4^n@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'AdvisorInfo',
     'Queue',
     'History',
-
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +56,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
+    'corsheaders.middleware.CorsMiddleware',
+
+
 ]
 
 ROOT_URLCONF = 'CE.urls'
@@ -150,3 +152,5 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = '58010555@kmitl.ac.th'
 EMAIL_HOST_PASSWORD = 'ef2w63Cz'
+
+CORS_ORIGIN_ALLOW_ALL = True
