@@ -1,83 +1,54 @@
 import React from 'react';
-import { StyleSheet,View,TouchableOpacity,Image } from 'react-native';
-import { LinearGradient,Constants } from 'expo';
-import { Calendar } from 'react-native-calendars';
-import { connect } from 'react-redux'
-import { AdvisorCollectionDateAction } from '../Actions';
+import { StyleSheet,View,Button,Image } from 'react-native';
+import { LinearGradient,Constants,DocumentPicker,ImagePicker } from 'expo';
+
+
 
 class AdvisorEditSelectDate extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-        selectedDate : '' ,
-        selectedDateResult: ['2019-04-03' , '2019-04-04'],
+      image: null
     };
-    this.onDayPress = this.onDayPress.bind(this);
-    }
-    componentDidMount() {
-        var url = 'http://10.66.13.208:8000/advisor/showavailable/' ;
+  }
+  _pickDocument = async () => {
+    let result = await DocumentPicker.getDocumentAsync({});
+    alert(result.uri);
+    console.log(result);
+}
 
-        fetch(url, {
-        method: 'POST', 
-        body: JSON.stringify(this.props.token),
-        headers:{
-            'Content-Type': 'application/json' ,
-            Authorization : `Token ${this.props.token}`,
-        }
-        }).then(res => res.json())
-        .then((responseData) => {
-            this.setState({
-                selectedDate: responseData
-            });
-            console.log(this.state.selectedDate)           
-          })
+_pickImage = async () => {
+  let result = await ImagePicker.launchImageLibraryAsync({
+    allowsEditing: true,
+    aspect: [4, 3],
+  });
 
-          
+  alert(result.uri);
+  console.log(result)
 
-        .then(response => console.log('Success:', JSON.stringify(response)))
-        .catch(error => console.error('Error:', error));
-    }
-    onDayPress(day) {
-      this.setState({
-        selected: day.dateString
-      });
-  
-    }
-    SentAllData(){
-      let AdvisorCollectionDate={}
-      AdvisorCollectionDate.date = this.state.selected.selected,
-      this.props.AdvisorCollectionDateAction(AdvisorCollectionDate)
-      //Actions.Queue();
-    }
+  if (!result.cancelled) {
+    this.setState({ image: result.uri });
+  }
+};
    render(){  
-    let dates = {};
-    this.state.selectedDateResult.forEach((val) => {
-        dates[val] = {selected: true}
-    });
-
+    let { image } = this.state;
     return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
           <View style={Styles.Container}>
           <View style={{alignItems:'center'}}>
           <View style={Styles.ContainerContacts}>
-            <View style={{ marginTop : 10}}>
-            <Calendar
-                onDayPress={this.onDayPress}
-                style={Styles.calendar}
-                hideExtraDays
-                markedDates= {{ [this.state.selected]: { selected: true,selectedColor: '#a69beb' } }} 
-                theme={{
-                selectedDayBackgroundColor: '#87daf3',
-                todayTextColor: '#a69beb',
-                arrowColor: '#a69beb',
-                }}
+              <Button
+              title="Select Document"
+              onPress={this._pickDocument}
             />
-            </View>
-            <View style={{ alignItems:'center',marginTop : 40 }}>
-            <TouchableOpacity onPress={() => this.SentAllData()}>
-              <Image style={{ marginTop: 30 , marginRight : 20 }} source={require('../Image/selecttime.png')} />
-            </TouchableOpacity>
-            </View>
+          <View style={{ 'marginTop': 20}}>
+          <Button
+            title="Select Image"
+            onPress={this._pickImage}
+          />
+          {image &&
+            <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        </View>
           </View>
           </View>
           </View>
@@ -100,23 +71,8 @@ const Styles = StyleSheet.create({
       shadowOpacity: 0.6,
       elevation: 6,
     },
-    calendar: {
-      borderTopWidth: 1,
-      paddingTop: 5,
-      borderBottomWidth: 1,
-      borderColor: '#eee',
-      height: 350
-    }
+
 });
 
 
-const mapDispatchToprops = dispatch => ({
-  AdvisorCollectionDateAction: (AdvisorCollectionDate) => dispatch(AdvisorCollectionDateAction(AdvisorCollectionDate))
-})
-
-const mapStateToProps = ({ LoginUser_Reducer }) => {
-  const { token } = LoginUser_Reducer;
-  return { token};
-}
-
-export default connect(mapStateToProps,mapDispatchToprops)(AdvisorEditSelectDate);
+export default AdvisorEditSelectDate

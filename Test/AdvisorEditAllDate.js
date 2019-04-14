@@ -55,22 +55,23 @@ class AdvisorEditAllDate extends React.Component{
     }
     SentAllData(){
       let collection={}
-      collection.date=this.state.markedDatesArray
+      collection.free_date=this.state.markedDatesArray
       collection.time=this.state.selected
 
       console.log('--SENT--',collection);
-      //Actions.Queue();
 
-      // var url = 'http://192.168.43.212:8000/queue/Queue' ;
+      Actions.AdvisorSelectMode()
 
-      // fetch(url, {
-      // method: 'POST', 
-      // body: JSON.stringify(collection),
-      // headers:{
-      //     'Content-Type': 'application/json' ,
-      //     Authorization : `Token ${this.props.token}`,
-      // }
-      // })
+      var url = 'http://10.66.13.208:8000/advisor/createavailable/' ;
+
+      fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(collection),
+        headers:{
+            'Content-Type': 'application/json' ,
+            Authorization : `Token ${this.props.token}`
+        }
+        })
 
     }
    render(){  
