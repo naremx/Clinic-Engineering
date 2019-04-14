@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View,Button,Image } from 'react-native';
+import { StyleSheet,View,Button,Image,Text } from 'react-native';
 import { LinearGradient,Constants,DocumentPicker,ImagePicker } from 'expo';
 
 
@@ -8,30 +8,30 @@ class AdvisorEditSelectDate extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      image: null
+      pickerResult: null,
     };
   }
   _pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({});
     alert(result.uri);
-    console.log(result);
+    console.log('_pickDocument',result);
 }
 
-_pickImage = async () => {
-  let result = await ImagePicker.launchImageLibraryAsync({
-    allowsEditing: true,
+_pickImg = async () => {
+  let pickerResult = await ImagePicker.launchImageLibraryAsync({
+    base64: true,
+    allowsEditing: false,
     aspect: [4, 3],
   });
-
-  alert(result.uri);
-  console.log(result)
-
-  if (!result.cancelled) {
-    this.setState({ image: result.uri });
-  }
+  console.log(pickerResult)
+  this.setState({
+    pickerResult,
+  });
 };
    render(){  
-    let { image } = this.state;
+    let { pickerResult } = this.state;
+    let imageUri = pickerResult ? `data:image/jpg;base64,${pickerResult.base64}` : null;
+    imageUri && console.log({uri: imageUri.slice(0, 100)});
     return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
           <View style={Styles.Container}>
@@ -41,14 +41,22 @@ _pickImage = async () => {
               title="Select Document"
               onPress={this._pickDocument}
             />
-          <View style={{ 'marginTop': 20}}>
-          <Button
-            title="Select Image"
-            onPress={this._pickImage}
-          />
-          {image &&
-            <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-        </View>
+            <View style={Styles.container}>
+              <Button onPress={this._pickImg} title="Open Picker" />
+              {pickerResult
+                ? <Image
+                    source={{uri: imageUri}}
+                    style={{ width: 200, height: 200 }}
+                  />
+                : null}
+              {pickerResult
+                ? <Text style={Styles.paragraph}>
+                    Keys on pickerResult:
+                    {' '}
+                    {JSON.stringify(Object.keys(pickerResult))}
+                  </Text>
+                : null}
+            </View>
           </View>
           </View>
           </View>
