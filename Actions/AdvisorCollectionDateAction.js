@@ -1,6 +1,6 @@
-export const AdvisorCollectionDateAction = (AdvisorCollectionDate) => {
+export const AdvisorCollectionDateAction = (SelectDate) => {
     return {
         type: 'ADVISOR_DATA_DATE',
-        payload: AdvisorCollectionDate
+        payload: SelectDate
     };
 }

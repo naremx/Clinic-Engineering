@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-    AdvisorCollectionDate: {},
+    SelectDate: {},
 };
 
 const Advisor_Date_Reducer = ( state = INITIAL_STATE , action ) => {
@@ -7,7 +7,7 @@ const Advisor_Date_Reducer = ( state = INITIAL_STATE , action ) => {
             case 'ADVISOR_DATA_DATE' :
                 return {
                     ...state,
-                    AdvisorCollectionDate: action.payload
+                    SelectDate: action.payload
                 };
             default:
                 return state;

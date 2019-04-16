@@ -12,36 +12,129 @@ export default class ModalCardRegister extends React.Component {
           last_name: '',
           email: '',
           password: '',
-          username: ''
+          username: '',
+          first_nameValdate: true,
+          last_nameValdate: true,
+          emailValdate: true,
+          passwordValdate: true,
+          usernameValdate: true
       }
   }
-  updateValue(text , field){
-    if(field == 'first_name'){
-        this.setState({
-            first_name : text
-        })
+  validate(text,type)
+    {
+    alph=/^[a-zA-Z0-9]+$/
+    mail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    num=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+      if(type == 'first_name') 
+      {
+        if(alph.test(text))
+        {
+          this.setState({
+            first_nameValdate:true,
+            first_name: text
+          })
+        }
+        else
+        {
+          this.setState({
+            first_nameValdate:false,
+          })
+        }
+      }
+      else if(type == 'last_name') 
+      {
+        if(alph.test(text))
+        {
+          this.setState({
+            last_nameValdate:true,
+            last_name: text
+          })
+        }
+        else
+        {
+          this.setState({
+            last_nameValdate:false,
+          })
+        }
+      }
+
+      else if(type == 'email') 
+      {
+        if(mail.test(text))
+        {
+          this.setState({
+            emailValdate:true,
+            email: text
+          })
+        }
+        else
+        {
+          this.setState({
+            emailValdate:false,
+          })
+        }
+      }
+      else if(type == 'password') 
+      {
+        if(num.test(text))
+        {
+          this.setState({
+            passwordValdate:true,
+            password: text
+          })
+        }
+        else
+        {
+          this.setState({
+            passwordValdate:false,
+          })
+        }
+      }
+      else if(type == 'username') 
+      {
+        if(alph.test(text))
+        {
+          this.setState({
+            usernameValdate:true,
+            username: text
+          })
+        }
+        else
+        {
+          this.setState({
+            usernameValdate:false,
+          })
+        }
+      }
     }
-    else if(field == 'last_name'){
-        this.setState({
-            last_name : text
-        })
-    }
-    else if(field == 'email'){
-        this.setState({
-            email : text
-        })
-    }
-    else if(field == 'password'){
-        this.setState({
-            password : text
-        })
-    }
-    else if(field == 'username'){
-        this.setState({
-            username : text
-        })
-    }
-}
+
+//   updateValue(text , field){
+//     if(field == 'first_name'){
+//         this.setState({
+//             first_name : text
+//         })
+//     }
+//     else if(field == 'last_name'){
+//         this.setState({
+//             last_name : text
+//         })
+//     }
+//     else if(field == 'email'){
+//         this.setState({
+//             email : text
+//         })
+//     }
+//     else if(field == 'password'){
+//         this.setState({
+//             password : text
+//         })
+//     }
+//     else if(field == 'username'){
+//         this.setState({
+//             username : text
+//         })
+//     }
+// }
   submit()
   {
       let collection={}
@@ -54,7 +147,7 @@ export default class ModalCardRegister extends React.Component {
 
       this.setState({ showMe:false })
 
-      var url = 'http://192.168.43.212:8000/Account/register' ;
+      var url = 'http://10.66.13.208:8000/Account/register' ;
 
       fetch(url, {
       method: 'POST', 
@@ -83,15 +176,24 @@ export default class ModalCardRegister extends React.Component {
                 <Text style={{ color : '#495090' , fontSize: 23 , fontWeight: 'bold', textAlign: 'center' }}>ลงทะเบียน</Text>
                     <View style={{ margin : 30 }}>
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >ชื่อผู้ใช้งาน</Text>
-                        <TextInput style={Styles.inputBoxRegister} onChangeText={(text) => this.updateValue(text, 'username')}/>
+                        <TextInput style={[Styles.inputBoxRegister, !this.state.usernameValdate? Styles.error:null]}
+                        onChangeText={ (text) => this.validate(text,'username')} placeholder="Username"/>
+
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >ชื่อ</Text>
-                        <TextInput style={Styles.inputBoxRegister} onChangeText={(text) => this.updateValue(text, 'first_name')}/>
+                        <TextInput style={[Styles.inputBoxRegister, !this.state.first_nameValdate? Styles.error:null]}
+                        onChangeText={ (text) => this.validate(text,'first_name')} placeholder="FirstName"/>
+
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >นามสกุล</Text>
-                        <TextInput style={Styles.inputBoxRegister}  onChangeText={(text) => this.updateValue(text, 'last_name')}/>
+                        <TextInput style={[Styles.inputBoxRegister, !this.state.last_nameValdate? Styles.error:null]}
+                        onChangeText={ (text) => this.validate(text,'last_name')} placeholder="LasttName"/>
+
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >อีเมล</Text>
-                        <TextInput style={Styles.inputBoxRegister}  onChangeText={(text) => this.updateValue(text, 'email')}/>
+                        <TextInput style={[Styles.inputBoxRegister, !this.state.emailValdate? Styles.error:null]} placeholder="Email address"
+                        onChangeText={(text) => this.validate(text, 'email')} keyboardType={'email-address'}/>
+
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >รหัสผ่าน</Text>
-                        <TextInput style={Styles.inputBoxRegister}  onChangeText={(text) => this.updateValue(text, 'password')}/>
+                        <TextInput style={[Styles.inputBoxRegister, !this.state.password1Valdate? Styles.error:null]} placeholder="Password (Least 8 characters)" 
+                        secureTextEntry={true} underlineColorAndroid={'transparent'} onChangeText={ (text) => this.validate(text,'password')}/>
                     </View>
                 <View style= {{ marginLeft: 110 }}>
                 <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
@@ -155,4 +257,8 @@ Header:{
     height: 60 ,
     backgroundColor: '#fff' ,
 },
+error:{
+    borderWidth: 1,
+    borderColor:'#891c1c',
+  }
 });

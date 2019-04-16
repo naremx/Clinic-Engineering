@@ -45,8 +45,8 @@ class ModalCardLogin extends React.Component {
         super()
         this.state = {
             showMe: false ,
-            username: 'pmmosaic' ,
-            password: 'pmmosaic' ,
+            username: 'naremxja' ,
+            password: '123456' ,
         }
     }
     updateValue(text , field){
@@ -123,8 +123,8 @@ class ModalCardLogin extends React.Component {
                             </View>
 
                             <View style={{ flexDirection: "column" , paddingLeft : 10 }}>
-                                <TextInput style={Styles.inputBoxLogin} onChangeText={(text) => this.updateValue(text, 'username')} value='pmmosaic'/>
-                                <TextInput style={Styles.inputBoxLogin}  secureTextEntry={true} onChangeText={(text) => this.updateValue(text, 'password')} value='pmmosaic'/>
+                                <TextInput style={Styles.inputBoxLogin} onChangeText={(text) => this.updateValue(text, 'username')}  placeholder="Username"/>
+                                <TextInput style={Styles.inputBoxLogin}  secureTextEntry={true} onChangeText={(text) => this.updateValue(text, 'password')}  placeholder="Password"/>
                             </View>
                         </View>
 

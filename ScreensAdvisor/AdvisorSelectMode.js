@@ -15,7 +15,7 @@ export default class AdvisorSelectMode extends React.Component{
             <TouchableOpacity onPress={() => Actions.AdvisorEditAllDate()}>
               <Image style={{ marginTop: 50 }} source={require('../Image/date.png')} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => Actions.AdvisorEditSelectedDate()}>
+            <TouchableOpacity onPress={() => Actions.AdvisorEditSelectDate()}>
               <Image style={{ marginTop: 30 }} source={require('../Image/datesetting.png')} />
             </TouchableOpacity>
             

@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 class SlideMenuUser extends Component{
     async Logout(token) {
         console.log(token)
-        const response = await fetch(`http://192.168.43.212:8000/Account/logout` , {
+        const response = await fetch(`http://10.66.13.208:8000/Account/logout` , {
             headers: {
                 Authorization : `Token ${token}`,
             }   

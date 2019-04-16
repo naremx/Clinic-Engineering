@@ -54,6 +54,7 @@ constructor(props) {
     CheckBoxChange()
     {
         this.setState({
+            
             check:!this.state.check
         })
     }

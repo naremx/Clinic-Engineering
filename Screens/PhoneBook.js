@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet,View,Button,Image,Text } from 'react-native';
 import { LinearGradient,Constants } from 'expo';
 
-import ModalCardSelectFile from '../ModalScreen/ModalCardSelectFile.js';
+// import ModalCardSelectFile from '../ModalScreen/ModalCardSelectFile.js';
 
 class AdvisorEditSelectDate extends React.Component{
   constructor(props) {
@@ -17,7 +17,6 @@ class AdvisorEditSelectDate extends React.Component{
           <View style={Styles.Container}>
           <View style={{alignItems:'center'}}>
           <View style={Styles.ContainerContacts}>
-            <ModalCardSelectFile/>
           </View>
           </View>
           </View>

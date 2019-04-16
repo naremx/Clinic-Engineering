@@ -23,12 +23,16 @@ import CalendarUser from './ScreensUser/CalendarUser.js';
 import DetailAdvisor from './ScreensUser/DetailAdvisor.js';
 import AddQueue from './ScreensUser/AddQueue.js';
 import DetailAddQueue from './ScreensUser/DetailAddQueue.js';
+import CalendarUserTime from './ScreensUser/CalendarUserTime.js';
 
-import AdvisorScheduleDate from './ScreensAdvisor/ScheduleDate.js';
+import AdvisorSelectMode from './ScreensAdvisor/AdvisorSelectMode.js';
 import AdvisorScheduleAss from './ScreensAdvisor/ScheduleAss.js';
 import AdvisorNotification from './ScreensAdvisor/Notification.js';
 import AdvisorQueue from './ScreensAdvisor/Queue.js';
 import AdvisorAssignment from './ScreensAdvisor/Assignment.js';
+import AdvisorEditAllDate from './ScreensAdvisor/AdvisorEditAllDate.js';
+import AdvisorEditSelectDate from './ScreensAdvisor/AdvisorEditSelectDate.js';
+import AdvisorEditSelectTime from './ScreensAdvisor/AdvisorEditSelectTime.js';
 
 import SlideMenuUser from './SlideMenu/SlideMenuUser';
 import SlideMenuAdvisor from './SlideMenu/SlideMenuAdvisor';
@@ -94,7 +98,13 @@ class Routes extends React.Component{
                                         <Scene 
                                                 key='CalendarUser' 
                                                 component={CalendarUser} 
-                                                title='ปฏิทิน' 
+                                                title='วันที่นัด' 
+                                                >
+                                        </Scene>
+                                        <Scene 
+                                                key='CalendarUserTime' 
+                                                component={CalendarUserTime} 
+                                                title='เวลาที่นัด' 
                                                 >
                                         </Scene>
                                         <Scene 
@@ -153,12 +163,30 @@ class Routes extends React.Component{
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
                                 activeTintColor="#87daf3" 
                                 inactiveTintColor="#a69beb" >
-                                    <Scene key='ScheduleDatePage' iconName="ios-home" icon={TabIcon} title='ตารางเวลา'>
+                                    <Scene key='AdvisorSelectMode' iconName="ios-home" icon={TabIcon} title='เลือกรายการ'>
                                         <Scene 
-                                                key='AdvisorScheduleDate' 
-                                                component={AdvisorScheduleDate} 
-                                                title='ตารางเวลา' 
+                                                key='AdvisorSelectMode' 
+                                                component={AdvisorSelectMode} 
+                                                title='เลือกรายการ' 
                                                 initial>
+                                        </Scene>
+                                        <Scene 
+                                                key='AdvisorEditAllDate' 
+                                                component={AdvisorEditAllDate} 
+                                                title='เพิ่มวันที่สามารถนัดคิวได้' 
+                                                >
+                                        </Scene>
+                                        <Scene 
+                                                key='AdvisorEditSelectDate' 
+                                                component={AdvisorEditSelectDate} 
+                                                title='แก้ไขวันที่สามารถนัดคิวได้' 
+                                                >
+                                        </Scene>
+                                        <Scene 
+                                                key='AdvisorEditSelectTime' 
+                                                component={AdvisorEditSelectTime} 
+                                                title='แก้ไขเวลาที่สามารถนัดคิวได้' 
+                                                >
                                         </Scene>
                                     </Scene>
 

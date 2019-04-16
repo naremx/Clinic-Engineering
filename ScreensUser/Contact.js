@@ -2,9 +2,24 @@ import React from 'react';
 import { View, Text, StyleSheet,Image} from 'react-native';
 import { LinearGradient } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
+import call from 'react-native-phone-call';
+import sentemail from 'react-native-email'
 
-const Contact = () => {
-    return (
+class Contact extends React.Component{
+
+        callphone = () => {
+            const args = {
+              number: '023298186'
+            };
+        
+            call(args).catch(console.error);
+        }
+        handleEmail = () => {
+            const to = 'eidts@kmitl.ac.th'
+            sentemail(to).catch(console.error);
+        }
+        render(){
+          return(
             <LinearGradient colors ={['#87daf3','#a69beb']} style={Styles.Container}>
             <View style={{alignItems:'center'}}>
                 <View style={Styles.Box}>
@@ -18,20 +33,25 @@ const Contact = () => {
                     <Text style={{ color:'#a69beb', marginLeft : 10  }}>eidts@kmitl.ac.th, kmitl.eidts@gmail.com</Text>
                     <View style={{flexDirection: "row", alignItems:'center' , marginTop: 40 }}>
                         <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
-                            <Ionicons name="ios-call" size={50} style={{ color:'#fff', marginTop: 12 , marginLeft: 20}} />
+                            <Ionicons name="ios-call" size={50} style={{ color:'#fff', marginTop: 12 , marginLeft: 20}} 
+                            onPress={() => this.callphone()}/>
                         </LinearGradient>
                         <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
                             <Ionicons name="ios-pin" size={50} style={{ color:'#fff', marginTop: 12 , marginLeft: 22}} />
                         </LinearGradient>
                         <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
-                            <Ionicons name="ios-mail" size={50} style={{ color:'#fff', marginTop: 12 , marginLeft: 18}} />
+                            <Ionicons name="ios-mail" size={50} style={{ color:'#fff', marginTop: 12 , marginLeft: 18}} 
+                            onPress={() => this.handleEmail()}/>
                         </LinearGradient>
                     </View>
                 </View>
             </View>
             </LinearGradient> 
-    );
-}
+          )
+        }
+    }
+
+
 
 const Styles = StyleSheet.create({
     Container: {
