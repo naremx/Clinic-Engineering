@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet,View,Text,TouchableOpacity,Modal,TextInput,Alert } from 'react-native';
+import { StyleSheet,View,Text,TouchableOpacity,Modal } from 'react-native';
 import { LinearGradient,BlurView } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
-import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
+import { Actions } from 'react-native-router-flux'
 
-class ModalCardConfirm extends React.Component {
+
+class ModalCardCancelAd extends React.Component {
     constructor(){
         super()
         this.state = {
@@ -13,12 +14,12 @@ class ModalCardConfirm extends React.Component {
         }
     }
 
-    SentDataConfirm()
+    SentDataCancle()
     {
         this.setState({ showMe:false })
         let collection={}
-        collection.decision = '1'
         collection.id = this.props.AdDateTimeDetail.id
+        collection.decision = '0'
 
         console.log(collection);
         Actions.AdvisorQueue();
@@ -49,12 +50,12 @@ class ModalCardConfirm extends React.Component {
                                 </TouchableOpacity>
                             </View>
                             
-                        <Text style={{ color : '#495090' , fontSize: 23 , fontWeight: 'bold' , textAlign: 'center' }}>คุณต้องการยืนยันคิวใช่หรือไม่ ?</Text>
+                        <Text style={{ color : '#495090' , fontSize: 23 , fontWeight: 'bold' , textAlign: 'center' }}>คุณต้องการยกเลิกคิวใช่หรือไม่ ?</Text>
 
                         <View style={{ alignItems:'center'}}>
                             <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
-                                <TouchableOpacity onPress={() => this.SentDataConfirm()}>
-                                <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>ยืนยันคิว</Text>
+                                <TouchableOpacity onPress={() => this.SentDataCancle()}>
+                                <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>ยกเลิกคิว</Text>
                                 </TouchableOpacity>
                             </LinearGradient>
                         </View>
@@ -63,9 +64,9 @@ class ModalCardConfirm extends React.Component {
                 </BlurView>
                 </Modal>
                 <View style={{ alignItems:'center'}}>
-                <LinearGradient colors={['#90ed9c', '#04d11f']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonConfirm}>
+                <LinearGradient colors={['#fc8a99', '#a30015']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonCancle}>
                     <TouchableOpacity onPress={() => this.setState({ showMe:true })}>
-                    <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>ยืนยันคิว</Text>
+                    <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>ยกเลิกคิว</Text>
                     </TouchableOpacity>
                 </LinearGradient>
             </View>
@@ -83,9 +84,20 @@ Container: {
 },  
 ModalBoxConfirm:{
     width: 370,
-    height: 200,
+    height: 180,
     backgroundColor: '#ecf8ff',
     borderRadius: 25,
+    shadowColor: '#30C1DD',
+    shadowRadius: 10,
+    shadowOpacity: 0.6,
+    elevation: 6,
+},
+ButtonCancle:{
+    height: 50, 
+    width: 150 , 
+    borderRadius: 20 , 
+    marginTop: 220, 
+    marginLeft: 20, 
     shadowColor: '#30C1DD',
     shadowRadius: 10,
     shadowOpacity: 0.6,
@@ -95,18 +107,7 @@ Button:{
     height: 50, 
     width: 150 , 
     borderRadius: 20 , 
-    marginTop: 40 , 
-    shadowColor: '#30C1DD',
-    shadowRadius: 10,
-    shadowOpacity: 0.6,
-    elevation: 6,
-},
-ButtonConfirm:{
-    height: 50, 
-    width: 150 , 
-    borderRadius: 20 , 
-    marginLeft: 20, 
-    marginTop: 220 , 
+    marginTop: 20, 
     shadowColor: '#30C1DD',
     shadowRadius: 10,
     shadowOpacity: 0.6,
@@ -121,6 +122,4 @@ const mapStateToProps = ({ Ad_Select_Time_Detail_Reducer , LoginUser_Reducer }) 
     return { AdDateTimeDetail,token,role };
   }
 
-export default connect(mapStateToProps)(ModalCardConfirm);
-
-
+export default connect(mapStateToProps)(ModalCardCancelAd);

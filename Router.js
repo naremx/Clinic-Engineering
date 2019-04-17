@@ -1,9 +1,7 @@
 import React , {Component} from 'react';
-import { Router,Scene,Drawer,Tabs,Actions } from 'react-native-router-flux';
-import { StyleSheet,View,Image,TouchableOpacity,ActivityIndicator } from 'react-native';
-import { LinearGradient,Font} from 'expo';
+import { Router,Scene,Drawer,Tabs} from 'react-native-router-flux';
 import { connect } from 'react-redux'
-import { Ionicons } from 'react-native-vector-icons'
+
 
 import Text from './Components/CustomText';
 import TabIcon from './TabIcon.js';
@@ -33,6 +31,7 @@ import AdvisorAssignment from './ScreensAdvisor/Assignment.js';
 import AdvisorEditAllDate from './ScreensAdvisor/AdvisorEditAllDate.js';
 import AdvisorEditSelectDate from './ScreensAdvisor/AdvisorEditSelectDate.js';
 import AdvisorEditSelectTime from './ScreensAdvisor/AdvisorEditSelectTime.js';
+import AdvisorDetailAddQueue from './ScreensAdvisor/DetailAddQueue.js';
 
 import SlideMenuUser from './SlideMenu/SlideMenuUser';
 import SlideMenuAdvisor from './SlideMenu/SlideMenuAdvisor';
@@ -207,13 +206,20 @@ class Routes extends React.Component{
                                             icon={TabIcon}
                                             title='แจ้งเตือน'>
                                     </Scene>
+                                    <Scene key='AdvisorQueue' iconName="ios-home" icon={TabIcon} title='คิว'>
+                                        <Scene 
+                                                key='AdvisorQueue' 
+                                                component={AdvisorQueue}
+                                                iconName="ios-people"
+                                                icon={TabIcon} 
+                                                title='คิว'>
+                                        </Scene>
 
-                                    <Scene 
-                                            key='AdvisorQueue' 
-                                            component={AdvisorQueue}
-                                            iconName="ios-people"
-                                            icon={TabIcon} 
-                                            title='คิว'>
+                                        <Scene 
+                                                key='AdvisorDetailAddQueue' 
+                                                component={AdvisorDetailAddQueue}
+                                                title='รายละเอียดคิว'>
+                                        </Scene>
                                     </Scene>
 
                                     <Scene 

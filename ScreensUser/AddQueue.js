@@ -30,7 +30,7 @@ constructor(props) {
     SentDateAddQueue(){
         let collection={}
         collection.topic=this.state.topic
-        collection.descriptions=this.state.descriptions
+        collection.detail=this.state.descriptions
         collection.type=this.state.check
         collection.free_date=this.props.collectionDateTime.date
         collection.time=this.props.collectionUserSelectTime
@@ -38,7 +38,7 @@ constructor(props) {
 
         console.log(collection);
         this.props.TopicQueueAction(collection)
-        Actions.Queue();
+        Actions.Home();
 
         var url = 'http:///10.66.13.208:8000/queue/addqueue/' ;
 

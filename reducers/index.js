@@ -5,6 +5,8 @@ import Topic_Queue_Reducer from './Topic_Queue_Reducer';
 import Data_Advisor_Reducer from './Data_Advisor_Reducer';
 import Advisor_Date_Reducer from './Advisor_Date_Reducer';
 import User_Select_time_reducer from './User_Select_time_reducer';
+import User_Select_Time_Detail_Reducer from './User_Select_Time_Detail_Reducer';
+import Ad_Select_Time_Detail_Reducer from './Ad_Select_Time_Detail_Reducer';
 
 import { combineReducers } from 'redux'
 
@@ -15,5 +17,7 @@ export default combineReducers({
     Topic_Queue_Reducer,
     Data_Advisor_Reducer,
     Advisor_Date_Reducer,
-    User_Select_time_reducer
+    User_Select_time_reducer,
+    User_Select_Time_Detail_Reducer,
+    Ad_Select_Time_Detail_Reducer
 });

@@ -4,6 +4,7 @@ import { LinearGradient, Constants } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
+import { UserSelectTimeQueueAction } from '../Actions/UserSelectTimeQueueAction.js'
 
 class Queue extends React.Component{
 
@@ -11,11 +12,11 @@ class Queue extends React.Component{
             super(props);
             this.state = {
                 isLoading: false,
-                dataSource: {},
+                selectedDate: '',
             }
         }    
     componentDidMount() {
-        var url = 'http://10.66.13.208:8000/history/History/' ;
+        var url = 'http://10.66.13.208:8000/history/Usshowhistory/' ;
     
         fetch(url, {
         method: 'POST', 
@@ -27,18 +28,24 @@ class Queue extends React.Component{
         }).then(res => res.json())
         .then((responseData) => {
             this.setState({
-                dataSource: responseData
-            });   
-            console.log('kk' ,responseData)
+                selectedDate: responseData
+            }); 
+            console.log('OK' ,responseData )
           })
     
         .then(response => console.log('Success:', JSON.stringify(response)))
         .catch(error => console.error('Error:', error));
     }
+    CollectData(val){
+        let UserDateTimeDetail={}
+        UserDateTimeDetail = val
 
+        this.props.UserSelectTimeQueueAction(UserDateTimeDetail)
+        Actions.DetailAddQueue()
+    }
     renderText() {
-        if (this.state.dataSource.length > 0) {
-            return this.state.dataSource.map((val, index) => 
+        if (this.state.selectedDate.length > 0) {
+            return this.state.selectedDate.map((val, index) => 
             <View key={index} style={Styles.ContainerContacts}>
                 <TouchableOpacity onPress={() => this.CollectData(val)}>
                     <View style={{ flexDirection: 'row' }}>
@@ -49,11 +56,12 @@ class Queue extends React.Component{
                                 color : '#3e48a3' ,
                                 fontSize: 15 ,
                                 fontWeight: 'bold' ,
-                                marginTop: 20 }} >Topic : {val.topic}</Text>
-                            <Text style={{ marginLeft : 10 , color : '#777' }}>{val.date_time}</Text>
+                                marginTop: 20 }} >{val.name}</Text>
+                            <Text style={{ marginLeft : 10 , color : '#3e48a3' }}>Topic : {val.topic}</Text>
+                            <Text style={{ marginLeft : 10 , color : '#777' }}>Date : {val.date_time}</Text>
                             <View style={{ flexDirection: 'row' }}>
-                                <Ionicons name="ios-notifications" size={15} style={{ color:'#87daf3' , marginLeft: 22}} />
-                                <Text style={{ marginLeft : 10 , color : '#87daf3' }}>Status : {val.status}</Text>
+                                <Ionicons name="ios-notifications" size={15} style={{ color:'#48cedb' , marginLeft: 22}} />
+                                <Text style={{ marginLeft : 10 , color : '#48cedb' }}>Status : {val.status}</Text>
                             </View>
                         </View>
                     </View>
@@ -61,10 +69,6 @@ class Queue extends React.Component{
             </View>
             );
         }
-    }
-
-    ShowDetailQueue(val){
-        Actions.DetailAddQueue();
     }
     render(){
         return(
@@ -103,6 +107,11 @@ const Styles = StyleSheet.create({
     },
 });
 
+const mapDispatchToprops = dispatch => ({
+    UserSelectTimeQueueAction: (UserDateTimeDetail) => dispatch(UserSelectTimeQueueAction(UserDateTimeDetail))
+})
+
+
 const mapStateToProps = ({ Add_Queue_Reducer , Data_Datetime_Reducer , LoginUser_Reducer }) => {
     const { token,role } = LoginUser_Reducer;
     const { val } = Add_Queue_Reducer;
@@ -110,4 +119,4 @@ const mapStateToProps = ({ Add_Queue_Reducer , Data_Datetime_Reducer , LoginUser
         return { chosenDate,val,token,role };
   }
 
-export default connect(mapStateToProps)(Queue);
+export default connect(mapStateToProps,mapDispatchToprops)(Queue);
