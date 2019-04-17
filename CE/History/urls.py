@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import showhistory
+from .views import Usshowhistory,Adshowhistory
 urlpatterns = [
-    path('History/', showhistory.as_view(), name="history"),
+    path('Usshowhistory/', Usshowhistory.as_view(), name="Usshowhistory"),
+    path('Adshowhistory/', Adshowhistory.as_view(), name="Adshowhistory"),
     ]

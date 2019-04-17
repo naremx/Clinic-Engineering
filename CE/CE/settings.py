@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'Queue',
     'History',
     'corsheaders',
+    'Search',
 ]
 
 MIDDLEWARE = [
