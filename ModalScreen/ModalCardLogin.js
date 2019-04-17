@@ -6,9 +6,12 @@ import { Ionicons } from 'react-native-vector-icons'
 import * as Expo from 'expo';
 import * as firebase from 'firebase';
 
+import { getData } from '../Actions';
 import { getToken } from '../Actions';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+
+import ModalCardRegister from './ModalCardRegister.js';
 
 const firebaseConfig={
     apiKey: "AIzaSyAzqICgMHtT0GuYtnUMAUYZTPdirJ6hdr8",
@@ -47,6 +50,8 @@ class ModalCardLogin extends React.Component {
             showMe: false ,
             username: 'usernaremx' ,
             password: '123456Nn' ,
+            // username: '507theerayod.wi@kmitl.ac.th' ,
+            // password: '1234' ,
         }
     }
     updateValue(text , field){
@@ -85,8 +90,9 @@ class ModalCardLogin extends React.Component {
     }
 
     selectUserRole(responseData) {
-        console.log(responseData)
+        console.log('--LOGIN--',responseData)
         this.props.getToken(responseData.token , responseData.role );
+        this.props.getData(responseData.data);
         if (responseData.role === 3) {
             Actions.user();
         } else if (responseData.role === 2) {
@@ -99,7 +105,6 @@ class ModalCardLogin extends React.Component {
               );
         }
     }
-
   
     render() {
         return(
@@ -142,7 +147,7 @@ class ModalCardLogin extends React.Component {
                                     <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold'}}>ลืมรหัสผ่าน</Text>
                                 </TouchableOpacity> 
                                 <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold'}}> | </Text> 
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.Register()}>
                                     <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold'}}>ลงทะเบียน</Text>
                                 </TouchableOpacity>
                             </View>
@@ -158,7 +163,7 @@ class ModalCardLogin extends React.Component {
     }
   };
 
-export default connect(null, { getToken })(ModalCardLogin);
+export default connect(null, { getToken,getData })(ModalCardLogin);
 
 const Styles = StyleSheet.create({
 Container: {

@@ -10,7 +10,7 @@ class SlideMenuAdvisor extends Component{
         console.log(token)
         const response = await fetch(`http://10.66.13.208:8000/Account/logout` , {
             headers: {
-                Authorization : `Token ${token}`,
+                Authorization : `Token ${this.props.token}`,
             }   
                 
         });
@@ -31,7 +31,7 @@ class SlideMenuAdvisor extends Component{
                             style={Styles.drawerImage}
                             source={require('../Image/user.png')} />
                         <View style={{flexDirection: "column" , marginLeft: 15 , marginTop: 35}}>
-                            <Text style={{ color: '#fff' , fontSize: 18 , fontWeight: 'bold' }}>ธีรวัฒน์ นามสกุล</Text>
+                            <Text style={{ color: '#fff' , fontSize: 18 , fontWeight: 'bold' }}>{this.props.data.first_name}</Text>
                         </View>
                     </View>
                 </LinearGradient>
@@ -90,9 +90,10 @@ const Styles = StyleSheet.create({
     }
     });
 
-    const mapStateToProps = ({ LoginUser_Reducer }) => {
+    const mapStateToProps = ({ LoginUser_Reducer,LoginUser_Data_Reducer }) => {
         const { token,role } = LoginUser_Reducer;
-            return { token,role };
+        const { data } = LoginUser_Data_Reducer;
+            return { token,role,data };
       }
     
     export default connect(mapStateToProps)(SlideMenuAdvisor);

@@ -7,6 +7,7 @@ import Advisor_Date_Reducer from './Advisor_Date_Reducer';
 import User_Select_time_reducer from './User_Select_time_reducer';
 import User_Select_Time_Detail_Reducer from './User_Select_Time_Detail_Reducer';
 import Ad_Select_Time_Detail_Reducer from './Ad_Select_Time_Detail_Reducer';
+import LoginUser_Data_Reducer from './LoginUser_Data_Reducer';
 
 import { combineReducers } from 'redux'
 
@@ -19,5 +20,6 @@ export default combineReducers({
     Advisor_Date_Reducer,
     User_Select_time_reducer,
     User_Select_Time_Detail_Reducer,
-    Ad_Select_Time_Detail_Reducer
+    Ad_Select_Time_Detail_Reducer,
+    LoginUser_Data_Reducer
 });

@@ -1,4 +1,5 @@
 export * from './AuthAction'
+export * from './getData'
 export * from './CollectDataAction'
 export * from './DatePickerAction'
 export * from './CollectDataAction'

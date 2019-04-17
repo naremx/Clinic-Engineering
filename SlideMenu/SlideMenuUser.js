@@ -5,19 +5,19 @@ import { LinearGradient } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux';
 
+
 class SlideMenuUser extends Component{
     async Logout(token) {
         console.log(token)
         const response = await fetch(`http://10.66.13.208:8000/Account/logout` , {
             headers: {
-                Authorization : `Token ${token}`,
+                Authorization : `Token ${this.props.token}`,
             }   
                 
         });
             this.props.dispatch({
                 type: 'Logout'
             })
-            console.log(response)
 
     }
     render(){
@@ -31,8 +31,9 @@ class SlideMenuUser extends Component{
                             style={Styles.drawerImage}
                             source={require('../Image/user.png')} />
                         <View style={{flexDirection: "column" , marginLeft: 15 , marginTop: 35}}>
-                            <Text style={{ color: '#fff' , fontSize: 18 , fontWeight: 'bold' }}>ธีรวัฒน์ นามสกุล</Text>
+                            <Text style={{ color: '#fff' , fontSize: 18 , fontWeight: 'bold' }}>{this.props.data.first_name}</Text>
                         </View>
+                        <Ionicons name="ios-settings" size={30} style={{ color:'#fff' , marginTop: 70 , marginLeft: -90 }} onPress={()=> Actions.UserEditProfileRoot()} />
                     </View>
                 </LinearGradient>
                 <TouchableOpacity onPress={()=> Actions.ContactRoot()}>
@@ -90,10 +91,11 @@ const Styles = StyleSheet.create({
     }
     });
 
-const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer }) => {
+const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer,LoginUser_Data_Reducer }) => {
     const { token,role } = LoginUser_Reducer;
+    const { data } = LoginUser_Data_Reducer;
     const { val } = Add_Queue_Reducer;
-        return { token,role,val };
+        return { token,role,val,data};
   }
 
 export default connect(mapStateToProps)(SlideMenuUser);

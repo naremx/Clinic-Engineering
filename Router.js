@@ -22,6 +22,7 @@ import DetailAdvisor from './ScreensUser/DetailAdvisor.js';
 import AddQueue from './ScreensUser/AddQueue.js';
 import DetailAddQueue from './ScreensUser/DetailAddQueue.js';
 import CalendarUserTime from './ScreensUser/CalendarUserTime.js';
+import UserEditProfile from './ScreensUser/UserEditProfile.js';
 
 import AdvisorSelectMode from './ScreensAdvisor/AdvisorSelectMode.js';
 import AdvisorScheduleAss from './ScreensAdvisor/ScheduleAss.js';
@@ -53,6 +54,11 @@ class Routes extends React.Component{
                     <Scene key='ConditionsRoot' >
                         <Scene key='Conditions' component={Conditions} title='เงื่อนไขและข้อตกลง'/>
                     </Scene>
+
+                    <Scene key='UserEditProfileRoot' >
+                        <Scene key='UserEditProfile' component={UserEditProfile} title='แก้ไขข้อมูลส่วนตัว'/>
+                    </Scene>
+
                     <Scene key='AddQueue' >
                         <Scene key='AddQueue' component={AddQueue} title='แอดคิว'/>
                     </Scene>

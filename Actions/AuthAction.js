@@ -1,6 +1,6 @@
-export const getToken = (token, role, data) => {
+export const getToken = (token, role) => {
     return { 
         type: 'Login', 
-        payload: { token, role, data } 
+        payload: { token, role } 
     };
 }
