@@ -19,7 +19,6 @@ from rest_framework import status
 from .models import User
 
 
-
 class contact(APIView):
     throttle_classes = ()
     permission_classes = ()
@@ -79,12 +78,13 @@ class logout(APIView):
     def get(self, request):
         # try:
         request.user.auth_token.delete()
-    # except (AttributeError):
-    # # except (AttributeError, ObjectDoesNotExist):
-    #     pass
-    #
-    # return Response({"success": ("Successfully logged out.")},
-    #             status=status.HTTP_200_OK)
+
+        # except (AttributeError):
+        # # except (AttributeError, ObjectDoesNotExist):
+        #     pass
+        #
+        # return Response({"success": ("Successfully logged out.")},
+        return Response(status=200)
 
 
 class fgpassword(APIView):

@@ -64,10 +64,6 @@ class confirm(APIView):
             queue.save()
             print("else")
 
-        # else:
-        #     Queue.objects.filter(id=request.data['id']).update(status='rejected')
-        #     print("else")
-
         return Response(status=200)
 
 

@@ -8,6 +8,20 @@ from Account.serializer import AdvisorSerializer
 import datetime
 
 import pandas as pd
+
+
+def expertisecsv(request):
+    exp = pd.read_csv("datafinal.csv")
+
+    ad_id = exp['ad_id']
+
+    count = 0
+    for i in range(0,6384):
+
+        print(ad_id[i])
+
+
+
 def advisorcsv(request):
     contact = pd.read_csv("contact.csv")
 
@@ -93,22 +107,25 @@ class getaddata(APIView):
 
 class Adshowavailable(APIView):
     permission_classes = ()
+
     def post(self, request):
         print(request.user)
-        advisor_available = available.objects.filter(advisor__user=request.user,is_display=True)
+        advisor_available = available.objects.filter(advisor__user=request.user, is_display=True)
         # serializers = ShowAvailableSerializer(advisor_available, many=True)
         serializers = ShowAvailableSerializer(advisor_available, many=True)
         print(serializers)
         return Response(serializers.data)
 
+
 class Usshowavailable(APIView):
     def post(self, request):
         print(request.data)
-        advisor_available = available.objects.filter(advisor__id=request.data,is_display=True)
+        advisor_available = available.objects.filter(advisor__id=request.data, is_display=True)
         # serializers = ShowAvailableSerializer(advisor_available, many=True)
         serializers = ShowAvailableSerializer(advisor_available, many=True)
         print(serializers)
         return Response(serializers.data)
+
 
 class createavailable(APIView):
     permission_classes = ()
