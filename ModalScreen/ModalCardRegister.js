@@ -13,7 +13,7 @@ export default class ModalCardRegister extends React.Component {
           email: '',
           password: '',
           username: '',
-          telephone: '',
+          phone: '',
           first_nameValdate: true,
           last_nameValdate: true,
           emailValdate: true,
@@ -58,10 +58,10 @@ export default class ModalCardRegister extends React.Component {
           })
         }
       }
-      else if(type == 'telephone') 
+      else if(type == 'phone') 
       {
           this.setState({
-            telephone: text
+            phone: text
           })
       }
       else if(type == 'email') 
@@ -119,7 +119,7 @@ export default class ModalCardRegister extends React.Component {
       collection.first_name=this.state.first_name,
       collection.last_name=this.state.last_name,
       collection.email=this.state.email,
-      collection.telephone=this.state.telephone,
+      collection.phone=this.state.phone,
       collection.password=this.state.password,
       collection.username=this.state.username,
       console.log(collection);
@@ -172,7 +172,7 @@ export default class ModalCardRegister extends React.Component {
 
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >เบอร์ติดต่อ</Text>
                         <TextInput style={Styles.inputBoxRegister}
-                        onChangeText={ (text) => this.validate(text,'telephone')} placeholder="Telephone"/>
+                        onChangeText={ (text) => this.validate(text,'phone')} placeholder="Phone"/>
 
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >รหัสผ่าน</Text>
                         <TextInput style={[Styles.inputBoxRegister, !this.state.passwordValdate? Styles.error:null]} placeholder="Password (Least 8 characters)" 
