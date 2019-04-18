@@ -13,6 +13,7 @@ export default class ModalCardRegister extends React.Component {
           email: '',
           password: '',
           username: '',
+          telephone: '',
           first_nameValdate: true,
           last_nameValdate: true,
           emailValdate: true,
@@ -57,7 +58,12 @@ export default class ModalCardRegister extends React.Component {
           })
         }
       }
-
+      else if(type == 'telephone') 
+      {
+          this.setState({
+            telephone: text
+          })
+      }
       else if(type == 'email') 
       {
         if(mail.test(text))
@@ -107,40 +113,13 @@ export default class ModalCardRegister extends React.Component {
         }
       }
     }
-
-//   updateValue(text , field){
-//     if(field == 'first_name'){
-//         this.setState({
-//             first_name : text
-//         })
-//     }
-//     else if(field == 'last_name'){
-//         this.setState({
-//             last_name : text
-//         })
-//     }
-//     else if(field == 'email'){
-//         this.setState({
-//             email : text
-//         })
-//     }
-//     else if(field == 'password'){
-//         this.setState({
-//             password : text
-//         })
-//     }
-//     else if(field == 'username'){
-//         this.setState({
-//             username : text
-//         })
-//     }
-// }
   submit()
   {
       let collection={}
       collection.first_name=this.state.first_name,
       collection.last_name=this.state.last_name,
       collection.email=this.state.email,
+      collection.telephone=this.state.telephone,
       collection.password=this.state.password,
       collection.username=this.state.username,
       console.log(collection);
@@ -185,14 +164,18 @@ export default class ModalCardRegister extends React.Component {
 
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >นามสกุล</Text>
                         <TextInput style={[Styles.inputBoxRegister, !this.state.last_nameValdate? Styles.error:null]}
-                        onChangeText={ (text) => this.validate(text,'last_name')} placeholder="LasttName"/>
+                        onChangeText={ (text) => this.validate(text,'last_name')} placeholder="LastName"/>
 
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >อีเมล</Text>
                         <TextInput style={[Styles.inputBoxRegister, !this.state.emailValdate? Styles.error:null]} placeholder="Email address"
                         onChangeText={(text) => this.validate(text, 'email')} keyboardType={'email-address'}/>
 
+                        <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >เบอร์ติดต่อ</Text>
+                        <TextInput style={Styles.inputBoxRegister}
+                        onChangeText={ (text) => this.validate(text,'telephone')} placeholder="Telephone"/>
+
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >รหัสผ่าน</Text>
-                        <TextInput style={[Styles.inputBoxRegister, !this.state.password1Valdate? Styles.error:null]} placeholder="Password (Least 8 characters)" 
+                        <TextInput style={[Styles.inputBoxRegister, !this.state.passwordValdate? Styles.error:null]} placeholder="Password (Least 8 characters)" 
                         secureTextEntry={true} underlineColorAndroid={'transparent'} onChangeText={ (text) => this.validate(text,'password')}/>
                     </View>
                 <View style= {{ marginLeft: 110 }}>
@@ -225,7 +208,7 @@ Container: {
 },  
 ModalBoxRegister:{
     width: 370,
-    height: 600,
+    height: 670,
     backgroundColor: '#ecf8ff',
     borderRadius: 25,
     shadowColor: '#30C1DD',

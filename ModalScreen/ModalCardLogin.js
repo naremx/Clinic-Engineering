@@ -140,17 +140,13 @@ class ModalCardLogin extends React.Component {
                                 </TouchableOpacity>
                             </LinearGradient>
                         </View>
-
-
-                            <View style={{ flexDirection: "row" , paddingLeft : 100 , marginTop: 20}}>
-                                <TouchableOpacity>
-                                    <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold'}}>ลืมรหัสผ่าน</Text>
-                                </TouchableOpacity> 
-                                <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold'}}> | </Text> 
-                                <TouchableOpacity onPress={() => this.Register()}>
-                                    <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold'}}>ลงทะเบียน</Text>
-                                </TouchableOpacity>
-                            </View>
+                            <TouchableOpacity>
+                                <Text style={{color : '#95a3e6' ,
+                                fontSize: 17 , 
+                                textAlign: 'center' , 
+                                fontWeight: 'bold',
+                                marginTop: 10 }}>ลืมรหัสผ่าน</Text>
+                            </TouchableOpacity> 
                         </View>
                     </View>
                 </BlurView>
@@ -173,7 +169,7 @@ Container: {
 },  
 ModalBoxLogin:{
     width: 370,
-    height: 340,
+    height: 320,
     backgroundColor: '#ecf8ff',
     borderRadius: 25,
     shadowColor: '#30C1DD',
