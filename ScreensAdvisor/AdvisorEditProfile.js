@@ -5,7 +5,7 @@ import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
-class UserEditProfile extends React.Component{
+class AdvisorEditProfile extends React.Component{
 
         callphone = () => {
             const args = {
@@ -27,7 +27,7 @@ class UserEditProfile extends React.Component{
                 <Image style={Styles.drawerImage}
                           source={require('../Image/user.png')} />
               </View>
-              <View style={{alignItems:'center' , flexDirection: 'row' , marginTop : 20}}>
+              <View style={{alignItems:'center' , flexDirection: 'row' , marginTop : 10}}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >ชื่อ</Text>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 130 }} >นามสกุล</Text>
               </View>
@@ -37,17 +37,27 @@ class UserEditProfile extends React.Component{
                 <TextInput style={Styles.inputBoxName} placeholder="LastName"/>
               </View>
 
-              <View style={{ marginTop : 10 }}>
+              <View style={{ marginTop : 5 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >อีเมล</Text>
                 <TextInput style={Styles.inputBox} placeholder="Email"/>
               </View>
 
-              <View style={{ marginTop : 10 }}>
+              <View style={{ marginTop : 5 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >เบอร์ติดต่อ</Text>
                 <TextInput style={Styles.inputBox} placeholder="Telephone"/>
               </View>
 
-              <View style={{ marginTop : 10 }}>
+              <View style={{ marginTop : 5 }}>
+                <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >คณะ</Text>
+                <TextInput style={Styles.inputBox} placeholder="Department"/>
+              </View>
+
+              <View style={{ marginTop : 5 }}>
+                <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >เลขประจำตัวผู้เสียภาษีอากร</Text>
+                <TextInput style={Styles.inputBox} placeholder="Tax"/>
+              </View>
+
+              <View style={{ marginTop : 5 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >ที่อยู่</Text>
                 <TextInput style={Styles.inputBox} placeholder="Address"/>
               </View>
@@ -75,7 +85,7 @@ const Styles = StyleSheet.create({
     },
     ContainerContacts: {
       width: 370,
-      height: 600,
+      height: 650,
       backgroundColor: 'white',
       borderRadius: 18,
       shadowColor: '#30C1DD',
@@ -111,13 +121,13 @@ const Styles = StyleSheet.create({
     height: 100,
     width: 100,
     borderRadius: 100,
-    marginTop: 30
+    marginTop: 20
   },
   ButtonConfirm:{
     height: 50, 
     width: 150 , 
     borderRadius: 20 , 
-    marginTop: 70, 
+    marginTop: 20, 
     shadowColor: '#30C1DD',
     shadowRadius: 10,
     shadowOpacity: 0.6,
@@ -132,4 +142,4 @@ const mapStateToProps = ({ LoginUser_Reducer,LoginUser_Data_Reducer }) => {
       return { token,role,data};
 }
 
-export default connect(mapStateToProps)(UserEditProfile);
+export default connect(mapStateToProps)(AdvisorEditProfile);

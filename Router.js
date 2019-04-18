@@ -33,6 +33,7 @@ import AdvisorEditAllDate from './ScreensAdvisor/AdvisorEditAllDate.js';
 import AdvisorEditSelectDate from './ScreensAdvisor/AdvisorEditSelectDate.js';
 import AdvisorEditSelectTime from './ScreensAdvisor/AdvisorEditSelectTime.js';
 import AdvisorDetailAddQueue from './ScreensAdvisor/DetailAddQueue.js';
+import AdvisorEditProfile from './ScreensAdvisor/AdvisorEditProfile.js';
 
 import SlideMenuUser from './SlideMenu/SlideMenuUser';
 import SlideMenuAdvisor from './SlideMenu/SlideMenuAdvisor';
@@ -57,6 +58,10 @@ class Routes extends React.Component{
 
                     <Scene key='UserEditProfileRoot' >
                         <Scene key='UserEditProfile' component={UserEditProfile} title='แก้ไขข้อมูลส่วนตัว'/>
+                    </Scene>
+
+                    <Scene key='AdvisorEditProfileRoot' >
+                        <Scene key='AdvisorEditProfile' component={AdvisorEditProfile} title='แก้ไขข้อมูลส่วนตัว'/>
                     </Scene>
 
                     <Scene key='AddQueue' >

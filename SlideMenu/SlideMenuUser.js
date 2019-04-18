@@ -33,8 +33,8 @@ class SlideMenuUser extends Component{
                         <View style={{flexDirection: "column" , marginLeft: 15 , marginTop: 35}}>
                             <Text style={{ color: '#fff' , fontSize: 18 , fontWeight: 'bold' }}>{this.props.data.first_name}</Text>
                         </View>
-                        <Ionicons name="ios-settings" size={30} style={{ color:'#fff' , marginTop: 70 , marginLeft: -90 }} onPress={()=> Actions.UserEditProfileRoot()} />
                     </View>
+                    <Ionicons name="ios-settings" size={30} style={{ color:'#fff' , marginTop: -20 , marginLeft: 95 }} onPress={()=> Actions.UserEditProfileRoot()} />
                 </LinearGradient>
                 <TouchableOpacity onPress={()=> Actions.ContactRoot()}>
                     <View style={{ flexDirection: 'row'  }}>
