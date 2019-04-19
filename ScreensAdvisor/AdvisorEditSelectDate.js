@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Image, Text } from 'react-native'
 import { LinearGradient, Constants } from 'expo'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
@@ -30,7 +30,7 @@ class AdvisorEditSelectDate extends React.Component{
             this.setState({
                 selectedDate: responseData
             });
-            console.log('--LLLL---',this.state.selectedDate)           
+            console.log('--CHECK--',this.state.selectedDate)           
             const resultDate = this.state.selectedDate.reduce((arr,item) =>{
                 if( item.free_date){
                     arr.push(item.free_date);
@@ -86,6 +86,7 @@ class AdvisorEditSelectDate extends React.Component{
                         }}
                     />
                 </View>
+                <Text style={{ fontSize: 22 , color: '#3e48a3' , marginLeft: 20 , marginTop: 20 , fontWeight: 'bold' }} >วันที่เลือก : {this.state.date}</Text>
                 <View style={{alignItems:'center'}}>
                     <TouchableOpacity onPress={() => this.SentDateTime()}>
                         <Image style={Styles.drawerImage} source={require('../Image/selecttime.png')} />
