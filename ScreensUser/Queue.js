@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { LinearGradient, Constants } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux'
@@ -47,7 +47,6 @@ class Queue extends React.Component{
         if (this.state.selectedDate.length > 0) {
             return this.state.selectedDate.map((val, index) => 
             <View key={index} style={Styles.ContainerContacts}>
-                <TouchableOpacity onPress={() => this.CollectData(val)}>
                     <View style={{ flexDirection: 'row' }}>
                         <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
                         <View style={Styles.Column}>
@@ -65,6 +64,17 @@ class Queue extends React.Component{
                             </View>
                         </View>
                     </View>
+                <TouchableOpacity onPress={() => this.CollectData(val)}>
+                <View style={{alignItems:'center'}}>
+                    <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonDescription}>
+                        <Text style = {{ color: '#fff', 
+                                fontSize: 20,
+                                textAlign: 'center',
+                                marginTop: 10,
+                                fontWeight: 'bold'
+                                }}>ดูรายละเอียด</Text>
+                    </LinearGradient>
+                </View>
                 </TouchableOpacity>
             </View>
             );
@@ -74,9 +84,11 @@ class Queue extends React.Component{
         return(
             <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
                 <View style={Styles.Container}>
+                <ScrollView>
                     <View style={{alignItems:'center'}}>
                         { this.renderText() }
                     </View> 
+                </ScrollView>
                 </View>
             </LinearGradient>
         )
@@ -89,7 +101,7 @@ const Styles = StyleSheet.create({
     },
     ContainerContacts: {
         width: 370,
-        height: 120,
+        height: 180,
         backgroundColor: 'white',
         borderRadius: 18,
         shadowColor: '#30C1DD',
@@ -105,6 +117,13 @@ const Styles = StyleSheet.create({
         marginLeft: 20,
         marginTop: 15,
     },
+    ButtonDescription: {
+        width: 350,
+        height: 50,
+        backgroundColor: '#000',
+        marginTop: 10,
+        borderRadius: 10,
+      },
 });
 
 const mapDispatchToprops = dispatch => ({

@@ -13,8 +13,9 @@ import Queue from './ScreensUser/Queue.js';
 import Assignment from './ScreensUser/Assignment.js';
 
 import PhoneBook from './Screens/PhoneBook.js';
+import Contact from './Screens/Contact.js';
 
-import Contact from './ScreensUser/Contact.js';
+import UserContact from './ScreensUser/UserContact.js';
 import Questions from './ScreensUser/Questions.js';
 import Conditions from './ScreensUser/Conditions.js'
 import CalendarUser from './ScreensUser/CalendarUser.js';
@@ -34,6 +35,7 @@ import AdvisorEditSelectDate from './ScreensAdvisor/AdvisorEditSelectDate.js';
 import AdvisorEditSelectTime from './ScreensAdvisor/AdvisorEditSelectTime.js';
 import AdvisorDetailAddQueue from './ScreensAdvisor/DetailAddQueue.js';
 import AdvisorEditProfile from './ScreensAdvisor/AdvisorEditProfile.js';
+import AdvisorContact from './ScreensAdvisor/AdvisorContact.js';
 
 import SlideMenuUser from './SlideMenu/SlideMenuUser';
 import SlideMenuAdvisor from './SlideMenu/SlideMenuAdvisor';
@@ -44,8 +46,21 @@ class Routes extends React.Component{
         return (
             <Router titleStyle={{color:'#87daf3', flex: 1 , textAlign: 'center', }}>
                 <Scene key='root' hideNavBar>
+
                     <Scene key='ContactRoot' >
                         <Scene key='Contact' component={Contact} title='ติดต่อเรา' initial/>
+                    </Scene>
+
+                    <Scene key='UserContactRoot' >
+                        <Scene key='UserContact' component={UserContact} title='ข้อมูลส่วนตัว' initial/>
+                    </Scene>
+
+                    <Scene key='AdvisorContactRoot' >
+                        <Scene key='AdvisorContact' component={AdvisorContact} title='ข้อมูลส่วนตัว' initial/>
+                    </Scene>
+
+                    <Scene key='AdvisorContactRoot' >
+                        <Scene key='AdvisorContact' component={AdvisorContact} title='ข้อมูลส่วนตัว' initial/>
                     </Scene>
 
                     <Scene key='QuestionsRoot' >

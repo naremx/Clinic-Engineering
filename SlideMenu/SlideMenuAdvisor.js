@@ -36,7 +36,7 @@ class SlideMenuAdvisor extends Component{
                     </View>
                     <Ionicons name="ios-settings" size={30} style={{ color:'#fff' , marginTop: -20 , marginLeft: 95 }} onPress={()=> Actions.AdvisorEditProfileRoot()} />
                 </LinearGradient>
-                <TouchableOpacity onPress={()=> Actions.ContactRoot()}>
+                <TouchableOpacity onPress={()=> Actions.AdvisorContactRoot()}>
                     <View style={{ flexDirection: 'row'  }}>
                         <Ionicons name="ios-contact" size={30} style={{ color:'#3e48a3' , marginTop: 10 , marginLeft: 20 }} />
                         <Text style={{ color : '#a69beb' , fontSize: 20 , marginTop: 10 , textAlign: 'center' , marginLeft: 10 }}>ข้อมูลส่วนตัว</Text>

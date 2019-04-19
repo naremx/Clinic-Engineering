@@ -106,7 +106,7 @@ ButtonConfirm:{
     width: 150 , 
     borderRadius: 20 , 
     marginLeft: 20, 
-    marginTop: 220 , 
+    marginTop: 200 , 
     shadowColor: '#30C1DD',
     shadowRadius: 10,
     shadowOpacity: 0.6,
