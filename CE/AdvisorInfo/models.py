@@ -15,7 +15,6 @@ class AdvisorData(models.Model):
     email = models.CharField(max_length=500, default='', blank=True)
     tax_number = models.CharField(max_length=500, default='', blank=True)
     gender = models.CharField(max_length=500, default='', blank=True)
-    expertise = models.CharField(max_length=500, default='', blank=True)
     address = models.CharField(max_length=500, default='', blank=True)
 
     # available = models.BooleanField(default=True)

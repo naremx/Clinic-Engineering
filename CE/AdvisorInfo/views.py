@@ -10,8 +10,7 @@ import datetime
 import pandas as pd
 
 def advisorcsv(request):
-    contact = pd.read_csv("contact2.csv")
-
+    contact = pd.read_csv("contact.csv")
     name = contact['name']
     email = contact['email']
     telephone = contact['telephone']
