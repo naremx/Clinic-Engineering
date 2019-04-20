@@ -3,13 +3,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import *
 from django.shortcuts import get_object_or_404
-import pandas as pd
+
 from Account.serializer import AdvisorSerializer
 import datetime
 
 import pandas as pd
+
 def advisorcsv(request):
-    contact = pd.read_csv("contact.csv")
+    contact = pd.read_csv("contact2.csv")
 
     name = contact['name']
     email = contact['email']
@@ -83,6 +84,7 @@ class getaddata(APIView):
     # p.save()
     def get(self, request):
         # create if for front request
+
         # list = available.objects.filter(advisor__id=16456)
         # Advisor_list = AdvisorData.objects.all()
         Advisor_list = AdvisorData.objects.filter(id=16456)
@@ -92,22 +94,25 @@ class getaddata(APIView):
 
 class Adshowavailable(APIView):
     permission_classes = ()
+
     def post(self, request):
         print(request.user)
-        advisor_available = available.objects.filter(advisor__user=request.user)
+        advisor_available = available.objects.filter(advisor__user=request.user, is_display=True)
         # serializers = ShowAvailableSerializer(advisor_available, many=True)
         serializers = ShowAvailableSerializer(advisor_available, many=True)
         print(serializers)
         return Response(serializers.data)
 
+
 class Usshowavailable(APIView):
     def post(self, request):
         print(request.data)
-        advisor_available = available.objects.filter(advisor__id=request.data)
+        advisor_available = available.objects.filter(advisor__id=request.data, is_display=True)
         # serializers = ShowAvailableSerializer(advisor_available, many=True)
         serializers = ShowAvailableSerializer(advisor_available, many=True)
         print(serializers)
         return Response(serializers.data)
+
 
 class createavailable(APIView):
     permission_classes = ()
