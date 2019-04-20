@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'History',
     'corsheaders',
     'Search',
+    'expertise',
 ]
 
 MIDDLEWARE = [

@@ -3,27 +3,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import *
 from django.shortcuts import get_object_or_404
-import pandas as pd
+
 from Account.serializer import AdvisorSerializer
 import datetime
 
 import pandas as pd
 
-
-def expertisecsv(request):
-    exp = pd.read_csv("datafinal.csv")
-
-    ad_id = exp['ad_id']
-
-    count = 0
-    for i in range(0,6384):
-
-        print(ad_id[i])
-
-
-
 def advisorcsv(request):
-    contact = pd.read_csv("contact.csv")
+    contact = pd.read_csv("contact2.csv")
 
     name = contact['name']
     email = contact['email']

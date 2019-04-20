@@ -4,7 +4,7 @@ from .views import *
 
 urlpatterns = [
 
-    path('test/', expertisecsv, name="test"),
+    # path('test/', expertisecsv, name="test"),
     path('addata/', advisorcsv, name="addata"),
     path('getaddata/',getaddata.as_view(),name="getaddata"),
     path('createavailable/',createavailable.as_view(),name="createavailable"),

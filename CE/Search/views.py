@@ -14,8 +14,10 @@ class search(APIView):
             Advisor_list = AdvisorData.objects.filter(name__id=request.data['advisor'])
             serializers = AdvisorDataSerializer(Advisor_list, many=True)
             return Response(serializers.data)
+
         elif AdvisorData.object.filter(department__icontains=request.data['department']):
             Advisor_list = AdvisorData.objects.filter(department=request.data['department'])
             serializers = AdvisorDataSerializer(Advisor_list, many=True)
             return Response(serializers.data)
+
         print(1)

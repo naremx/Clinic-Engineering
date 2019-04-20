@@ -23,7 +23,7 @@ urlpatterns = [
     path('advisor/', include('AdvisorInfo.urls')),
     path('history/', include('History.urls')),
     path('Admin/', include('Admin.urls')),
-    path('Search/',include('Search.urls')),
+    path('Search/', include('Search.urls')),
+    path('expertise/', include('expertise.urls')),
 
 ]
-
