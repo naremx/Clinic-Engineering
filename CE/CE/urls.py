@@ -25,5 +25,6 @@ urlpatterns = [
     path('Admin/', include('Admin.urls')),
     path('Search/', include('Search.urls')),
     path('expertise/', include('expertise.urls')),
+    path('Editprofile/', include('Editprofile.urls')),
 
 ]
