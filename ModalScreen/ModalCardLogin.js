@@ -1,14 +1,17 @@
 import React from 'react';
-import { StyleSheet,View,Text,TouchableOpacity,Modal,TextInput } from 'react-native';
-import { LinearGradient } from 'expo';
+import { StyleSheet,View,Text,TouchableOpacity,Modal,TextInput,Alert } from 'react-native';
+import { LinearGradient,BlurView } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 
 import * as Expo from 'expo';
 import * as firebase from 'firebase';
 
+import { getData } from '../Actions';
 import { getToken } from '../Actions';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+
+import ModalCardRegister from './ModalCardRegister.js';
 
 const firebaseConfig={
     apiKey: "AIzaSyAzqICgMHtT0GuYtnUMAUYZTPdirJ6hdr8",
@@ -45,8 +48,10 @@ class ModalCardLogin extends React.Component {
         super()
         this.state = {
             showMe: false ,
-            username: 'pmmosaic' ,
-            password: 'pmmosaic' ,
+            username: 'usernaremx' ,
+            password: '123456Nn' ,
+            // username: '507theerayod.wi@kmitl.ac.th' ,
+            // password: '1234' ,
         }
     }
     updateValue(text , field){
@@ -67,7 +72,9 @@ class ModalCardLogin extends React.Component {
         collection.username=this.state.username,
         collection.password=this.state.password
 
-        var url = 'http://192.168.43.212:8000/Account/' ;
+        this.setState({ showMe:false })
+
+        var url = 'http://10.66.13.208:8000/Account/' ;
 
         fetch(url, {
         method: 'POST', 
@@ -83,19 +90,27 @@ class ModalCardLogin extends React.Component {
     }
 
     selectUserRole(responseData) {
-        this.props.getToken(responseData.token, responseData.role);
+        console.log('--LOGIN--',responseData)
+        this.props.getToken(responseData.token , responseData.role );
+        this.props.getData(responseData.data);
         if (responseData.role === 3) {
             Actions.user();
-        } else {
+        } else if (responseData.role === 2) {
             Actions.Advisor();
         }
+        else{
+            Alert.alert(
+                'อีเมลหรือพาสเวิร์ดผิด',
+                'กรุณาตรวจสอบหรือกรอกใหม่อีกครั้ง',
+              );
+        }
     }
-
   
     render() {
         return(
             <View style={Styles.container}>
                 <Modal visible={this.state.showMe} onRequestClose ={()=>console.warn("this is close")} transparent animationType='fade'>
+                <BlurView tint="dark" intensity={50} style={StyleSheet.absoluteFill}>
                     <View style={{ alignItems:'center', marginTop: 50 }}>
                         <View style={Styles.ModalBoxLogin}>
 
@@ -113,8 +128,8 @@ class ModalCardLogin extends React.Component {
                             </View>
 
                             <View style={{ flexDirection: "column" , paddingLeft : 10 }}>
-                                <TextInput style={Styles.inputBoxLogin} onChangeText={(text) => this.updateValue(text, 'username')} value='pmmosaic'/>
-                                <TextInput style={Styles.inputBoxLogin}  secureTextEntry={true} onChangeText={(text) => this.updateValue(text, 'password')} value='pmmosaic'/>
+                                <TextInput style={Styles.inputBoxLogin} onChangeText={(text) => this.updateValue(text, 'username')}  placeholder="Username"/>
+                                <TextInput style={Styles.inputBoxLogin}  secureTextEntry={true} onChangeText={(text) => this.updateValue(text, 'password')}  placeholder="Password"/>
                             </View>
                         </View>
 
@@ -125,19 +140,16 @@ class ModalCardLogin extends React.Component {
                                 </TouchableOpacity>
                             </LinearGradient>
                         </View>
-
-
-                            <View style={{ flexDirection: "row" , paddingLeft : 100 , marginTop: 20}}>
-                                <TouchableOpacity>
-                                    <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold'}}>ลืมรหัสผ่าน</Text>
-                                </TouchableOpacity> 
-                                <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold'}}> | </Text> 
-                                <TouchableOpacity>
-                                    <Text style={{color : '#95a3e6' , fontSize: 17 , fontWeight: 'bold'}}>ลงทะเบียน</Text>
-                                </TouchableOpacity>
-                            </View>
+                            <TouchableOpacity>
+                                <Text style={{color : '#95a3e6' ,
+                                fontSize: 17 , 
+                                textAlign: 'center' , 
+                                fontWeight: 'bold',
+                                marginTop: 10 }}>ลืมรหัสผ่าน</Text>
+                            </TouchableOpacity> 
                         </View>
                     </View>
+                </BlurView>
                 </Modal>
                 <TouchableOpacity onPress={() => this.setState({ showMe:true })}>
                 <Text style={{color : '#fff' , fontSize: 15 , fontWeight: 'bold' }}>เข้าสู่ระบบ</Text>
@@ -147,7 +159,7 @@ class ModalCardLogin extends React.Component {
     }
   };
 
-export default connect(null, { getToken })(ModalCardLogin);
+export default connect(null, { getToken,getData })(ModalCardLogin);
 
 const Styles = StyleSheet.create({
 Container: {
@@ -157,7 +169,7 @@ Container: {
 },  
 ModalBoxLogin:{
     width: 370,
-    height: 340,
+    height: 320,
     backgroundColor: '#ecf8ff',
     borderRadius: 25,
     shadowColor: '#30C1DD',

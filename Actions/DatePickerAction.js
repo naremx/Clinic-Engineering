@@ -1,6 +1,6 @@
-export const DatePickerAction = (chosenDate) => {
+export const DatePickerAction = (collectionDateTime) => {
     return {
         type: 'DATA_DATETIME',
-        payload: chosenDate
+        payload: collectionDateTime,
     };
 }

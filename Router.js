@@ -1,15 +1,10 @@
 import React , {Component} from 'react';
-import { Router,Scene,Drawer,Tabs,Actions } from 'react-native-router-flux';
-import { StyleSheet,View,Image,TouchableOpacity,ActivityIndicator } from 'react-native';
-import { LinearGradient,Font} from 'expo';
+import { Router,Scene,Drawer,Tabs} from 'react-native-router-flux';
 import { connect } from 'react-redux'
-import { Ionicons } from 'react-native-vector-icons'
+
 
 import Text from './Components/CustomText';
 import TabIcon from './TabIcon.js';
-
-import ModalCardRegister from './ModalScreen/ModalCardRegister.js';
-import ModalCardLogin from './ModalScreen/ModalCardLogin.js';
 
 import Home from './ScreensUser/Home.js';
 import Search from './ScreensUser/Search.js';
@@ -18,19 +13,29 @@ import Queue from './ScreensUser/Queue.js';
 import Assignment from './ScreensUser/Assignment.js';
 
 import PhoneBook from './Screens/PhoneBook.js';
+import Contact from './Screens/Contact.js';
 
-import Contact from './ScreensUser/Contact.js';
+import UserContact from './ScreensUser/UserContact.js';
 import Questions from './ScreensUser/Questions.js';
 import Conditions from './ScreensUser/Conditions.js'
-import Calendar from './ScreensUser/Calendar.js';
+import CalendarUser from './ScreensUser/CalendarUser.js';
+import DetailAdvisor from './ScreensUser/DetailAdvisor.js';
 import AddQueue from './ScreensUser/AddQueue.js';
 import DetailAddQueue from './ScreensUser/DetailAddQueue.js';
+import CalendarUserTime from './ScreensUser/CalendarUserTime.js';
+import UserEditProfile from './ScreensUser/UserEditProfile.js';
 
-import AdvisorScheduleDate from './ScreensAdvisor/ScheduleDate.js';
+import AdvisorSelectMode from './ScreensAdvisor/AdvisorSelectMode.js';
 import AdvisorScheduleAss from './ScreensAdvisor/ScheduleAss.js';
 import AdvisorNotification from './ScreensAdvisor/Notification.js';
 import AdvisorQueue from './ScreensAdvisor/Queue.js';
 import AdvisorAssignment from './ScreensAdvisor/Assignment.js';
+import AdvisorEditAllDate from './ScreensAdvisor/AdvisorEditAllDate.js';
+import AdvisorEditSelectDate from './ScreensAdvisor/AdvisorEditSelectDate.js';
+import AdvisorEditSelectTime from './ScreensAdvisor/AdvisorEditSelectTime.js';
+import AdvisorDetailAddQueue from './ScreensAdvisor/DetailAddQueue.js';
+import AdvisorEditProfile from './ScreensAdvisor/AdvisorEditProfile.js';
+import AdvisorContact from './ScreensAdvisor/AdvisorContact.js';
 
 import SlideMenuUser from './SlideMenu/SlideMenuUser';
 import SlideMenuAdvisor from './SlideMenu/SlideMenuAdvisor';
@@ -41,8 +46,21 @@ class Routes extends React.Component{
         return (
             <Router titleStyle={{color:'#87daf3', flex: 1 , textAlign: 'center', }}>
                 <Scene key='root' hideNavBar>
+
                     <Scene key='ContactRoot' >
                         <Scene key='Contact' component={Contact} title='ติดต่อเรา' initial/>
+                    </Scene>
+
+                    <Scene key='UserContactRoot' >
+                        <Scene key='UserContact' component={UserContact} title='ข้อมูลส่วนตัว' initial/>
+                    </Scene>
+
+                    <Scene key='AdvisorContactRoot' >
+                        <Scene key='AdvisorContact' component={AdvisorContact} title='ข้อมูลส่วนตัว' initial/>
+                    </Scene>
+
+                    <Scene key='AdvisorContactRoot' >
+                        <Scene key='AdvisorContact' component={AdvisorContact} title='ข้อมูลส่วนตัว' initial/>
                     </Scene>
 
                     <Scene key='QuestionsRoot' >
@@ -52,11 +70,20 @@ class Routes extends React.Component{
                     <Scene key='ConditionsRoot' >
                         <Scene key='Conditions' component={Conditions} title='เงื่อนไขและข้อตกลง'/>
                     </Scene>
+
+                    <Scene key='UserEditProfileRoot' >
+                        <Scene key='UserEditProfile' component={UserEditProfile} title='แก้ไขข้อมูลส่วนตัว'/>
+                    </Scene>
+
+                    <Scene key='AdvisorEditProfileRoot' >
+                        <Scene key='AdvisorEditProfile' component={AdvisorEditProfile} title='แก้ไขข้อมูลส่วนตัว'/>
+                    </Scene>
+
                     <Scene key='AddQueue' >
                         <Scene key='AddQueue' component={AddQueue} title='แอดคิว'/>
                     </Scene>
 
-                    <Drawer key='auth' contentComponent={SlideMenu}  drawerImage={require('./Image/menu.png')} >
+                    <Drawer key='auth' contentComponent={SlideMenu}  drawerImage={require('./Image/menu.png')} initial>
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
@@ -74,7 +101,7 @@ class Routes extends React.Component{
                         </Scene>
                     </Drawer>
 
-                    <Drawer key='user' contentComponent={SlideMenuUser}  drawerImage={require('./Image/menu.png')} initial>
+                    <Drawer key='user' contentComponent={SlideMenuUser}  drawerImage={require('./Image/menu.png')} >
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
@@ -88,9 +115,21 @@ class Routes extends React.Component{
                                                 initial>
                                         </Scene>
                                         <Scene 
-                                                key='Calendar' 
-                                                component={Calendar} 
-                                                title='ปฏิทิน' 
+                                                key='DetailAdvisor' 
+                                                component={DetailAdvisor} 
+                                                title='รายละเอียดอาจารย์' 
+                                                >
+                                        </Scene>
+                                        <Scene 
+                                                key='CalendarUser' 
+                                                component={CalendarUser} 
+                                                title='วันที่นัด' 
+                                                >
+                                        </Scene>
+                                        <Scene 
+                                                key='CalendarUserTime' 
+                                                component={CalendarUserTime} 
+                                                title='เวลาที่นัด' 
                                                 >
                                         </Scene>
                                         <Scene 
@@ -149,12 +188,30 @@ class Routes extends React.Component{
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
                                 activeTintColor="#87daf3" 
                                 inactiveTintColor="#a69beb" >
-                                    <Scene key='ScheduleDatePage' iconName="ios-home" icon={TabIcon} title='ตารางเวลา'>
+                                    <Scene key='AdvisorSelectMode' iconName="ios-home" icon={TabIcon} title='เลือกรายการ'>
                                         <Scene 
-                                                key='AdvisorScheduleDate' 
-                                                component={AdvisorScheduleDate} 
-                                                title='ตารางเวลา' 
+                                                key='AdvisorSelectMode' 
+                                                component={AdvisorSelectMode} 
+                                                title='เลือกรายการ' 
                                                 initial>
+                                        </Scene>
+                                        <Scene 
+                                                key='AdvisorEditAllDate' 
+                                                component={AdvisorEditAllDate} 
+                                                title='เพิ่มวันที่สามารถนัดคิวได้' 
+                                                >
+                                        </Scene>
+                                        <Scene 
+                                                key='AdvisorEditSelectDate' 
+                                                component={AdvisorEditSelectDate} 
+                                                title='แก้ไขวันที่สามารถนัดคิวได้' 
+                                                >
+                                        </Scene>
+                                        <Scene 
+                                                key='AdvisorEditSelectTime' 
+                                                component={AdvisorEditSelectTime} 
+                                                title='แก้ไขเวลาที่สามารถนัดคิวได้' 
+                                                >
                                         </Scene>
                                     </Scene>
 
@@ -175,13 +232,20 @@ class Routes extends React.Component{
                                             icon={TabIcon}
                                             title='แจ้งเตือน'>
                                     </Scene>
+                                    <Scene key='AdvisorQueue' iconName="ios-home" icon={TabIcon} title='คิว'>
+                                        <Scene 
+                                                key='AdvisorQueue' 
+                                                component={AdvisorQueue}
+                                                iconName="ios-people"
+                                                icon={TabIcon} 
+                                                title='คิว'>
+                                        </Scene>
 
-                                    <Scene 
-                                            key='AdvisorQueue' 
-                                            component={AdvisorQueue}
-                                            iconName="ios-people"
-                                            icon={TabIcon} 
-                                            title='คิว'>
+                                        <Scene 
+                                                key='AdvisorDetailAddQueue' 
+                                                component={AdvisorDetailAddQueue}
+                                                title='รายละเอียดคิว'>
+                                        </Scene>
                                     </Scene>
 
                                     <Scene 

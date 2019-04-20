@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
     token: '',
-    role: ''
+    role: '',
 };
 
 const LoginUser_Reducer = ( state = INITIAL_STATE , action ) => {
@@ -9,7 +9,7 @@ const LoginUser_Reducer = ( state = INITIAL_STATE , action ) => {
                 return {
                     ...state,
                     token: action.payload.token,
-                    role: action.payload.role
+                    role: action.payload.role,
                 };
             case 'Logout' :
                 return INITIAL_STATE;

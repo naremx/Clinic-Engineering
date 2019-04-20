@@ -3,12 +3,22 @@ import { Actions } from 'react-native-router-flux';
 import { StyleSheet,View,Image,TouchableOpacity,Text } from 'react-native';
 import { LinearGradient } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
+import { connect } from 'react-redux';
 
 class SlideMenuAdvisor extends Component{
-    Logout(token)
-    {
+    async Logout(token) {
         console.log(token)
-        
+        const response = await fetch(`http://10.66.13.208:8000/Account/logout` , {
+            headers: {
+                Authorization : `Token ${this.props.token}`,
+            }   
+                
+        });
+            this.props.dispatch({
+                type: 'Logout'
+            })
+            console.log(response)
+
     }
     render(){
         return(
@@ -21,11 +31,12 @@ class SlideMenuAdvisor extends Component{
                             style={Styles.drawerImage}
                             source={require('../Image/user.png')} />
                         <View style={{flexDirection: "column" , marginLeft: 15 , marginTop: 35}}>
-                            <Text style={{ color: '#fff' , fontSize: 18 , fontWeight: 'bold' }}>ธีรวัฒน์ นามสกุล</Text>
+                            <Text style={{ color: '#fff' , fontSize: 18 , fontWeight: 'bold' }}>{this.props.data.first_name}</Text>
                         </View>
                     </View>
+                    <Ionicons name="ios-settings" size={30} style={{ color:'#fff' , marginTop: -20 , marginLeft: 95 }} onPress={()=> Actions.AdvisorEditProfileRoot()} />
                 </LinearGradient>
-                <TouchableOpacity onPress={()=> Actions.ContactRoot()}>
+                <TouchableOpacity onPress={()=> Actions.AdvisorContactRoot()}>
                     <View style={{ flexDirection: 'row'  }}>
                         <Ionicons name="ios-contact" size={30} style={{ color:'#3e48a3' , marginTop: 10 , marginLeft: 20 }} />
                         <Text style={{ color : '#a69beb' , fontSize: 20 , marginTop: 10 , textAlign: 'center' , marginLeft: 10 }}>ข้อมูลส่วนตัว</Text>
@@ -80,4 +91,10 @@ const Styles = StyleSheet.create({
     }
     });
 
-export default SlideMenuAdvisor;
+    const mapStateToProps = ({ LoginUser_Reducer,LoginUser_Data_Reducer }) => {
+        const { token,role } = LoginUser_Reducer;
+        const { data } = LoginUser_Data_Reducer;
+            return { token,role,data };
+      }
+    
+    export default connect(mapStateToProps)(SlideMenuAdvisor);

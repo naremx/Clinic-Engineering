@@ -5,14 +5,15 @@ import { connect } from 'react-redux'
 import { Ionicons } from 'react-native-vector-icons'
 import call from 'react-native-phone-call';
 
-import ModalCardCancel from '../ModalScreen/ModalCardCancel.js';
+import ModalCardCancelAd from '../ModalScreen/ModalCardCancelAd.js';
+import ModalCardConfirm from '../ModalScreen/ModalCardConfirm.js';
 
 class DetailAddQueue extends React.Component{
     constructor(props){
         super(props);
         this.state = {
         }
-    }
+    }   
     callphone = (telephone) => {
         const args = {
           number: telephone
@@ -34,18 +35,18 @@ class DetailAddQueue extends React.Component{
                                         color : '#3e48a3' , 
                                         fontSize: 20 , 
                                         fontWeight: 'bold' , 
-                                        marginTop: 20 }} >{this.props.UserDateTimeDetail.name}</Text>
+                                        marginTop: 20 }} >{this.props.AdDateTimeDetail.user}</Text>
                                     <View style={{ flexDirection: 'row' }}>
                                         <Ionicons name="ios-calendar" size={20} style={{ color:'#777' , marginLeft: 22}} />
-                                        <Text style={{ marginLeft : 15 , color : '#3e48a3' }}>วันที่ : {this.props.UserDateTimeDetail.date_time}</Text>
+                                        <Text style={{ marginLeft : 15 , color : '#3e48a3' }}>วันที่ : {this.props.AdDateTimeDetail.date_time}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row' }}>
                                         <Ionicons name="ios-alarm" size={20} style={{ color:'#777' , marginLeft: 22}} />
-                                        <Text style={{ marginLeft : 15 , color : '#3e48a3' }}> ช่วงเวลา : {this.props.UserDateTimeDetail.available}</Text>
+                                        <Text style={{ marginLeft : 15 , color : '#3e48a3' }}> ช่วงเวลา : {this.props.AdDateTimeDetail.available}</Text>
                                     </View>
                                     <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonCall}>
                                         <Ionicons name="ios-call" size={30} style={{ color:'#fff' , textAlign: 'center', marginTop: 5 }} 
-                                        onPress={() => this.callphone(this.props.UserDateTimeDetail.telephone)}/>
+                                        onPress={() => this.callphone(this.props.AdDateTimeDetail.telephone)}/>
                                     </LinearGradient>
                                 </View>
                             </View>
@@ -55,20 +56,23 @@ class DetailAddQueue extends React.Component{
                                     </View>
                                     <View style={{ flexDirection : 'row' }}>    
                                         <Text style={{ color : '#3e48a3' , fontSize: 17, fontWeight: 'bold' }}>หัวเรื่อง: </Text>
-                                        <Text style={{ color : '#848484' , fontSize: 17 }}>{this.props.UserDateTimeDetail.topic}</Text>
+                                        <Text style={{ color : '#848484' , fontSize: 17 }}>{this.props.AdDateTimeDetail.topic}</Text>
                                     </View>
                                     <View style={{ flexDirection : 'row' }}>
                                         <Text style={{ color : '#3e48a3' , fontSize: 17 , fontWeight: 'bold' }}>สถานะ: </Text>
-                                        <Text style={{ color : '#848484' , fontSize: 17 }}>{this.props.UserDateTimeDetail.status}</Text> 
+                                        <Text style={{ color : '#848484' , fontSize: 17 }}>{this.props.AdDateTimeDetail.status}</Text> 
                                     </View>
                                     <View style={{ flexDirection : 'column' }}> 
                                         <ScrollView style={{ height : 100 }}>
                                             <Text style={{ color : '#3e48a3' , fontSize: 17, fontWeight: 'bold' }}>รายละเอียด: </Text> 
-                                            <Text style={{ color : '#848484' , fontSize: 17 }}>{this.props.UserDateTimeDetail.detail}</Text> 
+                                            <Text style={{ color : '#848484' , fontSize: 17 }}>{this.props.AdDateTimeDetail.detail}</Text> 
                                         </ScrollView> 
                                     </View>
                                 </View>
-                            <ModalCardCancel/>
+                            <View style={{ flexDirection : 'row' }}> 
+                            <ModalCardConfirm/>
+                            <ModalCardCancelAd/>
+                            </View>
                         </View>
                     </View>
                 </View>
@@ -134,10 +138,10 @@ const Styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = ({ LoginUser_Reducer , User_Select_Time_Detail_Reducer }) => {
-    const { token,role } = LoginUser_Reducer;
-    const { UserDateTimeDetail } = User_Select_Time_Detail_Reducer;
-        return { token,role,UserDateTimeDetail };
+const mapStateToProps = ({ LoginUser_Reducer , Ad_Select_Time_Detail_Reducer }) => {
+    const { token} = LoginUser_Reducer;
+    const { AdDateTimeDetail } = Ad_Select_Time_Detail_Reducer;
+        return { token,AdDateTimeDetail };
   }
 
 export default connect(mapStateToProps)(DetailAddQueue);

@@ -1,12 +1,13 @@
 const INITIAL_STATE = {
-    chosenDate: {},
+    collectionDateTime: {},
 };
+
 const Data_Datetime_Reducer = ( state = INITIAL_STATE , action ) => {
         switch(action.type){
             case 'DATA_DATETIME' :
                 return {
                     ...state,
-                    chosenDate: action.payload
+                    collectionDateTime: action.payload 
                 };
             default:
                 return state;

@@ -29,17 +29,32 @@ constructor(props) {
     }
     SentDateAddQueue(){
         let collection={}
-        collection.topic=this.state.topic,
-        collection.descriptions=this.state.descriptions
-        collection.check=this.state.check
+        collection.topic=this.state.topic
+        collection.detail=this.state.descriptions
+        collection.type=this.state.check
+        collection.free_date=this.props.collectionDateTime.date
+        collection.time=this.props.collectionUserSelectTime
+        collection.advisor=this.props.val.id
 
         console.log(collection);
         this.props.TopicQueueAction(collection)
-        Actions.Queue();
+        Actions.Home();
+
+        var url = 'http:///10.66.13.208:8000/queue/addqueue/' ;
+
+        fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(collection),
+        headers:{
+            'Content-Type': 'application/json' ,
+            Authorization : `Token ${this.props.token}`,
+        }
+        })
     }
     CheckBoxChange()
     {
         this.setState({
+            
             check:!this.state.check
         })
     }
@@ -49,7 +64,7 @@ constructor(props) {
         <View style={Styles.Container}>
             <View style={Styles.ContainerContacts}>
                 <View style={{ alignItems:'flex-start' , marginLeft : 20 }}>
-                    <Text style={{ color : '#3e48a3' , fontSize: 25 , fontWeight: 'bold' , marginTop: 10 }} >{this.props.chosenDate}</Text>
+                    <Text style={{ color : '#3e48a3' , fontSize: 25 , fontWeight: 'bold' , marginTop: 10 }} >DATE : {this.props.collectionDateTime.date}</Text>
                     <Text style={{ color : '#777' , fontWeight: 'bold' }} >{this.props.val.book_title}</Text>
                     <Text style={{ color : '#777' }}>Computer Engineering</Text>
                     <Text style={{ color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold' , marginTop: 10 }} >หัวเรื่อง</Text>
@@ -159,10 +174,12 @@ const mapDispatchToprops = dispatch => ({
     TopicQueueAction: (collection) => dispatch(TopicQueueAction(collection))
 })
 
-const mapStateToProps = ({ Add_Queue_Reducer , Data_Datetime_Reducer }) => {
-    const { val } = Add_Queue_Reducer;
-    const {chosenDate} = Data_Datetime_Reducer;
-        return { chosenDate,val };
+const mapStateToProps = ({ Data_Advisor_Reducer , Data_Datetime_Reducer , LoginUser_Reducer , User_Select_time_reducer }) => {
+    const { val } = Data_Advisor_Reducer;
+    const { collectionDateTime } = Data_Datetime_Reducer;
+    const { token } = LoginUser_Reducer;
+    const { collectionUserSelectTime } = User_Select_time_reducer;
+        return { collectionDateTime,collectionUserSelectTime,val,token };
   }
 
 export default connect(mapStateToProps,mapDispatchToprops)(AddQueue);
