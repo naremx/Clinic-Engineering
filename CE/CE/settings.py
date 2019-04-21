@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'Queue',
     'History',
     'corsheaders',
+    'Search',
+    'expertise',
+    'Editprofile',
 ]
 
 MIDDLEWARE = [
