@@ -11,7 +11,6 @@ import { getToken } from '../Actions';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import ModalCardRegister from './ModalCardRegister.js';
 
 const firebaseConfig={
     apiKey: "AIzaSyAzqICgMHtT0GuYtnUMAUYZTPdirJ6hdr8",
@@ -48,10 +47,10 @@ class ModalCardLogin extends React.Component {
         super()
         this.state = {
             showMe: false ,
-            username: 'usernaremx' ,
-            password: '123456Nn' ,
-            // username: '507theerayod.wi@kmitl.ac.th' ,
-            // password: '1234' ,
+            // username: 'naremx' ,
+            // password: '123456Nn' ,
+            username: '507theerayod.wi@kmitl.ac.th' ,
+            password: '1234' ,
         }
     }
     updateValue(text , field){

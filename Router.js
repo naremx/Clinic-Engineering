@@ -24,6 +24,7 @@ import AddQueue from './ScreensUser/AddQueue.js';
 import DetailAddQueue from './ScreensUser/DetailAddQueue.js';
 import CalendarUserTime from './ScreensUser/CalendarUserTime.js';
 import UserEditProfile from './ScreensUser/UserEditProfile.js';
+import ResultSearch from './ScreensUser/ResultSearch.js';
 
 import AdvisorSelectMode from './ScreensAdvisor/AdvisorSelectMode.js';
 import AdvisorScheduleAss from './ScreensAdvisor/ScheduleAss.js';
@@ -147,6 +148,12 @@ class Routes extends React.Component{
                                                 iconName="ios-search"
                                                 icon={TabIcon} 
                                                 title='ค้นหา'>
+                                        </Scene>
+                                        <Scene 
+                                                key='ResultSearch' 
+                                                component={ResultSearch} 
+                                                title='ผลการค้นหา' 
+                                                >
                                         </Scene>
                                     </Scene>
 

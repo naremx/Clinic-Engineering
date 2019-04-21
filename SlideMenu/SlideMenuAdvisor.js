@@ -6,6 +6,54 @@ import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux';
 
 class SlideMenuAdvisor extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+                  first_name: '',
+                  last_name: '',
+                  email: '',
+                  telephone: '',
+                  address: '',
+                  department: '',
+                  tax_number: '',
+                  DataSource:'' ,
+        };
+      }
+    componentDidMount() {
+        var url = 'http://10.66.13.208:8000/Showdetail/Adshowdetail/' ;
+      
+        fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(this.props.token),
+        headers:{
+            'Content-Type': 'application/json' ,
+            Authorization : `Token ${this.props.token}`,
+        }
+        }).then(res => res.json())
+        .then((responseData) => {
+            this.setState({
+              DataSource: responseData.avs
+            }); 
+            console.log('OK' ,this.state.DataSource )
+            var output = this.state.DataSource.reduce(function (acc, item) {
+              acc = item
+              return acc
+            }, {})
+            this.setState({
+              first_name: output.first_name,
+              last_name: output.last_name,
+              email: output.email,
+              telephone: output.telephone,
+              address: output.address,
+              department: output.department,
+              tax_number: output.tax_number,
+            }); 
+          })
+          
+      
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));
+      }
     async Logout(token) {
         console.log(token)
         const response = await fetch(`http://10.66.13.208:8000/Account/logout` , {
@@ -31,7 +79,7 @@ class SlideMenuAdvisor extends Component{
                             style={Styles.drawerImage}
                             source={require('../Image/user.png')} />
                         <View style={{flexDirection: "column" , marginLeft: 15 , marginTop: 35}}>
-                            <Text style={{ color: '#fff' , fontSize: 18 , fontWeight: 'bold' }}>{this.props.data.first_name}</Text>
+                            <Text style={{ color: '#fff' , fontSize: 18 , fontWeight: 'bold' }}>{this.state.first_name} {this.state.last_name}</Text>
                         </View>
                     </View>
                     <Ionicons name="ios-settings" size={30} style={{ color:'#fff' , marginTop: -20 , marginLeft: 95 }} onPress={()=> Actions.AdvisorEditProfileRoot()} />
@@ -91,10 +139,9 @@ const Styles = StyleSheet.create({
     }
     });
 
-    const mapStateToProps = ({ LoginUser_Reducer,LoginUser_Data_Reducer }) => {
-        const { token,role } = LoginUser_Reducer;
-        const { data } = LoginUser_Data_Reducer;
-            return { token,role,data };
+    const mapStateToProps = ({ LoginUser_Reducer }) => {
+        const { token } = LoginUser_Reducer;
+            return { token };
       }
     
     export default connect(mapStateToProps)(SlideMenuAdvisor);

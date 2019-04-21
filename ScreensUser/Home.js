@@ -50,7 +50,7 @@ componentDidMount() {
         })
       .then(res => {
         this.setState({ dataSource : res.data});
-        console.log(res.data)
+        //console.log(res.data)
       })
     }
     catch(err){
@@ -101,19 +101,7 @@ componentDidMount() {
                         {images.map((image, index) => this.renderPage(image, index))}
                     </Carousel>
                         <View style={Styles.ContainerSearch}>
-                            <View style={{alignItems:'center'}}>
-                            <LinearGradient colors ={['#fafafa','#ffffff']} 
-                                            start={{x: 0.0, y: 1.0}} 
-                                            end={{x: 1.0, y: 1.0}}
-                                            style={Styles.InputBoxSearch}>
-                                <Ionicons name="ios-search" size={30} color="#a69beb" style={Styles.InputIconSearch} />
-                                    <TextInput 
-                                        placeholder='ชื่ออาจารย์ / ชื่อภาควิชา / ชื่อวิทยานิพนธ์' 
-                                        placeholderTextColor='#b6b6b6' 
-                                        underlineColorAndroid='transparent' 
-                                    />
-                            </LinearGradient>
-                            </View>
+
                             <View style={{flexDirection: 'row' , marginTop : 10  }}>
                                     <Ionicons name="ios-happy" size={40} color="#a69beb" style={{ marginLeft : 50 }} />
                                     <Ionicons name="ios-flask" size={40} color="#a69beb" style={{ marginLeft : 100 }} />
@@ -121,8 +109,8 @@ componentDidMount() {
                                 </View>
                                 <View style={{flexDirection: 'row' , marginTop : 10 }}>
                                     <Text style={{ color : '#a69beb' , marginLeft : 40 }}>ชื่ออาจารย์</Text>
-                                    <Text style={{ color : '#a69beb' , marginLeft : 60 }}>ชื่อภาควิชา</Text>
-                                    <Text style={{ color : '#a69beb' , marginLeft : 60 }}>ชื่อวิทยานิพนธ์</Text>
+                                    <Text style={{ color : '#a69beb' , marginLeft : 50 }}>ชื่อภาควิชา</Text>
+                                    <Text style={{ color : '#a69beb' , marginLeft : 50 }}>ชื่อวิทยานิพนธ์</Text>
                                 </View>
                         </View>
                     </View>
@@ -168,7 +156,7 @@ const Styles = StyleSheet.create({
     },
     ContainerSearch:{
         width: 450,
-        height: 140,
+        height: 100,
         backgroundColor: '#fff',
         shadowColor: '#e5e5e5',
         shadowRadius: 10,
@@ -181,25 +169,6 @@ const Styles = StyleSheet.create({
         borderRadius: 100,
         marginLeft: 20,
         marginTop: 15,
-    },
-    InputIconSearch:{
-        position: 'absolute' ,
-        left: 315,
-    },
-    InputBoxSearch: {
-        width: 360,
-        height: 40,
-        left: -20 ,
-        borderRadius: 25,
-        justifyContent: 'center',
-        paddingHorizontal: 20,
-        marginTop: 15,
-        shadowColor: '#e5e5e5',
-        shadowRadius: 10,
-        shadowOpacity: 0.6,
-        elevation: 6,
-        borderWidth: 2, 
-        borderColor: '#a69beb',
     },
 });
 

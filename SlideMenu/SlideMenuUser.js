@@ -7,6 +7,41 @@ import { connect } from 'react-redux';
 
 
 class SlideMenuUser extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+          first_name: '',
+        };
+      }
+    componentDidMount() {
+        var url = 'http://10.66.13.208:8000/Showdetail/Usshowdetail/' ;
+    
+        fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(this.props.token),
+        headers:{
+            'Content-Type': 'application/json' ,
+            Authorization : `Token ${this.props.token}`,
+        }
+        }).then(res => res.json())
+        .then((responseData) => {
+            this.setState({
+              DataSource: responseData
+            }); 
+            console.log('OK' ,responseData )
+            var output = this.state.DataSource.reduce(function (acc, item) {
+              acc = item
+              return acc
+            }, {})
+            this.setState({
+              first_name: output.first_name,
+            }); 
+          })
+          
+    
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));
+    }
     async Logout(token) {
         console.log(token)
         const response = await fetch(`http://10.66.13.208:8000/Account/logout` , {
@@ -31,7 +66,7 @@ class SlideMenuUser extends Component{
                             style={Styles.drawerImage}
                             source={require('../Image/user.png')} />
                         <View style={{flexDirection: "column" , marginLeft: 15 , marginTop: 35}}>
-                            <Text style={{ color: '#fff' , fontSize: 18 , fontWeight: 'bold' }}>{this.props.data.first_name}</Text>
+                            <Text style={{ color: '#fff' , fontSize: 18 , fontWeight: 'bold' }}>{this.state.first_name}</Text>
                         </View>
                     </View>
                     <Ionicons name="ios-settings" size={30} style={{ color:'#fff' , marginTop: -20 , marginLeft: 95 }} onPress={()=> Actions.UserEditProfileRoot()} />
