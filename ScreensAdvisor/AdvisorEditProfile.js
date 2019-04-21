@@ -7,17 +7,79 @@ import { Actions } from 'react-native-router-flux'
 
 class AdvisorEditProfile extends React.Component{
 
-        callphone = () => {
-            const args = {
-              number: '023298186'
-            };
-        
-            call(args).catch(console.error);
-        }
-        handleEmail = () => {
-            const to = 'eidts@kmitl.ac.th'
-            sentemail(to).catch(console.error);
-        }
+  constructor(){
+    super()
+    this.state = {
+        first_name: '',
+        last_name: '',
+        email: '',
+        telephone: '',
+        address: '',
+        department: '',
+        tax_number: ''
+    }
+}
+  updateValue(text , field){
+    if(field == 'first_name'){
+        this.setState({
+          first_name : text
+        })
+    }
+    else if(field == 'last_name'){
+        this.setState({
+          last_name : text
+        })
+    }
+    else if(field == 'email'){
+      this.setState({
+        email : text
+      })
+    }
+    else if(field == 'telephone'){
+      this.setState({
+        telephone : text
+      })
+    }
+    else if(field == 'address'){
+      this.setState({
+        address : text
+      })
+    }
+    else if(field == 'department'){
+      this.setState({
+        department : text
+      })
+    }
+    else if(field == 'tax_number'){
+      this.setState({
+        tax_number : text
+      })
+    }
+}
+  submit()
+  {
+      let collection={}
+      collection.first_name=this.state.first_name,
+      collection.last_name=this.state.last_name,
+      collection.email=this.state.email,
+      collection.telephone=this.state.telephone,
+      collection.address=this.state.address,
+      collection.department=this.state.department,
+      collection.tax_number=this.state.tax_number,
+      console.log(collection);
+      // Actions.pop()
+
+      var url = 'http://10.66.13.208:8000/Editprofile/Adedit/' ;
+
+      fetch(url, {
+      method: 'POST', 
+      body: JSON.stringify(collection),
+      headers:{
+          'Content-Type': 'application/json',
+          Authorization : `Token ${this.props.token}`,
+      }
+      })
+  }
         render(){
           return(
             <LinearGradient colors ={['#87daf3','#a69beb']} style={Styles.Container}>
@@ -33,33 +95,33 @@ class AdvisorEditProfile extends React.Component{
               </View>
 
               <View style={{alignItems:'center' , flexDirection: 'row' , marginTop : 10}}>
-                <TextInput style={Styles.inputBoxName} placeholder="FirstName"/>
-                <TextInput style={Styles.inputBoxName} placeholder="LastName"/>
+                <TextInput style={Styles.inputBoxName} placeholder={this.props.data.first_name} placeholderTextColor="#000"/>
+                <TextInput style={Styles.inputBoxName} placeholder={this.props.data.last_name} placeholderTextColor="#000"/>
               </View>
 
               <View style={{ marginTop : 5 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >อีเมล</Text>
-                <TextInput style={Styles.inputBox} placeholder="Email"/>
+                <TextInput style={Styles.inputBox} placeholder={this.props.data.email} placeholderTextColor="#000"/>
               </View>
 
               <View style={{ marginTop : 5 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >เบอร์ติดต่อ</Text>
-                <TextInput style={Styles.inputBox} placeholder="Telephone"/>
+                <TextInput style={Styles.inputBox} placeholder={this.props.data.telephone} placeholderTextColor="#000"/>
               </View>
 
               <View style={{ marginTop : 5 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >คณะ</Text>
-                <TextInput style={Styles.inputBox} placeholder="Department"/>
+                <TextInput style={Styles.inputBox} placeholder={this.props.data.department} placeholderTextColor="#000"/>
               </View>
 
               <View style={{ marginTop : 5 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >เลขประจำตัวผู้เสียภาษีอากร</Text>
-                <TextInput style={Styles.inputBox} placeholder="Tax"/>
+                <TextInput style={Styles.inputBox} placeholder={this.props.data.tax_number} placeholderTextColor="#000"/>
               </View>
 
               <View style={{ marginTop : 5 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >ที่อยู่</Text>
-                <TextInput style={Styles.inputBox} placeholder="Address"/>
+                <TextInput style={Styles.inputBox} placeholder={this.props.data.address} placeholderTextColor="#000"/>
               </View>
 
               <View style={{alignItems:'center'}}>
@@ -127,7 +189,7 @@ const Styles = StyleSheet.create({
     height: 50, 
     width: 150 , 
     borderRadius: 20 , 
-    marginTop: 20, 
+    marginTop: 10, 
     shadowColor: '#30C1DD',
     shadowRadius: 10,
     shadowOpacity: 0.6,

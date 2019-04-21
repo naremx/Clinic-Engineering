@@ -6,18 +6,66 @@ import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
 class UserEditProfile extends React.Component{
+  constructor(){
+    super()
+    this.state = {
+        first_name: '',
+        last_name: '',
+        email: '',
+        telephone: '',
+        address: ''
+    }
+}
+  updateValue(text , field){
+    if(field == 'first_name'){
+        this.setState({
+          first_name : text
+        })
+    }
+    else if(field == 'last_name'){
+        this.setState({
+          last_name : text
+        })
+    }
+    else if(field == 'email'){
+      this.setState({
+        email : text
+      })
+    }
+    else if(field == 'telephone'){
+      this.setState({
+        telephone : text
+      })
+    }
+    else if(field == 'address'){
+      this.setState({
+        address : text
+      })
+    }
+}
+  submit()
+  {
+      let collection={}
+      collection.first_name=this.state.first_name,
+      collection.last_name=this.state.last_name,
+      collection.email=this.state.email,
+      collection.telephone=this.state.telephone,
+      collection.address=this.state.address,
+      console.log(collection);
+      Actions.pop()
 
-        callphone = () => {
-            const args = {
-              number: '023298186'
-            };
-        
-            call(args).catch(console.error);
-        }
-        handleEmail = () => {
-            const to = 'eidts@kmitl.ac.th'
-            sentemail(to).catch(console.error);
-        }
+      var url = 'http://10.66.13.208:8000/Editprofile/Usedit/' ;
+
+      fetch(url, {
+      method: 'POST', 
+      body: JSON.stringify(collection),
+      headers:{
+          'Content-Type': 'application/json',
+          Authorization : `Token ${this.props.token}`,
+      }
+      })
+  }
+
         render(){
           return(
             <LinearGradient colors ={['#87daf3','#a69beb']} style={Styles.Container}>
@@ -33,28 +81,33 @@ class UserEditProfile extends React.Component{
               </View>
 
               <View style={{alignItems:'center' , flexDirection: 'row' , marginTop : 10}}>
-                <TextInput style={Styles.inputBoxName} placeholder="FirstName"/>
-                <TextInput style={Styles.inputBoxName} placeholder="LastName"/>
+                <TextInput style={Styles.inputBoxName} placeholder={this.props.data.first_name} 
+                onChangeText={(text) => this.updateValue(text, 'first_name')} placeholderTextColor="#000" />
+                <TextInput style={Styles.inputBoxName} placeholder={this.props.data.last_name} 
+                onChangeText={(text) => this.updateValue(text, 'last_name')} placeholderTextColor="#000" />
               </View>
 
               <View style={{ marginTop : 10 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >อีเมล</Text>
-                <TextInput style={Styles.inputBox} placeholder="Email"/>
+                <TextInput style={Styles.inputBox} placeholder={this.props.data.email} 
+                onChangeText={(text) => this.updateValue(text, 'email')}placeholderTextColor="#000" />
               </View>
 
               <View style={{ marginTop : 10 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >เบอร์ติดต่อ</Text>
-                <TextInput style={Styles.inputBox} placeholder="Telephone"/>
+                <TextInput style={Styles.inputBox} placeholder={this.props.data.telephone} 
+                onChangeText={(text) => this.updateValue(text, 'telephone')} placeholderTextColor="#000" />
               </View>
 
               <View style={{ marginTop : 10 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >ที่อยู่</Text>
-                <TextInput style={Styles.inputBox} placeholder="Address"/>
+                <TextInput style={Styles.inputBox} placeholder={this.props.data.address} 
+                onChangeText={(text) => this.updateValue(text, 'address')} placeholderTextColor="#000" />
               </View>
 
               <View style={{alignItems:'center'}}>
               <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonConfirm}>
-                <TouchableOpacity onPress={() => this.setState({ showMe:true })}>
+                <TouchableOpacity onPress={() =>this.submit()}>
                 <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>ยืนยัน</Text>
                 </TouchableOpacity>
               </LinearGradient>

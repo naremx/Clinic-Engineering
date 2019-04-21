@@ -13,7 +13,7 @@ export default class ModalCardRegister extends React.Component {
           email: '',
           password: '',
           username: '',
-          phone: '',
+          telephone: '',
           first_nameValdate: true,
           last_nameValdate: true,
           emailValdate: true,
@@ -58,10 +58,10 @@ export default class ModalCardRegister extends React.Component {
           })
         }
       }
-      else if(type == 'phone') 
+      else if(type == 'telephone') 
       {
           this.setState({
-            phone: text
+            telephone: text
           })
       }
       else if(type == 'email') 
@@ -119,14 +119,14 @@ export default class ModalCardRegister extends React.Component {
       collection.first_name=this.state.first_name,
       collection.last_name=this.state.last_name,
       collection.email=this.state.email,
-      collection.phone=this.state.phone,
+      collection.telephone=this.state.telephone,
       collection.password=this.state.password,
       collection.username=this.state.username,
       console.log(collection);
 
       this.setState({ showMe:false })
 
-      var url = 'http://10.66.13.208:8000/Account/register' ;
+      var url = 'http://10.66.13.208:8000/Account/Usregister/' ;
 
       fetch(url, {
       method: 'POST', 
@@ -172,7 +172,7 @@ export default class ModalCardRegister extends React.Component {
 
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >เบอร์ติดต่อ</Text>
                         <TextInput style={Styles.inputBoxRegister}
-                        onChangeText={ (text) => this.validate(text,'phone')} placeholder="Phone"/>
+                        onChangeText={ (text) => this.validate(text,'telephone')} placeholder="Telephone"/>
 
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >รหัสผ่าน</Text>
                         <TextInput style={[Styles.inputBoxRegister, !this.state.passwordValdate? Styles.error:null]} placeholder="Password (Least 8 characters)" 
