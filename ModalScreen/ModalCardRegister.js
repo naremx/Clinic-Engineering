@@ -14,6 +14,7 @@ export default class ModalCardRegister extends React.Component {
           password: '',
           username: '',
           telephone: '',
+          user_type: '3',
           first_nameValdate: true,
           last_nameValdate: true,
           emailValdate: true,
@@ -122,6 +123,7 @@ export default class ModalCardRegister extends React.Component {
       collection.telephone=this.state.telephone,
       collection.password=this.state.password,
       collection.username=this.state.username,
+      collection.user_type=this.state.user_type,
       console.log(collection);
 
       this.setState({ showMe:false })
@@ -208,7 +210,7 @@ Container: {
 },  
 ModalBoxRegister:{
     width: 370,
-    height: 670,
+    height: 690,
     backgroundColor: '#ecf8ff',
     borderRadius: 25,
     shadowColor: '#30C1DD',

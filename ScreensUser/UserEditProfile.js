@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet,Image,TextInput,TouchableOpacity} from 'react-native';
 import { LinearGradient } from 'expo';
-import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
+import axios from 'axios'
 
 class UserEditProfile extends React.Component{
   constructor(){
@@ -13,8 +13,43 @@ class UserEditProfile extends React.Component{
         last_name: '',
         email: '',
         telephone: '',
-        address: ''
+        address: '',
+        DataSource: '',
     }
+}
+componentDidMount() {
+        var url = 'http://10.66.13.208:8000/Showdetail/Usshowdetail/' ;
+    
+        fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(this.props.token),
+        headers:{
+            'Content-Type': 'application/json' ,
+            Authorization : `Token ${this.props.token}`,
+        }
+        }).then(res => res.json())
+        .then((responseData) => {
+            this.setState({
+              DataSource: responseData
+            }); 
+            console.log('OK' ,responseData )
+            var output = this.state.DataSource.reduce(function (acc, item) {
+              acc = item
+              return acc
+            }, {})
+            this.setState({
+              first_name: output.first_name,
+              last_name: output.last_name,
+              email: output.email,
+              telephone: output.telephone,
+              address: output.address,
+
+            }); 
+          })
+          
+    
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));
 }
   updateValue(text , field){
     if(field == 'first_name'){
@@ -42,6 +77,7 @@ class UserEditProfile extends React.Component{
         address : text
       })
     }
+
 }
   submit()
   {
@@ -81,28 +117,28 @@ class UserEditProfile extends React.Component{
               </View>
 
               <View style={{alignItems:'center' , flexDirection: 'row' , marginTop : 10}}>
-                <TextInput style={Styles.inputBoxName} placeholder={this.props.data.first_name} 
-                onChangeText={(text) => this.updateValue(text, 'first_name')} placeholderTextColor="#000" />
-                <TextInput style={Styles.inputBoxName} placeholder={this.props.data.last_name} 
-                onChangeText={(text) => this.updateValue(text, 'last_name')} placeholderTextColor="#000" />
+                <TextInput style={Styles.inputBoxName} placeholder='first_name' value={this.state.first_name} 
+                onChangeText={(text) => this.updateValue(text, 'first_name')} />
+                <TextInput style={Styles.inputBoxName} placeholder='last_name' value={this.state.last_name} 
+                onChangeText={(text) => this.updateValue(text, 'last_name')} />
               </View>
 
               <View style={{ marginTop : 10 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >อีเมล</Text>
-                <TextInput style={Styles.inputBox} placeholder={this.props.data.email} 
-                onChangeText={(text) => this.updateValue(text, 'email')}placeholderTextColor="#000" />
+                <TextInput style={Styles.inputBox} placeholder='email' value={this.state.email} 
+                onChangeText={(text) => this.updateValue(text, 'email')}/>
               </View>
 
               <View style={{ marginTop : 10 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >เบอร์ติดต่อ</Text>
-                <TextInput style={Styles.inputBox} placeholder={this.props.data.telephone} 
-                onChangeText={(text) => this.updateValue(text, 'telephone')} placeholderTextColor="#000" />
+                <TextInput style={Styles.inputBox} placeholder='telephone' value={this.state.telephone} 
+                onChangeText={(text) => this.updateValue(text, 'telephone')}  />
               </View>
 
               <View style={{ marginTop : 10 }}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >ที่อยู่</Text>
-                <TextInput style={Styles.inputBox} placeholder={this.props.data.address} 
-                onChangeText={(text) => this.updateValue(text, 'address')} placeholderTextColor="#000" />
+                <TextInput style={Styles.inputBox} placeholder='Address' value={this.state.address} 
+                onChangeText={(text) => this.updateValue(text, 'address')}  />
               </View>
 
               <View style={{alignItems:'center'}}>
@@ -179,10 +215,9 @@ const Styles = StyleSheet.create({
 });
 
 
-const mapStateToProps = ({ LoginUser_Reducer,LoginUser_Data_Reducer }) => {
-  const { token,role } = LoginUser_Reducer;
-  const { data } = LoginUser_Data_Reducer;
-      return { token,role,data};
+const mapStateToProps = ({ LoginUser_Reducer }) => {
+  const { token } = LoginUser_Reducer;
+      return { token };
 }
 
 export default connect(mapStateToProps)(UserEditProfile);

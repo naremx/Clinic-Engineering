@@ -8,9 +8,50 @@ class UserContact extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-
+      first_name: '',
+      last_name: '',
+      email: '',
+      telephone: '',
+      address: '',
+      username: '',
+      DataSource: '',
     };
   }
+  componentDidMount() {
+    var url = 'http://10.66.13.208:8000/Showdetail/Usshowdetail/' ;
+
+    fetch(url, {
+    method: 'POST', 
+    body: JSON.stringify(this.props.token),
+    headers:{
+        'Content-Type': 'application/json' ,
+        Authorization : `Token ${this.props.token}`,
+    }
+    }).then(res => res.json())
+    .then((responseData) => {
+        this.setState({
+          DataSource: responseData
+        }); 
+        console.log('OK' ,responseData )
+        var output = this.state.DataSource.reduce(function (acc, item) {
+          acc = item
+          return acc
+        }, {})
+        this.setState({
+          first_name: output.first_name,
+          last_name: output.last_name,
+          email: output.email,
+          telephone: output.telephone,
+          address: output.address,
+          username: output.username,
+        }); 
+      })
+      
+
+    .then(response => console.log('Success:', JSON.stringify(response)))
+    .catch(error => console.error('Error:', error));
+}
+
    render(){  
     return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
@@ -20,32 +61,32 @@ class UserContact extends React.Component{
             <View style={{alignItems:'center'}}>
               <Image style={Styles.drawerImage}
                           source={require('../Image/user.png')} />
-              <Text style={{color : '#3e48a3' , fontSize: 25 , fontWeight: 'bold' , marginTop : 20 }} >{this.props.data.first_name} {this.props.data.last_name}</Text>
+              <Text style={{color : '#3e48a3' , fontSize: 25 , fontWeight: 'bold' , marginTop : 20 }} >{this.state.first_name} {this.state.last_name}</Text>
             </View>
 
             <View style={{  flexDirection: 'row' , marginTop: 20 }}>
             <Ionicons name="ios-person" size={30} style={{ color:'#3e48a3', marginLeft : 20 , marginTop: 10 }}  />
             <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold' , marginTop : 10 , marginLeft : 10 }} >ชื่อผู้ใชงานในระบบ</Text>
             </View>
-            <Text style={{color : '#a69beb' , fontSize: 20 , fontWeight: 'bold' , marginLeft : 60 }} >{this.props.data.username}</Text>
+            <Text style={{color : '#a69beb' , fontSize: 20 , fontWeight: 'bold' , marginLeft : 60 }} >{this.state.username}</Text>
             
             <View style={{  flexDirection: 'row' }}>
             <Ionicons name="ios-phone-portrait" size={30} style={{ color:'#3e48a3', marginLeft : 20 , marginTop: 10 }}  />
             <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold' , marginTop : 10 , marginLeft : 10 }} >เบอร์ติดต่อ</Text>
             </View>
-            <Text style={{color : '#a69beb' , fontSize: 20 , fontWeight: 'bold' , marginLeft : 60 }} >{this.props.data.telephone}</Text>
+            <Text style={{color : '#a69beb' , fontSize: 20 , fontWeight: 'bold' , marginLeft : 60 }} >{this.state.telephone}</Text>
 
             <View style={{  flexDirection: 'row' }}>
             <Ionicons name="ios-mail" size={30} style={{ color:'#3e48a3', marginLeft : 20 , marginTop: 10 }}  />
             <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold' , marginTop : 10 , marginLeft : 10 }} >อีเมล</Text>
             </View>
-            <Text style={{color : '#a69beb' , fontSize: 20 , fontWeight: 'bold' , marginLeft : 60 }} >{this.props.data.email}</Text>
+            <Text style={{color : '#a69beb' , fontSize: 20 , fontWeight: 'bold' , marginLeft : 60 }} >{this.state.email}</Text>
 
             <View style={{  flexDirection: 'row' }}>
             <Ionicons name="ios-pin" size={30} style={{ color:'#3e48a3', marginLeft : 20 , marginTop: 10 }}  />
             <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold' , marginTop : 10 , marginLeft : 10 }} >ที่อยู่</Text>
             </View>
-            <Text style={{color : '#a69beb' , fontSize: 20 , fontWeight: 'bold' , marginLeft : 60 }} >{this.props.data.address}</Text>
+            <Text style={{color : '#a69beb' , fontSize: 20 , fontWeight: 'bold' , marginLeft : 60 }} >{this.state.address}</Text>
 
 
           </View>
@@ -78,9 +119,9 @@ const Styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = ({ LoginUser_Data_Reducer}) => {
-    const { data } = LoginUser_Data_Reducer;
-        return { data };
-  }
- 
+const mapStateToProps = ({ LoginUser_Reducer }) => {
+  const { token } = LoginUser_Reducer;
+      return { token };
+}
+
 export default connect(mapStateToProps)(UserContact);

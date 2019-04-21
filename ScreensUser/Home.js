@@ -50,7 +50,7 @@ componentDidMount() {
         })
       .then(res => {
         this.setState({ dataSource : res.data});
-        console.log(res.data)
+        //console.log(res.data)
       })
     }
     catch(err){
@@ -109,8 +109,8 @@ componentDidMount() {
                                 </View>
                                 <View style={{flexDirection: 'row' , marginTop : 10 }}>
                                     <Text style={{ color : '#a69beb' , marginLeft : 40 }}>ชื่ออาจารย์</Text>
-                                    <Text style={{ color : '#a69beb' , marginLeft : 60 }}>ชื่อภาควิชา</Text>
-                                    <Text style={{ color : '#a69beb' , marginLeft : 60 }}>ชื่อวิทยานิพนธ์</Text>
+                                    <Text style={{ color : '#a69beb' , marginLeft : 50 }}>ชื่อภาควิชา</Text>
+                                    <Text style={{ color : '#a69beb' , marginLeft : 50 }}>ชื่อวิทยานิพนธ์</Text>
                                 </View>
                         </View>
                     </View>
