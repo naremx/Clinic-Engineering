@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'Search',
     'expertise',
     'Editprofile',
+    'Showdetail',
+    'Document',
 ]
 
 MIDDLEWARE = [

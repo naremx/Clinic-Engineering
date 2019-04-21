@@ -68,26 +68,11 @@ def advisorcsv(request):
 class getaddata(APIView):
     permission_classes = ()
 
-    # serializer = AdvisorSerializer(data=list)
-    # # print(serializers)
-    # if serializer.is_valid(raise_exception=ValueError):
-    #     user_obj = serializer.create(validated_data=list)
-    # p = AdvisorData(
-    #     user=user_obj,
-    #     first_name=name[x],
-    #     email=email[x],
-    #     telephone=telephone[x],
-    #     department=department[x],
-    #     gender=gender[x]
-    # )
-    # p.save()
     def get(self, request):
-        # create if for front request
-
-        # list = available.objects.filter(advisor__id=16456)
-        # Advisor_list = AdvisorData.objects.all()
-        Advisor_list = AdvisorData.objects.filter(id=16456)
+        Advisor_list = AdvisorData.objects.filter(gender='female')
         serializers = AdvisorDataSerializer(Advisor_list, many=True)
+
+
         return Response(serializers.data)
 
 

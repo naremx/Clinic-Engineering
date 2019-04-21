@@ -14,9 +14,11 @@ from rest_framework.views import APIView
 from django.core.mail import send_mail
 import smtplib
 from django.conf import settings
-from .serializer import UserSerializer
+from .serializer import *
 from rest_framework import status
 from .models import User
+from AdvisorInfo.models import*
+from AdvisorInfo.serializer import*
 
 
 class contact(APIView):
@@ -56,22 +58,44 @@ class contact(APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
+
         serializer = UserSerializer(user)
-        print(User.user_type)
         return Response({'token': token.key, 'role': user.user_type, 'data': serializer.data})
 
 
-class register(APIView):
+
+class Usregister(APIView):
     permission_classes = ()
 
     def post(self, request):
-        print(request.data)
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid(raise_exception=ValueError):
             serializer.create(validated_data=request.data)
             return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
         return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
 
+class Adregister(APIView):
+    permission_classes = ()
+
+    def post(self, request):
+        print(request.data)
+        serializer = AdvisorRegisSerializer(data=request.data['user'])
+        if serializer.is_valid(raise_exception=ValueError):
+            user_obj = serializer.create(validated_data=request.data)
+        p = AdvisorData(
+            user=user_obj,
+            first_name=request.data['data']['firstName']+request.data['data']['lastName'],
+            email=request.data['data']['email'],
+            telephone=request.data['data']['telephone'],
+            department=request.data['data']['department'],
+            tax_number=request.data['data']['tax_number']
+        )
+        p.save()
+    #     serializer = AdvisorDataSerializer(data=request.data)
+    #     if serializer.is_valid(raise_exception=ValueError):
+    #         serializer.create(validated_data=request.data)
+    #         return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
 
 class logout(APIView):
 
@@ -90,8 +114,8 @@ class logout(APIView):
 class fgpassword(APIView):
     def get(self, request):
         print(1)
-        subject = 'Thank you for registering to our site'
-        message = ' it  means a world to us '
+        subject = 'God blessing on you!!, chance to change to new password'
+        message = ' click this link'
         email_from = settings.EMAIL_HOST_USER
         recipient_list = ['mosaicpm@outlook.com', ]
         send_mail(subject, message, email_from, recipient_list)

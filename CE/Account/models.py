@@ -13,5 +13,6 @@ class User(AbstractUser):
 
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, null=True)
     telephone = models.CharField(max_length=10, blank=True)
+    address = models.CharField(max_length=300,blank=True)
     # user_type = 3
 

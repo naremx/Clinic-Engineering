@@ -26,5 +26,6 @@ urlpatterns = [
     path('Search/', include('Search.urls')),
     path('expertise/', include('expertise.urls')),
     path('Editprofile/', include('Editprofile.urls')),
-
+    path('Showdetail/', include('Showdetail.urls')),
+    path('Document/', include('Document.urls')),
 ]
