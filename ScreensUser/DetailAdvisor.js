@@ -10,8 +10,47 @@ import sentemail from 'react-native-email'
 class DetailAdvisor extends React.Component{
 constructor(props) {
     super(props);
-    this.state = {};
-    }
+    this.state = {
+        ResultData : []
+    };
+}
+    componentDidMount() {
+        let collection={}
+        collection.user_type=this.props.data.user_type,
+        collection.id=this.props.val.id,
+        console.log(collection);
+        var url = 'http://10.66.13.208:8000/Showdetail/Adshowdetail/' ;
+      
+        fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(collection),
+        headers:{
+            'Content-Type': 'application/json' ,
+            Authorization : `Token ${this.props.token}`,
+        }
+        }).then(res => res.json())
+        .then((responseData) => {
+            this.setState({
+              DataSource: responseData
+            }); 
+            console.log('OK22222' ,this.state.DataSource )
+
+            const resultData = this.state.DataSource.reduce((arr,item) =>{
+                if( item.expertise){
+                    arr.push(item.expertise);
+                }
+                return arr
+                  }, [])
+                  console.log('--Result9999--', resultData)
+
+            this.setState({
+                ResultData : resultData
+            }); 
+          })
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));
+      }
+
     SentDateTime(chosenDate,chosenTime){
         console.log(chosenDate,chosenTime)
         this.props.DatePickerAction(chosenDate)
@@ -32,6 +71,16 @@ constructor(props) {
     gotoCalendar(){
         Actions.CalendarUser();
     }
+
+    renderText() {
+        if (this.state.ResultData.length > 0) {
+            return this.state.ResultData.map((val, index) => 
+            <View key={index}>
+                <Text style={{ color : '#777' }}> - {val}</Text>
+            </View>
+            );
+        }
+      }
     render(){
       return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
@@ -46,10 +95,10 @@ constructor(props) {
                                 fontSize: 15 ,
                                 fontWeight: 'bold' ,
                                 marginTop: 20 }} 
-                                >{this.props.val.first_name}</Text>
+                                >{this.props.val.first_name} {this.props.val.last_name}</Text>
                             <View style={{ flexDirection: 'row' }}>
                                 <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
-                                <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{this.props.val.department}</Text>
+                                <Text style={{ marginLeft : 10 , color : '#c0c0c0', width: 200 }}>{this.props.val.department}</Text>
                             </View>
                             <View style={{flexDirection: "row" , marginLeft: 10 }}>
                                 <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
@@ -68,11 +117,9 @@ constructor(props) {
                         </View>
                     </View>
                     <View style={{ marginLeft : 20 }}>
-                        <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' }}>ความถนัดเฉพาะทาง</Text> 
-                        <Text style={{ color : '#777' }}>คอมพิวเตอร์</Text>
                         <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' }}>วิทยานิพนธ์</Text>
-                        <ScrollView style={{ height : 100 }}>
-                            <Text style={{ color : '#777' }}>เครื่องมือสำหรับแปลงเค้าร่างฐานข้อมูลเชิงสัมพันธ์เป็นเค้าร่างฐานข้อมูลเชิงวัตถุ</Text>
+                        <ScrollView style={{ height : 150 }}>
+                            { this.renderText() }
                         </ScrollView> 
                     </View>
                     <Image source={require('../Image/meeting.png')} />
@@ -130,7 +177,7 @@ const Styles = StyleSheet.create({
         paddingTop: 5 ,
         fontWeight: 'bold' ,
         backgroundColor: '#87daf3',
-        marginTop: 20,
+        marginTop: 10,
         position: 'relative',
         borderRadius: 10,
         shadowColor: '#30C1DD',
@@ -140,9 +187,11 @@ const Styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = ({ Data_Advisor_Reducer }) => {
+const mapStateToProps = ({ Data_Advisor_Reducer,LoginUser_Reducer,LoginUser_Data_Reducer }) => {
     const { val } = Data_Advisor_Reducer;
-    return { val };
+    const { token } = LoginUser_Reducer;
+    const { data } = LoginUser_Data_Reducer;
+    return { val,token,data };
   }
 
 export default connect(mapStateToProps)(DetailAdvisor);

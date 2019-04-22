@@ -35,7 +35,7 @@ class AdvisorEditSelectTime extends React.Component{
         const resultDate = this.state.selectedDate.reduce((arr,item) =>{
             if( item.free_date == this.props.SelectDate.date){
               arr.value.push(item.id)
-              arr.label.push(item.start_time)
+              arr.label.push(item.free_time)
             }
             return arr
         }, { label: [] , value: [] }  )

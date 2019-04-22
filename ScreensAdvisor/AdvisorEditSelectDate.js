@@ -86,7 +86,7 @@ class AdvisorEditSelectDate extends React.Component{
                         }}
                     />
                 </View>
-                <Text style={{ fontSize: 22 , color: '#3e48a3' , marginLeft: 20 , marginTop: 20 , fontWeight: 'bold' }} >วันที่เลือก : {this.state.date}</Text>
+                <Text style={{ fontSize: 20 , color: '#3e48a3' , marginLeft: 20 , marginTop: 20 , fontWeight: 'bold' }} >วันที่เลือก : {this.state.date}</Text>
                 <View style={{alignItems:'center'}}>
                     <TouchableOpacity onPress={() => this.SentDateTime()}>
                         <Image style={Styles.drawerImage} source={require('../Image/selecttime.png')} />

@@ -50,6 +50,7 @@ constructor(props) {
     }
     
     onDayPress = (day) => {
+    this.setState({ date: day.dateString })
     this.setState({
             selected: {date: day.dateString}
         })
@@ -85,6 +86,7 @@ constructor(props) {
                             }}
                         />
                     </View>
+                    <Text style={{ fontSize: 20 , color: '#3e48a3' , marginLeft: 20 , marginTop: 20 , fontWeight: 'bold' }} >วันที่เลือก : {this.state.date}</Text>
                     <View style={{alignItems:'center'}}>
                         <TouchableOpacity onPress={() => this.SentDateTime()}>
                             <Image style={{ marginTop: 50 }} source={require('../Image/selecttime.png')} />

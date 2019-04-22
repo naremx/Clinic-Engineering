@@ -50,7 +50,7 @@ class ModalCardCancelAd extends React.Component {
                                 </TouchableOpacity>
                             </View>
                             
-                        <Text style={{ color : '#495090' , fontSize: 23 , fontWeight: 'bold' , textAlign: 'center' }}>คุณต้องการยกเลิกคิวใช่หรือไม่ ?</Text>
+                        <Text style={{ color : '#495090' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' }}>คุณต้องการยกเลิกคิวใช่หรือไม่ ?</Text>
 
                         <View style={{ alignItems:'center'}}>
                             <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
@@ -96,7 +96,7 @@ ButtonCancle:{
     height: 50, 
     width: 150 , 
     borderRadius: 20 , 
-    marginTop: 200, 
+    marginTop: 180, 
     marginLeft: 20, 
     shadowColor: '#30C1DD',
     shadowRadius: 10,

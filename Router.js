@@ -14,6 +14,7 @@ import Assignment from './ScreensUser/Assignment.js';
 
 import PhoneBook from './Screens/PhoneBook.js';
 import Contact from './Screens/Contact.js';
+import ResetPassword from './Screens/ResetPassword.js';
 
 import UserContact from './ScreensUser/UserContact.js';
 import Questions from './ScreensUser/Questions.js';
@@ -78,6 +79,10 @@ class Routes extends React.Component{
 
                     <Scene key='AdvisorEditProfileRoot' >
                         <Scene key='AdvisorEditProfile' component={AdvisorEditProfile} title='แก้ไขข้อมูลส่วนตัว'/>
+                    </Scene>
+
+                    <Scene key='ResetPassword' >
+                        <Scene key='ResetPassword' component={ResetPassword} title='ลืมรหัสผ่าน'/>
                     </Scene>
 
                     <Scene key='AddQueue' >
@@ -222,13 +227,13 @@ class Routes extends React.Component{
                                         </Scene>
                                     </Scene>
 
-                                    <Scene key='ScheduleAssPage' iconName="ios-search" icon={TabIcon} title='รายงาน'>
+                                    <Scene key='ScheduleAssPage' iconName="ios-book" icon={TabIcon} title='วิทยานิพนธ์'>
                                         <Scene 
                                                 key='AdvisorScheduleAss' 
                                                 component={AdvisorScheduleAss}
                                                 iconName="ios-search"
                                                 icon={TabIcon} 
-                                                title='รายงาน'>
+                                                title='วิทยานิพนธ์'>
                                         </Scene>
                                     </Scene>
 
