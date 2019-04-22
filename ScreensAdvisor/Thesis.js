@@ -3,7 +3,7 @@ import { StyleSheet,View,Text,ScrollView,Image } from 'react-native';
 import { LinearGradient,Constants } from 'expo';
 import { connect } from 'react-redux';
 
-class ScheduleAss extends React.Component{
+class Thesis extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -96,4 +96,4 @@ const mapStateToProps = ({ LoginUser_Reducer,LoginUser_Data_Reducer }) => {
       return { token,data };
 }
 
-export default connect(mapStateToProps)(ScheduleAss);
+export default connect(mapStateToProps)(Thesis);

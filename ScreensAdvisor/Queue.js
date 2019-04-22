@@ -10,7 +10,6 @@ class Queue extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-        isLoading: false,
         selectedDate: '',
     }
 }    
@@ -58,7 +57,7 @@ renderText() {
                       <Text style={{ marginLeft : 10 , color : '#3e48a3' }}>Topic : {val.topic}</Text>
                       <Text style={{ marginLeft : 10 , color : '#777' }}>Date : {val.date_time}</Text>
                       <View style={{ flexDirection: 'row' }}>
-                          <Ionicons name="ios-notifications" size={15} style={{ color:'#48cedb' , marginLeft: 22}} />
+                          <Ionicons name="ios-notifications" size={20} style={{ color:'#48cedb' , marginLeft: 22}} />
                           <Text style={{ marginLeft : 10 , color : '#48cedb' }}>Status : {val.status}</Text>
                       </View>
                   </View>

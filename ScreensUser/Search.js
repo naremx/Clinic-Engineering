@@ -83,7 +83,7 @@ class Search extends React.Component{
                         <Text style={{ marginLeft : 10 , color : '#777' }}>{val.telephone}</Text>
                         <View style={{ flexDirection: 'row' }}>
                             <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
-                            <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{val.department}</Text>
+                            <Text style={{ marginLeft : 10 , color : '#c0c0c0', width: 200 }}>{val.department}</Text>
                         </View>
                     </View>
                 </View>

@@ -26,9 +26,10 @@ import DetailAddQueue from './ScreensUser/DetailAddQueue.js';
 import CalendarUserTime from './ScreensUser/CalendarUserTime.js';
 import UserEditProfile from './ScreensUser/UserEditProfile.js';
 import ResultSearch from './ScreensUser/ResultSearch.js';
+import ListAddAss from './ScreensUser/ListAddAss.js';
 
 import AdvisorSelectMode from './ScreensAdvisor/AdvisorSelectMode.js';
-import AdvisorScheduleAss from './ScreensAdvisor/ScheduleAss.js';
+import Thesis from './ScreensAdvisor/Thesis.js';
 import AdvisorNotification from './ScreensAdvisor/Notification.js';
 import AdvisorQueue from './ScreensAdvisor/Queue.js';
 import AdvisorAssignment from './ScreensAdvisor/Assignment.js';
@@ -38,6 +39,7 @@ import AdvisorEditSelectTime from './ScreensAdvisor/AdvisorEditSelectTime.js';
 import AdvisorDetailAddQueue from './ScreensAdvisor/DetailAddQueue.js';
 import AdvisorEditProfile from './ScreensAdvisor/AdvisorEditProfile.js';
 import AdvisorContact from './ScreensAdvisor/AdvisorContact.js';
+import AddAssignment from './ScreensAdvisor/AddAssignment.js';
 
 import SlideMenuUser from './SlideMenu/SlideMenuUser';
 import SlideMenuAdvisor from './SlideMenu/SlideMenuAdvisor';
@@ -144,6 +146,12 @@ class Routes extends React.Component{
                                                 title='เพิ่มคิว' 
                                                 >
                                         </Scene>
+                                        <Scene 
+                                                key='ListAddAss' 
+                                                component={ListAddAss} 
+                                                title='รายการที่สามารถนัดคิวได้' 
+                                                >
+                                        </Scene>
                                     </Scene>
 
                                     <Scene key='SearchPage' iconName="ios-search" icon={TabIcon} title='ค้นหา'>
@@ -227,10 +235,10 @@ class Routes extends React.Component{
                                         </Scene>
                                     </Scene>
 
-                                    <Scene key='ScheduleAssPage' iconName="ios-book" icon={TabIcon} title='วิทยานิพนธ์'>
+                                    <Scene key='Thesis' iconName="ios-book" icon={TabIcon} title='วิทยานิพนธ์'>
                                         <Scene 
-                                                key='AdvisorScheduleAss' 
-                                                component={AdvisorScheduleAss}
+                                                key='Thesis' 
+                                                component={Thesis}
                                                 iconName="ios-search"
                                                 icon={TabIcon} 
                                                 title='วิทยานิพนธ์'>
@@ -260,13 +268,22 @@ class Routes extends React.Component{
                                         </Scene>
                                     </Scene>
 
-                                    <Scene 
-                                            key='AdvisorAssignment' 
-                                            component={AdvisorAssignment}
-                                            iconName="ios-document"
-                                            icon={TabIcon}  
-                                            title='งาน'>
+                                    <Scene key='AdvisorAssignment' iconName="ios-document" icon={TabIcon} title='งาน'>
+                                        <Scene 
+                                                key='AdvisorAssignment' 
+                                                component={AdvisorAssignment}
+                                                iconName="ios-document"
+                                                icon={TabIcon}  
+                                                title='งาน'>
+                                        </Scene>
+                                        <Scene 
+                                                key='AddAssignment' 
+                                                component={AddAssignment}
+                                                title='เพิ่มงาน'>
+                                        </Scene>
                                     </Scene>
+
+                                    
                             </Tabs>
                         </Scene>
                     </Drawer>
