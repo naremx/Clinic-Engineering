@@ -127,12 +127,12 @@ const Styles = StyleSheet.create({
       marginLeft: 20,
       marginTop: 15,
   },
-  Button: {
-    width: 350,
-    height: 50,
-    backgroundColor: '#000',
-    marginTop: 10,
-    borderRadius: 10,
+    Button: {
+      width: 350,
+      height: 50,
+      backgroundColor: '#000',
+      marginTop: 10,
+      borderRadius: 10,
   },
 });
 

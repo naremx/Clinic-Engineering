@@ -27,6 +27,7 @@ import CalendarUserTime from './ScreensUser/CalendarUserTime.js';
 import UserEditProfile from './ScreensUser/UserEditProfile.js';
 import ResultSearch from './ScreensUser/ResultSearch.js';
 import ListAddAss from './ScreensUser/ListAddAss.js';
+import UsAddAssignment from './ScreensUser/UsAddAssignment.js';
 
 import AdvisorSelectMode from './ScreensAdvisor/AdvisorSelectMode.js';
 import Thesis from './ScreensAdvisor/Thesis.js';
@@ -39,7 +40,7 @@ import AdvisorEditSelectTime from './ScreensAdvisor/AdvisorEditSelectTime.js';
 import AdvisorDetailAddQueue from './ScreensAdvisor/DetailAddQueue.js';
 import AdvisorEditProfile from './ScreensAdvisor/AdvisorEditProfile.js';
 import AdvisorContact from './ScreensAdvisor/AdvisorContact.js';
-import AddAssignment from './ScreensAdvisor/AddAssignment.js';
+// import AddAssignment from './ScreensAdvisor/AddAssignment.js';
 
 import SlideMenuUser from './SlideMenu/SlideMenuUser';
 import SlideMenuAdvisor from './SlideMenu/SlideMenuAdvisor';
@@ -151,6 +152,11 @@ class Routes extends React.Component{
                                                 component={ListAddAss} 
                                                 title='รายการที่สามารถนัดคิวได้' 
                                                 >
+                                        </Scene>
+                                        <Scene 
+                                                key='UsAddAssignment' 
+                                                component={UsAddAssignment}
+                                                title='เพิ่มงาน'>
                                         </Scene>
                                     </Scene>
 
@@ -276,11 +282,11 @@ class Routes extends React.Component{
                                                 icon={TabIcon}  
                                                 title='งาน'>
                                         </Scene>
-                                        <Scene 
+                                        {/* <Scene 
                                                 key='AddAssignment' 
                                                 component={AddAssignment}
                                                 title='เพิ่มงาน'>
-                                        </Scene>
+                                        </Scene> */}
                                     </Scene>
 
                                     

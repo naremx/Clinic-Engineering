@@ -63,6 +63,10 @@ const Styles = StyleSheet.create({
     backgroundColor: '#000',
     marginTop: 10,
     borderRadius: 10,
+    shadowColor: '#30C1DD',
+    shadowRadius: 10,
+    shadowOpacity: 0.6,
+    elevation: 6,
   },
 });
 

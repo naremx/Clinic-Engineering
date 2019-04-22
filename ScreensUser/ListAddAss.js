@@ -51,7 +51,7 @@ class Assignment extends React.Component{
     AdDateTimeDetail = val
 
     this.props.AdSelectTimeQueueAction(AdDateTimeDetail)
-    Actions.AddAssignment()
+    Actions.UsAddAssignment()
 }
 renderText() {
     if (this.state.ResultData.length > 0) {
@@ -59,7 +59,7 @@ renderText() {
         <View key={index}>
             <View style={{ flexDirection: 'row' , marginTop: 10, marginLeft : 20  }}>
               <Image style={{ marginLeft: 5 }} source={require('../Image/boss.png')} />
-                <View style={{ flexDirection: 'column' , marginTop: 10  }}>
+                <View style={{ flexDirection: 'column' , marginTop: 10 , marginLeft : 20  }}>
                     <TouchableOpacity onPress={() => this.CollectData(val)}>
                         <Text style={{ color : '#3e48a3', marginTop: 5 , fontWeight: 'bold' }}> {val.name}</Text>
                     </TouchableOpacity>
