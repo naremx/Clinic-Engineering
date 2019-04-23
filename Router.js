@@ -31,7 +31,8 @@ import UsAddAssignment from './ScreensUser/UsAddAssignment.js';
 import DetailAddDoc from './ScreensUser/DetailAddDoc.js';
 import DetailAddSubDoc from './ScreensUser/DetailAddSubDoc.js';
 import RealDetailAddSubDoc from './ScreensUser/RealDetailAddSubDoc.js';
-
+import UserSelectModeDoc from './ScreensUser/UserSelectModeDoc.js';
+import UserRecieveDoc from './ScreensUser/UserRecieveDoc.js';
 
 import AdvisorSelectMode from './ScreensAdvisor/AdvisorSelectMode.js';
 import Thesis from './ScreensAdvisor/Thesis.js';
@@ -197,9 +198,19 @@ class Routes extends React.Component{
                                     </Scene>
                                     <Scene key='AssignmentPage' iconName="ios-document" icon={TabIcon} title='งาน'>
                                         <Scene 
+                                                key='UserSelectModeDoc' 
+                                                component={UserSelectModeDoc}
+                                                title='เลือกทำรายการ'>
+                                        </Scene>
+                                        <Scene 
+                                                key='UserRecieveDoc' 
+                                                component={UserRecieveDoc}
+                                                title='งานที่ได้รับมอบหมาย'>
+                                        </Scene>
+                                        <Scene 
                                                 key='Assignment' 
                                                 component={Assignment}
-                                                title='งาน'>
+                                                title='งานที่ส่งมอบหมาย'>
                                         </Scene>
                                         <Scene 
                                                 key='UsAddAssignment' 
