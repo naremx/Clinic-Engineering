@@ -30,6 +30,7 @@ import ListAddAss from './ScreensUser/ListAddAss.js';
 import UsAddAssignment from './ScreensUser/UsAddAssignment.js';
 import DetailAddDoc from './ScreensUser/DetailAddDoc.js';
 import DetailAddSubDoc from './ScreensUser/DetailAddSubDoc.js';
+import RealDetailAddSubDoc from './ScreensUser/RealDetailAddSubDoc.js';
 
 
 import AdvisorSelectMode from './ScreensAdvisor/AdvisorSelectMode.js';
@@ -156,21 +157,6 @@ class Routes extends React.Component{
                                                 title='รายการที่สามารถนัดคิวได้' 
                                                 >
                                         </Scene>
-                                        <Scene 
-                                                key='UsAddAssignment' 
-                                                component={UsAddAssignment}
-                                                title='เพิ่มงาน'>
-                                        </Scene>
-                                        <Scene 
-                                                key='DetailAddDoc' 
-                                                component={DetailAddDoc}
-                                                title='รายละเอียดงาน'>
-                                        </Scene>
-                                        <Scene 
-                                                key='DetailAddSubDoc' 
-                                                component={DetailAddSubDoc}
-                                                title='เพิ่มหัวข้องาน'>
-                                        </Scene>
                                     </Scene>
 
                                     <Scene key='SearchPage' iconName="ios-search" icon={TabIcon} title='ค้นหา'>
@@ -196,7 +182,7 @@ class Routes extends React.Component{
                                             icon={TabIcon}
                                             title='แจ้งเตือน'>
                                     </Scene>
-                                    <Scene key='QueuePage' iconName="ios-people" icon={TabIcon} title='คิวจ้า'>
+                                    <Scene key='QueuePage' iconName="ios-people" icon={TabIcon} title='คิว'>
                                         <Scene 
                                                 key='Queue' 
                                                 component={Queue}
@@ -209,13 +195,32 @@ class Routes extends React.Component{
                                                 title='รายละเอียดคิว'>
                                         </Scene>
                                     </Scene>
-
-                                    <Scene 
-                                            key='Assignment' 
-                                            component={Assignment}
-                                            iconName="ios-document"
-                                            icon={TabIcon}  
-                                            title='งาน'>
+                                    <Scene key='AssignmentPage' iconName="ios-document" icon={TabIcon} title='งาน'>
+                                        <Scene 
+                                                key='Assignment' 
+                                                component={Assignment}
+                                                title='งาน'>
+                                        </Scene>
+                                        <Scene 
+                                                key='UsAddAssignment' 
+                                                component={UsAddAssignment}
+                                                title='เพิ่มงาน'>
+                                        </Scene>
+                                        <Scene 
+                                                key='DetailAddDoc' 
+                                                component={DetailAddDoc}
+                                                title='รายละเอียดงาน'>
+                                        </Scene>
+                                        <Scene 
+                                                key='DetailAddSubDoc' 
+                                                component={DetailAddSubDoc}
+                                                title='เพิ่มหัวข้องาน'>
+                                        </Scene>
+                                        <Scene 
+                                                key='RealDetailAddSubDoc' 
+                                                component={RealDetailAddSubDoc}
+                                                title='แนบไฟล์'>
+                                        </Scene>
                                     </Scene>
                             </Tabs>
                         </Scene>

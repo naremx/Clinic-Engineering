@@ -4,7 +4,7 @@ import { LinearGradient,Constants} from 'expo';
 import { connect } from 'react-redux'
 import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
-import { UserDetailSubDocAction } from '../Actions/UserDetailDocAction.js'
+import { UserDetailSubDocAction } from '../Actions/UserDetailSubDocAction.js'
 
 class DetailAddDoc extends React.Component{
   constructor(props) {
@@ -39,11 +39,11 @@ class DetailAddDoc extends React.Component{
     .catch(error => console.error('Error:', error));
 }
 CollectData(val){
-    let DetailDoc={}
-    DetailDoc = val
+    let DetailSubDoc={}
+    DetailSubDoc = val
 
-    this.props.UserDetailSubDocAction(DetailDoc)
-    Actions.DetailAddSubDoc()
+    this.props.UserDetailSubDocAction(DetailSubDoc)
+    Actions.RealDetailAddSubDoc()
 }
 renderText() {
     if (this.state.Data.length > 0) {
@@ -53,12 +53,15 @@ renderText() {
             <View style={Styles.ContainerDoc}>
                 <View style={{ flexDirection: 'row' }}>
                 <Image style={{ marginLeft : 10 , marginTop : 8 }} source={require('../Image/writing.png')} />
+                <View style={{ flexDirection: 'column' }}>
                 <Text style={{ 
                                 marginLeft : 10 ,
                                 color : '#3e48a3' ,
                                 fontSize: 20 ,
                                 fontWeight: 'bold' ,
-                                marginTop: 20 }} >{val.topic}</Text>
+                                marginTop: 15 }} >{val.topic}</Text>
+                <Text style={{  marginLeft : 15 , color : '#48cedb' , fontSize: 15 }} >status</Text>
+                </View>
                 </View>
             </View>
         </TouchableOpacity>
@@ -166,7 +169,7 @@ ButtonConfirm:{
 });
 
 const mapDispatchToprops = dispatch => ({
-    UserDetailSubDocAction: (DetailDoc) => dispatch(UserDetailSubDocAction(DetailDoc))
+    UserDetailSubDocAction: (DetailSubDoc) => dispatch(UserDetailSubDocAction(DetailSubDoc))
 })
 
 
