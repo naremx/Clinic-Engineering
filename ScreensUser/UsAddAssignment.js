@@ -28,13 +28,14 @@ class UsAddAssignment extends React.Component{
 submit(){
   let collection={}
   collection.id=this.props.AdDateTimeDetail.id
+  collection.name=this.props.AdDateTimeDetail.name
   collection.topic=this.state.topic
   collection.description=this.state.description
-  // collection.start_date=this.state.start_date
-  // collection.end_date=this.state.end_date
+  collection.start_date=this.state.start_date
+  collection.end_date=this.state.end_date
   console.log(collection);
 
-  // Actions.Assignment();
+  Actions.Home();
 
   var url = 'http:///10.66.13.208:8000/Document/adddocument/' ;
 

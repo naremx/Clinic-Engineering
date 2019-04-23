@@ -28,6 +28,9 @@ import UserEditProfile from './ScreensUser/UserEditProfile.js';
 import ResultSearch from './ScreensUser/ResultSearch.js';
 import ListAddAss from './ScreensUser/ListAddAss.js';
 import UsAddAssignment from './ScreensUser/UsAddAssignment.js';
+import DetailAddDoc from './ScreensUser/DetailAddDoc.js';
+import DetailAddSubDoc from './ScreensUser/DetailAddSubDoc.js';
+
 
 import AdvisorSelectMode from './ScreensAdvisor/AdvisorSelectMode.js';
 import Thesis from './ScreensAdvisor/Thesis.js';
@@ -157,6 +160,16 @@ class Routes extends React.Component{
                                                 key='UsAddAssignment' 
                                                 component={UsAddAssignment}
                                                 title='เพิ่มงาน'>
+                                        </Scene>
+                                        <Scene 
+                                                key='DetailAddDoc' 
+                                                component={DetailAddDoc}
+                                                title='รายละเอียดงาน'>
+                                        </Scene>
+                                        <Scene 
+                                                key='DetailAddSubDoc' 
+                                                component={DetailAddSubDoc}
+                                                title='เพิ่มหัวข้องาน'>
                                         </Scene>
                                     </Scene>
 
