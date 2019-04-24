@@ -5,7 +5,7 @@ import { Ionicons } from 'react-native-vector-icons'
 import axios from 'axios'
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux'
-
+import { DataAdvisorAction } from '../Actions';
 
 class PhoneBook extends React.Component{
   constructor(props) {

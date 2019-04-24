@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, TextInput, CheckBox } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, TextInput, CheckBox, KeyboardAvoidingView } from 'react-native';
 import { LinearGradient, Constants } from 'expo';
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
@@ -77,19 +77,7 @@ constructor(props) {
                     </View>
                     <Text style={{  marginLeft : 10 , color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold' , marginTop: 10 }} >รายละเอียด</Text>
                     <View >
-                    <View style={{ margin : 10 }}>
-                        <Textarea
-                            containerStyle={Styles.textareaContainer}
-                            style={Styles.textarea}
-                            onChangeText={this.onChange}
-                            defaultValue={this.state.text}
-                            maxLength={120}
-                            placeholder={'กรอกรายละเอียด'}
-                            placeholderTextColor={'#c7c7c7'}
-                            underlineColorAndroid={'transparent'}
-                            onChangeText={(text) => this.updateValue(text, 'descriptions')}
-                        />
-                    </View>
+                    <TextInput style={Styles.inputBox} onChangeText={(text) => this.updateValue(text, 'descriptions')}/>
                     </View>
                 </View>
                 <View style={{ alignItems: 'center' }}>

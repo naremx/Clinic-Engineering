@@ -48,6 +48,7 @@ class Thesis extends React.Component{
         <View key={index}>
             <View style={{ flexDirection: 'row' , marginTop: 10  }}>
               <Image style={{ marginLeft: 5 }} source={require('../Image/plan.png')} />
+              <Image style={{  width:32 , height:32 , marginLeft: 5 }} source={{ uri : "https://www.img.in.th/images/7415e5774dc66fd431a4e8d2682953ea.png" }} />
               <Text style={{ color : '#777', marginTop: 5 , width: 340 }}> {val}</Text>
             </View>
             <Text style={{ color : '#efefef' }}> __________________________________________________</Text>

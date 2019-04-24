@@ -58,7 +58,7 @@ renderText() {
         return this.state.ResultData.map((val, index) => 
         <View key={index}>
             <View style={{ flexDirection: 'row' , marginTop: 10, marginLeft : 20  }}>
-              <Image style={{ marginLeft: 5 }} source={require('../Image/boss.png')} />
+              <Image style={{  width:64 , height:64 , marginLeft: 5 }} source={{ uri : "https://www.img.in.th/images/7415e5774dc66fd431a4e8d2682953ea.png" }} />
                 <View style={{ flexDirection: 'column' , marginTop: 10 , marginLeft : 20  }}>
                     <TouchableOpacity onPress={() => this.CollectData(val)}>
                         <Text style={{ color : '#3e48a3', marginTop: 5 , fontWeight: 'bold' }}> {val.name}</Text>

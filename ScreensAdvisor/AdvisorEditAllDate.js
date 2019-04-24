@@ -9,7 +9,7 @@ import { Actions } from 'react-native-router-flux'
 
 const _format = 'YYYY-MM-DD'
 const _today = moment().format(_format)
-const _maxDate = moment().add(15, 'days').format(_format)
+const _maxDate = moment().add(100, 'days').format(_format)
 
 class AdvisorEditAllDate extends React.Component {
   initialState = {
@@ -123,7 +123,7 @@ class AdvisorEditAllDate extends React.Component {
                     rowDirection={"column"}
                   />
                   <TouchableOpacity onPress={() => this.SentSettingDate()}>
-                    <Image style={{ margin :30 }} source={require('../Image/ok.png')} />
+                    <Image style={{  width:200 , height:120 , margin :30 }} source={{ uri : "https://www.img.live/images/2019/04/24/ok.png" }} />
                   </TouchableOpacity>
                 </View>
         </View>

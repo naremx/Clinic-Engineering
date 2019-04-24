@@ -122,7 +122,7 @@ constructor(props) {
                             { this.renderText() }
                         </ScrollView> 
                     </View>
-                    <Image source={require('../Image/meeting.png')} />
+                    <Image style={{  width:370 , height:194 }} source={{ uri : "https://www.img.in.th/images/a96c9c44823dd503e7bf0a5cd222a517.png" }} />
                     <View style={{alignItems:'center'}}>
                         <TouchableOpacity onPress={() => this.gotoCalendar()}>
                             <Text style={Styles.ButtonChosen}>เลือกวันนัดคิว</Text>

@@ -69,7 +69,8 @@ class RealDetailAddSubDoc extends React.Component{
                 <View style={{ alignItems:'center' }}>
                     <View style={Styles.ContainerContacts}>
                     <View style={{ flexDirection: 'row' }}>
-                    <Image style={{ marginLeft : 15 , marginTop : 8 , alignItems:'center' }} source={require('../Image/writing.png')} />
+                    <Image style={{  width:64 , height:64 , marginLeft : 15 , marginTop : 8 , alignItems:'center' }} source={{ uri : "https://www.img.live/images/2019/04/24/writing.png" }} />
+                    
                     <Text style={{ 
                                 marginLeft : 10 ,
                                 color : '#3e48a3' ,

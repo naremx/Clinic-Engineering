@@ -53,7 +53,7 @@ renderText() {
         <TouchableOpacity onPress={() => this.CollectData(val)}>
             <View style={Styles.ContainerDoc}>
                 <View style={{ flexDirection: 'row' }}>
-                <Image style={{ marginLeft : 10 , marginTop : 8 }} source={require('../Image/writing.png')} />
+                <Image style={{  width:64 , height:64 , marginLeft : 10 , marginTop : 8 }} source={{ uri : "https://www.img.live/images/2019/04/24/writing.png" }} />
                 <View style={{ flexDirection: 'column' }}>
                 <Text style={{ 
                                 marginLeft : 10 ,
@@ -77,7 +77,7 @@ renderText() {
                 <View style={{ alignItems:'center' }}>
                     <View style={Styles.ContainerContacts}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Image style={Styles.drawerImage} source={require('../Image/edit.png')} />
+                        <Image style={{  width:64 , height:64 , marginTop: 5 }} source={{ uri : "https://www.img.live/images/2019/04/24/edit.png" }} />
                         <View style={{ flexDirection: 'column' }}>
                             <Text style={{ 
                                 marginLeft : 10 , 

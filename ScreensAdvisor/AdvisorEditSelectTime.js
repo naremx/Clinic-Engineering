@@ -120,7 +120,7 @@ headers:{
               />
                 <View style={{alignItems:'center'}}>
                     <TouchableOpacity onPress={() => this.DeleteDate()}>
-                        <Image style={Styles.drawerImage} source={require('../Image/delete-time.png')} />
+                        <Image style={{  width:220 , height:105 , marginTop: 20 }} source={{ uri : "https://www.img.live/images/2019/04/24/delete-time.png" }} />
                     </TouchableOpacity>
                 </View>
             </View>

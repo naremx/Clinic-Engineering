@@ -111,7 +111,7 @@ TopicandDescription(){
               />
                 <View style={{alignItems:'center'}}>
                     <TouchableOpacity onPress={() => this.TopicandDescription()}>
-                        <Image source={require('../Image/description.png')} />
+                        <Image style={{  width:200 , height:105 }} source={{ uri : "https://www.img.live/images/2019/04/24/description.png" }} />
                     </TouchableOpacity>
                 </View>
             </View>
