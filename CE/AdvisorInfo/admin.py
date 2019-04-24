@@ -4,7 +4,7 @@ from .models import *
 
 # Register your models here.
 class AdvisorDataAdmin(admin.ModelAdmin):
-    list_display = ('id', 'gender', 'first_name', 'email', 'telephone', 'department')
+    list_display = ('id', 'gender', 'first_name','last_name', 'email', 'telephone', 'department')
 
 
 class TimeAdmin(admin.ModelAdmin):
@@ -13,6 +13,7 @@ class TimeAdmin(admin.ModelAdmin):
 
 class AvailableAdmin(admin.ModelAdmin):
     list_display = ('id', 'free_date', 'advisor', 'free_time', 'is_display')
+
 
 
 admin.site.register(AdvisorData, AdvisorDataAdmin)

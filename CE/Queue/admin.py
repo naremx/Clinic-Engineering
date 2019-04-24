@@ -6,4 +6,6 @@ from .models import Queue
 class QueueAdmin(admin.ModelAdmin):
     list_display = ('id', )
 
+
+
 admin.site.register(Queue,QueueAdmin)
