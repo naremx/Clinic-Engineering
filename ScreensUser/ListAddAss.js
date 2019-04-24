@@ -16,7 +16,7 @@ class Assignment extends React.Component{
         }
     }    
     componentDidMount() {
-      var url = 'http://10.66.13.208:8000/history/Adshowhistory/' ;
+      var url = 'http://10.66.13.208:8000/history/Usshowhistory/' ;
   
       fetch(url, {
       method: 'POST', 
@@ -51,53 +51,35 @@ class Assignment extends React.Component{
     AdDateTimeDetail = val
 
     this.props.AdSelectTimeQueueAction(AdDateTimeDetail)
-    Actions.AddAssignment()
+    Actions.UsAddAssignment()
 }
-  renderText() {
+renderText() {
     if (this.state.ResultData.length > 0) {
         return this.state.ResultData.map((val, index) => 
-        <View key={index} style={Styles.ContainerContacts}>
-                <View style={{ flexDirection: 'row' }}>
-                    <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
-                    <View style={Styles.Column}>
-                        <Text style={{ 
-                            marginLeft : 10 ,
-                            color : '#3e48a3' ,
-                            fontSize: 15 ,
-                            fontWeight: 'bold' ,
-                            marginTop: 20 }} >{val.user}</Text>
-                        <Text style={{ marginLeft : 10 , color : '#3e48a3' }}>Topic : {val.topic}</Text>
-                        <Text style={{ marginLeft : 10 , color : '#777' }}>Date : {val.date_time}</Text>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Ionicons name="ios-notifications" size={20} style={{ color:'#48cedb' , marginLeft: 22}} />
-                            <Text style={{ marginLeft : 10 , color : '#48cedb' }}>Status : {val.status}</Text>
-                        </View>
-                    </View>
+        <View key={index}>
+            <View style={{ flexDirection: 'row' , marginTop: 10, marginLeft : 20  }}>
+              <Image style={{ marginLeft: 5 }} source={require('../Image/boss.png')} />
+                <View style={{ flexDirection: 'column' , marginTop: 10 , marginLeft : 20  }}>
+                    <TouchableOpacity onPress={() => this.CollectData(val)}>
+                        <Text style={{ color : '#3e48a3', marginTop: 5 , fontWeight: 'bold' }}> {val.name}</Text>
+                    </TouchableOpacity>
+                    <Text style={{ color : '#777', marginTop: 5 }}>Topic : {val.topic}</Text>
                 </View>
-              <TouchableOpacity onPress={() => this.CollectData(val)}>
-                  <View style={{alignItems:'center'}}>
-                  <LinearGradient colors={['#90ed9c', '#04d11f']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
-                      <Text style = {{ color: '#fff', 
-                              fontSize: 20,
-                              textAlign: 'center',
-                              marginTop: 10,
-                              fontWeight: 'bold'
-                              }}>เพิ่มงาน</Text>
-                  </LinearGradient>
-                  </View>
-              </TouchableOpacity>
+            </View>
+            <Text style={{ color : '#efefef' , marginLeft : 10 }}> ____________________________________________</Text>
         </View>
         );
     }
   }
-
     render(){
         return(
-            <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
+            <LinearGradient colors ={['#87daf3','#a69beb']} >
             <View style={Styles.Container}>
+            <View style={Styles.ContainerContacts}>
               <View style={{alignItems:'center'}}>
                   { this.renderText() }
-              </View> 
+              </View>
+            </View> 
             </View>
             </LinearGradient>
         )
@@ -111,7 +93,7 @@ const Styles = StyleSheet.create({
     },
     ContainerContacts: {
       width: 370,
-      height: 180,
+      height: 600,
       backgroundColor: 'white',
       borderRadius: 18,
       shadowColor: '#30C1DD',
@@ -127,12 +109,12 @@ const Styles = StyleSheet.create({
       marginLeft: 20,
       marginTop: 15,
   },
-    Button: {
-      width: 350,
-      height: 50,
-      backgroundColor: '#000',
-      marginTop: 10,
-      borderRadius: 10,
+  Button: {
+    width: 350,
+    height: 50,
+    backgroundColor: '#000',
+    marginTop: 10,
+    borderRadius: 10,
   },
 });
 

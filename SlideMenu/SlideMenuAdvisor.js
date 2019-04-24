@@ -20,11 +20,14 @@ class SlideMenuAdvisor extends Component{
         };
       }
     componentDidMount() {
+        let collection={}
+        collection.user_type=this.props.data.user_type,
+        console.log(collection);
         var url = 'http://10.66.13.208:8000/Showdetail/Adshowdetail/' ;
       
         fetch(url, {
         method: 'POST', 
-        body: JSON.stringify(this.props.token),
+        body: JSON.stringify(collection),
         headers:{
             'Content-Type': 'application/json' ,
             Authorization : `Token ${this.props.token}`,
@@ -34,7 +37,6 @@ class SlideMenuAdvisor extends Component{
             this.setState({
               DataSource: responseData.avs
             }); 
-            console.log('OK' ,this.state.DataSource )
             var output = this.state.DataSource.reduce(function (acc, item) {
               acc = item
               return acc
@@ -55,7 +57,6 @@ class SlideMenuAdvisor extends Component{
         .catch(error => console.error('Error:', error));
       }
     async Logout(token) {
-        console.log(token)
         const response = await fetch(`http://10.66.13.208:8000/Account/logout` , {
             headers: {
                 Authorization : `Token ${this.props.token}`,
@@ -65,7 +66,6 @@ class SlideMenuAdvisor extends Component{
             this.props.dispatch({
                 type: 'Logout'
             })
-            console.log(response)
 
     }
     render(){
@@ -96,13 +96,7 @@ class SlideMenuAdvisor extends Component{
                         <Text style={{ color : '#a69beb' , fontSize: 20 , marginTop: 10 , textAlign: 'center' , marginLeft: 10 }}>รายการย้อนหลัง</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> Actions.ContactRoot()}>
-                    <View style={{ flexDirection: 'row'  }}>
-                        <Ionicons name="ios-book" size={30} style={{ color:'#3e48a3' , marginTop: 10 , marginLeft: 20 }} />
-                        <Text style={{ color : '#a69beb' , fontSize: 20 , marginTop: 10 , textAlign: 'center' , marginLeft: 10 }}>วิทยานิพนธ์</Text>
-                    </View>
-                </TouchableOpacity>
-                <Text style={{ color : '#c0c0c0' , fontSize: 15 , marginTop: 5 , textAlign: 'center' }}>_____________________________________</Text>
+                <Text style={{ color : '#c0c0c0' , fontSize: 15 , marginTop: 5 , textAlign: 'center' }}>__________________________________</Text>
                 <TouchableOpacity onPress={()=> Actions.ContactRoot()}>
                     <Text style={{ color : '#a69beb' , fontSize: 18 , marginTop: 10 , marginLeft: 20  }}>ติดต่อเรา</Text>
                 </TouchableOpacity>
@@ -112,7 +106,7 @@ class SlideMenuAdvisor extends Component{
                 <TouchableOpacity onPress={()=> Actions.ConditionsRoot()}>
                     <Text style={{ color : '#a69beb' , fontSize: 18 , marginTop: 10 , marginLeft: 20  }}>เงื่อนไขและข้อตกลง</Text>
                 </TouchableOpacity>
-                <View style={{ alignItems : 'flex-end' , marginTop: 300 }}>
+                <View style={{ alignItems : 'flex-end' , marginTop: 320 }}>
                     <TouchableOpacity onPress={() => this.Logout(this.props.token)}>
                         <Text style={{ color : '#a69beb' }}> ออกจากระบบ </Text>
                     </TouchableOpacity>
@@ -139,9 +133,10 @@ const Styles = StyleSheet.create({
     }
     });
 
-    const mapStateToProps = ({ LoginUser_Reducer }) => {
+    const mapStateToProps = ({ LoginUser_Reducer,LoginUser_Data_Reducer }) => {
         const { token } = LoginUser_Reducer;
-            return { token };
+        const { data } = LoginUser_Data_Reducer;
+            return { token,data };
       }
     
     export default connect(mapStateToProps)(SlideMenuAdvisor);

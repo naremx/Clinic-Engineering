@@ -89,7 +89,7 @@ class SlideMenuUser extends Component{
                         <Text style={{ color : '#a69beb' , fontSize: 20 , marginTop: 10 , textAlign: 'center' , marginLeft: 10 }}>วิทยานิพนธ์</Text>
                     </View>
                 </TouchableOpacity>
-                <Text style={{ color : '#c0c0c0' , fontSize: 15 , marginTop: 5 , textAlign: 'center' }}>_____________________________________</Text>
+                <Text style={{ color : '#c0c0c0' , fontSize: 15 , marginTop: 5 , textAlign: 'center' }}>__________________________________</Text>
                 <TouchableOpacity onPress={()=> Actions.ContactRoot()}>
                     <Text style={{ color : '#a69beb' , fontSize: 18 , marginTop: 10 , marginLeft: 20  }}>ติดต่อเรา</Text>
                 </TouchableOpacity>
@@ -99,7 +99,7 @@ class SlideMenuUser extends Component{
                 <TouchableOpacity onPress={()=> Actions.ConditionsRoot()}>
                     <Text style={{ color : '#a69beb' , fontSize: 18 , marginTop: 10 , marginLeft: 20  }}>เงื่อนไขและข้อตกลง</Text>
                 </TouchableOpacity>
-                <View style={{ alignItems : 'flex-end' , marginTop: 300 }}>
+                <View style={{ alignItems : 'flex-end' , marginTop: 270 }}>
                     <TouchableOpacity onPress={() => this.Logout(this.props.token)}>
                         <Text style={{ color : '#a69beb' }}> ออกจากระบบ </Text>
                     </TouchableOpacity>

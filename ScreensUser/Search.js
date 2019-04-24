@@ -5,6 +5,7 @@ import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux';
 import { UserSearchAction } from '../Actions/UserSearchAction.js'
+import { DataAdvisorAction } from '../Actions';
 import axios from 'axios'
 
 class Search extends React.Component{
@@ -55,7 +56,6 @@ class Search extends React.Component{
       }
     }).then(res => res.json())
     .then((responseData) => {
-        console.log('--res--',responseData)
       this.props.UserSearchAction(responseData)
       Actions.ResultSearch();
     })
@@ -79,11 +79,11 @@ class Search extends React.Component{
                             color : '#3e48a3' ,
                             fontSize: 15 ,
                             fontWeight: 'bold' ,
-                            marginTop: 20 }} >{val.first_name}</Text>
+                            marginTop: 20 }} >{val.first_name} {val.last_name}</Text>
                         <Text style={{ marginLeft : 10 , color : '#777' }}>{val.telephone}</Text>
                         <View style={{ flexDirection: 'row' }}>
                             <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
-                            <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{val.department}</Text>
+                            <Text style={{ marginLeft : 10 , color : '#c0c0c0', width: 200 }}>{val.department}</Text>
                         </View>
                     </View>
                 </View>

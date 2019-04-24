@@ -31,7 +31,7 @@ class ResultSearch extends React.Component{
                             color : '#3e48a3' ,
                             fontSize: 15 ,
                             fontWeight: 'bold' ,
-                            marginTop: 20 }} >{val.first_name}</Text>
+                            marginTop: 20 }} >{val.first_name} {val.last_name}</Text>
                         <Text style={{ marginLeft : 10 , color : '#777' }}>{val.telephone}</Text>
                         <View style={{ flexDirection: 'row' }}>
                             <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
