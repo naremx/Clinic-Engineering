@@ -19,7 +19,7 @@ class DetailAddDoc extends React.Component{
     collection.id=this.props.DetailDoc.id
     console.log(collection);
 
-    var url = 'http://10.66.13.208:8000/Document/showsubdocument/' ;
+    var url = 'http://161.246.5.11:8000/Document/showsubdocument/' ;
 
     fetch(url, {
     method: 'POST', 

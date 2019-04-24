@@ -23,7 +23,7 @@ class SlideMenuAdvisor extends Component{
         let collection={}
         collection.user_type=this.props.data.user_type,
         console.log(collection);
-        var url = 'http://10.66.13.208:8000/Showdetail/Adshowdetail/' ;
+        var url = 'http://161.246.5.11:8000/Showdetail/Adshowdetail/' ;
       
         fetch(url, {
         method: 'POST', 
@@ -57,7 +57,7 @@ class SlideMenuAdvisor extends Component{
         .catch(error => console.error('Error:', error));
       }
     async Logout(token) {
-        const response = await fetch(`http://10.66.13.208:8000/Account/logout` , {
+        const response = await fetch(`http://161.246.5.11:8000/Account/logout` , {
             headers: {
                 Authorization : `Token ${this.props.token}`,
             }   

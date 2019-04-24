@@ -22,7 +22,7 @@ class AdvisorContact extends React.Component{
     let collection={}
     collection.user_type=this.props.data.user_type,
     console.log(collection);
-    var url = 'http://10.66.13.208:8000/Showdetail/Adshowdetail/' ;
+    var url = 'http://161.246.5.11:8000/Showdetail/Adshowdetail/' ;
   
   
     fetch(url, {

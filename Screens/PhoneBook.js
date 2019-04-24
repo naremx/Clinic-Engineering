@@ -17,7 +17,7 @@ class PhoneBook extends React.Component{
 
   componentDidMount() {
     try{
-        axios.get(`http://10.66.13.208:8000/advisor/getaddata/` , {
+        axios.get(`http://161.246.5.11:8000/advisor/getaddata/` , {
         headers: {
             // Authorization : `Token ${this.props.token}`,
         }
