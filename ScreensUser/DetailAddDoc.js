@@ -77,7 +77,7 @@ renderText() {
                 <View style={{ alignItems:'center' }}>
                     <View style={Styles.ContainerContacts}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Image style={{  width:64 , height:64 , marginTop: 5 }} source={{ uri : "https://www.img.live/images/2019/04/24/edit.png" }} />
+                        <Image style={{  width:64 , height:64 , marginTop: 10 , marginLeft: 20 }} source={{ uri : "https://www.img.live/images/2019/04/24/edit.png" }} />
                         <View style={{ flexDirection: 'column' }}>
                             <Text style={{ 
                                 marginLeft : 10 , 

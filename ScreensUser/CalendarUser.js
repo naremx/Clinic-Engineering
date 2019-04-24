@@ -89,7 +89,7 @@ constructor(props) {
                     <Text style={{ fontSize: 20 , color: '#3e48a3' , marginLeft: 20 , marginTop: 20 , fontWeight: 'bold' }} >วันที่เลือก : {this.state.date}</Text>
                     <View style={{alignItems:'center'}}>
                         <TouchableOpacity onPress={() => this.SentDateTime()}>
-                            <Image style={{  width:200 , height:120 , marginTop: 50}} source={{ uri : "https://www.img.live/images/2019/04/24/selecttime.png" }} />
+                            <Image style={{  width:250 , height:120 , marginTop: 50}} source={{ uri : "https://www.img.live/images/2019/04/24/selecttime.png" }} />
                         </TouchableOpacity>
                     </View>
                 </View>
