@@ -13,6 +13,7 @@ class DetailAddDoc extends React.Component{
         Data: ''
     };
   }
+
   componentDidMount() {
     let collection={}
     collection.id=this.props.DetailDoc.id
@@ -60,7 +61,7 @@ renderText() {
                                 fontSize: 20 ,
                                 fontWeight: 'bold' ,
                                 marginTop: 15 }} >{val.topic}</Text>
-                <Text style={{  marginLeft : 15 , color : '#48cedb' , fontSize: 15 }} >status</Text>
+                <Text style={{  marginLeft : 15 , color : '#48cedb' , fontSize: 15 }} >{val.status}</Text>
                 </View>
                 </View>
             </View>

@@ -15,6 +15,8 @@ import Assignment from './ScreensUser/Assignment.js';
 import PhoneBook from './Screens/PhoneBook.js';
 import Contact from './Screens/Contact.js';
 import ResetPassword from './Screens/ResetPassword.js';
+import DetailAdvisorPhoneBook from './Screens/DetailAdvisorPhoneBook.js';
+
 
 import UserContact from './ScreensUser/UserContact.js';
 import Questions from './ScreensUser/Questions.js';
@@ -103,14 +105,20 @@ class Routes extends React.Component{
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
                                 activeTintColor="#8ccff1" 
                                 inactiveTintColor="#a69beb" >
+                                <Scene key='PhoneBookPage' iconName="ios-call" icon={TabIcon} title='สมุดโทรศัพท์'>
                                     <Scene 
                                             key='PhoneBook' 
                                             component={PhoneBook} 
-                                            icon={TabIcon}
-                                            iconName="ios-call"
                                             title='สมุดโทรศัพท์' 
                                             initial>
                                     </Scene>
+                                    <Scene 
+                                            key='DetailAdvisorPhoneBook' 
+                                            component={DetailAdvisorPhoneBook} 
+                                            title='รายละเอียด' 
+                                            >
+                                    </Scene>
+                                </Scene>
                             </Tabs>
                         </Scene>
                     </Drawer>
@@ -150,12 +158,6 @@ class Routes extends React.Component{
                                                 key='AddQueue' 
                                                 component={AddQueue} 
                                                 title='เพิ่มคิว' 
-                                                >
-                                        </Scene>
-                                        <Scene 
-                                                key='ListAddAss' 
-                                                component={ListAddAss} 
-                                                title='รายการที่สามารถนัดคิวได้' 
                                                 >
                                         </Scene>
                                     </Scene>
@@ -216,6 +218,12 @@ class Routes extends React.Component{
                                                 key='UsAddAssignment' 
                                                 component={UsAddAssignment}
                                                 title='เพิ่มงาน'>
+                                        </Scene>
+                                        <Scene 
+                                                key='ListAddAss' 
+                                                component={ListAddAss} 
+                                                title='รายการที่สามารถเพิ่มงานได้' 
+                                                >
                                         </Scene>
                                         <Scene 
                                                 key='DetailAddDoc' 

@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet,View,Text,Image,TouchableOpacity } from 'react-native';
-import { LinearGradient,Constants,DocumentPicker} from 'expo';
+import { StyleSheet,View,Text,Image,TouchableOpacity,WebView,Platform } from 'react-native';
+import { LinearGradient,Constants,DocumentPicker,ImagePicker } from 'expo';
 import { connect } from 'react-redux'
 import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
+
 
 
 class RealDetailAddSubDoc extends React.Component{
@@ -11,28 +12,42 @@ class RealDetailAddSubDoc extends React.Component{
     super(props);
     this.state = {
         Data: '',
-        filename: ''
+        filename: '',
+        pickerResult: null,
     };
   }
   SentDataConfirm(){
     let collection={}
     collection.id = this.props.DetailSubDoc.id
+    collection.user = this.props.DetailSubDoc.user
     collection.file = this.state.pickDocument
 
     console.log(collection);
     // Actions.DetailAddDoc();
 
-    // var url = 'http:///10.66.13.208:8000/Document/addsubdoc/' ;
+    var url = 'http:///10.66.13.208:8000/Document/file/' ;
 
-    // fetch(url, {
-    // method: 'POST', 
-    // body: JSON.stringify(collection),
-    // headers:{
-    //     'Content-Type': 'application/json' ,
-    //     Authorization : `Token ${this.props.token}`,
-    // }
-    // })
+    fetch(url, {
+    method: 'POST', 
+    body: JSON.stringify(collection),
+    headers:{
+        'Content-Type': 'application/json' ,
+        Authorization : `Token ${this.props.token}`,
+    }
+    })
   }
+  _pickImg = async () => {
+    let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      base64: true,
+      allowsEditing: false,
+      aspect: [4, 3],
+    });
+    console.log(pickerResult)
+    this.setState({
+      pickerResult,
+      showMe:false
+    });
+  };
   _pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({});
     alert('ทำการเพิ่มไฟล์เรียบร้อยแล้ว');
@@ -45,6 +60,9 @@ class RealDetailAddSubDoc extends React.Component{
     console.log('_pickDocument',result);
 }
    render(){  
+    let { pickerResult } = this.state;
+    let imageUri = pickerResult ? `data:image/jpg;base64,${pickerResult.base64}` : null;
+    imageUri && console.log({uri: imageUri.slice(0, 100)});
     return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
             <View style={{ height: '100%' }}>
@@ -87,7 +105,7 @@ class RealDetailAddSubDoc extends React.Component{
                         marginTop: 20 }} >แนบไฟล์</Text>
                     <View style={{alignItems:'center'}}>
                     <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonSelectFile}>
-                        <TouchableOpacity onPress={() => this._pickDocument()}>
+                        <TouchableOpacity onPress={() => this._pickImg()}>
                         <Ionicons name="ios-attach" size={20} style={{ color:'#fff' , marginTop: 5 , marginLeft: 10 }} />
                         </TouchableOpacity>
                     </LinearGradient>

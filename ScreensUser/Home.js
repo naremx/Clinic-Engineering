@@ -9,8 +9,6 @@ import axios from 'axios'
 import { DataAdvisorAction } from '../Actions';
 
 
-
-
 const BannerWidth = Dimensions.get('window').width;
 const BannerHeight = 200;
 
@@ -103,13 +101,13 @@ componentDidMount() {
                         <View style={Styles.ContainerSearch}>
 
                             <View style={{flexDirection: 'row' , marginTop : 10  }}>
-                                    <Ionicons name="ios-happy" size={40} color="#a69beb" style={{ marginLeft : 50 }} />
-                                    <Ionicons name="ios-flask" size={40} color="#a69beb" style={{ marginLeft : 100 }} />
+                                    <Ionicons name="ios-happy" size={40} color="#a69beb" style={{ marginLeft : 55 }} />
+                                    <Ionicons name="ios-flask" size={40} color="#a69beb" style={{ marginLeft : 90 }} />
                                     <Ionicons name="ios-book"  size={40} color="#a69beb" style={{ marginLeft : 100 }} />
                                 </View>
                                 <View style={{flexDirection: 'row' , marginTop : 10 }}>
                                     <Text style={{ color : '#a69beb' , marginLeft : 40 }}>ชื่ออาจารย์</Text>
-                                    <Text style={{ color : '#a69beb' , marginLeft : 50 }}>ชื่อภาควิชา</Text>
+                                    <Text style={{ color : '#a69beb' , marginLeft : 60 }}>ชื่อภาควิชา</Text>
                                     <Text style={{ color : '#a69beb' , marginLeft : 50 }}>ชื่อวิทยานิพนธ์</Text>
                                 </View>
                         </View>

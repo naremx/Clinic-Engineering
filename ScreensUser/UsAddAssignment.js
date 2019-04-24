@@ -35,7 +35,7 @@ submit(){
   collection.end_date=this.state.end_date
   console.log(collection);
 
-  Actions.Home();
+  Actions.UserSelectModeDoc();
 
   var url = 'http:///10.66.13.208:8000/Document/adddocument/' ;
 
