@@ -19,7 +19,8 @@ from rest_framework import status
 from .models import User
 from AdvisorInfo.models import*
 from AdvisorInfo.serializer import*
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class contact(APIView):
     throttle_classes = ()
@@ -53,7 +54,7 @@ class contact(APIView):
         )
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
+
         serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
@@ -78,7 +79,6 @@ class Adregister(APIView):
     permission_classes = ()
 
     def post(self, request):
-        print(request.data)
         serializer = AdvisorRegisSerializer(data=request.data['user'])
         if serializer.is_valid(raise_exception=ValueError):
             user_obj = serializer.create(validated_data=request.data)
@@ -112,10 +112,14 @@ class logout(APIView):
 
 
 class fgpassword(APIView):
-    def get(self, request):
-        print(1)
-        subject = 'God blessing on you!!, chance to change to new password'
-        message = ' click this link'
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = ['mosaicpm@outlook.com', ]
-        send_mail(subject, message, email_from, recipient_list)
+    def post(self, request):
+        print(request.data)
+        list=[]
+        list.append(request.data)
+        if User.objects.filter(email=request.data):
+            subject = 'God blessing on you!!, chance to change to new password'
+            message = ' click this link'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = list
+            print(recipient_list)
+            send_mail(subject, message, email_from, recipient_list)

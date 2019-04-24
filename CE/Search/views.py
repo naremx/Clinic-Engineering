@@ -10,7 +10,7 @@ from AdvisorInfo.serializer import *
 
 class search(APIView):
     def post(self, request):
-        if AdvisorData.objects.filter(first_name__icontains=request.data):
+        if AdvisorData.objects.filter(name__icontains=request.data):
             Advisor_list = AdvisorData.objects.filter(first_name__icontains=request.data)
             serializers = AdvisorDataSerializer(Advisor_list, many=True)
             return Response(serializers.data)

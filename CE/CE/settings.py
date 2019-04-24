@@ -132,7 +132,7 @@ REST_FRAMEWORK = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Bangkok'
 
 USE_I18N = True
 
@@ -159,3 +159,6 @@ EMAIL_HOST_USER = '58010555@kmitl.ac.th'
 EMAIL_HOST_PASSWORD = 'ef2w63Cz'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'

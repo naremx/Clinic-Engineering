@@ -8,6 +8,7 @@ class AvailableSerializer(serializers.ModelSerializer):
         model = available
         fields = "__all__"
 
+
 class AdvisorDataSerializer(serializers.ModelSerializer):
     # name = serializers.CharField(source='first_name')
     # surname = serializers.CharField(source='last_name')
@@ -26,9 +27,16 @@ class AdvisorDataSerializer(serializers.ModelSerializer):
 
 
 class ShowAvailableSerializer(serializers.ModelSerializer):
-    start_time = serializers.TimeField(source='free_time.start_time')
-    end_time = serializers.TimeField(source='free_time.end_time')
+    free_time = serializers.SerializerMethodField('time')
 
     class Meta:
         model = available
-        fields = ('free_date', 'start_time', 'end_time','id')
+        fields = ('free_date', 'free_time', 'id')
+
+    def time(self, obj):
+        from django.shortcuts import get_object_or_404
+        import time
+        available1 = get_object_or_404(available, id=obj.id)
+        # print(available1)
+        return str(available1.free_time.start_time)+'-'+ str(available1.free_time.end_time)
+

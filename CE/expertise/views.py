@@ -22,7 +22,7 @@ class expertise(APIView):
         expertise = exp['expertise']
 
         contact = pd.read_csv("contact.csv")
-        name = contact['name']
+        # name = contact['name']
         advisor_id = 169
         adname_list = []
         expertise_list = []
@@ -35,8 +35,8 @@ class expertise(APIView):
             expertise_list.append(a)
         all = [{'adname': a, 'expname': b} for a, b in zip(adname_list, expertise_list)]
         for i in all:
-            if AdvisorData.objects.filter(first_name=i['adname']):
-                a = AdvisorData.objects.get(first_name=i['adname'])
+            if AdvisorData.objects.filter(name=i['adname']):
+                a = AdvisorData.objects.get(name=i['adname'])
                 Expertise.objects.create(
                     advisor=a,
                     expertise=i['expname']

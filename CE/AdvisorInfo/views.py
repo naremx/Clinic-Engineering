@@ -11,6 +11,8 @@ import pandas as pd
 
 def advisorcsv(request):
     contact = pd.read_csv("contact.csv")
+    first_name = contact['first_name']
+    last_name = contact['last_name']
     name = contact['name']
     email = contact['email']
     telephone = contact['telephone']
@@ -39,7 +41,9 @@ def advisorcsv(request):
             user_obj = serializer.create(validated_data=list)
         p = AdvisorData(
             user=user_obj,
-            first_name=name[x],
+            first_name=first_name[x],
+            last_name=last_name[x],
+            name=name[x],
             email=email[x],
             telephone=telephone[x],
             department=department[x],

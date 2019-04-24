@@ -16,7 +16,7 @@ class AdvisorData(models.Model):
     tax_number = models.CharField(max_length=500, default='', blank=True)
     gender = models.CharField(max_length=500, default='', blank=True)
     address = models.CharField(max_length=500, default='', blank=True)
-
+    name = models.CharField(max_length=500,default='',blank=True)
     # available = models.BooleanField(default=True)
     def __str__(self):
         return self.first_name + self.last_name
@@ -42,6 +42,5 @@ class available(models.Model):
     advisor = models.ForeignKey(AdvisorData, on_delete=models.CASCADE, default='')
     free_time = models.ForeignKey(time, on_delete=models.CASCADE, default='')
     is_display = models.BooleanField(default=True)
-
     def __str__(self):
         return str(self.free_date) + ' ' + str(self.free_time) + ' ' + str(self.advisor)
