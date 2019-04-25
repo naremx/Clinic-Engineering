@@ -51,6 +51,8 @@ class ModalCardLogin extends React.Component {
             // password: '123456Nn' ,
             username: '161pipat.pr@kmitl.ac.th' ,
             password: '1234' ,
+            // username: '' ,
+            // password: '' ,
         }
     }
     updateValue(text , field){

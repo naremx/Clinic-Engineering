@@ -47,7 +47,14 @@ import AdvisorEditSelectTime from './ScreensAdvisor/AdvisorEditSelectTime.js';
 import AdvisorDetailAddQueue from './ScreensAdvisor/DetailAddQueue.js';
 import AdvisorEditProfile from './ScreensAdvisor/AdvisorEditProfile.js';
 import AdvisorContact from './ScreensAdvisor/AdvisorContact.js';
-// import AddAssignment from './ScreensAdvisor/AddAssignment.js';
+import AdSelectModeDoc from './ScreensAdvisor/AdSelectModeDoc.js';
+import AdRecieveDoc from './ScreensAdvisor/AdRecieveDoc.js';
+import ListAddUs from './ScreensAdvisor/ListAddUs.js';
+import AdAsAddAssignment from './ScreensAdvisor/AsAddAssignment.js';
+import AdDetailAddDoc from './ScreensAdvisor/DetailAddDoc.js';
+import AdDetailAddSubDoc from './ScreensAdvisor/DetailAddSubDoc.js';
+import AdRealDetailAddSubDoc from './ScreensAdvisor/RealDetailAddSubDoc.js';
+
 
 import SlideMenuUser from './SlideMenu/SlideMenuUser';
 import SlideMenuAdvisor from './SlideMenu/SlideMenuAdvisor';
@@ -314,17 +321,48 @@ class Routes extends React.Component{
 
                                     <Scene key='AdvisorAssignment' iconName="ios-document" icon={TabIcon} title='งาน'>
                                         <Scene 
-                                                key='AdvisorAssignment' 
-                                                component={AdvisorAssignment}
-                                                iconName="ios-document"
-                                                icon={TabIcon}  
-                                                title='งาน'>
+                                                key='AdSelectModeDoc' 
+                                                component={AdSelectModeDoc} 
+                                                title='เลือกทำรายการ'>
                                         </Scene>
-                                        {/* <Scene 
-                                                key='AddAssignment' 
-                                                component={AddAssignment}
-                                                title='เพิ่มงาน'>
-                                        </Scene> */}
+                                        <Scene 
+                                                key='AdvisorAssignment' 
+                                                component={AdvisorAssignment} 
+                                                title='งานที่ส่งมอบหมาย'>
+                                        </Scene>
+                                        <Scene 
+                                                key='ListAddUs' 
+                                                component={ListAddUs} 
+                                                title='รายการที่สามารถเพิ่มงานได้' 
+                                                >
+                                        </Scene>
+                                        <Scene 
+                                                key='AdAsAddAssignment' 
+                                                component={AdAsAddAssignment} 
+                                                title='เพิ่มงาน' 
+                                                >
+                                        </Scene>
+
+                                        <Scene 
+                                                key='AdRecieveDoc' 
+                                                component={AdRecieveDoc}
+                                                title='งานที่ได้รับมอบหมาย'>
+                                        </Scene>
+                                        <Scene 
+                                                key='AdDetailAddDoc' 
+                                                component={AdDetailAddDoc}
+                                                title='รายละเอียดงาน'>
+                                        </Scene>
+                                        <Scene 
+                                                key='AdDetailAddSubDoc' 
+                                                component={AdDetailAddSubDoc}
+                                                title='เพิ่มหัวข้องาน'>
+                                        </Scene>
+                                        <Scene 
+                                                key='AdRealDetailAddSubDoc' 
+                                                component={AdRealDetailAddSubDoc}
+                                                title='แนบไฟล์'>
+                                        </Scene>
                                     </Scene>
 
                                     

@@ -106,7 +106,7 @@ class SlideMenuAdvisor extends Component{
                 <TouchableOpacity onPress={()=> Actions.ConditionsRoot()}>
                     <Text style={{ color : '#a69beb' , fontSize: 18 , marginTop: 10 , marginLeft: 20  }}>เงื่อนไขและข้อตกลง</Text>
                 </TouchableOpacity>
-                <View style={{ alignItems : 'flex-end' , marginTop: 320 }}>
+                <View style={{ alignItems : 'flex-end' , marginTop: 350 }}>
                     <TouchableOpacity onPress={() => this.Logout(this.props.token)}>
                         <Text style={{ color : '#a69beb' }}> ออกจากระบบ </Text>
                     </TouchableOpacity>

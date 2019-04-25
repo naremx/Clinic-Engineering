@@ -4,7 +4,7 @@ import { LinearGradient,Constants } from 'expo';
 import { Actions } from 'react-native-router-flux'
 
 
-export default class UserSelectModeDoc extends React.Component{
+export default class AdSelectModeDoc extends React.Component{
    render(){  
     return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
@@ -12,10 +12,10 @@ export default class UserSelectModeDoc extends React.Component{
           <View style={{alignItems:'center'}}>
           <View style={Styles.ContainerContacts}>
             <View style={{alignItems:'center'}}>
-            <TouchableOpacity onPress={() => Actions.UserRecieveDoc()}>
+            <TouchableOpacity onPress={() => Actions.AdRecieveDoc()}>
               <Image style={{  width:300 , height:150 , marginTop: 50 }} source={{ uri : "https://www.img.live/images/2019/04/24/document.png" }} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => Actions.Assignment()}>
+            <TouchableOpacity onPress={() => Actions.AdvisorAssignment()}>
               <Image style={{  width:300 , height:150 , marginTop: 50 }} source={{ uri : "https://www.img.live/images/2019/04/24/documentsent.png" }} />
             </TouchableOpacity>
             

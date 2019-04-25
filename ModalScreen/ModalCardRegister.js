@@ -188,7 +188,7 @@ export default class ModalCardRegister extends React.Component {
                 <View style= {{ marginLeft: 110 }}>
                 <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
                     <TouchableOpacity onPress={() => this.submit()}>
-                    <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , paddingTop: 10 }}>เข้าสู่ระบบ</Text>
+                    <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , paddingTop: 10 }}>ลงทะเบียน</Text>
                     </TouchableOpacity>
                 </LinearGradient>
                 </View>

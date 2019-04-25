@@ -37,7 +37,7 @@ submit(){
 
   Actions.UserSelectModeDoc();
 
-  var url = 'http:///10.66.13.208:8000/Document/adddocument/' ;
+  var url = 'http://161.246.5.11:8000/Document/adddocument/' ;
 
   fetch(url, {
   method: 'POST', 

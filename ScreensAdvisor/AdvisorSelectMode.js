@@ -19,7 +19,7 @@ export default class AdvisorSelectMode extends React.Component{
               <Image style={{ marginTop: 50 , width:300 , height:150 , borderRadius: 20 }} source={{ uri : "https://www.img.in.th/images/160970118a2153353f7bd14c65a986fa.png" }} />
             </TouchableOpacity>
             
-            <Image style={{  width:370 , height:194 }} source={{ uri : "https://www.img.in.th/images/a96c9c44823dd503e7bf0a5cd222a517.png" }} />
+            <Image style={{  width:370 , height:194 , borderRadius: 15  }} source={{ uri : "https://www.img.in.th/images/a96c9c44823dd503e7bf0a5cd222a517.png" }} />
 
             </View>
           </View>

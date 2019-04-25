@@ -44,19 +44,19 @@ constructor(props) {
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
             <View style={Styles.Container}>
                 <View style={Styles.ContainerContacts}>
-                    <View style={{ flexDirection: 'row' }}>
+                    <View style={{ alignItems:'center' }}>
                         <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
                         <View style={{ flexDirection: 'column' }}>
                             <Text style={{ 
-                                marginLeft : 10 ,
                                 color : '#3e48a3' ,
-                                fontSize: 15 ,
+                                fontSize: 20 ,
                                 fontWeight: 'bold' ,
                                 marginTop: 20 }} 
                                 >{this.props.val.first_name} {this.props.val.last_name}</Text>
+                    </View>
                             <View style={{ flexDirection: 'row' }}>
                                 <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
-                                <Text style={{ marginLeft : 10 , color : '#c0c0c0', width: 200 }}>{this.props.val.department}</Text>
+                                <Text style={{ marginLeft : 10 , color : '#c0c0c0' }}>{this.props.val.department}</Text>
                             </View>
                             <View style={{flexDirection: "row" , marginLeft: 10 }}>
                                 <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
@@ -73,7 +73,7 @@ constructor(props) {
                                 </LinearGradient>
                             </View>
                         </View>
-                    </View>
+                    
                     <View style={{ marginLeft : 20 }}>
                         {/* <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' }}>วิทยานิพนธ์</Text>
                         <ScrollView style={{ height : 150 }}>
@@ -109,10 +109,9 @@ const Styles = StyleSheet.create({
         elevation: 6,
     },
     drawerImage: {
-        height: 90,
-        width: 90,
+        height: 100,
+        width: 100,
         borderRadius: 100,
-        marginLeft: 20,
         marginTop: 15,
     },
     Button:{

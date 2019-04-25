@@ -5,7 +5,7 @@ import DatePicker from 'react-native-datepicker'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
-class AddAssignment extends React.Component{
+class AsAddAssignment extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -28,24 +28,25 @@ class AddAssignment extends React.Component{
 submit(){
   let collection={}
   collection.id=this.props.AdDateTimeDetail.id
+  collection.name=this.props.AdDateTimeDetail.name
   collection.topic=this.state.topic
   collection.description=this.state.description
   collection.start_date=this.state.start_date
-  collection.end_date=this.state.end_date_date
+  collection.end_date=this.state.end_date
   console.log(collection);
 
-  Actions.Assignment();
+  Actions.UserSelectModeDoc();
 
-  // var url = 'http://161.246.5.11:8000/Document/adddocument/' ;
+  var url = 'http://161.246.5.11:8000/Document/adddocument/' ;
 
-  // fetch(url, {
-  // method: 'POST', 
-  // body: JSON.stringify(collection),
-  // headers:{
-  //     'Content-Type': 'application/json' ,
-  //     Authorization : `Token ${this.props.token}`,
-  //    }
-  // })
+  fetch(url, {
+  method: 'POST', 
+  body: JSON.stringify(collection),
+  headers:{
+      'Content-Type': 'application/json' ,
+      Authorization : `Token ${this.props.token}`,
+     }
+  })
 }
    render(){  
     return(
@@ -190,7 +191,7 @@ const mapStateToProps = ({ LoginUser_Reducer , Ad_Select_Time_Detail_Reducer }) 
       return { token,AdDateTimeDetail };
 }
 
-export default connect(mapStateToProps)(AddAssignment);
+export default connect(mapStateToProps)(AsAddAssignment);
 
 
 
