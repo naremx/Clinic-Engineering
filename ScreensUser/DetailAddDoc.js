@@ -53,7 +53,7 @@ renderText() {
         <TouchableOpacity onPress={() => this.CollectData(val)}>
             <View style={Styles.ContainerDoc}>
                 <View style={{ flexDirection: 'row' }}>
-                <Image style={{  width:64 , height:64 , marginLeft : 10 , marginTop : 8 }} source={{ uri : "https://www.img.live/images/2019/04/24/writing.png" }} />
+                <Image style={{  width:64 , height:64 , marginLeft : 10 , marginTop : 8 }} source={{ uri : "https://www.img.in.th/images/2389068f88f131a1fc3bcbb03b8fc52d.png" }} />
                 <View style={{ flexDirection: 'column' }}>
                 <Text style={{ 
                                 marginLeft : 10 ,
@@ -61,7 +61,7 @@ renderText() {
                                 fontSize: 20 ,
                                 fontWeight: 'bold' ,
                                 marginTop: 15 }} >{val.topic}</Text>
-                <Text style={{  marginLeft : 15 , color : '#48cedb' , fontSize: 15 }} >{val.status}</Text>
+                { this.renderStatus(val) }
                 </View>
                 </View>
             </View>
@@ -70,6 +70,15 @@ renderText() {
         );
     }
 }
+renderStatus(val){
+    console.log('OK' , val)
+    if(val.status == 'complete'){
+        return <Text style={{ marginLeft : 15 , color : '#45e353' , fontWeight: 'bold', fontSize: 15 }}>Status : เสร็จเรียบร้อย</Text> 
+    }
+    else{
+        return <Text style={{ marginLeft : 15 , color : '#8d8d8d' , fontWeight: 'bold', fontSize: 15 }}>Status : รอการดำเนินการ</Text> 
+    }
+  }
    render(){  
     return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>

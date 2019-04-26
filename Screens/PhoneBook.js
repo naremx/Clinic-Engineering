@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet,Image,View,Text,ScrollView,TouchableOpacity } from 'react-native';
+import { StyleSheet,Image,View,Text,ScrollView,TouchableOpacity,TextInput } from 'react-native';
 import { LinearGradient } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import axios from 'axios'
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux'
 import { DataAdvisorAction } from '../Actions';
+import { UserSearchAction } from '../Actions/UserSearchAction.js'
 
 class PhoneBook extends React.Component{
   constructor(props) {
@@ -30,14 +31,37 @@ class PhoneBook extends React.Component{
       console.log(err)
     }
 }
+sentDataSearch(){
+  let collection={}
+  collection=this.state.search
 
+  console.log(collection);
+
+  var url = 'http://161.246.5.11:8000/Search/search/' ;
+
+  fetch(url, {
+  method: 'POST', 
+  body: JSON.stringify(collection),
+  headers:{
+      'Content-Type': 'application/json' ,
+      // Authorization : `Token ${this.props.token}`,
+    }
+  }).then(res => res.json())
+  .then((responseData) => {
+    console.log(responseData)
+    this.props.UserSearchAction(responseData)
+    Actions.HomeResultSearch();
+  })
+  .then(response => console.log('Success:', JSON.stringify(response)))
+  .catch(error => console.error('Error:', error));
+}
   renderText() {
     if (this.state.dataSource.length > 0) {
         return this.state.dataSource.map((val, index) => 
         <View key={index} style={Styles.ContainerContacts}>
             <TouchableOpacity onPress={() => this.CollectData(val)}>
                 <View style={{ flexDirection: 'row' }}>
-                    <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
+                    <Image style={Styles.drawerImage} source={require('../Image/Advisor.png')} />
                     <View style={Styles.Column}>
                         <Text style={{ 
                             marginLeft : 10 ,
@@ -57,7 +81,13 @@ class PhoneBook extends React.Component{
         );
     }
 }
-
+updateValue(text , field){
+  if(field == 'search'){
+      this.setState({
+        search : text
+      })
+  }
+}
 CollectData(val){
   this.props.DataAdvisorAction(val)
   console.log(val)
@@ -68,6 +98,16 @@ CollectData(val){
     return(
       <LinearGradient colors ={['#87daf3','#a69beb']} style={Styles.container}>
         <View style={{ alignItems:'center' , marginTop: 10 }}>
+        <View style = {{ flexDirection: 'row' }}>
+          <LinearGradient colors ={['#fafafa','#ffffff']} style={Styles.InputBoxSearch}>
+            <TextInput style={Styles.Input} placeholder='ชื่ออาจารย์ / ชื่อภาควิชา / ชื่อวิทยานิพนธ์'
+            onChangeText={(text) => this.updateValue(text, 'search')}
+            placeholderTextColor='#b2b2b2' underlineColorAndroid='transparent' />
+          </LinearGradient>
+          <TouchableOpacity onPress={() => this.sentDataSearch()}>
+              <Text style={Styles.ButtonSearch}>ค้นหา</Text>
+          </TouchableOpacity>
+        </View>
         <ScrollView>
         <View style={{alignItems:'center'}}>
             { this.renderText() }
@@ -119,11 +159,40 @@ const Styles = StyleSheet.create({
       marginLeft: 20,
       marginTop: 15,
   },
-
+  InputBoxSearch: {
+    width: 310,
+    height: 40,
+    borderBottomLeftRadius: 10,
+    borderTopLeftRadius: 10,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    shadowColor: '#30C1DD',
+    shadowRadius: 10,
+    shadowOpacity: 0.6,
+    elevation: 6,
+    borderWidth: 2, 
+    borderColor: '#c8bfff',
+  },
+  ButtonSearch:{
+    width: 70,
+    height: 40,
+    color: '#fff' ,
+    fontSize: 15 , 
+    textAlign: 'center' ,
+    paddingTop: 10 ,
+    backgroundColor: '#c8bfff',
+    borderBottomRightRadius: 10,
+    borderTopRightRadius: 10,
+    shadowColor: '#30C1DD',
+    shadowRadius: 10,
+    shadowOpacity: 0.6,
+    elevation: 6,
+  },
 });
 
 
 const mapDispatchToprops = dispatch => ({
+  UserSearchAction: (data) => dispatch(UserSearchAction(data)) ,
   DataAdvisorAction: (val) => dispatch(DataAdvisorAction(val))
 })
 

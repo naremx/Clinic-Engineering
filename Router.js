@@ -16,6 +16,7 @@ import PhoneBook from './Screens/PhoneBook.js';
 import Contact from './Screens/Contact.js';
 import ResetPassword from './Screens/ResetPassword.js';
 import DetailAdvisorPhoneBook from './Screens/DetailAdvisorPhoneBook.js';
+import HomeResultSearch from './Screens/ResultSearch.js';
 
 
 import UserContact from './ScreensUser/UserContact.js';
@@ -124,6 +125,12 @@ class Routes extends React.Component{
                                             key='DetailAdvisorPhoneBook' 
                                             component={DetailAdvisorPhoneBook} 
                                             title='รายละเอียด' 
+                                            >
+                                    </Scene>
+                                    <Scene 
+                                            key='HomeResultSearch' 
+                                            component={HomeResultSearch} 
+                                            title='ผลการค้นหา' 
                                             >
                                     </Scene>
                                 </Scene>

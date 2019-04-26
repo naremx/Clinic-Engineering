@@ -46,7 +46,7 @@ renderText() {
       return this.state.selectedDate.map((val, index) => 
       <View key={index} style={Styles.ContainerContacts}>
               <View style={{ flexDirection: 'row' }}>
-                  <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
+                <Image style={Styles.drawerImage} source={{ uri : "https://www.img.in.th/images/f07736c5adb48f6a0ac1909d77b3f3e3.png" }} />
                   <View style={Styles.Column}>
                       <Text style={{ 
                           marginLeft : 10 ,
@@ -58,7 +58,7 @@ renderText() {
                       <Text style={{ marginLeft : 10 , color : '#777' }}>Date : {val.date_time}</Text>
                       <View style={{ flexDirection: 'row' }}>
                           <Ionicons name="ios-notifications" size={20} style={{ color:'#48cedb' , marginLeft: 22}} />
-                          <Text style={{ marginLeft : 10 , color : '#48cedb' }}>Status : {val.status}</Text>
+                          {this.renderStatus(val)}
                       </View>
                   </View>
               </View>
@@ -76,6 +76,17 @@ renderText() {
             </TouchableOpacity>
       </View>
       );
+  }
+}
+renderStatus(val){
+  if(val.status == 'accepted'){
+      return <Text style={{ marginLeft : 10 , color : '#45e353' , fontWeight: 'bold' }}>Status : ยืนยัน</Text> 
+  }
+  else if(val.status == 'rejected'){
+      return <Text style={{ marginLeft : 10 , color : '#45e353' , fontWeight: 'bold' }}>Status : ยกเลิก</Text> 
+  }
+  else{
+      return <Text style={{ marginLeft : 10 , color : '#8d8d8d' , fontWeight: 'bold' }}>Status : รอการยืนยัน</Text> 
   }
 }
   render(){

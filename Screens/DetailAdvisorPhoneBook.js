@@ -45,7 +45,7 @@ constructor(props) {
             <View style={Styles.Container}>
                 <View style={Styles.ContainerContacts}>
                     <View style={{ alignItems:'center' }}>
-                        <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
+                        <Image style={Styles.drawerImage} source={require('../Image/Advisor.png')} />
                         <View style={{ flexDirection: 'column' }}>
                             <Text style={{ 
                                 color : '#3e48a3' ,
@@ -73,19 +73,6 @@ constructor(props) {
                                 </LinearGradient>
                             </View>
                         </View>
-                    
-                    <View style={{ marginLeft : 20 }}>
-                        {/* <Text style={{ color : '#3e48a3' , fontSize: 15 , fontWeight: 'bold' }}>วิทยานิพนธ์</Text>
-                        <ScrollView style={{ height : 150 }}>
-                            { this.renderText() }
-                        </ScrollView>  */}
-                    {/* </View>
-                    <Image source={require('../Image/meeting.png')} />
-                    <View style={{alignItems:'center'}}>
-                        <TouchableOpacity onPress={() => this.gotoCalendar()}>
-                            <Text style={Styles.ButtonChosen}>เลือกวันนัดคิว</Text>
-                        </TouchableOpacity> */}
-                    </View>
                 </View>
             </View>
         </LinearGradient>
@@ -100,7 +87,7 @@ const Styles = StyleSheet.create({
     },
     ContainerContacts: {
         width: 370,
-        height: 600,
+        height: 300,
         backgroundColor: 'white',
         borderRadius: 18,
         shadowColor: '#30C1DD',

@@ -47,7 +47,7 @@ class Assignment extends React.Component{
             return this.state.Data.map((val, index) => 
             <View key={index} style={Styles.ContainerContacts}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
+                        <Image style={Styles.drawerImage} source={{ uri : "https://www.img.in.th/images/a185d8d30d7e1eb3d300b0915d195414.png" }} />
                         <View style={Styles.Column}>
                             <Text style={{ 
                                 marginLeft : 10 ,
@@ -55,15 +55,9 @@ class Assignment extends React.Component{
                                 fontSize: 15 ,
                                 fontWeight: 'bold' ,
                                 marginTop: 20 }} >{val.name}</Text>
-                            <Text style={{ marginLeft : 10 , color : '#3e48a3',fontWeight: 'bold' }}>Topic : {val.topic}</Text>
-                            <View style={{ flexDirection: 'row' }}>
-                            <Ionicons name="ios-alarm" size={20} style={{ color:'#3e48a3' , marginLeft: 22}} />
+                            <Text style={{ marginLeft : 10 , color : '#3e48a3' }}>Topic : {val.topic}</Text>
                             <Text style={{ marginLeft : 10 , color : '#777' }}>Start Date : {val.start_date}</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row' }}>
-                            <Ionicons name="ios-alarm" size={20} style={{ color:'#3e48a3' , marginLeft: 22}} />
                             <Text style={{ marginLeft : 10 , color : '#777' }}>End Date : {val.end_date}</Text>
-                            </View>
                         </View>
                     </View>
                 <TouchableOpacity onPress={() => this.CollectData(val)}>

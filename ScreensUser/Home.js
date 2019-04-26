@@ -63,7 +63,7 @@ componentDidMount() {
             <View key={index} style={Styles.ContainerContacts}>
                 <TouchableOpacity onPress={() => this.CollectData(val)}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
+                        <Image style={Styles.drawerImage} source={require('../Image/Advisor.png')} />
                         <View style={Styles.Column}>
                             <Text style={{ 
                                 marginLeft : 10 ,

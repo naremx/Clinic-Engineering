@@ -109,7 +109,7 @@ componentDidMount() {
               <View style={Styles.ContainerContacts}>
               <View style={{alignItems:'center'}}>
                 <Image style={Styles.drawerImage}
-                          source={require('../Image/user.png')} />
+                          source={require('../Image/Advisor.png')} />
               </View>
               <View style={{alignItems:'center' , flexDirection: 'row' , marginTop : 10}}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >ชื่อ</Text>

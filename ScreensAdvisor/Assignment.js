@@ -47,7 +47,7 @@ class Assignment extends React.Component{
             return this.state.Data.map((val, index) => 
             <View key={index} style={Styles.ContainerContacts}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
+                        <Image style={Styles.drawerImage} source={{ uri : "https://www.img.in.th/images/a185d8d30d7e1eb3d300b0915d195414.png" }} />
                         <View style={Styles.Column}>
                             <Text style={{ 
                                 marginLeft : 10 ,
