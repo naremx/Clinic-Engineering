@@ -23,7 +23,7 @@ class SlideMenuAdvisor extends Component{
         let collection={}
         collection.user_type=this.props.data.user_type,
         console.log(collection);
-        var url = 'http://161.246.5.11:8000/Showdetail/Adshowdetail/' ;
+        var url = 'http://35.247.141.196:8000/Showdetail/Adshowdetail/' ;
       
         fetch(url, {
         method: 'POST', 
@@ -57,7 +57,7 @@ class SlideMenuAdvisor extends Component{
         .catch(error => console.error('Error:', error));
       }
     async Logout(token) {
-        const response = await fetch(`http://161.246.5.11:8000/Account/logout` , {
+        const response = await fetch(`http://35.247.141.196:8000/Account/logout` , {
             headers: {
                 Authorization : `Token ${this.props.token}`,
             }   
@@ -90,7 +90,7 @@ class SlideMenuAdvisor extends Component{
                         <Text style={{ color : '#a69beb' , fontSize: 20 , marginTop: 10 , textAlign: 'center' , marginLeft: 10 }}>ข้อมูลส่วนตัว</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> Actions.ContactRoot()}>
+                <TouchableOpacity onPress={()=> Actions.AdvisorHistory()}>
                     <View style={{ flexDirection: 'row'  }}>
                         <Ionicons name="ios-list-box" size={30} style={{ color:'#3e48a3' , marginTop: 10 , marginLeft: 20 }} />
                         <Text style={{ color : '#a69beb' , fontSize: 20 , marginTop: 10 , textAlign: 'center' , marginLeft: 10 }}>รายการย้อนหลัง</Text>

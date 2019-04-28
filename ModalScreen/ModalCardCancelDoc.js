@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
 
-class ModalCardCancel extends React.Component {
+class ModalCardCancelDoc extends React.Component {
     constructor(){
         super()
         this.state = {
@@ -49,12 +49,12 @@ class ModalCardCancel extends React.Component {
                                 </TouchableOpacity>
                             </View>
                             
-                        <Text style={{ color : '#495090' , fontSize: 18 , fontWeight: 'bold' , textAlign: 'center' }}>คุณต้องการยกเลิกคิวใช่หรือไม่ ?</Text>
+                        <Text style={{ color : '#495090' , fontSize: 18 , fontWeight: 'bold' , textAlign: 'center' }}>คุณต้องการยกเลิกเอกสารใช่หรือไม่ ?</Text>
 
                         <View style={{ alignItems:'center'}}>
                             <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
                                 <TouchableOpacity onPress={() => this.SentDataCancle()}>
-                                <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>ยกเลิกคิว</Text>
+                                <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>ยกเลิกเอกสาร</Text>
                                 </TouchableOpacity>
                             </LinearGradient>
                         </View>
@@ -65,7 +65,7 @@ class ModalCardCancel extends React.Component {
                 <View style={{ alignItems:'center'}}>
                 <LinearGradient colors={['#fc8a99', '#a30015']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonCancle}>
                     <TouchableOpacity onPress={() => this.setState({ showMe:true })}>
-                    <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>ยกเลิกคิว</Text>
+                    <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>ยกเลิกเอกสาร</Text>
                     </TouchableOpacity>
                 </LinearGradient>
             </View>
@@ -95,7 +95,6 @@ ButtonCancle:{
     height: 50, 
     width: 150 , 
     borderRadius: 20 , 
-    marginTop: 180, 
     shadowColor: '#30C1DD',
     shadowRadius: 10,
     shadowOpacity: 0.6,
@@ -120,4 +119,4 @@ const mapStateToProps = ({ User_Select_Time_Detail_Reducer , LoginUser_Reducer }
     return { UserDateTimeDetail,token,role };
   }
 
-export default connect(mapStateToProps)(ModalCardCancel);
+export default connect(mapStateToProps)(ModalCardCancelDoc);

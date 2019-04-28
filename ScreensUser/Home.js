@@ -41,7 +41,7 @@ renderPage(image, index) {
 
 componentDidMount() {
     try{
-        axios.get(`http://161.246.5.11:8000/advisor/getaddata/` , {
+        axios.get(`http://35.247.141.196:8000/advisor/getaddata/` , {
         headers: {
             Authorization : `Token ${this.props.token}`,
         }
@@ -100,16 +100,6 @@ componentDidMount() {
                     </Carousel>
                         <View style={Styles.ContainerSearch}>
 
-                            <View style={{flexDirection: 'row' , marginTop : 10  }}>
-                                    <Ionicons name="ios-happy" size={40} color="#a69beb" style={{ marginLeft : 55 }} />
-                                    <Ionicons name="ios-flask" size={40} color="#a69beb" style={{ marginLeft : 90 }} />
-                                    <Ionicons name="ios-book"  size={40} color="#a69beb" style={{ marginLeft : 100 }} />
-                                </View>
-                                <View style={{flexDirection: 'row' , marginTop : 10 }}>
-                                    <Text style={{ color : '#a69beb' , marginLeft : 40 }}>ชื่ออาจารย์</Text>
-                                    <Text style={{ color : '#a69beb' , marginLeft : 60 }}>ชื่อภาควิชา</Text>
-                                    <Text style={{ color : '#a69beb' , marginLeft : 50 }}>ชื่อวิทยานิพนธ์</Text>
-                                </View>
                         </View>
                     </View>
                 <ScrollView>
@@ -154,7 +144,7 @@ const Styles = StyleSheet.create({
     },
     ContainerSearch:{
         width: 450,
-        height: 100,
+        height: 10,
         backgroundColor: '#fff',
         shadowColor: '#e5e5e5',
         shadowRadius: 10,

@@ -25,7 +25,7 @@ class RealDetailAddSubDoc extends React.Component{
     console.log(collection);
     // Actions.DetailAddDoc();
 
-    var url = 'http://161.246.5.11:8000/Document/file/' ;
+    var url = 'http://35.247.141.196:8000/Document/file/' ;
 
     fetch(url, {
     method: 'POST', 
@@ -69,7 +69,7 @@ class RealDetailAddSubDoc extends React.Component{
                 <View style={{ alignItems:'center' }}>
                     <View style={Styles.ContainerContacts}>
                     <View style={{ flexDirection: 'row' }}>
-                    <Image style={{  width:64 , height:64 , marginLeft : 15 , marginTop : 8 , alignItems:'center' }} source={{ uri : "https://www.img.live/images/2019/04/24/writing.png" }} />
+                    <Image style={{  width:64 , height:64 , marginLeft : 15 , marginTop : 8 , alignItems:'center' }} source={{ uri : "https://www.img.in.th/images/2389068f88f131a1fc3bcbb03b8fc52d.png" }} />
                     
                     <Text style={{ 
                                 marginLeft : 10 ,

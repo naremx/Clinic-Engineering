@@ -18,7 +18,7 @@ class UserEditProfile extends React.Component{
     }
 }
 componentDidMount() {
-        var url = 'http://161.246.5.11:8000/Showdetail/Usshowdetail/' ;
+        var url = 'http://35.247.141.196:8000/Showdetail/Usshowdetail/' ;
     
         fetch(url, {
         method: 'POST', 
@@ -90,7 +90,7 @@ componentDidMount() {
       console.log(collection);
       Actions.pop()
 
-      var url = 'http://161.246.5.11:8000/Editprofile/Usedit/' ;
+      var url = 'http://35.247.141.196:8000/Editprofile/Usedit/' ;
 
       fetch(url, {
       method: 'POST', 

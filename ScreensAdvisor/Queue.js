@@ -14,7 +14,7 @@ class Queue extends React.Component{
     }
 }    
   componentDidMount() {
-    var url = 'http://161.246.5.11:8000/history/Adshowhistory/' ;
+    var url = 'http://35.247.141.196:8000/history/Adshowhistory/' ;
 
     fetch(url, {
     method: 'POST', 
@@ -83,7 +83,7 @@ renderStatus(val){
       return <Text style={{ marginLeft : 10 , color : '#45e353' , fontWeight: 'bold' }}>Status : ยืนยัน</Text> 
   }
   else if(val.status == 'rejected'){
-      return <Text style={{ marginLeft : 10 , color : '#45e353' , fontWeight: 'bold' }}>Status : ยกเลิก</Text> 
+      return <Text style={{ marginLeft : 10 , color : '#c10023' , fontWeight: 'bold' }}>Status : ยกเลิก</Text> 
   }
   else{
       return <Text style={{ marginLeft : 10 , color : '#8d8d8d' , fontWeight: 'bold' }}>Status : รอการยืนยัน</Text> 

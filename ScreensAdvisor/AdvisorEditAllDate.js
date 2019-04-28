@@ -32,7 +32,7 @@ class AdvisorEditAllDate extends React.Component {
     console.log('--SENT--',collection)
     Actions.AdvisorSelectMode()
 
-    var url = 'http://161.246.5.11:8000/advisor/createavailable/' ;
+    var url = 'http://35.247.141.196:8000/advisor/createavailable/' ;
 
     fetch(url, {
       method: 'POST', 

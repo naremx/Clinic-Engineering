@@ -13,10 +13,10 @@ export default class UserSelectModeDoc extends React.Component{
           <View style={Styles.ContainerContacts}>
             <View style={{alignItems:'center'}}>
             <TouchableOpacity onPress={() => Actions.UserRecieveDoc()}>
-              <Image style={{  width:300 , height:150 , marginTop: 50 }} source={{ uri : "https://www.img.live/images/2019/04/24/document.png" }} />
+              <Image style={{  width:300 , height:150 , marginTop: 50 }} source={{ uri : "https://www.img.in.th/images/8e9cf3f862e18f3542569b4b11ce9a36.png" }} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => Actions.Assignment()}>
-              <Image style={{  width:300 , height:150 , marginTop: 50 }} source={{ uri : "https://www.img.live/images/2019/04/24/documentsent.png" }} />
+              <Image style={{  width:300 , height:150 , marginTop: 50 }} source={{ uri : "https://www.img.in.th/images/0495389109057a374cbfb6cd522088da.png" }} />
             </TouchableOpacity>
             
             <Image style={{  width:370 , height:194 , marginTop: 5 , borderRadius: 15 }} source={{ uri : "https://www.img.in.th/images/a96c9c44823dd503e7bf0a5cd222a517.png" }} />

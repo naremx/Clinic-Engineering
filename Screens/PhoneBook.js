@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,Image,View,Text,ScrollView,TouchableOpacity,TextInput } from 'react-native';
+import { StyleSheet,Image,View,Text,ScrollView,TouchableOpacity,TextInput,Alert } from 'react-native';
 import { LinearGradient } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import axios from 'axios'
@@ -18,7 +18,7 @@ class PhoneBook extends React.Component{
 
   componentDidMount() {
     try{
-        axios.get(`http://161.246.5.11:8000/advisor/getaddata/` , {
+        axios.get(`http://35.247.141.196:8000/advisor/getaddata/` , {
         headers: {
             // Authorization : `Token ${this.props.token}`,
         }
@@ -37,7 +37,7 @@ sentDataSearch(){
 
   console.log(collection);
 
-  var url = 'http://161.246.5.11:8000/Search/search/' ;
+  var url = 'http://35.247.141.196:8000/Search/search/' ;
 
   fetch(url, {
   method: 'POST', 
@@ -48,12 +48,16 @@ sentDataSearch(){
     }
   }).then(res => res.json())
   .then((responseData) => {
-    console.log(responseData)
     this.props.UserSearchAction(responseData)
     Actions.HomeResultSearch();
   })
-  .then(response => console.log('Success:', JSON.stringify(response)))
-  .catch(error => console.error('Error:', error));
+  .catch(error => {
+    Alert.alert(
+      'ไม่พบผลลัพธ์การค้นหา',
+      'กรุณากรอกใหม่อีกครั้ง',
+    )
+    console.log(error)
+  });
 }
   renderText() {
     if (this.state.dataSource.length > 0) {

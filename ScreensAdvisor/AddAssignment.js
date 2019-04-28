@@ -36,7 +36,7 @@ submit(){
 
   Actions.Assignment();
 
-  // var url = 'http://161.246.5.11:8000/Document/adddocument/' ;
+  // var url = 'http://35.247.141.196:8000/Document/adddocument/' ;
 
   // fetch(url, {
   // method: 'POST', 
@@ -58,9 +58,9 @@ submit(){
               <Text style={{color : '#495090' , fontSize: 20 , fontWeight: 'bold', margin : 5 }}> {this.props.AdDateTimeDetail.user}</Text>
               <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >หัวเรื่อง</Text>
               <TextInput style={Styles.inputBoxAss} onChangeText={(text) => this.updateValue(text, 'topic')}/>
-              <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >รายละเอียดงาน</Text>
+              <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >รายละเอียดเอกสาร</Text>
               <TextInput style={Styles.inputBoxAss} onChangeText={(text) => this.updateValue(text, 'description')}/>
-              <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >วันที่รับงาน</Text>
+              <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >วันที่รับเอกสาร</Text>
               <DatePicker
                 style={{width: 200}}
                 date={this.state.start_date}
@@ -92,7 +92,7 @@ submit(){
                 }}
                 onDateChange={(date) => {this.setState({start_date: date})}}
               />
-              <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >วันที่ส่งงาน</Text>
+              <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >วันที่ส่งเอกสาร</Text>
               <DatePicker
                 style={{width: 200}}
                 date={this.state.end_date}

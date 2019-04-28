@@ -36,7 +36,7 @@ SentDataConfirm()
     console.log(collection);
     Actions.Assignment();
 
-    var url = 'http://161.246.5.11:8000/Document/addsubdoc/' ;
+    var url = 'http://35.247.141.196:8000/Document/addsubdoc/' ;
 
     fetch(url, {
     method: 'POST', 
@@ -53,9 +53,9 @@ SentDataConfirm()
             <View style={{ height: '100%' }}>
                 <View style={{ alignItems:'center' }}>
                     <View style={Styles.ContainerContacts}>
-                    <Text style={{ color : '#495090' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , marginTop: 30 }}>กรุณากรอกหัวข้องาน</Text>
+                    <Text style={{ color : '#495090' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , marginTop: 30 }}>กรุณากรอกหัวข้อเอกสาร</Text>
                         <View style={{ marginLeft : 30 }}> 
-                        <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >หัวข้องาน</Text>
+                        <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >หัวข้อเอกสาร</Text>
                         <TextInput style={Styles.inputBoxAss} onChangeText={(text) => this.updateValue(text, 'topic')}/>
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >รายละเอียด</Text>
                         <TextInput style={Styles.inputBoxAss} onChangeText={(text) => this.updateValue(text, 'description')}/>

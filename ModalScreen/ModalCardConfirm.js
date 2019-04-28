@@ -23,7 +23,7 @@ class ModalCardConfirm extends React.Component {
         console.log(collection);
         Actions.AdvisorQueue();
 
-        var url = 'http://161.246.5.11:8000/queue/confirm/' ;
+        var url = 'http://35.247.141.196:8000/queue/confirm/' ;
 
         fetch(url, {
         method: 'POST', 

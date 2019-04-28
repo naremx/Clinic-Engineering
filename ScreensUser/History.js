@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { UserSelectTimeQueueAction } from '../Actions/UserSelectTimeQueueAction.js'
 
-class Notification extends React.Component{
+class History extends React.Component{
 
         constructor(props){
             super(props);
@@ -17,7 +17,7 @@ class Notification extends React.Component{
             }
         }    
     componentDidMount() {
-        var url = 'http://35.247.141.196:8000/history/Adshowhistory/' ;
+        var url = 'http://35.247.141.196:8000/history/Usshowhistory/' ;
     
         fetch(url, {
         method: 'POST', 
@@ -32,7 +32,7 @@ class Notification extends React.Component{
                 DataSource: responseData
             }); 
             var output = this.state.DataSource.reduce(function (acc, item) {
-              if( item.status == 'waiting' ){
+              if( item.status == 'accepted' ){
                 acc.push(item);
               }
               return acc
@@ -58,7 +58,7 @@ class Notification extends React.Component{
             return this.state.ResultData.map((val, index) => 
             <View key={index} style={Styles.ContainerContacts}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Image style={Styles.drawerImage} source={{ uri : "https://www.img.live/images/2019/04/27/notification.png" }} />
+                        <Image style={Styles.drawerImage} source={{ uri : "https://www.img.in.th/images/f07736c5adb48f6a0ac1909d77b3f3e3.png" }} />
                         <View style={Styles.Column}>
                             <View style={{ flexDirection: 'row' }}>
                             <Ionicons name="ios-checkmark-circle" size={20} style={{ color:'#45e353' , marginLeft: 5 , marginTop: 20}} />
@@ -67,7 +67,7 @@ class Notification extends React.Component{
                                 color : '#3e48a3' ,
                                 fontSize: 15 ,
                                 fontWeight: 'bold' ,
-                                marginTop: 20 }} >{val.user}</Text>
+                                marginTop: 20 }} >{val.name}</Text>
                             </View>
                             <Text style={{ marginLeft : 10 , color : '#3e48a3' }}>Topic : {val.topic}</Text>
                             <Text style={{ marginLeft : 10 , color : '#777' }}>Date : {val.date_time}</Text>
@@ -77,7 +77,7 @@ class Notification extends React.Component{
                             </View>
                         </View>
                     </View>
-                {/* <TouchableOpacity onPress={() => this.CollectData(val)}>
+                <TouchableOpacity onPress={() => this.CollectData(val)}>
                 <View style={{alignItems:'center'}}>
                     <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonDescription}>
                         <Text style = {{ color: '#fff', 
@@ -88,7 +88,7 @@ class Notification extends React.Component{
                                 }}>ดูรายละเอียด</Text>
                     </LinearGradient>
                 </View>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
             </View>
             );
         }
@@ -126,7 +126,7 @@ const Styles = StyleSheet.create({
     },
     ContainerContacts: {
         width: 370,
-        height: 120,
+        height: 180,
         backgroundColor: 'white',
         borderRadius: 18,
         shadowColor: '#30C1DD',
@@ -163,4 +163,4 @@ const mapStateToProps = ({ Add_Queue_Reducer , Data_Datetime_Reducer , LoginUser
         return { chosenDate,val,token,role };
   }
 
-export default connect(mapStateToProps,mapDispatchToprops)(Notification);
+export default connect(mapStateToProps,mapDispatchToprops)(History);

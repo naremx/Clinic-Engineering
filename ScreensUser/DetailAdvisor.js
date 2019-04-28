@@ -19,7 +19,7 @@ constructor(props) {
         collection.user_type=this.props.data.user_type,
         collection.id=this.props.val.id,
         console.log(collection);
-        var url = 'http://161.246.5.11:8000/Showdetail/Adshowdetail/' ;
+        var url = 'http://35.247.141.196:8000/Showdetail/Adshowdetail/' ;
       
         fetch(url, {
         method: 'POST', 

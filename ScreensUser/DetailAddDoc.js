@@ -6,6 +6,8 @@ import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
 import { UserDetailSubDocAction } from '../Actions/UserDetailSubDocAction.js'
 
+import ModalCardCancelDoc from '../ModalScreen/ModalCardCancelDoc.js';
+
 class DetailAddDoc extends React.Component{
   constructor(props) {
     super(props);
@@ -19,7 +21,7 @@ class DetailAddDoc extends React.Component{
     collection.id=this.props.DetailDoc.id
     console.log(collection);
 
-    var url = 'http://161.246.5.11:8000/Document/showsubdocument/' ;
+    var url = 'http://35.247.141.196:8000/Document/showsubdocument/' ;
 
     fetch(url, {
     method: 'POST', 
@@ -86,7 +88,7 @@ renderStatus(val){
                 <View style={{ alignItems:'center' }}>
                     <View style={Styles.ContainerContacts}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Image style={{  width:64 , height:64 , marginTop: 10 , marginLeft: 20 }} source={{ uri : "https://www.img.live/images/2019/04/24/edit.png" }} />
+                        <Image style={{  width:64 , height:64 , marginTop: 30 , marginLeft: 20 }} source={{ uri : "https://www.img.live/images/2019/04/24/edit.png" }} />
                         <View style={{ flexDirection: 'column' }}>
                             <Text style={{ 
                                 marginLeft : 10 , 
@@ -102,7 +104,7 @@ renderStatus(val){
                             <View style={{ flexDirection: 'row' }}>
                                 <Ionicons name="ios-alarm" size={20} style={{ color:'#777' , marginLeft: 22}} />
                                 <Text style={{ marginLeft : 15 , color : '#3e48a3' , fontWeight: 'bold' }}>End Time :</Text>
-                                <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.DetailDoc.end_date}</Text>
+                                <Text style={{ marginLeft : 15 , color : '#777' }}>  {this.props.DetailDoc.end_date}</Text>
                             </View>
                         </View>
                     </View>
@@ -111,24 +113,29 @@ renderStatus(val){
                                 color : '#3e48a3' , 
                                 fontSize: 15 , 
                                 fontWeight: 'bold' , 
-                                marginTop: 20 }} >รายละเอียดงาน</Text>
-                    <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.DetailDoc.description}</Text>
+                                marginTop: 20 }} >รายละเอียดเอกสาร</Text>
+                    <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.DetailDoc.description}Building Your First Mobile App</Text>
                     <View style={{ flexDirection: 'row' }}>
                     <Text style={{ 
                                 marginLeft : 10 , 
                                 color : '#3e48a3' , 
                                 fontSize: 15 , 
                                 fontWeight: 'bold' , 
-                                marginTop: 20 }} >หัวข้องาน </Text>
+                                marginTop: 20 }} >หัวข้อเอกสารย่อย</Text>
                         <View style={Styles.ButtonConfirm}>
                         <TouchableOpacity onPress={() => Actions.DetailAddSubDoc()}>
                         <Ionicons name="ios-add" size={25} style={{ color: '#fff', paddingLeft : 6 }} />
                         </TouchableOpacity>
                         </View>
                     </View>
-                    <ScrollView style={{ height : 50 }}>
-                        { this.renderText() }
-                    </ScrollView>
+                    <View style={{ height : 250 }}>
+                        <ScrollView style={{ marginTop : 20 , height : 280 }}>
+                            
+                                { this.renderText() }
+
+                        </ScrollView>
+                    </View>
+                    <ModalCardCancelDoc/>
                     </View>
                 </View> 
             </View>
@@ -170,6 +177,7 @@ ButtonConfirm:{
     width: 25 , 
     borderRadius: 5 , 
     marginTop: 20 ,
+    marginLeft: 10,
     backgroundColor: '#3e48a3', 
     shadowColor: '#30C1DD',
     shadowRadius: 10,
