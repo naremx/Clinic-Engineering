@@ -1,9 +1,6 @@
 import React , {Component} from 'react';
 import { Router,Scene,Drawer,Tabs} from 'react-native-router-flux';
 import { connect } from 'react-redux'
-
-
-import Text from './Components/CustomText';
 import TabIcon from './TabIcon.js';
 
 import Home from './ScreensUser/Home.js';
@@ -37,6 +34,7 @@ import RealDetailAddSubDoc from './ScreensUser/RealDetailAddSubDoc.js';
 import UserSelectModeDoc from './ScreensUser/UserSelectModeDoc.js';
 import UserRecieveDoc from './ScreensUser/UserRecieveDoc.js';
 import UserHistory from './ScreensUser/History.js';
+import UserDetailHistory from './ScreensUser/DetailHistory.js';
 
 import AdvisorSelectMode from './ScreensAdvisor/AdvisorSelectMode.js';
 import Thesis from './ScreensAdvisor/Thesis.js';
@@ -57,6 +55,7 @@ import AdDetailAddDoc from './ScreensAdvisor/DetailAddDoc.js';
 import AdDetailAddSubDoc from './ScreensAdvisor/DetailAddSubDoc.js';
 import AdRealDetailAddSubDoc from './ScreensAdvisor/RealDetailAddSubDoc.js';
 import AdvisorHistory from './ScreensAdvisor/History.js';
+import AdDetailHistory from './ScreensUser/DetailHistory.js';
 
 
 import SlideMenuUser from './SlideMenu/SlideMenuUser';
@@ -70,23 +69,31 @@ class Routes extends React.Component{
                 <Scene key='root' hideNavBar>
 
                     <Scene key='ContactRoot' >
-                        <Scene key='Contact' component={Contact} title='ติดต่อเรา' initial/>
+                        <Scene key='Contact' component={Contact} title='ติดต่อเรา'/>
                     </Scene>
 
-                    <Scene key='UserHistory' >
-                        <Scene key='UserHistory' component={UserHistory} title='รายการย้อนหลัง' initial/>
-                    </Scene>
+                <Scene key='UserHistory' >
+                        <Scene key='UserHistory' component={UserHistory} title='รายการย้อนหลัง'/>
+                </Scene>
+                
+                <Scene key='UserDetailHistory' >
+                        <Scene key='UserDetailHistory' component={UserDetailHistory} title='รายละเอียด'/>
+                </Scene>
 
                     <Scene key='AdvisorHistory' >
-                        <Scene key='AdvisorHistory' component={AdvisorHistory} title='รายการย้อนหลัง' initial/>
+                        <Scene key='AdvisorHistory' component={AdvisorHistory} title='รายการย้อนหลัง'/>
+                    </Scene>
+
+                    <Scene key='AdDetailHistory' >
+                        <Scene key='AdDetailHistory' component={AdDetailHistory} title='รายละเอียด'/>
                     </Scene>
 
                     <Scene key='UserContactRoot' >
-                        <Scene key='UserContact' component={UserContact} title='ข้อมูลส่วนตัว' initial/>
+                        <Scene key='UserContact' component={UserContact} title='ข้อมูลส่วนตัว'/>
                     </Scene>
 
                     <Scene key='AdvisorContactRoot' >
-                        <Scene key='AdvisorContact' component={AdvisorContact} title='ข้อมูลส่วนตัว' initial/>
+                        <Scene key='AdvisorContact' component={AdvisorContact} title='ข้อมูลส่วนตัว' />
                     </Scene>
 
                     <Scene key='QuestionsRoot' >

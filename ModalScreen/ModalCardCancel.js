@@ -23,7 +23,7 @@ class ModalCardCancel extends React.Component {
         console.log(collection);
         Actions.Queue();
 
-        var url = 'http://35.247.141.196:8000/queue/deletequeue/' ;
+        var url = 'http://10.66.13.208:8000/queue/deletequeue/' ;
 
         fetch(url, {
         method: 'POST', 

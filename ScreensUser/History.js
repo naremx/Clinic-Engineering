@@ -17,7 +17,7 @@ class History extends React.Component{
             }
         }    
     componentDidMount() {
-        var url = 'http://35.247.141.196:8000/history/Usshowhistory/' ;
+        var url = 'http://10.66.13.208:8000/history/Usshowhistory/' ;
     
         fetch(url, {
         method: 'POST', 
@@ -51,7 +51,7 @@ class History extends React.Component{
         UserDateTimeDetail = val
 
         this.props.UserSelectTimeQueueAction(UserDateTimeDetail)
-        Actions.DetailAddQueue()
+        Actions.UserDetailHistory()
     }
     renderText() {
         if (this.state.ResultData.length > 0) {

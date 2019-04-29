@@ -14,7 +14,7 @@ class SlideMenuUser extends Component{
         };
       }
     componentDidMount() {
-        var url = 'http://35.247.141.196:8000/Showdetail/Usshowdetail/' ;
+        var url = 'http://10.66.13.208:8000/Showdetail/Usshowdetail/' ;
     
         fetch(url, {
         method: 'POST', 
@@ -44,7 +44,7 @@ class SlideMenuUser extends Component{
     }
     async Logout(token) {
         console.log(token)
-        const response = await fetch(`http://35.247.141.196:8000/Account/logout` , {
+        const response = await fetch(`http://10.66.13.208:8000/Account/logout` , {
             headers: {
                 Authorization : `Token ${this.props.token}`,
             }   

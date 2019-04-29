@@ -10,14 +10,13 @@ class Queue extends React.Component{
 
         constructor(props){
             super(props);
-            this.renderStatus = this.renderStatus.bind(this);
             this.state = {
                 isLoading: false,
                 selectedDate: '',
             }
         }    
     componentDidMount() {
-        var url = 'http://35.247.141.196:8000/history/Usshowhistory/' ;
+        var url = 'http://10.66.13.208:8000/history/Usshowhistory/' ;
     
         fetch(url, {
         method: 'POST', 
@@ -32,7 +31,6 @@ class Queue extends React.Component{
                 selectedDate: responseData
             }); 
             console.log('OK' ,responseData )
-            renderStatus2(this.state.selectedDate)
           })
     
         .then(response => console.log('Success:', JSON.stringify(response)))
@@ -141,7 +139,7 @@ const Styles = StyleSheet.create({
 });
 
 const mapDispatchToprops = dispatch => ({
-    UserSelectTimeQueueAction: (UserDateTimeDetail) => dispatch(UserSelectTimeQueueAction(UserDateTimeDetail))
+    UserSelectTimeQueueAction: (UserDateTimeDetail) => dispatch(UserSelectTimeQueueAction(UserDateTimeDetail)),
 })
 
 

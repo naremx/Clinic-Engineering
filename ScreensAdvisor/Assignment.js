@@ -15,7 +15,7 @@ class Assignment extends React.Component{
         }
     }    
     componentDidMount() {
-        var url = 'http://35.247.141.196:8000/Document/showdocument/' ;
+        var url = 'http://10.66.13.208:8000/Document/showdocument/' ;
     
         fetch(url, {
         method: 'POST', 

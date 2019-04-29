@@ -41,7 +41,7 @@ renderPage(image, index) {
 
 componentDidMount() {
     try{
-        axios.get(`http://35.247.141.196:8000/advisor/getaddata/` , {
+        axios.get(`http://10.66.13.208:8000/advisor/getaddata/` , {
         headers: {
             Authorization : `Token ${this.props.token}`,
         }

@@ -75,7 +75,7 @@ class ModalCardLogin extends React.Component {
 
         this.setState({ showMe:false })
 
-        var url = 'http://35.247.141.196:8000/Account/' ;
+        var url = 'http://10.66.13.208:8000/Account/' ;
 
         fetch(url, {
         method: 'POST', 

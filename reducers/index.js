@@ -27,5 +27,5 @@ export default combineReducers({
     LoginUser_Data_Reducer,
     User_Search_Reducer,
     User_Detail_Doc,
-    User_Detail_Sub_Doc
+    User_Detail_Sub_Doc,
 });

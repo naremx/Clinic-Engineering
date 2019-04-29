@@ -14,16 +14,17 @@ class ModalCardCancelDoc extends React.Component {
         }
     }
 
-    SentDataCancle(date_time)
+    SentDataCancle()
     {
         this.setState({ showMe:false })
         let collection={}
-        collection.id = this.props.UserDateTimeDetail.id
+        collection.id_doc = this.props.DetailDoc.id
+        collection.id_queue = this.props.DetailDoc.queue
 
         console.log(collection);
-        Actions.Queue();
+        Actions.Assignment();
 
-        var url = 'http://35.247.141.196:8000/queue/deletequeue/' ;
+        var url = 'http://10.66.13.208:8000/Document/deletedocument/' ;
 
         fetch(url, {
         method: 'POST', 
@@ -113,10 +114,11 @@ Button:{
 
 });
 
-const mapStateToProps = ({ User_Select_Time_Detail_Reducer , LoginUser_Reducer }) => {
-    const { UserDateTimeDetail } = User_Select_Time_Detail_Reducer;
+const mapStateToProps = ({ User_Detail_Doc , LoginUser_Reducer , Ad_Select_Time_Detail_Reducer }) => {
+    const { DetailDoc } = User_Detail_Doc;
+    const { AdDateTimeDetail } = Ad_Select_Time_Detail_Reducer;
     const { token,role } = LoginUser_Reducer;
-    return { UserDateTimeDetail,token,role };
+    return { DetailDoc,token,role,AdDateTimeDetail };
   }
 
 export default connect(mapStateToProps)(ModalCardCancelDoc);

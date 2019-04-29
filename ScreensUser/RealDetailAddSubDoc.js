@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View,Text,Image,TouchableOpacity,WebView,Platform } from 'react-native';
+import { StyleSheet,View,Text,Image,TouchableOpacity,WebView,Platform,Button } from 'react-native';
 import { LinearGradient,Constants,DocumentPicker,ImagePicker } from 'expo';
 import { connect } from 'react-redux'
 import { Ionicons } from 'react-native-vector-icons'
@@ -25,7 +25,7 @@ class RealDetailAddSubDoc extends React.Component{
     console.log(collection);
     // Actions.DetailAddDoc();
 
-    var url = 'http://35.247.141.196:8000/Document/file/' ;
+    var url = 'http://10.66.13.208:8000/Document/file/' ;
 
     fetch(url, {
     method: 'POST', 
@@ -106,7 +106,7 @@ class RealDetailAddSubDoc extends React.Component{
                         marginTop: 20 }} >แนบไฟล์</Text>
                     <View style={{alignItems:'center'}}>
                     <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonSelectFile}>
-                        <TouchableOpacity onPress={() => this._pickImg()}>
+                        <TouchableOpacity onPress={() => this._pickDocument()}>
                         <Ionicons name="ios-attach" size={20} style={{ color:'#fff' , marginTop: 5 , marginLeft: 10 }} />
                         </TouchableOpacity>
                     </LinearGradient>

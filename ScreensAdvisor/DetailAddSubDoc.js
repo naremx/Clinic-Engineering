@@ -36,7 +36,7 @@ SentDataConfirm()
     console.log(collection);
     Actions.Assignment();
 
-    var url = 'http://35.247.141.196:8000/Document/addsubdoc/' ;
+    var url = 'http://10.66.13.208:8000/Document/addsubdoc/' ;
 
     fetch(url, {
     method: 'POST', 

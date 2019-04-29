@@ -16,7 +16,7 @@ class ListAddUs extends React.Component{
         }
     }    
     componentDidMount() {
-      var url = 'http://35.247.141.196:8000/history/Adshowhistory/' ;
+      var url = 'http://10.66.13.208:8000/history/Adshowhistory/' ;
   
       fetch(url, {
       method: 'POST', 

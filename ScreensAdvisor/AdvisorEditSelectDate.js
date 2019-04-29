@@ -16,7 +16,7 @@ class AdvisorEditSelectDate extends React.Component{
     this.onDayPress = this.onDayPress.bind(this);
     }
     componentDidMount() {
-        var url = 'http://35.247.141.196:8000/advisor/Adshowavailable/' ;
+        var url = 'http://10.66.13.208:8000/advisor/Adshowavailable/' ;
 
         fetch(url, {
         method: 'POST', 

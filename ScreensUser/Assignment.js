@@ -15,11 +15,16 @@ class Assignment extends React.Component{
         }
     }    
     componentDidMount() {
-        var url = 'http://35.247.141.196:8000/Document/showdocument/' ;
+        var url = 'http://10.66.13.208:8000/Document/showdocument/' ;
+
+        let collection={}
+        collection.user_type=this.props.data.user_type,
+
+        console.log(collection);
     
         fetch(url, {
         method: 'POST', 
-        body: JSON.stringify(this.props.token),
+        body: JSON.stringify(collection),
         headers:{
             'Content-Type': 'application/json' ,
             Authorization : `Token ${this.props.token}`,
@@ -150,10 +155,11 @@ const mapDispatchToprops = dispatch => ({
     UserDetailDocAction: (DetailDoc) => dispatch(UserDetailDocAction(DetailDoc))
 })
 
-const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer }) => {
+const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer , LoginUser_Data_Reducer}) => {
     const { token,role } = LoginUser_Reducer;
     const { val } = Add_Queue_Reducer;
-        return { token,role,val };
+    const { data } = LoginUser_Data_Reducer;
+        return { token,role,val,data};
   }
 
 export default connect(mapStateToProps,mapDispatchToprops)(Assignment);

@@ -5449,6 +5449,11 @@ react-dom@^16.8.2:
     prop-types "^15.6.2"
     scheduler "^0.13.2"
 
+react-file-picker@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/react-file-picker/-/react-file-picker-0.0.6.tgz#dd8fd8f0cd1ce74a42074c653f3afff7d7013690"
+  integrity sha512-EnRQCEeC5YpSaCm/pbUi7zroP6lMgT7SqQTFS0ZNJXlcA8Cw2zDvEIoP/SkQ8u5Lbp+L2cyoxiy7ZBVtXk5hGw==
+
 react-is@^16.3.2, react-is@^16.5.2:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.7.0.tgz#c1bd21c64f1f1364c6f70695ec02d69392f41bfa"
@@ -5584,6 +5589,11 @@ react-native-fcm@^16.2.4:
   version "16.2.4"
   resolved "https://registry.yarnpkg.com/react-native-fcm/-/react-native-fcm-16.2.4.tgz#1ed0cf6a9712949c178ee01265cc0b98b103dfc3"
   integrity sha512-1bUunJMz4PbnvWeFgSjdcEvSU3JIFz0T3N4b4XiyeZtF5pMEBYVx10kkWR+xF4AevPeE1+zpeiVxsa+XwcysZA==
+
+react-native-file-transfer@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-file-transfer/-/react-native-file-transfer-0.0.3.tgz#e1d607578feda628f90d775c8f0a5f1c09c2e37b"
+  integrity sha1-4dYHV4/tpij5DXdcjwpfHAnC43s=
 
 react-native-fontawesome@^6.0.1:
   version "6.0.1"

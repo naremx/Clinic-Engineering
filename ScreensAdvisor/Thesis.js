@@ -15,7 +15,7 @@ class Thesis extends React.Component{
     collection.user_type=this.props.data.user_type,
     console.log(collection);
 
-    var url = 'http://35.247.141.196:8000/Showdetail/Adshowdetail/' ;
+    var url = 'http://10.66.13.208:8000/Showdetail/Adshowdetail/' ;
   
     fetch(url, {
     method: 'POST', 

@@ -18,7 +18,7 @@ class UserContact extends React.Component{
     };
   }
   componentDidMount() {
-    var url = 'http://35.247.141.196:8000/Showdetail/Usshowdetail/' ;
+    var url = 'http://10.66.13.208:8000/Showdetail/Usshowdetail/' ;
 
     fetch(url, {
     method: 'POST', 

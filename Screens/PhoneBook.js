@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,Image,View,Text,ScrollView,TouchableOpacity,TextInput,Alert } from 'react-native';
+import { StyleSheet,Image,View,Text,ScrollView,TouchableOpacity,TextInput,Alert,Button } from 'react-native';
 import { LinearGradient } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import axios from 'axios'
@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux'
 import { DataAdvisorAction } from '../Actions';
 import { UserSearchAction } from '../Actions/UserSearchAction.js'
+
 
 class PhoneBook extends React.Component{
   constructor(props) {
@@ -18,7 +19,7 @@ class PhoneBook extends React.Component{
 
   componentDidMount() {
     try{
-        axios.get(`http://35.247.141.196:8000/advisor/getaddata/` , {
+        axios.get(`http://10.66.13.208:8000/advisor/getaddata/` , {
         headers: {
             // Authorization : `Token ${this.props.token}`,
         }
@@ -37,7 +38,7 @@ sentDataSearch(){
 
   console.log(collection);
 
-  var url = 'http://35.247.141.196:8000/Search/search/' ;
+  var url = 'http://10.66.13.208:8000/Search/search/' ;
 
   fetch(url, {
   method: 'POST', 
