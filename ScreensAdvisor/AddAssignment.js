@@ -34,18 +34,18 @@ submit(){
   collection.end_date=this.state.end_date_date
   console.log(collection);
 
-  Actions.Assignment();
+  Actions.AdSelectModeDoc();
 
-  // var url = 'http://10.66.13.208:8000/Document/adddocument/' ;
+  var url = 'http://10.66.13.208:8000/Document/adddocument/' ;
 
-  // fetch(url, {
-  // method: 'POST', 
-  // body: JSON.stringify(collection),
-  // headers:{
-  //     'Content-Type': 'application/json' ,
-  //     Authorization : `Token ${this.props.token}`,
-  //    }
-  // })
+  fetch(url, {
+  method: 'POST', 
+  body: JSON.stringify(collection),
+  headers:{
+      'Content-Type': 'application/json' ,
+      Authorization : `Token ${this.props.token}`,
+     }
+  })
 }
    render(){  
     return(

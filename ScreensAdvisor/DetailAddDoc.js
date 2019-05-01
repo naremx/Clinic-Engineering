@@ -6,6 +6,8 @@ import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
 import { UserDetailSubDocAction } from '../Actions/UserDetailSubDocAction.js'
 
+import ModalCardCancelDocAd from '../ModalScreen/ModalCardCancelDocAd.js';
+
 class DetailAddDoc extends React.Component{
   constructor(props) {
     super(props);
@@ -44,7 +46,7 @@ CollectData(val){
     DetailSubDoc = val
 
     this.props.UserDetailSubDocAction(DetailSubDoc)
-    Actions.RealDetailAddSubDoc()
+    Actions.AdRealDetailAddSubDoc()
 }
 renderText() {
     if (this.state.Data.length > 0) {
@@ -121,14 +123,19 @@ renderStatus(val){
                                 fontWeight: 'bold' , 
                                 marginTop: 20 }} >หัวข้องาน </Text>
                         <View style={Styles.ButtonConfirm}>
-                        <TouchableOpacity onPress={() => Actions.DetailAddSubDoc()}>
+                        <TouchableOpacity onPress={() => Actions.AdDetailAddSubDoc()}>
                         <Ionicons name="ios-add" size={25} style={{ color: '#fff', paddingLeft : 6 }} />
                         </TouchableOpacity>
                         </View>
                     </View>
-                    <ScrollView style={{ height : 50 }}>
-                        { this.renderText() }
-                    </ScrollView>
+                    <View style={{ height : 250 }}>
+                        <ScrollView style={{ marginTop : 20 , height : 280 }}>
+                            
+                                { this.renderText() }
+
+                        </ScrollView>
+                    </View>
+                    <ModalCardCancelDocAd/>
                     </View>
                 </View> 
             </View>

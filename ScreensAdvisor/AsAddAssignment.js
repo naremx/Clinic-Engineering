@@ -28,14 +28,14 @@ class AsAddAssignment extends React.Component{
 submit(){
   let collection={}
   collection.id=this.props.AdDateTimeDetail.id
-  collection.name=this.props.AdDateTimeDetail.name
+  collection.name=this.props.AdDateTimeDetail.user
   collection.topic=this.state.topic
   collection.description=this.state.description
   collection.start_date=this.state.start_date
   collection.end_date=this.state.end_date
   console.log(collection);
 
-  Actions.UserSelectModeDoc();
+  Actions.AdvisorSelectMode();
 
   var url = 'http://10.66.13.208:8000/Document/adddocument/' ;
 
