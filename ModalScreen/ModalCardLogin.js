@@ -47,12 +47,12 @@ class ModalCardLogin extends React.Component {
         super()
         this.state = {
             showMe: false ,
-            username: 'naremx' ,
-            password: '123456Nn' ,
-            // username: '507theerayod.wi@kmitl.ac.th' ,
-            // password: '1234' ,
-            // username: '161pipat.pr@kmitl.ac.th' ,
-            // password: '1234' ,
+            // username: 'naremx' ,
+            // password: '123456Nn' ,
+            username: '161pipat.pr@kmitl.ac.th' ,
+            password: '1234' ,
+            // username: '' ,
+            // password: '' ,
         }
     }
     updateValue(text , field){

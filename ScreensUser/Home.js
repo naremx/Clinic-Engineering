@@ -9,8 +9,6 @@ import axios from 'axios'
 import { DataAdvisorAction } from '../Actions';
 
 
-
-
 const BannerWidth = Dimensions.get('window').width;
 const BannerHeight = 200;
 
@@ -65,7 +63,7 @@ componentDidMount() {
             <View key={index} style={Styles.ContainerContacts}>
                 <TouchableOpacity onPress={() => this.CollectData(val)}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Image style={Styles.drawerImage} source={require('../Image/user.png')} />
+                        <Image style={Styles.drawerImage} source={require('../Image/Advisor.png')} />
                         <View style={Styles.Column}>
                             <Text style={{ 
                                 marginLeft : 10 ,
@@ -102,16 +100,6 @@ componentDidMount() {
                     </Carousel>
                         <View style={Styles.ContainerSearch}>
 
-                            <View style={{flexDirection: 'row' , marginTop : 10  }}>
-                                    <Ionicons name="ios-happy" size={40} color="#a69beb" style={{ marginLeft : 50 }} />
-                                    <Ionicons name="ios-flask" size={40} color="#a69beb" style={{ marginLeft : 100 }} />
-                                    <Ionicons name="ios-book"  size={40} color="#a69beb" style={{ marginLeft : 100 }} />
-                                </View>
-                                <View style={{flexDirection: 'row' , marginTop : 10 }}>
-                                    <Text style={{ color : '#a69beb' , marginLeft : 40 }}>ชื่ออาจารย์</Text>
-                                    <Text style={{ color : '#a69beb' , marginLeft : 50 }}>ชื่อภาควิชา</Text>
-                                    <Text style={{ color : '#a69beb' , marginLeft : 50 }}>ชื่อวิทยานิพนธ์</Text>
-                                </View>
                         </View>
                     </View>
                 <ScrollView>
@@ -156,7 +144,7 @@ const Styles = StyleSheet.create({
     },
     ContainerSearch:{
         width: 450,
-        height: 100,
+        height: 10,
         backgroundColor: '#fff',
         shadowColor: '#e5e5e5',
         shadowRadius: 10,

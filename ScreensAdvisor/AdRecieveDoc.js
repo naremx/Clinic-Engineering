@@ -7,7 +7,7 @@ import { Actions } from 'react-native-router-flux';
 import { UserDetailDocAction } from '../Actions/UserDetailDocAction.js'
 
 
-class Assignment extends React.Component{
+class AdRecieveDoc extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -15,16 +15,11 @@ class Assignment extends React.Component{
         }
     }    
     componentDidMount() {
-        var url = 'http://10.66.13.208:8000/Document/showdocument/' ;
-
-        let collection={}
-        collection.user_type=this.props.data.user_type,
-
-        console.log(collection);
+        var url = 'http://10.66.13.208:8000/Document/getdocument/' ;
     
         fetch(url, {
         method: 'POST', 
-        body: JSON.stringify(collection),
+        body: JSON.stringify(this.props.token),
         headers:{
             'Content-Type': 'application/json' ,
             Authorization : `Token ${this.props.token}`,
@@ -45,7 +40,7 @@ class Assignment extends React.Component{
         DetailDoc = val
 
         this.props.UserDetailDocAction(DetailDoc)
-        Actions.DetailAddDoc()
+        // Actions.DetailAddDoc()
     }
     renderText() {
         if (this.state.Data.length > 0) {
@@ -60,9 +55,15 @@ class Assignment extends React.Component{
                                 fontSize: 15 ,
                                 fontWeight: 'bold' ,
                                 marginTop: 20 }} >{val.name}</Text>
-                            <Text style={{ marginLeft : 10 , color : '#3e48a3' }}>Topic : {val.topic}</Text>
+                            <Text style={{ marginLeft : 10 , color : '#3e48a3',fontWeight: 'bold' }}>Topic : {val.topic}</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                            <Ionicons name="ios-alarm" size={20} style={{ color:'#3e48a3' , marginLeft: 22}} />
                             <Text style={{ marginLeft : 10 , color : '#777' }}>Start Date : {val.start_date}</Text>
+                            </View>
+                            <View style={{ flexDirection: 'row' }}>
+                            <Ionicons name="ios-alarm" size={20} style={{ color:'#3e48a3' , marginLeft: 22}} />
                             <Text style={{ marginLeft : 10 , color : '#777' }}>End Date : {val.end_date}</Text>
+                            </View>
                         </View>
                     </View>
                 <TouchableOpacity onPress={() => this.CollectData(val)}>
@@ -85,18 +86,6 @@ class Assignment extends React.Component{
         return(
             <LinearGradient colors ={['#87daf3','#a69beb']}>
             <View style={Styles.Container}>
-            <TouchableOpacity onPress={() => Actions.ListAddAss()}>
-                <View style={{alignItems:'center'}}>
-                <LinearGradient colors={['#90ed9c', '#04d11f']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
-                    <Text style = {{ color: '#fff', 
-                            fontSize: 20,
-                            textAlign: 'center',
-                            marginTop: 10,
-                            fontWeight: 'bold'
-                            }}>เพิ่มเอกสาร</Text>
-                </LinearGradient>
-                </View>
-            </TouchableOpacity>
             <ScrollView>
                 <View style={{alignItems:'center'}}>
                     { this.renderText() }
@@ -155,11 +144,11 @@ const mapDispatchToprops = dispatch => ({
     UserDetailDocAction: (DetailDoc) => dispatch(UserDetailDocAction(DetailDoc))
 })
 
-const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer , LoginUser_Data_Reducer}) => {
+const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer,LoginUser_Data_Reducer }) => {
     const { token,role } = LoginUser_Reducer;
     const { val } = Add_Queue_Reducer;
     const { data } = LoginUser_Data_Reducer;
-        return { token,role,val,data};
+        return { token,role,val,data };
   }
 
-export default connect(mapStateToProps,mapDispatchToprops)(Assignment);
+export default connect(mapStateToProps,mapDispatchToprops)(AdRecieveDoc);

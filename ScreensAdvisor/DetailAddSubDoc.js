@@ -34,7 +34,7 @@ SentDataConfirm()
     collection.description = this.state.description
 
     console.log(collection);
-    Actions.Assignment();
+    Actions.AdDetailAddDoc();
 
     var url = 'http://10.66.13.208:8000/Document/addsubdoc/' ;
 

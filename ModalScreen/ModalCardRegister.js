@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View,Text,TouchableOpacity,Modal,TextInput } from 'react-native';
+import { StyleSheet,View,Text,TouchableOpacity,Modal,TextInput,KeyboardAvoidingView } from 'react-native';
 import { LinearGradient,BlurView } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 
@@ -147,7 +147,8 @@ export default class ModalCardRegister extends React.Component {
         <View style={Styles.container}>
         <Modal visible={this.state.showMe} onRequestClose ={()=>console.warn("this is close")} transparent animationType='fade'>
         <BlurView tint="dark" intensity={50} style={StyleSheet.absoluteFill}>
-            <View style={{ alignItems:'center', marginTop: 30 }}>
+            <View style={{ alignItems:'center', marginTop: 10 }}>
+            
                 <View style={Styles.ModalBoxRegister}>
                     <View style={{ alignItems:'flex-end' }}>
                         <TouchableOpacity onPress={() => this.setState({ showMe:false })}>
@@ -155,18 +156,22 @@ export default class ModalCardRegister extends React.Component {
                         </TouchableOpacity>
                     </View>
                 <Text style={{ color : '#495090' , fontSize: 23 , fontWeight: 'bold', textAlign: 'center' }}>ลงทะเบียน</Text>
-                    <View style={{ margin : 30 }}>
+                    <View style={{ marginLeft : 30  ,  marginTop : 5  }}>
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >ชื่อผู้ใช้งาน</Text>
                         <TextInput style={[Styles.inputBoxRegister, !this.state.usernameValdate? Styles.error:null]}
                         onChangeText={ (text) => this.validate(text,'username')} placeholder="Username"/>
 
+                        <View style={{ flexDirection: 'row' }}>
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >ชื่อ</Text>
-                        <TextInput style={[Styles.inputBoxRegister, !this.state.first_nameValdate? Styles.error:null]}
-                        onChangeText={ (text) => this.validate(text,'first_name')} placeholder="FirstName"/>
+                        <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', marginTop : 5 , marginLeft : 130 }} >นามสกุล</Text>
+                        </View>
 
-                        <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >นามสกุล</Text>
-                        <TextInput style={[Styles.inputBoxRegister, !this.state.last_nameValdate? Styles.error:null]}
+                        <View style={{ flexDirection: 'row' }}>
+                        <TextInput style={[Styles.inputBoxRegisterName, !this.state.first_nameValdate? Styles.error:null]}
+                        onChangeText={ (text) => this.validate(text,'first_name')} placeholder="FirstName"/>
+                        <TextInput style={[Styles.inputBoxRegisterLast, !this.state.last_nameValdate? Styles.error:null]}
                         onChangeText={ (text) => this.validate(text,'last_name')} placeholder="LastName"/>
+                        </View>
 
                         <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >อีเมล</Text>
                         <TextInput style={[Styles.inputBoxRegister, !this.state.emailValdate? Styles.error:null]} placeholder="Email address"
@@ -183,7 +188,7 @@ export default class ModalCardRegister extends React.Component {
                 <View style= {{ marginLeft: 110 }}>
                 <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
                     <TouchableOpacity onPress={() => this.submit()}>
-                    <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , paddingTop: 10 }}>เข้าสู่ระบบ</Text>
+                    <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , paddingTop: 10 }}>ลงทะเบียน</Text>
                     </TouchableOpacity>
                 </LinearGradient>
                 </View>
@@ -210,7 +215,7 @@ Container: {
 },  
 ModalBoxRegister:{
     width: 370,
-    height: 690,
+    height: 620,
     backgroundColor: '#ecf8ff',
     borderRadius: 25,
     shadowColor: '#30C1DD',
@@ -228,11 +233,33 @@ inputBoxRegister:{
     paddingHorizontal: 16,
     fontSize: 15,
 },
+inputBoxRegisterName:{
+    width: 150,
+    height: 40,
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    borderColor:'#95a3e6',
+    borderWidth: 1,
+    paddingHorizontal: 16,
+    fontSize: 15,
+},
+inputBoxRegisterLast:{
+  width: 160,
+  height: 40,
+  marginLeft: 10,
+  backgroundColor: '#fff',
+  borderRadius: 15,
+  borderColor:'#95a3e6',
+  borderWidth: 1,
+  paddingHorizontal: 16,
+  fontSize: 15,
+},
 Button:{
     height: 50, 
     alignItems: 'center', 
     width: 150 , 
     borderRadius: 20 , 
+    marginTop: 30,
     shadowColor: '#30C1DD',
     shadowRadius: 10,
     shadowOpacity: 0.6,

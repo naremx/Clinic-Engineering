@@ -5,7 +5,7 @@ import DatePicker from 'react-native-datepicker'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
-class AddAssignment extends React.Component{
+class AsAddAssignment extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -28,13 +28,14 @@ class AddAssignment extends React.Component{
 submit(){
   let collection={}
   collection.id=this.props.AdDateTimeDetail.id
+  collection.name=this.props.AdDateTimeDetail.user
   collection.topic=this.state.topic
   collection.description=this.state.description
   collection.start_date=this.state.start_date
-  collection.end_date=this.state.end_date_date
+  collection.end_date=this.state.end_date
   console.log(collection);
 
-  Actions.AdSelectModeDoc();
+  Actions.AdvisorSelectMode();
 
   var url = 'http://10.66.13.208:8000/Document/adddocument/' ;
 
@@ -58,9 +59,9 @@ submit(){
               <Text style={{color : '#495090' , fontSize: 20 , fontWeight: 'bold', margin : 5 }}> {this.props.AdDateTimeDetail.user}</Text>
               <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >หัวเรื่อง</Text>
               <TextInput style={Styles.inputBoxAss} onChangeText={(text) => this.updateValue(text, 'topic')}/>
-              <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >รายละเอียดเอกสาร</Text>
+              <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >รายละเอียดงาน</Text>
               <TextInput style={Styles.inputBoxAss} onChangeText={(text) => this.updateValue(text, 'description')}/>
-              <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >วันที่รับเอกสาร</Text>
+              <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >วันที่รับงาน</Text>
               <DatePicker
                 style={{width: 200}}
                 date={this.state.start_date}
@@ -92,7 +93,7 @@ submit(){
                 }}
                 onDateChange={(date) => {this.setState({start_date: date})}}
               />
-              <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >วันที่ส่งเอกสาร</Text>
+              <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold', margin : 5 }} >วันที่ส่งงาน</Text>
               <DatePicker
                 style={{width: 200}}
                 date={this.state.end_date}
@@ -190,7 +191,7 @@ const mapStateToProps = ({ LoginUser_Reducer , Ad_Select_Time_Detail_Reducer }) 
       return { token,AdDateTimeDetail };
 }
 
-export default connect(mapStateToProps)(AddAssignment);
+export default connect(mapStateToProps)(AsAddAssignment);
 
 
 

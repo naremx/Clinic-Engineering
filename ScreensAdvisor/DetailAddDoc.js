@@ -6,7 +6,7 @@ import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
 import { UserDetailSubDocAction } from '../Actions/UserDetailSubDocAction.js'
 
-import ModalCardCancelDoc from '../ModalScreen/ModalCardCancelDoc.js';
+import ModalCardCancelDocAd from '../ModalScreen/ModalCardCancelDocAd.js';
 
 class DetailAddDoc extends React.Component{
   constructor(props) {
@@ -46,7 +46,7 @@ CollectData(val){
     DetailSubDoc = val
 
     this.props.UserDetailSubDocAction(DetailSubDoc)
-    Actions.RealDetailAddSubDoc()
+    Actions.AdRealDetailAddSubDoc()
 }
 renderText() {
     if (this.state.Data.length > 0) {
@@ -88,7 +88,7 @@ renderStatus(val){
                 <View style={{ alignItems:'center' }}>
                     <View style={Styles.ContainerContacts}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Image style={{  width:64 , height:64 , marginTop: 30 , marginLeft: 20 }} source={{ uri : "https://www.img.live/images/2019/04/24/edit.png" }} />
+                        <Image style={{  width:64 , height:64 , marginTop: 10 , marginLeft: 20 }} source={{ uri : "https://www.img.live/images/2019/04/24/edit.png" }} />
                         <View style={{ flexDirection: 'column' }}>
                             <Text style={{ 
                                 marginLeft : 10 , 
@@ -104,7 +104,7 @@ renderStatus(val){
                             <View style={{ flexDirection: 'row' }}>
                                 <Ionicons name="ios-alarm" size={20} style={{ color:'#777' , marginLeft: 22}} />
                                 <Text style={{ marginLeft : 15 , color : '#3e48a3' , fontWeight: 'bold' }}>End Time :</Text>
-                                <Text style={{ marginLeft : 15 , color : '#777' }}>  {this.props.DetailDoc.end_date}</Text>
+                                <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.DetailDoc.end_date}</Text>
                             </View>
                         </View>
                     </View>
@@ -113,17 +113,17 @@ renderStatus(val){
                                 color : '#3e48a3' , 
                                 fontSize: 15 , 
                                 fontWeight: 'bold' , 
-                                marginTop: 20 }} >รายละเอียดเอกสาร</Text>
-                    <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.DetailDoc.description}Building Your First Mobile App</Text>
+                                marginTop: 20 }} >รายละเอียดงาน</Text>
+                    <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.DetailDoc.description}</Text>
                     <View style={{ flexDirection: 'row' }}>
                     <Text style={{ 
                                 marginLeft : 10 , 
                                 color : '#3e48a3' , 
                                 fontSize: 15 , 
                                 fontWeight: 'bold' , 
-                                marginTop: 20 }} >หัวข้อเอกสารย่อย</Text>
+                                marginTop: 20 }} >หัวข้องาน </Text>
                         <View style={Styles.ButtonConfirm}>
-                        <TouchableOpacity onPress={() => Actions.DetailAddSubDoc()}>
+                        <TouchableOpacity onPress={() => Actions.AdDetailAddSubDoc()}>
                         <Ionicons name="ios-add" size={25} style={{ color: '#fff', paddingLeft : 6 }} />
                         </TouchableOpacity>
                         </View>
@@ -135,7 +135,7 @@ renderStatus(val){
 
                         </ScrollView>
                     </View>
-                    <ModalCardCancelDoc/>
+                    <ModalCardCancelDocAd/>
                     </View>
                 </View> 
             </View>
@@ -177,7 +177,6 @@ ButtonConfirm:{
     width: 25 , 
     borderRadius: 5 , 
     marginTop: 20 ,
-    marginLeft: 10,
     backgroundColor: '#3e48a3', 
     shadowColor: '#30C1DD',
     shadowRadius: 10,

@@ -3939,6 +3939,11 @@ jsonify@~0.0.0:
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
   integrity sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=
 
+keymirror@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/keymirror/-/keymirror-0.1.1.tgz#918889ea13f8d0a42e7c557250eee713adc95c35"
+  integrity sha1-kYiJ6hP40KQufFVyUO7nE63JXDU=
+
 kind-of@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-1.1.0.tgz#140a3d2d41a36d2efcfa9377b62c24f8495a5c44"
@@ -5444,6 +5449,11 @@ react-dom@^16.8.2:
     prop-types "^15.6.2"
     scheduler "^0.13.2"
 
+react-file-picker@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/react-file-picker/-/react-file-picker-0.0.6.tgz#dd8fd8f0cd1ce74a42074c653f3afff7d7013690"
+  integrity sha512-EnRQCEeC5YpSaCm/pbUi7zroP6lMgT7SqQTFS0ZNJXlcA8Cw2zDvEIoP/SkQ8u5Lbp+L2cyoxiy7ZBVtXk5hGw==
+
 react-is@^16.3.2, react-is@^16.5.2:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.7.0.tgz#c1bd21c64f1f1364c6f70695ec02d69392f41bfa"
@@ -5579,6 +5589,11 @@ react-native-fcm@^16.2.4:
   version "16.2.4"
   resolved "https://registry.yarnpkg.com/react-native-fcm/-/react-native-fcm-16.2.4.tgz#1ed0cf6a9712949c178ee01265cc0b98b103dfc3"
   integrity sha512-1bUunJMz4PbnvWeFgSjdcEvSU3JIFz0T3N4b4XiyeZtF5pMEBYVx10kkWR+xF4AevPeE1+zpeiVxsa+XwcysZA==
+
+react-native-file-transfer@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-file-transfer/-/react-native-file-transfer-0.0.3.tgz#e1d607578feda628f90d775c8f0a5f1c09c2e37b"
+  integrity sha1-4dYHV4/tpij5DXdcjwpfHAnC43s=
 
 react-native-fontawesome@^6.0.1:
   version "6.0.1"
@@ -5793,6 +5808,16 @@ react-native-view-shot@2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-native-view-shot/-/react-native-view-shot-2.5.0.tgz#428a997f470d3148d0067c5b46abd988ef1aa4c0"
   integrity sha512-xFJA+N7wh8Ik/17I4QB24e0a0L3atg1ScVehvtYR5UBTgHdzTFA0ZylvXp9gkZt7V+AT5Pni0H3NQItpqSKFoQ==
+
+react-native-webview-file-upload-android@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-webview-file-upload-android/-/react-native-webview-file-upload-android-1.1.2.tgz#55a7a1eacba8b1514089b1018b3c66ae8effed02"
+  integrity sha512-PRR9vYq3NEkhkPfAqo2LEnza9lp4QQOihdPqFft0WOdmlVMbbcBlhRLU6pKoTl/b9XhmBxdk9p50UaGG53LZkw==
+  dependencies:
+    escape-string-regexp "^1.0.5"
+    keymirror "^0.1.1"
+    prop-types "^15.6.2"
+    warning "^3.0.0"
 
 "react-native@https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz":
   version "0.57.1"
@@ -7024,6 +7049,13 @@ walker@~1.0.5:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
+
+warning@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
+  integrity sha1-MuU3fLVy3kqwR1O9+IIcAe1gW3w=
+  dependencies:
+    loose-envify "^1.0.0"
 
 warning@^4.0.2:
   version "4.0.3"

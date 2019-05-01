@@ -7,7 +7,7 @@ import { Actions } from 'react-native-router-flux'
 import { AdSelectTimeQueueAction } from '../Actions/AdSelectTimeQueueAction.js'
 
 
-class Assignment extends React.Component{
+class ListAddUs extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -16,7 +16,7 @@ class Assignment extends React.Component{
         }
     }    
     componentDidMount() {
-      var url = 'http://10.66.13.208:8000/history/Usshowhistory/' ;
+      var url = 'http://10.66.13.208:8000/history/Adshowhistory/' ;
   
       fetch(url, {
       method: 'POST', 
@@ -51,7 +51,7 @@ class Assignment extends React.Component{
     AdDateTimeDetail = val
 
     this.props.AdSelectTimeQueueAction(AdDateTimeDetail)
-    Actions.UsAddAssignment()
+    Actions.AdAsAddAssignment()
 }
 renderText() {
     if (this.state.ResultData.length > 0) {
@@ -61,7 +61,7 @@ renderText() {
               <Image style={{  width:64 , height:64 , marginLeft: 5 }} source={{ uri : "https://www.img.in.th/images/7415e5774dc66fd431a4e8d2682953ea.png" }} />
                 <View style={{ flexDirection: 'column' , marginTop: 10 , marginLeft : 20  }}>
                     <TouchableOpacity onPress={() => this.CollectData(val)}>
-                        <Text style={{ color : '#3e48a3', marginTop: 5 , fontWeight: 'bold' }}> {val.name}</Text>
+                        <Text style={{ color : '#3e48a3', marginTop: 5 , fontWeight: 'bold' }}> {val.user}</Text>
                     </TouchableOpacity>
                     <Text style={{ color : '#777', marginTop: 5 }}>Topic : {val.topic}</Text>
                 </View>
@@ -128,4 +128,4 @@ const mapStateToProps = ({ LoginUser_Reducer }) => {
         return { token };
   }
 
-export default connect(mapStateToProps,mapDispatchToprops)(Assignment);
+export default connect(mapStateToProps,mapDispatchToprops)(ListAddUs);

@@ -1,9 +1,6 @@
 import React , {Component} from 'react';
 import { Router,Scene,Drawer,Tabs} from 'react-native-router-flux';
 import { connect } from 'react-redux'
-
-
-import Text from './Components/CustomText';
 import TabIcon from './TabIcon.js';
 
 import Home from './ScreensUser/Home.js';
@@ -15,6 +12,9 @@ import Assignment from './ScreensUser/Assignment.js';
 import PhoneBook from './Screens/PhoneBook.js';
 import Contact from './Screens/Contact.js';
 import ResetPassword from './Screens/ResetPassword.js';
+import DetailAdvisorPhoneBook from './Screens/DetailAdvisorPhoneBook.js';
+import HomeResultSearch from './Screens/ResultSearch.js';
+
 
 import UserContact from './ScreensUser/UserContact.js';
 import Questions from './ScreensUser/Questions.js';
@@ -33,6 +33,8 @@ import DetailAddSubDoc from './ScreensUser/DetailAddSubDoc.js';
 import RealDetailAddSubDoc from './ScreensUser/RealDetailAddSubDoc.js';
 import UserSelectModeDoc from './ScreensUser/UserSelectModeDoc.js';
 import UserRecieveDoc from './ScreensUser/UserRecieveDoc.js';
+import UserHistory from './ScreensUser/History.js';
+import UserDetailHistory from './ScreensUser/DetailHistory.js';
 
 import AdvisorSelectMode from './ScreensAdvisor/AdvisorSelectMode.js';
 import Thesis from './ScreensAdvisor/Thesis.js';
@@ -45,7 +47,16 @@ import AdvisorEditSelectTime from './ScreensAdvisor/AdvisorEditSelectTime.js';
 import AdvisorDetailAddQueue from './ScreensAdvisor/DetailAddQueue.js';
 import AdvisorEditProfile from './ScreensAdvisor/AdvisorEditProfile.js';
 import AdvisorContact from './ScreensAdvisor/AdvisorContact.js';
-// import AddAssignment from './ScreensAdvisor/AddAssignment.js';
+import AdSelectModeDoc from './ScreensAdvisor/AdSelectModeDoc.js';
+import AdRecieveDoc from './ScreensAdvisor/AdRecieveDoc.js';
+import ListAddUs from './ScreensAdvisor/ListAddUs.js';
+import AdAsAddAssignment from './ScreensAdvisor/AsAddAssignment.js';
+import AdDetailAddDoc from './ScreensAdvisor/DetailAddDoc.js';
+import AdDetailAddSubDoc from './ScreensAdvisor/DetailAddSubDoc.js';
+import AdRealDetailAddSubDoc from './ScreensAdvisor/RealDetailAddSubDoc.js';
+import AdvisorHistory from './ScreensAdvisor/History.js';
+import AdDetailHistory from './ScreensUser/DetailHistory.js';
+
 
 import SlideMenuUser from './SlideMenu/SlideMenuUser';
 import SlideMenuAdvisor from './SlideMenu/SlideMenuAdvisor';
@@ -58,19 +69,31 @@ class Routes extends React.Component{
                 <Scene key='root' hideNavBar>
 
                     <Scene key='ContactRoot' >
-                        <Scene key='Contact' component={Contact} title='ติดต่อเรา' initial/>
+                        <Scene key='Contact' component={Contact} title='ติดต่อเรา'/>
+                    </Scene>
+
+                <Scene key='UserHistory' >
+                        <Scene key='UserHistory' component={UserHistory} title='รายการย้อนหลัง'/>
+                </Scene>
+                
+                <Scene key='UserDetailHistory' >
+                        <Scene key='UserDetailHistory' component={UserDetailHistory} title='รายละเอียด'/>
+                </Scene>
+
+                    <Scene key='AdvisorHistory' >
+                        <Scene key='AdvisorHistory' component={AdvisorHistory} title='รายการย้อนหลัง'/>
+                    </Scene>
+
+                    <Scene key='AdDetailHistory' >
+                        <Scene key='AdDetailHistory' component={AdDetailHistory} title='รายละเอียด'/>
                     </Scene>
 
                     <Scene key='UserContactRoot' >
-                        <Scene key='UserContact' component={UserContact} title='ข้อมูลส่วนตัว' initial/>
+                        <Scene key='UserContact' component={UserContact} title='ข้อมูลส่วนตัว'/>
                     </Scene>
 
                     <Scene key='AdvisorContactRoot' >
-                        <Scene key='AdvisorContact' component={AdvisorContact} title='ข้อมูลส่วนตัว' initial/>
-                    </Scene>
-
-                    <Scene key='AdvisorContactRoot' >
-                        <Scene key='AdvisorContact' component={AdvisorContact} title='ข้อมูลส่วนตัว' initial/>
+                        <Scene key='AdvisorContact' component={AdvisorContact} title='ข้อมูลส่วนตัว' />
                     </Scene>
 
                     <Scene key='QuestionsRoot' >
@@ -98,19 +121,32 @@ class Routes extends React.Component{
                     </Scene>
 
                     <Drawer key='auth' contentComponent={SlideMenu}  drawerImage={require('./Image/menu.png')} initial>
+                    
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
                                 activeTintColor="#8ccff1" 
                                 inactiveTintColor="#a69beb" >
+                                <Scene key='PhoneBookPage' iconName="ios-call" icon={TabIcon} title='สมุดโทรศัพท์'>
                                     <Scene 
                                             key='PhoneBook' 
                                             component={PhoneBook} 
-                                            icon={TabIcon}
-                                            iconName="ios-call"
                                             title='สมุดโทรศัพท์' 
                                             initial>
                                     </Scene>
+                                    <Scene 
+                                            key='DetailAdvisorPhoneBook' 
+                                            component={DetailAdvisorPhoneBook} 
+                                            title='รายละเอียด' 
+                                            >
+                                    </Scene>
+                                    <Scene 
+                                            key='HomeResultSearch' 
+                                            component={HomeResultSearch} 
+                                            title='ผลการค้นหา' 
+                                            >
+                                    </Scene>
+                                </Scene>
                             </Tabs>
                         </Scene>
                     </Drawer>
@@ -152,12 +188,6 @@ class Routes extends React.Component{
                                                 title='เพิ่มคิว' 
                                                 >
                                         </Scene>
-                                        <Scene 
-                                                key='ListAddAss' 
-                                                component={ListAddAss} 
-                                                title='รายการที่สามารถนัดคิวได้' 
-                                                >
-                                        </Scene>
                                     </Scene>
 
                                     <Scene key='SearchPage' iconName="ios-search" icon={TabIcon} title='ค้นหา'>
@@ -196,7 +226,7 @@ class Routes extends React.Component{
                                                 title='รายละเอียดคิว'>
                                         </Scene>
                                     </Scene>
-                                    <Scene key='AssignmentPage' iconName="ios-document" icon={TabIcon} title='งาน'>
+                                    <Scene key='AssignmentPage' iconName="ios-document" icon={TabIcon} title='เอกสาร'>
                                         <Scene 
                                                 key='UserSelectModeDoc' 
                                                 component={UserSelectModeDoc}
@@ -205,27 +235,33 @@ class Routes extends React.Component{
                                         <Scene 
                                                 key='UserRecieveDoc' 
                                                 component={UserRecieveDoc}
-                                                title='งานที่ได้รับมอบหมาย'>
+                                                title='เอกสารที่ได้รับมอบหมาย'>
                                         </Scene>
                                         <Scene 
                                                 key='Assignment' 
                                                 component={Assignment}
-                                                title='งานที่ส่งมอบหมาย'>
+                                                title='เอกสารที่ส่งมอบหมาย'>
                                         </Scene>
                                         <Scene 
                                                 key='UsAddAssignment' 
                                                 component={UsAddAssignment}
-                                                title='เพิ่มงาน'>
+                                                title='เพิ่มเอกสาร'>
+                                        </Scene>
+                                        <Scene 
+                                                key='ListAddAss' 
+                                                component={ListAddAss} 
+                                                title='รายการที่สามารถเพิ่มเอกสารได้' 
+                                                >
                                         </Scene>
                                         <Scene 
                                                 key='DetailAddDoc' 
                                                 component={DetailAddDoc}
-                                                title='รายละเอียดงาน'>
+                                                title='รายละเอียดเอกสาร'>
                                         </Scene>
                                         <Scene 
                                                 key='DetailAddSubDoc' 
                                                 component={DetailAddSubDoc}
-                                                title='เพิ่มหัวข้องาน'>
+                                                title='เพิ่มหัวข้อเอกสารย่อย'>
                                         </Scene>
                                         <Scene 
                                                 key='RealDetailAddSubDoc' 
@@ -243,7 +279,7 @@ class Routes extends React.Component{
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
                                 activeTintColor="#87daf3" 
                                 inactiveTintColor="#a69beb" >
-                                    <Scene key='AdvisorSelectMode' iconName="ios-home" icon={TabIcon} title='เลือกรายการ'>
+                                    <Scene key='AdvisorSelectMode' iconName="ios-clipboard" icon={TabIcon} title='ตารางคิว'>
                                         <Scene 
                                                 key='AdvisorSelectMode' 
                                                 component={AdvisorSelectMode} 
@@ -287,7 +323,7 @@ class Routes extends React.Component{
                                             icon={TabIcon}
                                             title='แจ้งเตือน'>
                                     </Scene>
-                                    <Scene key='AdvisorQueue' iconName="ios-home" icon={TabIcon} title='คิว'>
+                                    <Scene key='AdvisorQueue' iconName="ios-people" icon={TabIcon} title='คิว'>
                                         <Scene 
                                                 key='AdvisorQueue' 
                                                 component={AdvisorQueue}
@@ -303,19 +339,50 @@ class Routes extends React.Component{
                                         </Scene>
                                     </Scene>
 
-                                    <Scene key='AdvisorAssignment' iconName="ios-document" icon={TabIcon} title='งาน'>
+                                    <Scene key='AdvisorAssignment' iconName="ios-document" icon={TabIcon} title='เอกสาร'>
+                                        <Scene 
+                                                key='AdSelectModeDoc' 
+                                                component={AdSelectModeDoc} 
+                                                title='เลือกทำรายการ'>
+                                        </Scene>
                                         <Scene 
                                                 key='AdvisorAssignment' 
-                                                component={AdvisorAssignment}
-                                                iconName="ios-document"
-                                                icon={TabIcon}  
-                                                title='งาน'>
+                                                component={AdvisorAssignment} 
+                                                title='เอกสารที่ส่งมอบหมาย'>
                                         </Scene>
-                                        {/* <Scene 
-                                                key='AddAssignment' 
-                                                component={AddAssignment}
-                                                title='เพิ่มงาน'>
-                                        </Scene> */}
+                                        <Scene 
+                                                key='ListAddUs' 
+                                                component={ListAddUs} 
+                                                title='รายการที่สามารถเพิ่มเอกสารได้' 
+                                                >
+                                        </Scene>
+                                        <Scene 
+                                                key='AdAsAddAssignment' 
+                                                component={AdAsAddAssignment} 
+                                                title='เพิ่มเอกสาร' 
+                                                >
+                                        </Scene>
+
+                                        <Scene 
+                                                key='AdRecieveDoc' 
+                                                component={AdRecieveDoc}
+                                                title='เอกสารที่ได้รับมอบหมาย'>
+                                        </Scene>
+                                        <Scene 
+                                                key='AdDetailAddDoc' 
+                                                component={AdDetailAddDoc}
+                                                title='รายละเอียดเอกสาร'>
+                                        </Scene>
+                                        <Scene 
+                                                key='AdDetailAddSubDoc' 
+                                                component={AdDetailAddSubDoc}
+                                                title='เพิ่มหัวข้อเอกสารย่อย'>
+                                        </Scene>
+                                        <Scene 
+                                                key='AdRealDetailAddSubDoc' 
+                                                component={AdRealDetailAddSubDoc}
+                                                title='แนบไฟล์'>
+                                        </Scene>
                                     </Scene>
 
                                     

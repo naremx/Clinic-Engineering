@@ -109,9 +109,9 @@ componentDidMount() {
               <View style={Styles.ContainerContacts}>
               <View style={{alignItems:'center'}}>
                 <Image style={Styles.drawerImage}
-                          source={require('../Image/user.png')} />
+                          source={require('../Image/Advisor.png')} />
               </View>
-              <View style={{alignItems:'center' , flexDirection: 'row' , marginTop : 20}}>
+              <View style={{alignItems:'center' , flexDirection: 'row' , marginTop : 10}}>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 40 }} >ชื่อ</Text>
                 <Text style={{color : '#3e48a3' , fontSize: 20 , fontWeight: 'bold', marginLeft : 130 }} >นามสกุล</Text>
               </View>
@@ -200,7 +200,7 @@ const Styles = StyleSheet.create({
     height: 100,
     width: 100,
     borderRadius: 100,
-    marginTop: 30
+    marginTop: 15
   },
   ButtonConfirm:{
     height: 50, 

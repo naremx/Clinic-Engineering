@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View,Text,TextInput,TouchableOpacity,ScrollView,Image } from 'react-native';
+import { StyleSheet,View,Text,TextInput,TouchableOpacity,ScrollView,Image,Alert } from 'react-native';
 import { LinearGradient,Constants } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
@@ -45,7 +45,7 @@ class Search extends React.Component{
 
     console.log(collection);
 
-    var url = 'http:///10.66.13.208:8000/Search/search/' ;
+    var url = 'http://10.66.13.208:8000/Search/search/' ;
 
     fetch(url, {
     method: 'POST', 
@@ -59,8 +59,13 @@ class Search extends React.Component{
       this.props.UserSearchAction(responseData)
       Actions.ResultSearch();
     })
-    .then(response => console.log('Success:', JSON.stringify(response)))
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+      Alert.alert(
+        'ไม่พบผลลัพธ์การค้นหา',
+        'กรุณากรอกใหม่อีกครั้ง',
+      )
+      console.log(error)
+    });
   }
   CollectData(val){
     this.props.DataAdvisorAction(val)

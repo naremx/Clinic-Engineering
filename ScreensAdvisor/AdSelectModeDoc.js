@@ -4,7 +4,7 @@ import { LinearGradient,Constants } from 'expo';
 import { Actions } from 'react-native-router-flux'
 
 
-export default class AdvisorSelectMode extends React.Component{
+export default class AdSelectModeDoc extends React.Component{
    render(){  
     return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
@@ -12,14 +12,14 @@ export default class AdvisorSelectMode extends React.Component{
           <View style={{alignItems:'center'}}>
           <View style={Styles.ContainerContacts}>
             <View style={{alignItems:'center'}}>
-            <TouchableOpacity onPress={() => Actions.AdvisorEditAllDate()}>
-              <Image style={{ marginTop: 50 , width:300 , height:150 , borderRadius: 20 }} source={{ uri : "https://www.img.in.th/images/f531a60fc338e97251b51c76fc71ac1f.png" }} />
+            <TouchableOpacity onPress={() => Actions.AdRecieveDoc()}>
+              <Image style={{  width:300 , height:150 , marginTop: 50 }} source={{ uri : "https://www.img.in.th/images/8e9cf3f862e18f3542569b4b11ce9a36.png" }} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => Actions.AdvisorEditSelectDate()}>
-              <Image style={{ marginTop: 50 , width:300 , height:150 , borderRadius: 20 }} source={{ uri : "https://www.img.in.th/images/160970118a2153353f7bd14c65a986fa.png" }} />
+            <TouchableOpacity onPress={() => Actions.AdvisorAssignment()}>
+              <Image style={{  width:300 , height:150 , marginTop: 50 }} source={{ uri : "https://www.img.in.th/images/0495389109057a374cbfb6cd522088da.png" }} />
             </TouchableOpacity>
             
-            <Image style={{  width:370 , height:194 , borderRadius: 15  }} source={{ uri : "https://www.img.in.th/images/a96c9c44823dd503e7bf0a5cd222a517.png" }} />
+            <Image style={{  width:370 , height:194 , marginTop: 5 , borderRadius: 15 }} source={{ uri : "https://www.img.in.th/images/a96c9c44823dd503e7bf0a5cd222a517.png" }} />
 
             </View>
           </View>

@@ -90,7 +90,7 @@ class SlideMenuAdvisor extends Component{
                         <Text style={{ color : '#a69beb' , fontSize: 20 , marginTop: 10 , textAlign: 'center' , marginLeft: 10 }}>ข้อมูลส่วนตัว</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> Actions.ContactRoot()}>
+                <TouchableOpacity onPress={()=> Actions.AdvisorHistory()}>
                     <View style={{ flexDirection: 'row'  }}>
                         <Ionicons name="ios-list-box" size={30} style={{ color:'#3e48a3' , marginTop: 10 , marginLeft: 20 }} />
                         <Text style={{ color : '#a69beb' , fontSize: 20 , marginTop: 10 , textAlign: 'center' , marginLeft: 10 }}>รายการย้อนหลัง</Text>
@@ -106,7 +106,7 @@ class SlideMenuAdvisor extends Component{
                 <TouchableOpacity onPress={()=> Actions.ConditionsRoot()}>
                     <Text style={{ color : '#a69beb' , fontSize: 18 , marginTop: 10 , marginLeft: 20  }}>เงื่อนไขและข้อตกลง</Text>
                 </TouchableOpacity>
-                <View style={{ alignItems : 'flex-end' , marginTop: 320 }}>
+                <View style={{ alignItems : 'flex-end' , marginTop: 350 }}>
                     <TouchableOpacity onPress={() => this.Logout(this.props.token)}>
                         <Text style={{ color : '#a69beb' }}> ออกจากระบบ </Text>
                     </TouchableOpacity>

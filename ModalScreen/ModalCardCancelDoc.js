@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet,View,Text,TouchableOpacity,Modal } from 'react-native';
+import { StyleSheet,View,Text,TouchableOpacity,Modal,TextInput,Alert } from 'react-native';
 import { LinearGradient,BlurView } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
 
-class ModalCardCancelAd extends React.Component {
+class ModalCardCancelDoc extends React.Component {
     constructor(){
         super()
         this.state = {
@@ -18,13 +18,13 @@ class ModalCardCancelAd extends React.Component {
     {
         this.setState({ showMe:false })
         let collection={}
-        collection.id = this.props.AdDateTimeDetail.id
-        collection.decision = '0'
+        collection.id_doc = this.props.DetailDoc.id
+        collection.id_queue = this.props.DetailDoc.queue
 
         console.log(collection);
-        Actions.AdvisorQueue();
+        Actions.Assignment();
 
-        var url = 'http://10.66.13.208:8000/queue/confirm/' ;
+        var url = 'http://10.66.13.208:8000/Document/deletedocument/' ;
 
         fetch(url, {
         method: 'POST', 
@@ -50,12 +50,12 @@ class ModalCardCancelAd extends React.Component {
                                 </TouchableOpacity>
                             </View>
                             
-                        <Text style={{ color : '#495090' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' }}>คุณต้องการยกเลิกคิวใช่หรือไม่ ?</Text>
+                        <Text style={{ color : '#495090' , fontSize: 18 , fontWeight: 'bold' , textAlign: 'center' }}>คุณต้องการยกเลิกเอกสารใช่หรือไม่ ?</Text>
 
                         <View style={{ alignItems:'center'}}>
                             <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.Button}>
                                 <TouchableOpacity onPress={() => this.SentDataCancle()}>
-                                <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>ยกเลิกคิว</Text>
+                                <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>ยกเลิกเอกสาร</Text>
                                 </TouchableOpacity>
                             </LinearGradient>
                         </View>
@@ -66,7 +66,7 @@ class ModalCardCancelAd extends React.Component {
                 <View style={{ alignItems:'center'}}>
                 <LinearGradient colors={['#fc8a99', '#a30015']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonCancle}>
                     <TouchableOpacity onPress={() => this.setState({ showMe:true })}>
-                    <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>ยกเลิกคิว</Text>
+                    <Text style={{color : '#fff' , fontSize: 20 , fontWeight: 'bold' , textAlign: 'center' , paddingTop: 10 }}>ยกเลิกเอกสาร</Text>
                     </TouchableOpacity>
                 </LinearGradient>
             </View>
@@ -96,8 +96,6 @@ ButtonCancle:{
     height: 50, 
     width: 150 , 
     borderRadius: 20 , 
-    marginTop: 180, 
-    marginLeft: 20, 
     shadowColor: '#30C1DD',
     shadowRadius: 10,
     shadowOpacity: 0.6,
@@ -116,10 +114,11 @@ Button:{
 
 });
 
-const mapStateToProps = ({ Ad_Select_Time_Detail_Reducer , LoginUser_Reducer }) => {
+const mapStateToProps = ({ User_Detail_Doc , LoginUser_Reducer , Ad_Select_Time_Detail_Reducer }) => {
+    const { DetailDoc } = User_Detail_Doc;
     const { AdDateTimeDetail } = Ad_Select_Time_Detail_Reducer;
     const { token,role } = LoginUser_Reducer;
-    return { AdDateTimeDetail,token,role };
+    return { DetailDoc,token,role,AdDateTimeDetail };
   }
 
-export default connect(mapStateToProps)(ModalCardCancelAd);
+export default connect(mapStateToProps)(ModalCardCancelDoc);
