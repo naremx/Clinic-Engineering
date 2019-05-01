@@ -16,10 +16,13 @@ class UserRecieveDoc extends React.Component{
     }    
     componentDidMount() {
         var url = 'http://10.66.13.208:8000/Document/getdocument/' ;
+
+        let collection={}
+        collection.user_type=this.props.data.user_type,
     
         fetch(url, {
         method: 'POST', 
-        body: JSON.stringify(this.props.token),
+        body: JSON.stringify(collection),
         headers:{
             'Content-Type': 'application/json' ,
             Authorization : `Token ${this.props.token}`,

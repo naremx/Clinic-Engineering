@@ -6,9 +6,7 @@ import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
 import { UserDetailSubDocAction } from '../Actions/UserDetailSubDocAction.js'
 
-import ModalCardCancelDoc from '../ModalScreen/ModalCardCancelDoc.js';
-
-class DetailAddDoc extends React.Component{
+class DetailReceiveDoc extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +16,7 @@ class DetailAddDoc extends React.Component{
 
   componentDidMount() {
     let collection={}
-    collection.id=this.props.DetailDoc.id
+    collection.id=this.props.ReceiveDoc.id
     console.log(collection);
 
     var url = 'http://10.66.13.208:8000/Document/showsubdocument/' ;
@@ -38,15 +36,14 @@ class DetailAddDoc extends React.Component{
         console.log('OK' ,responseData )
       })
 
-    .then(response => console.log('Success:', JSON.stringify(response)))
-    .catch(error => console.error('Error:', error));
 }
+
 CollectData(val){
     let DetailSubDoc={}
     DetailSubDoc = val
 
     this.props.UserDetailSubDocAction(DetailSubDoc)
-    Actions.RealDetailAddSubDoc()
+    Actions.AdRealDetailAddSubDoc()
 }
 renderText() {
     if (this.state.Data.length > 0) {
@@ -88,23 +85,23 @@ renderStatus(val){
                 <View style={{ alignItems:'center' }}>
                     <View style={Styles.ContainerContacts}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Image style={{  width:64 , height:64 , marginTop: 30 , marginLeft: 20 }} source={{ uri : "https://www.img.live/images/2019/04/24/edit.png" }} />
+                        <Image style={{  width:64 , height:64 , marginTop: 10 , marginLeft: 20 }} source={{ uri : "https://www.img.live/images/2019/04/24/edit.png" }} />
                         <View style={{ flexDirection: 'column' }}>
                             <Text style={{ 
                                 marginLeft : 10 , 
                                 color : '#3e48a3' , 
                                 fontSize: 20 , 
                                 fontWeight: 'bold' , 
-                                marginTop: 20 }} >{this.props.DetailDoc.name}</Text>
+                                marginTop: 20 }} >{this.props.ReceiveDoc.name}</Text>
                             <View style={{ flexDirection: 'row' }}>
                                 <Ionicons name="ios-alarm" size={20} style={{ color:'#777' , marginLeft: 22}} />
                                 <Text style={{ marginLeft : 15 , color : '#3e48a3' , fontWeight: 'bold' }}>Start Time :</Text>
-                                <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.DetailDoc.start_date}</Text>
+                                <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.ReceiveDoc.start_date}</Text>
                             </View>
                             <View style={{ flexDirection: 'row' }}>
                                 <Ionicons name="ios-alarm" size={20} style={{ color:'#777' , marginLeft: 22}} />
                                 <Text style={{ marginLeft : 15 , color : '#3e48a3' , fontWeight: 'bold' }}>End Time :</Text>
-                                <Text style={{ marginLeft : 15 , color : '#777' }}>  {this.props.DetailDoc.end_date}</Text>
+                                <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.ReceiveDoc.end_date}</Text>
                             </View>
                         </View>
                     </View>
@@ -113,20 +110,15 @@ renderStatus(val){
                                 color : '#3e48a3' , 
                                 fontSize: 15 , 
                                 fontWeight: 'bold' , 
-                                marginTop: 20 }} >รายละเอียดเอกสาร</Text>
-                    <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.DetailDoc.description}</Text>
+                                marginTop: 20 }} >รายละเอียดงาน</Text>
+                    <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.ReceiveDoc.description}</Text>
                     <View style={{ flexDirection: 'row' }}>
                     <Text style={{ 
                                 marginLeft : 10 , 
                                 color : '#3e48a3' , 
                                 fontSize: 15 , 
                                 fontWeight: 'bold' , 
-                                marginTop: 20 }} >หัวข้อเอกสารย่อย</Text>
-                        <View style={Styles.ButtonConfirm}>
-                        <TouchableOpacity onPress={() => Actions.DetailAddSubDoc()}>
-                        <Ionicons name="ios-add" size={25} style={{ color: '#fff', paddingLeft : 6 }} />
-                        </TouchableOpacity>
-                        </View>
+                                marginTop: 20 }} >หัวข้องาน </Text>
                     </View>
                     <View style={{ height : 250 }}>
                         <ScrollView style={{ marginTop : 20 , height : 280 }}>
@@ -135,7 +127,6 @@ renderStatus(val){
 
                         </ScrollView>
                     </View>
-                    <ModalCardCancelDoc/>
                     </View>
                 </View> 
             </View>
@@ -177,7 +168,6 @@ ButtonConfirm:{
     width: 25 , 
     borderRadius: 5 , 
     marginTop: 20 ,
-    marginLeft: 10,
     backgroundColor: '#3e48a3', 
     shadowColor: '#30C1DD',
     shadowRadius: 10,
@@ -191,11 +181,11 @@ const mapDispatchToprops = dispatch => ({
 })
 
 
-const mapStateToProps = ({ LoginUser_Reducer , User_Detail_Doc }) => {
+const mapStateToProps = ({ LoginUser_Reducer , Detail_Receive_Doc }) => {
     const { token,role } = LoginUser_Reducer;
-    const { DetailDoc } = User_Detail_Doc;
-        return { token,role,DetailDoc };
+    const { ReceiveDoc } = Detail_Receive_Doc;
+        return { token,role,ReceiveDoc };
   }
 
-export default connect(mapStateToProps,mapDispatchToprops)(DetailAddDoc);
+export default connect(mapStateToProps,mapDispatchToprops)(DetailReceiveDoc);
 

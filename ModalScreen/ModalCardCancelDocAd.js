@@ -95,6 +95,7 @@ ModalBoxConfirm:{
 ButtonCancle:{
     height: 50, 
     width: 150 , 
+    marginTop: 20,
     borderRadius: 20 , 
     shadowColor: '#30C1DD',
     shadowRadius: 10,

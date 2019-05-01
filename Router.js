@@ -55,7 +55,8 @@ import AdDetailAddDoc from './ScreensAdvisor/DetailAddDoc.js';
 import AdDetailAddSubDoc from './ScreensAdvisor/DetailAddSubDoc.js';
 import AdRealDetailAddSubDoc from './ScreensAdvisor/RealDetailAddSubDoc.js';
 import AdvisorHistory from './ScreensAdvisor/History.js';
-import AdDetailHistory from './ScreensUser/DetailHistory.js';
+import AdDetailReceiveDoc from './ScreensAdvisor/DetailReceiveDoc.js';
+import AdDetailHistory from './ScreensAdvisor/DetailHistory.js';
 
 
 import SlideMenuUser from './SlideMenu/SlideMenuUser';
@@ -368,6 +369,13 @@ class Routes extends React.Component{
                                                 component={AdRecieveDoc}
                                                 title='เอกสารที่ได้รับมอบหมาย'>
                                         </Scene>
+
+                                        <Scene 
+                                                key='AdDetailReceiveDoc' 
+                                                component={AdDetailReceiveDoc}
+                                                title='รายละเอียด'>
+                                        </Scene>
+
                                         <Scene 
                                                 key='AdDetailAddDoc' 
                                                 component={AdDetailAddDoc}

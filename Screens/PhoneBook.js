@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet,Image,View,Text,ScrollView,TouchableOpacity,TextInput,Alert,Button } from 'react-native';
-import { LinearGradient } from 'expo';
+import Expo ,{ LinearGradient, Permissions, Notifications }  from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import axios from 'axios'
 import { connect } from 'react-redux';
@@ -10,12 +10,29 @@ import { UserSearchAction } from '../Actions/UserSearchAction.js'
 
 
 class PhoneBook extends React.Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      dataSource: ''
-    };
-  }
+  // componentWillMount(){
+  //   this.getToken();
+  // }
+
+  // async getToken() {
+  //   let notificationStatus;
+  //   await Permissions.askAsync(Permissions.LOCATION)
+  //   .then(notificationResponse =>{
+  //     notificationStatus = notificationResponse.status;
+  //   })
+  //   if (notificationStatus === 'granted') {
+  //         const token = await Notifications.getExpoPushTokenAsync();
+  //         // this.setNoticeToken(token)
+  //         console.log('Our token',token);
+  //       } 
+  //   }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     dataSource: ''
+  //   };
+  // }
+  
 
 //   componentDidMount() {
 //     try{
@@ -86,18 +103,18 @@ class PhoneBook extends React.Component{
 //         );
 //     }
 // }
-updateValue(text , field){
-  if(field == 'search'){
-      this.setState({
-        search : text
-      })
-  }
-}
-CollectData(val){
-  this.props.DataAdvisorAction(val)
-  console.log(val)
-  Actions.DetailAdvisorPhoneBook();
-  }
+// updateValue(text , field){
+//   if(field == 'search'){
+//       this.setState({
+//         search : text
+//       })
+//   }
+// }
+// CollectData(val){
+//   this.props.DataAdvisorAction(val)
+//   console.log(val)
+//   Actions.DetailAdvisorPhoneBook();
+//   }
 
    render(){  
     return(

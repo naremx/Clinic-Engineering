@@ -11,6 +11,7 @@ import LoginUser_Data_Reducer from './LoginUser_Data_Reducer';
 import User_Search_Reducer from './User_Search_Reducer';
 import User_Detail_Doc from './User_Detail_Doc';
 import User_Detail_Sub_Doc from './User_Detail_Sub_Doc';
+import Detail_Receive_Doc from './Detail_Receive_Doc';
 
 import { combineReducers } from 'redux'
 
@@ -28,4 +29,5 @@ export default combineReducers({
     User_Search_Reducer,
     User_Detail_Doc,
     User_Detail_Sub_Doc,
+    Detail_Receive_Doc
 });
