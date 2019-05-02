@@ -19,7 +19,7 @@ constructor(props) {
     this.onDayPress = this.onDayPress.bind(this);
     }
     componentDidMount() {
-        var url = 'http://10.66.13.208:8000/advisor/Usshowavailable/' ;
+        var url = 'http://10.16.2.185:8000/advisor/Usshowavailable/' ;
 
         fetch(url, {
         method: 'POST', 

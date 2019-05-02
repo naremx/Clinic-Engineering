@@ -26,95 +26,95 @@ class PhoneBook extends React.Component{
   //         console.log('Our token',token);
   //       } 
   //   }
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     dataSource: ''
-  //   };
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource: ''
+    };
+  }
   
 
-//   componentDidMount() {
-//     try{
-//         axios.get(`http://10.66.13.208:8000/advisor/getaddata/` , {
-//         headers: {
-//             // Authorization : `Token ${this.props.token}`,
-//         }
-//         })
-//       .then(res => {
-//         this.setState({ dataSource : res.data});
-//       })
-//     }
-//     catch(err){
-//       console.log(err)
-//     }
-// }
-// sentDataSearch(){
-//   let collection={}
-//   collection=this.state.search
+  componentDidMount() {
+    try{
+        axios.get(`http://10.16.2.185:8000/advisor/getaddata/` , {
+        headers: {
+            // Authorization : `Token ${this.props.token}`,
+        }
+        })
+      .then(res => {
+        this.setState({ dataSource : res.data});
+      })
+    }
+    catch(err){
+      console.log(err)
+    }
+}
+sentDataSearch(){
+  let collection={}
+  collection=this.state.search
 
-//   console.log(collection);
+  console.log(collection);
 
-//   var url = 'http://10.66.13.208:8000/Search/search/' ;
+  var url = 'http://10.16.2.185:8000/Search/search/' ;
 
-//   fetch(url, {
-//   method: 'POST', 
-//   body: JSON.stringify(collection),
-//   headers:{
-//       'Content-Type': 'application/json' ,
-//       // Authorization : `Token ${this.props.token}`,
-//     }
-//   }).then(res => res.json())
-//   .then((responseData) => {
-//     this.props.UserSearchAction(responseData)
-//     Actions.HomeResultSearch();
-//   })
-//   .catch(error => {
-//     Alert.alert(
-//       'ไม่พบผลลัพธ์การค้นหา',
-//       'กรุณากรอกใหม่อีกครั้ง',
-//     )
-//     console.log(error)
-//   });
-// }
-//   renderText() {
-//     if (this.state.dataSource.length > 0) {
-//         return this.state.dataSource.map((val, index) => 
-//         <View key={index} style={Styles.ContainerContacts}>
-//             <TouchableOpacity onPress={() => this.CollectData(val)}>
-//                 <View style={{ flexDirection: 'row' }}>
-//                     <Image style={Styles.drawerImage} source={require('../Image/Advisor.png')} />
-//                     <View style={Styles.Column}>
-//                         <Text style={{ 
-//                             marginLeft : 10 ,
-//                             color : '#3e48a3' ,
-//                             fontSize: 15 ,
-//                             fontWeight: 'bold' ,
-//                             marginTop: 20 }} >{val.first_name} {val.last_name}</Text>
-//                         <Text style={{ marginLeft : 10 , color : '#777' }}>{val.telephone}</Text>
-//                         <View style={{ flexDirection: 'row' }}>
-//                             <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
-//                             <Text style={{ marginLeft : 10 , color : '#c0c0c0' , width: 200 }}>{val.department}</Text>
-//                         </View>
-//                     </View>
-//                 </View>
-//             </TouchableOpacity>
-//         </View>
-//         );
-//     }
-// }
-// updateValue(text , field){
-//   if(field == 'search'){
-//       this.setState({
-//         search : text
-//       })
-//   }
-// }
-// CollectData(val){
-//   this.props.DataAdvisorAction(val)
-//   console.log(val)
-//   Actions.DetailAdvisorPhoneBook();
-//   }
+  fetch(url, {
+  method: 'POST', 
+  body: JSON.stringify(collection),
+  headers:{
+      'Content-Type': 'application/json' ,
+      // Authorization : `Token ${this.props.token}`,
+    }
+  }).then(res => res.json())
+  .then((responseData) => {
+    this.props.UserSearchAction(responseData)
+    Actions.HomeResultSearch();
+  })
+  .catch(error => {
+    Alert.alert(
+      'ไม่พบผลลัพธ์การค้นหา',
+      'กรุณากรอกใหม่อีกครั้ง',
+    )
+    console.log(error)
+  });
+}
+  renderText() {
+    if (this.state.dataSource.length > 0) {
+        return this.state.dataSource.map((val, index) => 
+        <View key={index} style={Styles.ContainerContacts}>
+            <TouchableOpacity onPress={() => this.CollectData(val)}>
+                <View style={{ flexDirection: 'row' }}>
+                    <Image style={Styles.drawerImage} source={require('../Image/Advisor.png')} />
+                    <View style={Styles.Column}>
+                        <Text style={{ 
+                            marginLeft : 10 ,
+                            color : '#3e48a3' ,
+                            fontSize: 15 ,
+                            fontWeight: 'bold' ,
+                            marginTop: 20 }} >{val.first_name} {val.last_name}</Text>
+                        <Text style={{ marginLeft : 10 , color : '#777' }}>{val.telephone}</Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Ionicons name="ios-pin" size={15} style={{ color:'#777' , marginLeft: 22}} />
+                            <Text style={{ marginLeft : 10 , color : '#c0c0c0' , width: 200 }}>{val.department}</Text>
+                        </View>
+                    </View>
+                </View>
+            </TouchableOpacity>
+        </View>
+        );
+    }
+}
+updateValue(text , field){
+  if(field == 'search'){
+      this.setState({
+        search : text
+      })
+  }
+}
+CollectData(val){
+  this.props.DataAdvisorAction(val)
+  console.log(val)
+  Actions.DetailAdvisorPhoneBook();
+  }
 
    render(){  
     return(
@@ -132,7 +132,7 @@ class PhoneBook extends React.Component{
         </View>
         <ScrollView>
         <View style={{alignItems:'center'}}>
-            {/* { this.renderText() } */}
+            { this.renderText() }
         </View>
         </ScrollView>   
         </View>

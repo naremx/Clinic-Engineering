@@ -6,9 +6,7 @@ import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
 import { UserDetailSubDocAction } from '../Actions/UserDetailSubDocAction.js'
 
-import ModalCardCancelDocAd from '../ModalScreen/ModalCardCancelDocAd.js';
-
-class DetailAddDoc extends React.Component{
+class DetailReceiveDoc extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -18,10 +16,11 @@ class DetailAddDoc extends React.Component{
 
   componentDidMount() {
     let collection={}
-    collection.id=this.props.DetailDoc.id
+    collection.id=this.props.ReceiveDoc.id,
+    collection.user_type=this.props.data.user_type,
     console.log(collection);
 
-    var url = 'http://10.16.2.185:8000/Document/showsubdocument/' ;
+    var url = 'http://10.16.2.185:8000/Document/getsubdocument/' ;
 
     fetch(url, {
     method: 'POST', 
@@ -38,15 +37,14 @@ class DetailAddDoc extends React.Component{
         console.log('OK' ,responseData )
       })
 
-    .then(response => console.log('Success:', JSON.stringify(response)))
-    .catch(error => console.error('Error:', error));
 }
+
 CollectData(val){
     let DetailSubDoc={}
     DetailSubDoc = val
 
     this.props.UserDetailSubDocAction(DetailSubDoc)
-    Actions.AdRealDetailAddSubDoc()
+    Actions.RealDetailAddSubDoc()
 }
 renderText() {
     if (this.state.Data.length > 0) {
@@ -95,16 +93,16 @@ renderStatus(val){
                                 color : '#3e48a3' , 
                                 fontSize: 20 , 
                                 fontWeight: 'bold' , 
-                                marginTop: 20 }} >{this.props.DetailDoc.name}</Text>
+                                marginTop: 20 }} >{this.props.ReceiveDoc.name}</Text>
                             <View style={{ flexDirection: 'row' }}>
                                 <Ionicons name="ios-alarm" size={20} style={{ color:'#777' , marginLeft: 22}} />
                                 <Text style={{ marginLeft : 15 , color : '#3e48a3' , fontWeight: 'bold' }}>Start Time :</Text>
-                                <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.DetailDoc.start_date}</Text>
+                                <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.ReceiveDoc.start_date}</Text>
                             </View>
                             <View style={{ flexDirection: 'row' }}>
                                 <Ionicons name="ios-alarm" size={20} style={{ color:'#777' , marginLeft: 22}} />
                                 <Text style={{ marginLeft : 15 , color : '#3e48a3' , fontWeight: 'bold' }}>End Time :</Text>
-                                <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.DetailDoc.end_date}</Text>
+                                <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.ReceiveDoc.end_date}</Text>
                             </View>
                         </View>
                     </View>
@@ -114,7 +112,7 @@ renderStatus(val){
                                 fontSize: 15 , 
                                 fontWeight: 'bold' , 
                                 marginTop: 20 }} >รายละเอียดงาน</Text>
-                    <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.DetailDoc.description}</Text>
+                    <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.ReceiveDoc.description}</Text>
                     <View style={{ flexDirection: 'row' }}>
                     <Text style={{ 
                                 marginLeft : 10 , 
@@ -122,11 +120,6 @@ renderStatus(val){
                                 fontSize: 15 , 
                                 fontWeight: 'bold' , 
                                 marginTop: 20 }} >หัวข้องาน </Text>
-                        <View style={Styles.ButtonConfirm}>
-                        <TouchableOpacity onPress={() => Actions.AdDetailAddSubDoc()}>
-                        <Ionicons name="ios-add" size={25} style={{ color: '#fff', paddingLeft : 6 }} />
-                        </TouchableOpacity>
-                        </View>
                     </View>
                     <View style={{ height : 250 }}>
                         <ScrollView style={{ marginTop : 20 , height : 280 }}>
@@ -135,7 +128,6 @@ renderStatus(val){
 
                         </ScrollView>
                     </View>
-                    <ModalCardCancelDocAd/>
                     </View>
                 </View> 
             </View>
@@ -190,11 +182,12 @@ const mapDispatchToprops = dispatch => ({
 })
 
 
-const mapStateToProps = ({ LoginUser_Reducer , User_Detail_Doc }) => {
+const mapStateToProps = ({ LoginUser_Reducer , Detail_Receive_Doc , LoginUser_Data_Reducer }) => {
     const { token,role } = LoginUser_Reducer;
-    const { DetailDoc } = User_Detail_Doc;
-        return { token,role,DetailDoc };
+    const { ReceiveDoc } = Detail_Receive_Doc;
+    const { data } = LoginUser_Data_Reducer;
+        return { token,role,ReceiveDoc,data };
   }
 
-export default connect(mapStateToProps,mapDispatchToprops)(DetailAddDoc);
+export default connect(mapStateToProps,mapDispatchToprops)(DetailReceiveDoc);
 

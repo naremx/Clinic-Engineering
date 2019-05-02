@@ -35,6 +35,7 @@ import UserSelectModeDoc from './ScreensUser/UserSelectModeDoc.js';
 import UserRecieveDoc from './ScreensUser/UserRecieveDoc.js';
 import UserHistory from './ScreensUser/History.js';
 import UserDetailHistory from './ScreensUser/DetailHistory.js';
+import UserDetailReceiveDoc from './ScreensUser/DetailReceiveDoc.js';
 
 import AdvisorSelectMode from './ScreensAdvisor/AdvisorSelectMode.js';
 import Thesis from './ScreensAdvisor/Thesis.js';
@@ -237,6 +238,11 @@ class Routes extends React.Component{
                                                 key='UserRecieveDoc' 
                                                 component={UserRecieveDoc}
                                                 title='เอกสารที่ได้รับมอบหมาย'>
+                                        </Scene>
+                                        <Scene 
+                                                key='UserDetailReceiveDoc' 
+                                                component={UserDetailReceiveDoc}
+                                                title='รายละเอียด'>
                                         </Scene>
                                         <Scene 
                                                 key='Assignment' 

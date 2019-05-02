@@ -14,7 +14,7 @@ class SlideMenuUser extends Component{
         };
       }
     componentDidMount() {
-        var url = 'http://10.66.13.208:8000/Showdetail/Usshowdetail/' ;
+        var url = 'http://10.16.2.185:8000/Showdetail/Usshowdetail/' ;
     
         fetch(url, {
         method: 'POST', 
@@ -37,14 +37,11 @@ class SlideMenuUser extends Component{
               first_name: output.first_name,
             }); 
           })
-          
-    
-        .then(response => console.log('Success:', JSON.stringify(response)))
-        .catch(error => console.error('Error:', error));
+
     }
     async Logout(token) {
         console.log(token)
-        const response = await fetch(`http://10.66.13.208:8000/Account/logout` , {
+        const response = await fetch(`http://10.16.2.185:8000/Account/logout` , {
             headers: {
                 Authorization : `Token ${this.props.token}`,
             }   

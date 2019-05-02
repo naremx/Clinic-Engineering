@@ -49,10 +49,10 @@ class ModalCardLogin extends React.Component {
             showMe: false ,
             // username: 'naremx' ,
             // password: '123456Nn' ,
-            username: '161pipat.pr@kmitl.ac.th' ,
-            password: '1234' ,
-            // username: '' ,
-            // password: '' ,
+            // username: '161pipat.pr@kmitl.ac.th' ,
+            // password: '1234' ,
+            username: '' ,
+            password: '' ,
         }
     }
     updateValue(text , field){
@@ -75,7 +75,7 @@ class ModalCardLogin extends React.Component {
 
         this.setState({ showMe:false })
 
-        var url = 'http://10.66.13.208:8000/Account/' ;
+        var url = 'http://10.16.2.185:8000/Account/' ;
 
         fetch(url, {
         method: 'POST', 

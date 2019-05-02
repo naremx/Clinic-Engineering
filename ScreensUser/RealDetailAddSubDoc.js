@@ -25,7 +25,7 @@ class RealDetailAddSubDoc extends React.Component{
     console.log(collection);
     // Actions.DetailAddDoc();
 
-    var url = 'http://10.66.13.208:8000/Document/file/' ;
+    var url = 'http://10.16.2.185:8000/Document/file/' ;
 
     fetch(url, {
     method: 'POST', 

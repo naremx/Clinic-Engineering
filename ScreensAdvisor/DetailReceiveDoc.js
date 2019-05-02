@@ -16,10 +16,11 @@ class DetailReceiveDoc extends React.Component{
 
   componentDidMount() {
     let collection={}
-    collection.id=this.props.ReceiveDoc.id
+    collection.id=this.props.ReceiveDoc.id,
+    collection.user_type=this.props.data.user_type,
     console.log(collection);
 
-    var url = 'http://10.66.13.208:8000/Document/showsubdocument/' ;
+    var url = 'http://10.16.2.185:8000/Document/getsubdocument/' ;
 
     fetch(url, {
     method: 'POST', 
@@ -181,10 +182,11 @@ const mapDispatchToprops = dispatch => ({
 })
 
 
-const mapStateToProps = ({ LoginUser_Reducer , Detail_Receive_Doc }) => {
+const mapStateToProps = ({ LoginUser_Reducer , Detail_Receive_Doc , LoginUser_Data_Reducer }) => {
     const { token,role } = LoginUser_Reducer;
     const { ReceiveDoc } = Detail_Receive_Doc;
-        return { token,role,ReceiveDoc };
+    const { data } = LoginUser_Data_Reducer;
+        return { token,role,ReceiveDoc,data };
   }
 
 export default connect(mapStateToProps,mapDispatchToprops)(DetailReceiveDoc);
