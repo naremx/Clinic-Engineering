@@ -122,7 +122,7 @@ class Routes extends React.Component{
                         <Scene key='AddQueue' component={AddQueue} title='แอดคิว'/>
                     </Scene>
 
-                    <Drawer key='auth' contentComponent={SlideMenu}  drawerImage={require('./Image/menu.png')} initial>
+                    <Drawer key='auth' contentComponent={SlideMenu}  drawerImage={{uri : "https://www.img.live/images/2019/05/02/menu.png" , height: 25, width: 25}} initial>
                     
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
@@ -153,7 +153,7 @@ class Routes extends React.Component{
                         </Scene>
                     </Drawer>
 
-                    <Drawer key='user' contentComponent={SlideMenuUser}  drawerImage={require('./Image/menu.png')} >
+                    <Drawer key='user' contentComponent={SlideMenuUser}  drawerImage={{uri : "https://www.img.live/images/2019/05/02/menu.png" , height: 25, width: 25}} >
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
@@ -280,7 +280,7 @@ class Routes extends React.Component{
                         </Scene>
                     </Drawer>
 
-                    <Drawer key='Advisor' contentComponent={SlideMenuAdvisor}  drawerImage={require('./Image/menu.png')}>
+                    <Drawer key='Advisor' contentComponent={SlideMenuAdvisor}  drawerImage={{uri : "https://www.img.live/images/2019/05/02/menu.png" , height: 25, width: 25}}>
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  

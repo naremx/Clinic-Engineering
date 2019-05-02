@@ -19,7 +19,7 @@ constructor(props) {
         collection.user_type=this.props.data.user_type,
         collection.id=this.props.val.id,
         console.log(collection);
-        var url = 'http://10.16.2.185:8000/Showdetail/Adshowdetail/' ;
+        var url = 'http://10.66.13.208:8000/Showdetail/Adshowdetail/' ;
       
         fetch(url, {
         method: 'POST', 
@@ -122,7 +122,7 @@ constructor(props) {
                             { this.renderText() }
                         </ScrollView> 
                     </View>
-                    <Image style={{  width:370 , height:194 , borderRadius: 15 }} source={{ uri : "https://www.img.in.th/images/a96c9c44823dd503e7bf0a5cd222a517.png" }} />
+                    <Image style={{  width:370 , height:194 , borderRadius: 15 }} source={{ uri : "https://www.img.live/images/2019/05/02/shake-up-sales-meeting-og.jpg" }} />
                     <View style={{alignItems:'center'}}>
                         <TouchableOpacity onPress={() => this.gotoCalendar()}>
                             <Text style={Styles.ButtonChosen}>เลือกวันนัดคิว</Text>

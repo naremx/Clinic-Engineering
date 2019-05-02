@@ -38,9 +38,9 @@ constructor(props) {
 
         console.log(collection);
         this.props.TopicQueueAction(collection)
-        Actions.Home();
+        Actions.Queue();
 
-        var url = 'http://10.16.2.185:8000/queue/addqueue/' ;
+        var url = 'http://10.66.13.208:8000/queue/addqueue/' ;
 
         fetch(url, {
         method: 'POST', 

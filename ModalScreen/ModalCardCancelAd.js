@@ -24,7 +24,7 @@ class ModalCardCancelAd extends React.Component {
         console.log(collection);
         Actions.AdvisorQueue();
 
-        var url = 'http://10.16.2.185:8000/queue/confirm/' ;
+        var url = 'http://10.66.13.208:8000/queue/confirm/' ;
 
         fetch(url, {
         method: 'POST', 

@@ -13,7 +13,7 @@ const BannerWidth = Dimensions.get('window').width;
 const BannerHeight = 200;
 
 const images = [
-    "https://www.img.in.th/images/a691f37ca749a831e4362e41a336ec6f.png"
+    "https://www.img.live/images/2019/05/02/e58d783b5680e029.png"
 ];
 
 
@@ -41,7 +41,7 @@ renderPage(image, index) {
 
 componentDidMount() {
     try{
-        axios.get(`http://10.16.2.185:8000/advisor/getaddata/` , {
+        axios.get(`http://10.66.13.208:8000/advisor/getaddata/` , {
         headers: {
             Authorization : `Token ${this.props.token}`,
         }

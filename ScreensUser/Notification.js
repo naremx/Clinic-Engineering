@@ -16,36 +16,67 @@ class Notification extends React.Component{
                 ResultData: [],
             }
         }    
-    componentDidMount() {
-        var url = 'http://10.16.2.185:8000/history/Usshowhistory/' ;
+
+
+
+        componentDidMount() {
+            var url = 'http://10.66.13.208:8000/history/AdminShowQueue/' ;
+        
+            fetch(url, {
+            method: 'POST', 
+            body: JSON.stringify(this.props.token),
+            headers:{
+                'Content-Type': 'application/json' ,
+                Authorization : `Token ${this.props.token}`,
+            }
+            }).then(res => res.json())
+            .then((responseData) => {
+                console.log('OKAY',responseData)
+                this.setState({
+                    DataSource: responseData
+                }); 
+                var output = this.state.DataSource.reduce(function (acc, item) {
+                  if( item.status == 'waiting'  ){
+                    acc.push(item);
+                  }
+                  return acc
+                }, [])
+                console.log(output)
+                this.setState({
+                  ResultData: output
+              }); 
+              })
+            }
+    // componentDidMount() {
+    //     var url = 'http://10.66.13.208:8000/history/Usshowhistory/' ;
     
-        fetch(url, {
-        method: 'POST', 
-        body: JSON.stringify(this.props.token),
-        headers:{
-            'Content-Type': 'application/json' ,
-            Authorization : `Token ${this.props.token}`,
-        }
-        }).then(res => res.json())
-        .then((responseData) => {
-            this.setState({
-                DataSource: responseData
-            }); 
-            var output = this.state.DataSource.reduce(function (acc, item) {
-              if( item.status == 'waiting'  ){
-                acc.push(item);
-              }
-              return acc
-            }, [])
-            console.log(output)
-            this.setState({
-              ResultData: output
-          }); 
-          })
+    //     fetch(url, {
+    //     method: 'POST', 
+    //     body: JSON.stringify(this.props.token),
+    //     headers:{
+    //         'Content-Type': 'application/json' ,
+    //         Authorization : `Token ${this.props.token}`,
+    //     }
+    //     }).then(res => res.json())
+    //     .then((responseData) => {
+    //         this.setState({
+    //             DataSource: responseData
+    //         }); 
+    //         var output = this.state.DataSource.reduce(function (acc, item) {
+    //           if( item.status == 'waiting'  ){
+    //             acc.push(item);
+    //           }
+    //           return acc
+    //         }, [])
+    //         console.log(output)
+    //         this.setState({
+    //           ResultData: output
+    //       }); 
+    //       })
     
-        .then(response => console.log('Success:', JSON.stringify(response)))
-        .catch(error => console.error('Error:', error));
-    }
+    //     .then(response => console.log('Success:', JSON.stringify(response)))
+    //     .catch(error => console.error('Error:', error));
+    // }
     CollectData(val){
         let UserDateTimeDetail={}
         UserDateTimeDetail = val

@@ -34,9 +34,10 @@ class PhoneBook extends React.Component{
   }
   
 
+
   componentDidMount() {
     try{
-        axios.get(`http://10.16.2.185:8000/advisor/getaddata/` , {
+        axios.get(`http://10.66.13.208:8000/advisor/getaddata/` , {
         headers: {
             // Authorization : `Token ${this.props.token}`,
         }
@@ -55,7 +56,7 @@ sentDataSearch(){
 
   console.log(collection);
 
-  var url = 'http://10.16.2.185:8000/Search/search/' ;
+  var url = 'http://10.66.13.208:8000/Search/search/' ;
 
   fetch(url, {
   method: 'POST', 
@@ -66,6 +67,7 @@ sentDataSearch(){
     }
   }).then(res => res.json())
   .then((responseData) => {
+    console.log('RESULTSEARCH' , responseData)
     this.props.UserSearchAction(responseData)
     Actions.HomeResultSearch();
   })

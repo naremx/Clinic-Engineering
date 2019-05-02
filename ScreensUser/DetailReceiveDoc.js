@@ -20,7 +20,7 @@ class DetailReceiveDoc extends React.Component{
     collection.user_type=this.props.data.user_type,
     console.log(collection);
 
-    var url = 'http://10.16.2.185:8000/Document/getsubdocument/' ;
+    var url = 'http://10.66.13.208:8000/Document/getsubdocument/' ;
 
     fetch(url, {
     method: 'POST', 
@@ -53,7 +53,7 @@ renderText() {
         <TouchableOpacity onPress={() => this.CollectData(val)}>
             <View style={Styles.ContainerDoc}>
                 <View style={{ flexDirection: 'row' }}>
-                <Image style={{  width:64 , height:64 , marginLeft : 10 , marginTop : 8 }} source={{ uri : "https://www.img.in.th/images/2389068f88f131a1fc3bcbb03b8fc52d.png" }} />
+                <Image style={{  width:64 , height:64 , marginLeft : 10 , marginTop : 8 }} source={{ uri : "https://www.img.live/images/2019/05/02/writing.png" }} />
                 <View style={{ flexDirection: 'column' }}>
                 <Text style={{ 
                                 marginLeft : 10 ,
