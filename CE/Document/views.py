@@ -15,7 +15,22 @@ from django.core.files import File
 
 class adddocument(APIView):
     def post(self, request):
+        print(678678678678678678)
+        print(request.data)
         if Queue.objects.filter(user=request.user, id=request.data['id']):
+            Dc = Document(
+                topic=request.data['topic'],
+                end_date=datetime.datetime.strptime(request.data['end_date'], "%Y-%m-%d").date(),
+                start_date=datetime.datetime.strptime(request.data['start_date'], "%Y-%m-%d").date(),
+                user=request.user,
+                queue=get_object_or_404(Queue, id=request.data['id']),
+                name=request.data['name'],
+                description=request.data['description']
+            )
+            Dc.save()
+            return Response(status=status.HTTP_201_CREATED, )
+
+        elif Queue.objects.filter(name__user=request.user, id=request.data['id']):
             Dc = Document(
                 topic=request.data['topic'],
                 end_date=datetime.datetime.strptime(request.data['end_date'], "%Y-%m-%d").date(),
@@ -33,6 +48,7 @@ class adddocument(APIView):
 class addsubdoc(APIView):
     def post(self, request):
         print(request.data)
+        print(12312312343348284587748)
         if Document.objects.filter(user=request.user, id=request.data['id'], ):
             Sd = SubDoc(
                 topic=request.data['topic'],
@@ -48,26 +64,63 @@ class addsubdoc(APIView):
 class deletedocument(APIView):
     def post(self, request):
         print(request.data)
-        Document.objects.filter(id=request.data['id'], user=request.user, queue=request.data['queue']).delete()
+        print(222222222222222)
+        Document.objects.filter(id=request.data['id_doc'], user=request.user, queue__id=request.data['id_queue']).delete()
         return Response(status=201)
 
 
 class showdocument(APIView):
     def post(self, request):
         print(request.data)
-        document = Document.objects.filter(user=request.user)
-        serializers = DocumentSerializer(document, many=True)
-        return Response(serializers.data)
+        print(777777777)
+        if request.data['user_type'] == 2 :
+            document = Document.objects.filter(user=request.user)
+            serializers = DocumentSerializer(document, many=True)
+            return Response(serializers.data)
 
+        elif request.data['user_type'] == 3 :
+            document = Document.objects.filter(user=request.user)
+            serializers = DocumentSerializer(document, many=True)
+            return Response(serializers.data)
+
+class getdocument(APIView):
+    def post(self, request):
+        if request.data['user_type']==2:
+            name = get_object_or_404(AdvisorData,user=request.user)
+            document = Document.objects.filter(name=name.first_name)
+            serializers = DocumentSerializer(document, many=True)
+            return Response(serializers.data)
+
+        elif request.data['user_type']==3:
+            document = Document.objects.filter(user=request.user)
+            serializers = DocumentSerializer(document,many=True)
+            return Response(serializers.data)
 
 class showsubdocument(APIView):
     def post(self, request):
-        print(request.data)
         subdocument = SubDoc.objects.filter(user=request.user, doc__id=request.data['id'])
-        print(subdocument)
         serializers = SubDocumentSerializer(subdocument, many=True)
         return Response(serializers.data)
 
+class getsubdocument(APIView):
+    def post(self, request):
+        if request.data['user_type']==2:
+            print(222222222222222222222222222)
+            name = get_object_or_404(AdvisorData,user=request.user)
+            print(request.data['id'])
+            print(name.first_name)
+            subdocument = SubDoc.objects.filter(name=name.first_name, doc__id=request.data['id'])
+            print(subdocument)
+            serializers = SubDocumentSerializer(subdocument, many=True)
+            print(serializers)
+            return Response(serializers.data)
+
+        elif request.data['user_type']==3:
+            print(3333333333333333333333333333)
+            subdocument = SubDoc.objects.filter(user=request.user, doc__id=request.data['id'])
+            serializers = SubDocumentSerializer(subdocument, many=True)
+            print(serializers)
+            return Response(serializers.data)
 
 class file(APIView):
     def post(self, request):
