@@ -19,6 +19,7 @@ class UserRecieveDoc extends React.Component{
 
         let collection={}
         collection.user_type=this.props.data.user_type,
+        console.log(this.props.data.user_type)
     
         fetch(url, {
         method: 'POST', 

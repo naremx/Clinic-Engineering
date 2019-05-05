@@ -24,12 +24,13 @@ export default class ModalCardRegister extends React.Component {
   }
   validate(text,type)
     {
+    name=/^[a-zA-Z]+$/
     alph=/^[a-zA-Z0-9]+$/
     mail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/
     num=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
       if(type == 'first_name') 
       {
-        if(alph.test(text))
+        if(name.test(text))
         {
           this.setState({
             first_nameValdate:true,
@@ -45,7 +46,7 @@ export default class ModalCardRegister extends React.Component {
       }
       else if(type == 'last_name') 
       {
-        if(alph.test(text))
+        if(name.test(text))
         {
           this.setState({
             last_nameValdate:true,

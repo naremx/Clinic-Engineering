@@ -13,10 +13,10 @@ export default class AdvisorSelectMode extends React.Component{
           <View style={Styles.ContainerContacts}>
             <View style={{alignItems:'center'}}>
             <TouchableOpacity onPress={() => Actions.AdvisorEditAllDate()}>
-              <Image style={{ marginTop: 50 , width:300 , height:150 , borderRadius: 20 }} source={{ uri : "https://www.img.live/images/2019/05/02/editdate.png" }} />
+              <Image style={{ marginTop: 50 , width:300 , height:150 , borderRadius: 20 }} source={{ uri : "https://www.img.live/images/2019/05/02/selectaddalldate.png" }} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => Actions.AdvisorEditSelectDate()}>
-              <Image style={{ marginTop: 50 , width:300 , height:150 , borderRadius: 20 }} source={{ uri : "https://www.img.live/images/2019/05/02/selectaddalldate.png" }} />
+              <Image style={{ marginTop: 50 , width:300 , height:150 , borderRadius: 20 }} source={{ uri : "https://www.img.live/images/2019/05/02/editdate.png" }} />
             </TouchableOpacity>
             
             <Image style={{  width:370 , height:194 , borderRadius: 15  }} source={{ uri : "https://www.img.live/images/2019/05/02/shake-up-sales-meeting-og.jpg" }} />
