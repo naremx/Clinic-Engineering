@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import { LinearGradient, Constants } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux'
@@ -11,8 +11,31 @@ class Queue extends React.Component{
     super(props);
     this.state = {
         selectedDate: '',
+        refreshing: false,
     }
 }    
+
+_onRefresh(){
+  var url = 'http://10.66.13.208:8000/history/Adshowhistory/' ;
+
+  fetch(url, {
+  method: 'POST', 
+  body: JSON.stringify(this.props.token),
+  headers:{
+      'Content-Type': 'application/json' ,
+      Authorization : `Token ${this.props.token}`,
+  }
+  }).then(res => res.json())
+  .then((responseData) => {
+      this.setState({
+          selectedDate: responseData
+      }); 
+      console.log('OK' ,responseData )
+    })
+
+  .then(response => console.log('Success:', JSON.stringify(response)))
+  .catch(error => console.error('Error:', error));
+}
   componentDidMount() {
     var url = 'http://10.66.13.208:8000/history/Adshowhistory/' ;
 
@@ -93,10 +116,17 @@ renderStatus(val){
     return(
       <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
         <View style={Styles.Container}>
-        <ScrollView>
-            <View style={{alignItems:'center'}}>
-                { this.renderText() }
-            </View> 
+        <ScrollView
+            refreshControl={
+            <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh()}
+            />
+            }
+        >
+        <View style={{alignItems:'center'}}>
+            { this.renderText() }
+        </View>
         </ScrollView>
         </View>
     </LinearGradient>

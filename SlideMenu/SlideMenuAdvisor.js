@@ -62,6 +62,7 @@ class SlideMenuAdvisor extends Component{
             this.props.dispatch({
                 type: 'Logout'
             })
+            Actions.replace('PhoneBook')
 
     }
     render(){

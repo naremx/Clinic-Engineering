@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import { LinearGradient, Constants } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux'
@@ -13,6 +13,7 @@ class Queue extends React.Component{
             this.state = {
                 isLoading: false,
                 selectedDate: '',
+                refreshing: false,
             }
         }    
     componentDidMount() {
@@ -91,16 +92,43 @@ class Queue extends React.Component{
             return <Text style={{ marginLeft : 10 , color : '#8d8d8d' , fontWeight: 'bold' }}>Status : รอการยืนยัน</Text> 
         }
     }
-
+    _onRefresh(){
+        var url = 'http://10.66.13.208:8000/history/Usshowhistory/' ;
+    
+        fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(this.props.token),
+        headers:{
+            'Content-Type': 'application/json' ,
+            Authorization : `Token ${this.props.token}`,
+        }
+        }).then(res => res.json())
+        .then((responseData) => {
+            this.setState({
+                selectedDate: responseData
+            }); 
+            console.log('OK' ,responseData )
+          })
+    
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));
+    }
     render(){
         return(
             <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
                 <View style={Styles.Container}>
-                <ScrollView>
+                      <ScrollView
+                        refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this._onRefresh()}
+                        />
+                        }
+                    >
                     <View style={{alignItems:'center'}}>
                         { this.renderText() }
-                    </View> 
-                </ScrollView>
+                    </View>
+                    </ScrollView>
                 </View>
             </LinearGradient>
         )

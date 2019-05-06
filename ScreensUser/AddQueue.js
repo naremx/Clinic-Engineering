@@ -38,7 +38,7 @@ constructor(props) {
 
         console.log(collection);
         this.props.TopicQueueAction(collection)
-        Actions.Queue();
+        Actions.replace('Queue')
 
         var url = 'http://10.66.13.208:8000/queue/addqueue/' ;
 

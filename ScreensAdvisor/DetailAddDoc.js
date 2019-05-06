@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View,Text,ScrollView,Image,TouchableOpacity } from 'react-native';
+import { StyleSheet,View,Text,ScrollView,Image,TouchableOpacity,RefreshControl } from 'react-native';
 import { LinearGradient,Constants} from 'expo';
 import { connect } from 'react-redux'
 import { Ionicons } from 'react-native-vector-icons'
@@ -12,7 +12,8 @@ class DetailAddDoc extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-        Data: ''
+        Data: '',
+        refreshing: false,
     };
   }
 
@@ -81,6 +82,31 @@ renderStatus(val){
         return <Text style={{ marginLeft : 15 , color : '#8d8d8d' , fontWeight: 'bold', fontSize: 15 }}>Status : รอการดำเนินการ</Text> 
     }
   }
+  _onRefresh(){
+    let collection={}
+    collection.id=this.props.DetailDoc.id
+    console.log(collection);
+
+    var url = 'http://10.66.13.208:8000/Document/showsubdocument/' ;
+
+    fetch(url, {
+    method: 'POST', 
+    body: JSON.stringify(collection),
+    headers:{
+        'Content-Type': 'application/json' ,
+        Authorization : `Token ${this.props.token}`,
+    }
+    }).then(res => res.json())
+    .then((responseData) => {
+        this.setState({
+            Data: responseData
+        }); 
+        console.log('OK' ,responseData )
+      })
+
+    .then(response => console.log('Success:', JSON.stringify(response)))
+    .catch(error => console.error('Error:', error));
+  }
    render(){  
     return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
@@ -128,13 +154,23 @@ renderStatus(val){
                         </TouchableOpacity>
                         </View>
                     </View>
-                    <View style={{ height : 250 }}>
-                        <ScrollView style={{ marginTop : 20 , height : 280 }}>
-                            
-                                { this.renderText() }
 
+
+                    <View style={{height : 250}}>
+                        <ScrollView style={{ marginTop : 20 , height : 280 }}
+                            refreshControl={
+                            <RefreshControl
+                                refreshing={this.state.refreshing}
+                                onRefresh={this._onRefresh()}
+                            />
+                            }
+                        >
+                        <View style={{alignItems:'center'}}>
+                            { this.renderText() }
+                        </View>
                         </ScrollView>
                     </View>
+
                     <ModalCardCancelDocAd/>
                     </View>
                 </View> 
