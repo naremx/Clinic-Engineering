@@ -17,10 +17,12 @@ from django.conf import settings
 from .serializer import *
 from rest_framework import status
 from .models import User
-from AdvisorInfo.models import*
-from AdvisorInfo.serializer import*
+from AdvisorInfo.models import *
+from AdvisorInfo.serializer import *
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
+
 
 class contact(APIView):
     throttle_classes = ()
@@ -54,7 +56,6 @@ class contact(APIView):
         )
 
     def post(self, request, *args, **kwargs):
-
         serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
@@ -64,16 +65,25 @@ class contact(APIView):
         return Response({'token': token.key, 'role': user.user_type, 'data': serializer.data})
 
 
-
 class Usregister(APIView):
     permission_classes = ()
 
     def post(self, request):
+        print(request.data)
         serializer = UserSerializer(data=request.data)
+        # checkmail = User.objects.get(email=request.data['email'])
+        # checkusername = User.objects.get(username=request.data['username'])
+        # print(checkmail.email)
+        # print(checkusername.username)
+        if (request.data['first_name'] == '' or request.data['last_name'] == '' or request.data['telephone'] == '' or
+                request.data['email'] == '' or request.data['password'] == '' or request.data[
+                    'username'] == '' ):
+            return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
+        print("kuykuykuykuy")
         if serializer.is_valid(raise_exception=ValueError):
             serializer.create(validated_data=request.data)
             return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
-        return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
+
 
 class Adregister(APIView):
     permission_classes = ()
@@ -84,11 +94,13 @@ class Adregister(APIView):
             user_obj = serializer.create(validated_data=request.data)
         p = AdvisorData(
             user=user_obj,
-            first_name=request.data['data']['firstName']+request.data['data']['lastName'],
+            first_name=request.data['data']['firstName'],
+            last_name=request.data['data']['lastName'],
             email=request.data['data']['email'],
             telephone=request.data['data']['telephone'],
             department=request.data['data']['department'],
-            tax_number=request.data['data']['tax_number']
+            tax_number=request.data['data']['tax_number'],
+            gender=request.data['data']['gender']
         )
         p.save()
     #     serializer = AdvisorDataSerializer(data=request.data)
@@ -96,6 +108,7 @@ class Adregister(APIView):
     #         serializer.create(validated_data=request.data)
     #         return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
     #     return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
+
 
 class logout(APIView):
 
@@ -114,11 +127,13 @@ class logout(APIView):
 class fgpassword(APIView):
     def post(self, request):
         print(request.data)
-        list=[]
+        list = []
         list.append(request.data)
+        userpass = User.objects.get(email=request.data)
+
         if User.objects.filter(email=request.data):
             subject = 'God blessing on you!!, chance to change to new password'
-            message = ' click this link'
+            message = ' your password is' + userpass.password
             email_from = settings.EMAIL_HOST_USER
             recipient_list = list
             print(recipient_list)

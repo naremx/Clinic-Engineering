@@ -15,7 +15,6 @@ from django.core.files import File
 
 class adddocument(APIView):
     def post(self, request):
-        print(678678678678678678)
         print(request.data)
         if Queue.objects.filter(user=request.user, id=request.data['id']):
             Dc = Document(
@@ -47,8 +46,6 @@ class adddocument(APIView):
 
 class addsubdoc(APIView):
     def post(self, request):
-        print(request.data)
-        print(12312312343348284587748)
         if Document.objects.filter(user=request.user, id=request.data['id'], ):
             Sd = SubDoc(
                 topic=request.data['topic'],
@@ -63,16 +60,12 @@ class addsubdoc(APIView):
 
 class deletedocument(APIView):
     def post(self, request):
-        print(request.data)
-        print(222222222222222)
         Document.objects.filter(id=request.data['id_doc'], user=request.user, queue__id=request.data['id_queue']).delete()
         return Response(status=201)
 
 
 class showdocument(APIView):
     def post(self, request):
-        print(request.data)
-        print(777777777)
         if request.data['user_type'] == 2 :
             document = Document.objects.filter(user=request.user)
             serializers = DocumentSerializer(document, many=True)
@@ -92,8 +85,11 @@ class getdocument(APIView):
             return Response(serializers.data)
 
         elif request.data['user_type']==3:
-            document = Document.objects.filter(user=request.user)
+            print(request.user.first_name)
+            document = Document.objects.filter(name=request.user.first_name)
+            print(document)
             serializers = DocumentSerializer(document,many=True)
+            print(serializers)
             return Response(serializers.data)
 
 class showsubdocument(APIView):
@@ -105,39 +101,20 @@ class showsubdocument(APIView):
 class getsubdocument(APIView):
     def post(self, request):
         if request.data['user_type']==2:
-            print(222222222222222222222222222)
             name = get_object_or_404(AdvisorData,user=request.user)
-            print(request.data['id'])
-            print(name.first_name)
             subdocument = SubDoc.objects.filter(name=name.first_name, doc__id=request.data['id'])
-            print(subdocument)
             serializers = SubDocumentSerializer(subdocument, many=True)
-            print(serializers)
             return Response(serializers.data)
 
         elif request.data['user_type']==3:
-            print(3333333333333333333333333333)
-            subdocument = SubDoc.objects.filter(user=request.user, doc__id=request.data['id'])
+            print(request.data)
+            subdocument = SubDoc.objects.filter(name=request.user.first_name, doc__id=request.data['id'])
+            print(subdocument)
             serializers = SubDocumentSerializer(subdocument, many=True)
             print(serializers)
             return Response(serializers.data)
 
 class file(APIView):
     def post(self, request):
-        print(request.data)
-        print(request.user)
-        user = User.objects.get(username=request.user)
-        subdoc = SubDoc.objects.get(user__username=request.user, id=request.data['id'])
-        print(user)
-        print(subdoc)
-        serializers = FileSerializer(subdoc, many=True)
-        a = SuperFile.objects.all()
-        print(a)
 
-        SuperFile.objects.create(
-            subdoc=subdoc,
-            user=user,
-        )
-        file = SuperFile.objects.get(user__username=request.user, subdoc__id=request.data['id'])
-        file.file.save(request.data['file']['name'], request.data['file'])
         return Response(serializers.data)

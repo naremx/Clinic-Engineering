@@ -73,7 +73,8 @@ class getaddata(APIView):
     permission_classes = ()
 
     def get(self, request):
-        Advisor_list = AdvisorData.objects.all()
+        # Advisor_list = AdvisorData.objects.all()
+        Advisor_list = AdvisorData.objects.filter(id=1689)
         serializers = AdvisorDataSerializer(Advisor_list, many=True)
 
 
@@ -82,7 +83,6 @@ class getaddata(APIView):
 
 class Adshowavailable(APIView):
     permission_classes = ()
-
     def post(self, request):
         print(request.user)
         advisor_available = available.objects.filter(advisor__user=request.user, is_display=True)
@@ -90,7 +90,6 @@ class Adshowavailable(APIView):
         serializers = ShowAvailableSerializer(advisor_available, many=True)
         print(serializers)
         return Response(serializers.data)
-
 
 class Usshowavailable(APIView):
     def post(self, request):

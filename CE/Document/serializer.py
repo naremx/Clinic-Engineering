@@ -24,6 +24,6 @@ class FileSerializer(serializers.ModelSerializer):
     subdoc=serializers.CharField(source='subdoc.id')
     user = serializers.CharField(source='user.id')
     class Meta:
-        model = Document
+        model = SuperFile
         fields = ('file','user','subdoc')
 

@@ -34,7 +34,8 @@ class File(models.Model):
 
 class SuperFile(models.Model):
     subdoc = models.ForeignKey(SubDoc, on_delete=models.CASCADE, default='')
-    file = models.FileField(upload_to='pdf', blank=True)
+    # file = models.ImageFieldField(upload_to=, blank=True)
+    file = models.ImageField(upload_to='file/%Y_%m_%d', blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default='')
 
 
