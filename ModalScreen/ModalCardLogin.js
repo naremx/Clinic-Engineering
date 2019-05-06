@@ -51,6 +51,8 @@ class ModalCardLogin extends React.Component {
             // password: '123456Nn' ,
             username: '161pipat.pr@kmitl.ac.th' ,
             password: '1234' ,
+            // username: 'naremx2' ,
+            // password: '12345678Nn' ,
             // username: '' ,
             // password: '' ,
         }
@@ -95,9 +97,9 @@ class ModalCardLogin extends React.Component {
         this.props.getToken(responseData.token , responseData.role );
         this.props.getData(responseData.data);
         if (responseData.role === 3) {
-            Actions.user();
+            Actions.replace('user');
         } else if (responseData.role === 2) {
-            Actions.Advisor();
+            Actions.replace('Advisor');
         }
         else{
             Alert.alert(
@@ -128,7 +130,7 @@ class ModalCardLogin extends React.Component {
                         <Text style={{ color : '#495090' , fontSize: 23 , fontWeight: 'bold' , textAlign: 'center' }}>เข้าสู่ระบบ</Text>
                         <View style={{ flexDirection: "row" }}>
                             <View style={{ flexDirection: "column"  }}>
-                                <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , paddingTop : 20 , paddingLeft : 10 }} >อีเมล</Text>
+                                <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , paddingTop : 20 , paddingLeft : 10 }} >ผู้ใช้งาน</Text>
                                 <Text style={{color : '#95a3e6' , fontSize: 20 , fontWeight: 'bold' , paddingTop : 40 , paddingLeft : 10 }} >รหัสผ่าน</Text>
                             </View>
 

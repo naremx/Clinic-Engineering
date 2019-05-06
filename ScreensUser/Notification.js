@@ -16,6 +16,8 @@ class Notification extends React.Component{
                 ResultData: [],
             }
         }    
+
+
     componentDidMount() {
         var url = 'http://10.66.13.208:8000/history/Usshowhistory/' ;
     
@@ -32,7 +34,10 @@ class Notification extends React.Component{
                 DataSource: responseData
             }); 
             var output = this.state.DataSource.reduce(function (acc, item) {
-              if( item.status == 'waiting'  ){
+              if( item.status == 'accepted' ){
+                acc.push(item);
+              }
+              else if( item.status == 'rejected' ){
                 acc.push(item);
               }
               return acc

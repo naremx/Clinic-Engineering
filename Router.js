@@ -35,6 +35,7 @@ import UserSelectModeDoc from './ScreensUser/UserSelectModeDoc.js';
 import UserRecieveDoc from './ScreensUser/UserRecieveDoc.js';
 import UserHistory from './ScreensUser/History.js';
 import UserDetailHistory from './ScreensUser/DetailHistory.js';
+import UserDetailReceiveDoc from './ScreensUser/DetailReceiveDoc.js';
 
 import AdvisorSelectMode from './ScreensAdvisor/AdvisorSelectMode.js';
 import Thesis from './ScreensAdvisor/Thesis.js';
@@ -55,7 +56,8 @@ import AdDetailAddDoc from './ScreensAdvisor/DetailAddDoc.js';
 import AdDetailAddSubDoc from './ScreensAdvisor/DetailAddSubDoc.js';
 import AdRealDetailAddSubDoc from './ScreensAdvisor/RealDetailAddSubDoc.js';
 import AdvisorHistory from './ScreensAdvisor/History.js';
-import AdDetailHistory from './ScreensUser/DetailHistory.js';
+import AdDetailReceiveDoc from './ScreensAdvisor/DetailReceiveDoc.js';
+import AdDetailHistory from './ScreensAdvisor/DetailHistory.js';
 
 
 import SlideMenuUser from './SlideMenu/SlideMenuUser';
@@ -120,7 +122,7 @@ class Routes extends React.Component{
                         <Scene key='AddQueue' component={AddQueue} title='แอดคิว'/>
                     </Scene>
 
-                    <Drawer key='auth' contentComponent={SlideMenu}  drawerImage={require('./Image/menu.png')} initial>
+                    <Drawer key='auth' contentComponent={SlideMenu}  drawerImage={{uri : "https://www.img.live/images/2019/05/02/menu.png" , height: 25, width: 25}} initial>
                     
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
@@ -151,7 +153,7 @@ class Routes extends React.Component{
                         </Scene>
                     </Drawer>
 
-                    <Drawer key='user' contentComponent={SlideMenuUser}  drawerImage={require('./Image/menu.png')} >
+                    <Drawer key='user' contentComponent={SlideMenuUser}  drawerImage={{uri : "https://www.img.live/images/2019/05/02/menu.png" , height: 25, width: 25}} >
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
@@ -238,6 +240,11 @@ class Routes extends React.Component{
                                                 title='เอกสารที่ได้รับมอบหมาย'>
                                         </Scene>
                                         <Scene 
+                                                key='UserDetailReceiveDoc' 
+                                                component={UserDetailReceiveDoc}
+                                                title='รายละเอียด'>
+                                        </Scene>
+                                        <Scene 
                                                 key='Assignment' 
                                                 component={Assignment}
                                                 title='เอกสารที่ส่งมอบหมาย'>
@@ -273,7 +280,7 @@ class Routes extends React.Component{
                         </Scene>
                     </Drawer>
 
-                    <Drawer key='Advisor' contentComponent={SlideMenuAdvisor}  drawerImage={require('./Image/menu.png')}>
+                    <Drawer key='Advisor' contentComponent={SlideMenuAdvisor}  drawerImage={{uri : "https://www.img.live/images/2019/05/02/menu.png" , height: 25, width: 25}}>
                         <Scene key='container' hideNavBar>
                             <Tabs key='tabBar' 
                                 tabBarStyle={{ backgroundColor: '#fff' , height : 60 }}  
@@ -368,6 +375,13 @@ class Routes extends React.Component{
                                                 component={AdRecieveDoc}
                                                 title='เอกสารที่ได้รับมอบหมาย'>
                                         </Scene>
+
+                                        <Scene 
+                                                key='AdDetailReceiveDoc' 
+                                                component={AdDetailReceiveDoc}
+                                                title='รายละเอียด'>
+                                        </Scene>
+
                                         <Scene 
                                                 key='AdDetailAddDoc' 
                                                 component={AdDetailAddDoc}

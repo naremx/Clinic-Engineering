@@ -21,7 +21,7 @@ class ModalCardConfirm extends React.Component {
         collection.id = this.props.AdDateTimeDetail.id
 
         console.log(collection);
-        Actions.AdvisorQueue();
+        Actions.pop();
 
         var url = 'http://10.66.13.208:8000/queue/confirm/' ;
 

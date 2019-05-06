@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View,Text,Image,TouchableOpacity,WebView,Platform } from 'react-native';
+import { StyleSheet,View,Text,Image,TouchableOpacity,WebView,Platform,Button } from 'react-native';
 import { LinearGradient,Constants,DocumentPicker,ImagePicker } from 'expo';
 import { connect } from 'react-redux'
 import { Ionicons } from 'react-native-vector-icons'
@@ -20,9 +20,10 @@ class RealDetailAddSubDoc extends React.Component{
     let collection={}
     collection.id = this.props.DetailSubDoc.id
     collection.user = this.props.DetailSubDoc.user
-    collection.file = this.state.pickDocument
+    // collection.file = this.state.pickDocument
+    collection.formData = this.state.formData
 
-    console.log(collection);
+    console.log('--SENT--',collection);
     // Actions.DetailAddDoc();
 
     var url = 'http://10.66.13.208:8000/Document/file/' ;
@@ -31,14 +32,15 @@ class RealDetailAddSubDoc extends React.Component{
     method: 'POST', 
     body: JSON.stringify(collection),
     headers:{
-        'Content-Type': 'application/json' ,
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
         Authorization : `Token ${this.props.token}`,
     }
     })
   }
   _pickImg = async () => {
     let pickerResult = await ImagePicker.launchImageLibraryAsync({
-      base64: true,
+      base64: false,
       allowsEditing: false,
       aspect: [4, 3],
     });
@@ -55,9 +57,27 @@ class RealDetailAddSubDoc extends React.Component{
     this.setState({ 
         showMe:false,
         pickDocument : result,
-        filename: result.name
+        filename: result.name,
      })
-    console.log('_pickDocument',result);
+    console.log('_pickDocumentja',result);
+
+    let uri = result.uri
+    console.log("++URI++",uri)
+    let uriParts = uri.split('.');
+    let fileType = uri[uri.length - 1];
+    console.log("++FILE TYPE++",fileType)
+  
+    let formData = new FormData();
+    formData.append('image', {
+      uri,
+      name: `photo.${fileType}`,
+      type: `image/${fileType}`,
+    });
+    console.log("==============",formData)
+
+    this.setState({ 
+        formData:formData,
+     })
 }
    render(){  
     let { pickerResult } = this.state;
@@ -69,7 +89,7 @@ class RealDetailAddSubDoc extends React.Component{
                 <View style={{ alignItems:'center' }}>
                     <View style={Styles.ContainerContacts}>
                     <View style={{ flexDirection: 'row' }}>
-                    <Image style={{  width:64 , height:64 , marginLeft : 15 , marginTop : 8 , alignItems:'center' }} source={{ uri : "https://www.img.in.th/images/2389068f88f131a1fc3bcbb03b8fc52d.png" }} />
+                    <Image style={{  width:64 , height:64 , marginLeft : 15 , marginTop : 8 , alignItems:'center' }} source={{ uri : "https://www.img.live/images/2019/05/02/writing.png" }} />
                     
                     <Text style={{ 
                                 marginLeft : 10 ,
@@ -104,13 +124,29 @@ class RealDetailAddSubDoc extends React.Component{
                         fontSize: 15 , 
                         fontWeight: 'bold' , 
                         marginTop: 20 }} >แนบไฟล์</Text>
+
                     <View style={{alignItems:'center'}}>
+                    <View style={{ flexDirection: 'row' }}>
                     <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonSelectFile}>
+                        <TouchableOpacity onPress={() => this._pickDocument()}>
+                        <Ionicons name="ios-image" size={20} style={{ color:'#fff' , marginTop: 5 , marginLeft: 7 }} />
+                        </TouchableOpacity>
+                    </LinearGradient>
+                    {/* <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonSelectFile}>
                         <TouchableOpacity onPress={() => this._pickImg()}>
+                        <Ionicons name="ios-image" size={20} style={{ color:'#fff' , marginTop: 5 , marginLeft: 7 }} />
+                        </TouchableOpacity>
+                    </LinearGradient> */}
+
+                    </View>
+                    </View>
+                    {/* <View style={{alignItems:'center'}}>
+                    <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonSelectFile}>
+                        <TouchableOpacity onPress={() => this._pickDocument()}>
                         <Ionicons name="ios-attach" size={20} style={{ color:'#fff' , marginTop: 5 , marginLeft: 10 }} />
                         </TouchableOpacity>
                     </LinearGradient>
-                    </View>
+                    </View> */}
                     </View>
 
                     <View style={{alignItems:'center'}}>

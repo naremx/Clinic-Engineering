@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View,Text,ScrollView,Image,TouchableOpacity } from 'react-native';
+import { StyleSheet,View,Text,ScrollView,Image,TouchableOpacity,RefreshControl } from 'react-native';
 import { LinearGradient,Constants} from 'expo';
 import { connect } from 'react-redux'
 import { Ionicons } from 'react-native-vector-icons'
@@ -12,7 +12,8 @@ class DetailAddDoc extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-        Data: ''
+        Data: '',
+        refreshing: false,
     };
   }
 
@@ -55,7 +56,7 @@ renderText() {
         <TouchableOpacity onPress={() => this.CollectData(val)}>
             <View style={Styles.ContainerDoc}>
                 <View style={{ flexDirection: 'row' }}>
-                <Image style={{  width:64 , height:64 , marginLeft : 10 , marginTop : 8 }} source={{ uri : "https://www.img.in.th/images/2389068f88f131a1fc3bcbb03b8fc52d.png" }} />
+                <Image style={{  width:64 , height:64 , marginLeft : 10 , marginTop : 8 }} source={{ uri : "https://www.img.live/images/2019/05/02/writing.png" }} />
                 <View style={{ flexDirection: 'column' }}>
                 <Text style={{ 
                                 marginLeft : 10 ,
@@ -80,6 +81,31 @@ renderStatus(val){
     else{
         return <Text style={{ marginLeft : 15 , color : '#8d8d8d' , fontWeight: 'bold', fontSize: 15 }}>Status : รอการดำเนินการ</Text> 
     }
+  }
+  _onRefresh(){
+    let collection={}
+    collection.id=this.props.DetailDoc.id
+    console.log(collection);
+
+    var url = 'http://10.66.13.208:8000/Document/showsubdocument/' ;
+
+    fetch(url, {
+    method: 'POST', 
+    body: JSON.stringify(collection),
+    headers:{
+        'Content-Type': 'application/json' ,
+        Authorization : `Token ${this.props.token}`,
+    }
+    }).then(res => res.json())
+    .then((responseData) => {
+        this.setState({
+            Data: responseData
+        }); 
+        console.log('OK' ,responseData )
+      })
+
+    .then(response => console.log('Success:', JSON.stringify(response)))
+    .catch(error => console.error('Error:', error));
   }
    render(){  
     return(
@@ -114,7 +140,7 @@ renderStatus(val){
                                 fontSize: 15 , 
                                 fontWeight: 'bold' , 
                                 marginTop: 20 }} >รายละเอียดเอกสาร</Text>
-                    <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.DetailDoc.description}Building Your First Mobile App</Text>
+                    <Text style={{ marginLeft : 15 , color : '#777' }}>{this.props.DetailDoc.description}</Text>
                     <View style={{ flexDirection: 'row' }}>
                     <Text style={{ 
                                 marginLeft : 10 , 
@@ -128,13 +154,24 @@ renderStatus(val){
                         </TouchableOpacity>
                         </View>
                     </View>
-                    <View style={{ height : 250 }}>
-                        <ScrollView style={{ marginTop : 20 , height : 280 }}>
-                            
-                                { this.renderText() }
-
+                    <View style={{height : 250}}>
+                        <ScrollView style={{ marginTop : 20 , height : 280 }}
+                            refreshControl={
+                            <RefreshControl
+                                refreshing={this.state.refreshing}
+                                onRefresh={this._onRefresh()}
+                            />
+                            }
+                        >
+                        <View style={{alignItems:'center'}}>
+                            { this.renderText() }
+                        </View>
                         </ScrollView>
                     </View>
+
+
+
+
                     <ModalCardCancelDoc/>
                     </View>
                 </View> 

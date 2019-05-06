@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View,Text,TouchableOpacity,Image } from 'react-native'
+import { StyleSheet,View,Text,TouchableOpacity,Image,ScrollView } from 'react-native'
 import { LinearGradient, Constants } from 'expo'
 import { connect } from 'react-redux'
 import CheckboxGroup from 'react-native-checkbox-group'
@@ -94,24 +94,28 @@ TopicandDescription(){
                               fontSize: 20 , 
                               fontWeight: 'bold' , 
                               marginTop: 5 }}>เลือกเวลาที่ต้องการจอง</Text>
-              <CheckboxGroup
-              callback={this.onTimePress}
-              iconColor={"#00a2dd"}
-              iconSize={30}
-              checkedIcon="ios-checkbox-outline"
-              uncheckedIcon="ios-square-outline"
-              checkboxes={this.state.selectedValue}
-              labelStyle={{
-                  color: '#3e48a3',
-                  fontSize: 20
-              }}
-              rowStyle={{
-                  flexDirection: 'row'
-              }}
-              />
+              <View style={{ height : 350 }}>
+                  <ScrollView style={{ marginTop : 20 , height : 280 }}>
+                  <CheckboxGroup
+                      callback={this.onTimePress}
+                      iconColor={"#00a2dd"}
+                      iconSize={30}
+                      checkedIcon="ios-checkbox-outline"
+                      uncheckedIcon="ios-square-outline"
+                      checkboxes={this.state.selectedValue}
+                      labelStyle={{
+                          color: '#3e48a3',
+                          fontSize: 20
+                      }}
+                      rowStyle={{
+                          flexDirection: 'row'
+                      }}
+                      />
+                  </ScrollView>
+              </View>
                 <View style={{alignItems:'center'}}>
                     <TouchableOpacity onPress={() => this.TopicandDescription()}>
-                        <Image style={{  width:220 , height:105 }} source={{ uri : "https://www.img.live/images/2019/04/24/description.png" }} />
+                        <Image style={{  width:220,height:105,borderRadius: 20 }} source={{ uri : "https://www.img.live/images/2019/05/02/addqueue.png" }} />
                     </TouchableOpacity>
                 </View>
             </View>

@@ -4,7 +4,7 @@ import { LinearGradient, Constants } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux';
-import { UserDetailDocAction } from '../Actions/UserDetailDocAction.js'
+import { DetailReceiveDocAction } from '../Actions/DetailReceiveDocAction.js'
 
 
 class AdRecieveDoc extends React.Component{
@@ -16,10 +16,14 @@ class AdRecieveDoc extends React.Component{
     }    
     componentDidMount() {
         var url = 'http://10.66.13.208:8000/Document/getdocument/' ;
+
+        let collection={}
+        collection.user_type=this.props.data.user_type,
+        console.log(this.props.data.user_type)
     
         fetch(url, {
         method: 'POST', 
-        body: JSON.stringify(this.props.token),
+        body: JSON.stringify(collection),
         headers:{
             'Content-Type': 'application/json' ,
             Authorization : `Token ${this.props.token}`,
@@ -36,11 +40,11 @@ class AdRecieveDoc extends React.Component{
         .catch(error => console.error('Error:', error));
     }
     CollectData(val){
-        let DetailDoc={}
-        DetailDoc = val
+        let ReceiveDoc={}
+        ReceiveDoc = val
 
-        this.props.UserDetailDocAction(DetailDoc)
-        // Actions.DetailAddDoc()
+        this.props.DetailReceiveDocAction(ReceiveDoc)
+        Actions.AdDetailReceiveDoc()
     }
     renderText() {
         if (this.state.Data.length > 0) {
@@ -141,7 +145,7 @@ const Styles = StyleSheet.create({
 });
 
 const mapDispatchToprops = dispatch => ({
-    UserDetailDocAction: (DetailDoc) => dispatch(UserDetailDocAction(DetailDoc))
+    DetailReceiveDocAction: (ReceiveDoc) => dispatch(DetailReceiveDocAction(ReceiveDoc))
 })
 
 const mapStateToProps = ({ LoginUser_Reducer,Add_Queue_Reducer,LoginUser_Data_Reducer }) => {

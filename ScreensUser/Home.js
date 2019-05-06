@@ -13,7 +13,7 @@ const BannerWidth = Dimensions.get('window').width;
 const BannerHeight = 200;
 
 const images = [
-    "https://www.img.in.th/images/a691f37ca749a831e4362e41a336ec6f.png"
+    "https://www.img.live/images/2019/05/02/e58d783b5680e029.png"
 ];
 
 

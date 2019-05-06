@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View,Text,TouchableOpacity,Modal,TextInput,KeyboardAvoidingView } from 'react-native';
+import { StyleSheet,View,Text,TouchableOpacity,Modal,TextInput,Alert } from 'react-native';
 import { LinearGradient,BlurView } from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 
@@ -24,12 +24,13 @@ export default class ModalCardRegister extends React.Component {
   }
   validate(text,type)
     {
+    name=/^[a-zA-Z]+$/
     alph=/^[a-zA-Z0-9]+$/
     mail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/
     num=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
       if(type == 'first_name') 
       {
-        if(alph.test(text))
+        if(name.test(text))
         {
           this.setState({
             first_nameValdate:true,
@@ -45,7 +46,7 @@ export default class ModalCardRegister extends React.Component {
       }
       else if(type == 'last_name') 
       {
-        if(alph.test(text))
+        if(name.test(text))
         {
           this.setState({
             last_nameValdate:true,
@@ -125,20 +126,53 @@ export default class ModalCardRegister extends React.Component {
       collection.username=this.state.username,
       collection.user_type=this.state.user_type,
       console.log(collection);
+        // this.setState({ showMe:false })
 
-      this.setState({ showMe:false })
+        var url = 'http://10.66.13.208:8000/Account/Usregister/' ;
+  
+        fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(collection),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+        }).then(res => res.json())
+        .then(responseData => {
+            if(responseData.null){
+              Alert.alert(
+                'ไม่สามารถสมัครสมาชิกได้',
+                'กรุณาตรวจสอบหรือกรอกใหม่อีกครั้ง',
+              );
+            }
+            else if (responseData.invalid){
+              Alert.alert(
+                'ไม่สามารถสมัครสมาชิกได้',
+                'กรุณาตรวจสอบหรือกรอกใหม่อีกครั้ง',
+              );
+            }
+            else if (responseData.required){
+              Alert.alert(
+                'ไม่สามารถสมัครสมาชิกได้',
+                'กรุณาตรวจสอบหรือกรอกใหม่อีกครั้ง',
+              );
+            }
+            else {
+              this.setState({ showMe:false })
+            }
+        })
+        .catch(error => {
+          this.setState({ showMe:true })
+          console.log(error)
+          Alert.alert(
+            'ไม่สามารถสมัครสมาชิกได้',
+            'กรุณาตรวจสอบหรือกรอกใหม่อีกครั้ง',
+          );
+        });
+    
 
-      var url = 'http://10.66.13.208:8000/Account/Usregister/' ;
 
-      fetch(url, {
-      method: 'POST', 
-      body: JSON.stringify(collection),
-      headers:{
-          'Content-Type': 'application/json'
-      }
-      }).then(res => res.json())
-      .then(response => console.log('Success:', JSON.stringify(response)))
-      .catch(error => console.error('Error:', error));
+    
+
   }
   
   render() {

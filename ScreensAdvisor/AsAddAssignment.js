@@ -33,9 +33,9 @@ submit(){
   collection.description=this.state.description
   collection.start_date=this.state.start_date
   collection.end_date=this.state.end_date
-  console.log(collection);
+  console.log('KIKI',collection);
 
-  Actions.AdvisorSelectMode();
+  Actions.AdSelectModeDoc();
 
   var url = 'http://10.66.13.208:8000/Document/adddocument/' ;
 

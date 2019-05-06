@@ -37,10 +37,7 @@ class SlideMenuUser extends Component{
               first_name: output.first_name,
             }); 
           })
-          
-    
-        .then(response => console.log('Success:', JSON.stringify(response)))
-        .catch(error => console.error('Error:', error));
+
     }
     async Logout(token) {
         console.log(token)
@@ -53,6 +50,7 @@ class SlideMenuUser extends Component{
             this.props.dispatch({
                 type: 'Logout'
             })
+            Actions.replace('PhoneBook')
 
     }
     render(){

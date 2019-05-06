@@ -51,10 +51,6 @@ class SlideMenuAdvisor extends Component{
               tax_number: output.tax_number,
             }); 
           })
-          
-      
-        .then(response => console.log('Success:', JSON.stringify(response)))
-        .catch(error => console.error('Error:', error));
       }
     async Logout(token) {
         const response = await fetch(`http://10.66.13.208:8000/Account/logout` , {
@@ -66,6 +62,7 @@ class SlideMenuAdvisor extends Component{
             this.props.dispatch({
                 type: 'Logout'
             })
+            Actions.replace('PhoneBook')
 
     }
     render(){

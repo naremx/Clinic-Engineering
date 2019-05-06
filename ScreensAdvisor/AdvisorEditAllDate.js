@@ -123,7 +123,7 @@ class AdvisorEditAllDate extends React.Component {
                     rowDirection={"column"}
                   />
                   <TouchableOpacity onPress={() => this.SentSettingDate()}>
-                    <Image style={{  width:200 , height:120 , margin :30 }} source={{ uri : "https://www.img.live/images/2019/04/24/ok.png" }} />
+                    <Image style={{  width:200 , height:120 , margin :30 , borderRadius: 20 }} source={{ uri : "https://www.img.live/images/2019/05/02/ok.png" }} />
                   </TouchableOpacity>
                 </View>
         </View>
