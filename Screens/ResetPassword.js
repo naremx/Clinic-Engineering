@@ -25,7 +25,7 @@ class ResetPassword extends React.Component{
         console.log(collection);
         Actions.PhoneBook()
   
-        var url = 'http://10.66.13.208:8000/Account/fgpassword/' ;
+        var url = 'http://35.198.249.38:8000/Account/fgpassword/' ;
   
         fetch(url, {
         method: 'POST', 

@@ -128,7 +128,7 @@ export default class ModalCardRegister extends React.Component {
       console.log(collection);
         // this.setState({ showMe:false })
 
-        var url = 'http://10.66.13.208:8000/Account/Usregister/' ;
+        var url = 'http://35.198.249.38:8000/Account/Usregister/' ;
   
         fetch(url, {
         method: 'POST', 

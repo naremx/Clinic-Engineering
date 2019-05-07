@@ -24,7 +24,7 @@ class RealDetailAddSubDoc extends React.Component{
     // collection.image = this.state.pickerResult
     console.log('--SENT--',collection);
 
-    var url = 'http://10.66.13.208:8000/Document/showfile/' ;
+    var url = 'http://35.198.249.38:8000/Document/showfile/' ;
 
     fetch(url, {
     method: 'POST', 
@@ -81,7 +81,7 @@ class RealDetailAddSubDoc extends React.Component{
             <Text style={{ marginLeft : 15 , color : '#777', fontSize: 13 }}>{item}</Text>
         </TouchableOpacity> */}
             <Image 
-                source={{ uri: 'http://10.66.13.208:8000'+item }}
+                source={{ uri: 'http://35.198.249.38:8000'+item }}
                 style={{width: 350, height: 300}}
             />
         </View>
@@ -110,7 +110,7 @@ class RealDetailAddSubDoc extends React.Component{
     console.log('--SENT--',collection);
     // Actions.DetailAddDoc();
 
-    var url = 'http://10.66.13.208:8000/Document/file/' ;
+    var url = 'http://35.198.249.38:8000/Document/file/' ;
 
     fetch(url, {
     method: 'POST', 

@@ -21,7 +21,7 @@ class DetailReceiveDoc extends React.Component{
     collection.user_type=this.props.data.user_type,
     console.log(collection);
 
-    var url = 'http://10.66.13.208:8000/Document/getsubdocument/' ;
+    var url = 'http://35.198.249.38:8000/Document/getsubdocument/' ;
 
     fetch(url, {
     method: 'POST', 
@@ -89,7 +89,7 @@ renderStatus(val){
     collection.user_type=this.props.data.user_type,
     console.log(collection);
 
-    var url = 'http://10.66.13.208:8000/Document/getsubdocument/' ;
+    var url = 'http://35.198.249.38:8000/Document/getsubdocument/' ;
 
     fetch(url, {
     method: 'POST', 

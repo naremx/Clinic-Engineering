@@ -10,7 +10,7 @@ class AdvisorSelectMode extends React.Component{
     let collection={}
     collection.expo_token=token
     try{
-        var url = 'http://10.66.13.208:8000/notification/upload_expo_token/' ;
+        var url = 'http://35.198.249.38:8000/notification/upload_expo_token/' ;
 
         await fetch(url, {
         method: 'POST', 

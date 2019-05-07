@@ -24,7 +24,7 @@ class ModalCardCancelDoc extends React.Component {
         console.log(collection);
         Actions.Assignment();
 
-        var url = 'http://10.66.13.208:8000/Document/deletedocument/' ;
+        var url = 'http://35.198.249.38:8000/Document/deletedocument/' ;
 
         fetch(url, {
         method: 'POST', 

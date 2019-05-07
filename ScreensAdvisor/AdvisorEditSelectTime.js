@@ -16,7 +16,7 @@ class AdvisorEditSelectTime extends React.Component{
   }
 
   componentDidMount() {
-    var url = 'http://10.66.13.208:8000/advisor/Adshowavailable/' ;
+    var url = 'http://35.198.249.38:8000/advisor/Adshowavailable/' ;
 
     fetch(url, {
     method: 'POST', 
@@ -72,7 +72,7 @@ DeleteDate(){
 console.log('--SENT--',collection)
 Actions.AdvisorSelectMode()
 
-var url = 'http://10.66.13.208:8000/advisor/deleteavailable/' ;
+var url = 'http://35.198.249.38:8000/advisor/deleteavailable/' ;
 
 fetch(url, {
 method: 'POST', 

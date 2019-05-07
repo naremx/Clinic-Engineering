@@ -20,7 +20,7 @@ class Notification extends React.Component{
 
 
     componentDidMount() {
-        var url = 'http://10.66.13.208:8000/history/Usshowhistory/' ;
+        var url = 'http://35.198.249.38:8000/history/Usshowhistory/' ;
     
         fetch(url, {
         method: 'POST', 
@@ -56,7 +56,7 @@ class Notification extends React.Component{
         this.setState({
           refreshing: true,
       }); 
-      var url = 'http://10.66.13.208:8000/history/Usshowhistory/' ;
+      var url = 'http://35.198.249.38:8000/history/Usshowhistory/' ;
     
       fetch(url, {
       method: 'POST', 
