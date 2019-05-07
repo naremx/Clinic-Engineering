@@ -73,11 +73,10 @@ class getaddata(APIView):
     permission_classes = ()
 
     def get(self, request):
-        # Advisor_list = AdvisorData.objects.all()
-        Advisor_list = AdvisorData.objects.filter(id=1689)
+        Advisor_list = AdvisorData.objects.all()
+        # Advisor_list = AdvisorData.objects.filter(id=1689)
         serializers = AdvisorDataSerializer(Advisor_list, many=True)
-
-
+        print(serializers)
         return Response(serializers.data)
 
 
