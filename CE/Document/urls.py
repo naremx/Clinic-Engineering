@@ -9,5 +9,7 @@ urlpatterns = [
     path('getsubdocument/', getsubdocument.as_view(), name="getsubdocument"),
     path('showsubdocument/', showsubdocument.as_view(), name="showsubdocument"),
     path('addsubdoc/', addsubdoc.as_view(), name="addsubdoc"),
-    path('file/',file.as_view(), name='file')
+    path('file/',file.as_view(), name='file'),
+    path('showfile/', showfile.as_view(), name="showfile"),
+    # path('confirm/', confirm.as_view(), name="confirm")
     ]

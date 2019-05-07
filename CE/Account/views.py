@@ -20,6 +20,7 @@ from .models import User
 from AdvisorInfo.models import *
 from AdvisorInfo.serializer import *
 from django.contrib.auth import get_user_model
+from notification.models import *
 
 User = get_user_model()
 
@@ -116,11 +117,14 @@ class logout(APIView):
         # try:
         request.user.auth_token.delete()
 
+        Notification.objects.filter(user=request.user).delete()
+
         # except (AttributeError):
         # # except (AttributeError, ObjectDoesNotExist):
         #     pass
         #
         # return Response({"success": ("Successfully logged out.")},
+
         return Response(status=200)
 
 

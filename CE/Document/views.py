@@ -127,10 +127,40 @@ class file(APIView):
             user=User.objects.get(id=request.data['user']),
             subdoc=SubDoc.objects.get(id=request.data['id']),
         )
+        SubDoc.objects.filter(id=request.data['id']).update(status='completed')
         file_name = file['uri'].split('/')[-1]
         super_file.file.save(file_name,ContentFile(base64.b64decode(file['base64'])),save=True)
         serializers = FileSerializer(super_file,context={'request':request})
-    # return render(request, 'core/simple_upload.html')
         return Response(serializers.data,status=status.HTTP_200_OK)
-        # return Response(serializers.data)
 
+class showfile(APIView):
+    def post(self,request):
+        show_file = SuperFile.objects.filter(subdoc__id=request.data['id'])
+        serializers = FileSerializer(show_file, many=True)
+        print(serializers)
+        return Response(serializers.data)
+
+# class confirm(APIView):
+#     def post(self, request):
+#         permission_classes = ()
+#         decision = int(request.data['decision'])
+#         print("show")
+#         if decision != 1:
+#             print(55555555)
+#         else:
+#             print(request.data)
+#             SuperFile.objects.filter(id=request.data['id']).update(status='finished')
+#
+#             try:
+#                 notification_list = Notification.objects.filter(user=queue.user)
+#                 for notification in notification_list:
+#                     notification.send_notification(
+#                         message='you have received new file',
+#                         # เพิ่มรายละเอียด queue ไหน
+#                         title='NEW FILE RECEIVED',
+#                         data={'status': 200},
+#                     )
+#             except:
+#                 pass
+#
+#         return Response(status=200)

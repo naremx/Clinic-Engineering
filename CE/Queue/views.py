@@ -16,6 +16,8 @@ class addqueue(APIView):
     permission_classes = ()
 
     def post(self, request):
+        print(777777777777777777777777777)
+        print(request.data)
         print(request.data['time']['selected'])
         print(666666666666666666666666666666666666)
         for id in request.data['time']['selected']:
@@ -33,20 +35,21 @@ class addqueue(APIView):
             )
             Us.save()
             e = available.objects.filter(id=id).update(is_display=False)
-            print(33333333333333333333333334444444444444444444)
-            print(request.data)
-            queue = get_object_or_404(AdvisorData, id=request.data['advisor'])
-            print(queue)
-            notification = get_object_or_404(Notification, user=queue.user)
-            # notification_list = Notification.objects.filter(user = queue.user)
-            print(notification)
-            # for notification in notification_list:
-            notification.send_notification(
-                message='you have new request',
-                # เพิ่มรายละเอียดคนไหน
-                title='NEW REQUEST',
-                data={'status': 200},
-            )
+        print(33333333333333333333333334444444444444444444)
+        print(request.data)
+        # for id in request.data['time']['selected']:
+        queue = get_object_or_404(AdvisorData, id=request.data['advisor'])
+        print(queue.user)
+        notification = get_object_or_404(Notification, user=queue.user)
+        # notification_list = Notification.objects.filter(user = queue.user)
+        print(notification)
+        # for notification in notification_list:
+        notification.send_notification(
+            message='you have new request',
+            # เพิ่มรายละเอียดคนไหน
+            title='NEW REQUEST',
+            data={'status': 200},
+        )
 
         QueueAdmin = QueueAd(
             name=get_object_or_404(AdvisorData, id=request.data['advisor']),
@@ -58,8 +61,8 @@ class addqueue(APIView):
             available=get_object_or_404(available, id=int(id))
 
         )
+        print(1231231231231231231231231231231231231231231231231231231231231231231123)
         QueueAdmin.save()
-        e = available.objects.filter(id=id).update(is_display=False)
 
         return Response(status=status.HTTP_201_CREATED)
 
