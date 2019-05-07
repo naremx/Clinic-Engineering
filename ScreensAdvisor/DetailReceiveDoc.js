@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View,Text,ScrollView,Image,TouchableOpacity } from 'react-native';
+import { StyleSheet,View,Text,ScrollView,Image,TouchableOpacity,RefreshControl } from 'react-native';
 import { LinearGradient,Constants} from 'expo';
 import { connect } from 'react-redux'
 import { Ionicons } from 'react-native-vector-icons'
@@ -10,7 +10,8 @@ class DetailReceiveDoc extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-        Data: ''
+        Data: '',
+        refreshing: false,
     };
   }
 
@@ -72,12 +73,41 @@ renderText() {
 }
 renderStatus(val){
     console.log('OK' , val)
-    if(val.status == 'complete'){
+    if(val.status == 'completed'){
         return <Text style={{ marginLeft : 15 , color : '#45e353' , fontWeight: 'bold', fontSize: 15 }}>Status : เสร็จเรียบร้อย</Text> 
     }
     else{
         return <Text style={{ marginLeft : 15 , color : '#8d8d8d' , fontWeight: 'bold', fontSize: 15 }}>Status : รอการดำเนินการ</Text> 
     }
+  }
+  _onRefresh(){
+    this.setState({
+        refreshing: true
+    }); 
+
+    let collection={}
+    collection.id=this.props.ReceiveDoc.id,
+    collection.user_type=this.props.data.user_type,
+    console.log(collection);
+
+    var url = 'http://10.66.13.208:8000/Document/getsubdocument/' ;
+
+    fetch(url, {
+    method: 'POST', 
+    body: JSON.stringify(collection),
+    headers:{
+        'Content-Type': 'application/json' ,
+        Authorization : `Token ${this.props.token}`,
+    }
+    }).then(res => res.json())
+    .then((responseData) => {
+        this.setState({
+            Data: responseData,
+            refreshing: false
+        }); 
+        console.log('OK' ,responseData )
+      })
+
   }
    render(){  
     return(
@@ -122,10 +152,17 @@ renderStatus(val){
                                 marginTop: 20 }} >หัวข้องาน </Text>
                     </View>
                     <View style={{ height : 250 }}>
-                        <ScrollView style={{ marginTop : 20 , height : 280 }}>
-                            
-                                { this.renderText() }
-
+                        <ScrollView style={{ marginTop : 20 , height : 280 }}
+                            refreshControl={
+                            <RefreshControl
+                                refreshing={this.state.refreshing}
+                                onRefresh={() =>this._onRefresh()}
+                            />
+                            }
+                        >
+                        <View style={{alignItems:'center'}}>
+                            { this.renderText() }
+                        </View>
                         </ScrollView>
                     </View>
                     </View>

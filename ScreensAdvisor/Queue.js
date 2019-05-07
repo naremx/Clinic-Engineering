@@ -16,6 +16,9 @@ class Queue extends React.Component{
 }    
 
 _onRefresh(){
+  this.setState({
+    refreshing: true,
+}); 
   var url = 'http://10.66.13.208:8000/history/Adshowhistory/' ;
 
   fetch(url, {
@@ -25,7 +28,8 @@ _onRefresh(){
       'Content-Type': 'application/json' ,
       Authorization : `Token ${this.props.token}`,
   }
-  }).then(res => res.json())
+  })
+  .then(res => res.json())
   .then((responseData) => {
       this.setState({
           selectedDate: responseData
@@ -120,7 +124,7 @@ renderStatus(val){
             refreshControl={
             <RefreshControl
                 refreshing={this.state.refreshing}
-                onRefresh={this._onRefresh()}
+                onRefresh={() => this._onRefresh()}
             />
             }
         >

@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet,View,Text,Image,TouchableOpacity,WebView,Platform,Button } from 'react-native';
-import { LinearGradient,Constants,DocumentPicker,ImagePicker } from 'expo';
+import { StyleSheet,View,Text,Image,TouchableOpacity,Alert,ScrollView } from 'react-native';
+import { LinearGradient,Constants,DocumentPicker,ImagePicker,FileSystem } from 'expo';
 import { connect } from 'react-redux'
 import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
@@ -16,13 +16,97 @@ class RealDetailAddSubDoc extends React.Component{
         pickerResult: null,
     };
   }
-  SentDataConfirm(){
+
+  componentDidMount() {
     let collection={}
     collection.id = this.props.DetailSubDoc.id
-    collection.user = this.props.DetailSubDoc.user
-    // collection.file = this.state.pickDocument
-    collection.formData = this.state.formData
+    // collection.user = this.props.DetailSubDoc.advisor_id
+    // collection.image = this.state.pickerResult
+    console.log('--SENT--',collection);
 
+    var url = 'http://10.66.13.208:8000/Document/showfile/' ;
+
+    fetch(url, {
+    method: 'POST', 
+    body: JSON.stringify(collection),
+    headers:{
+        'Content-Type': 'application/json' ,
+        Authorization : `Token ${this.props.token}`,
+    }
+    }).then(res => res.json())
+    .then((responseData) => {
+            console.log('--showFile--', responseData.file)
+            this.setState({ 
+                showFile : responseData,
+             })
+             const resultshowFile = this.state.showFile.reduce((arr,item) =>{
+                if( item.file){
+                    arr.push(item.file);
+                }
+                return arr
+            }, [])
+            this.setState({ 
+                ResultshowFile : resultshowFile,
+             })
+             console.log('--showFile2--', this.state.ResultshowFile)
+    })
+  }
+//   download(item){
+//       console.log(item)
+//             FileSystem.downloadAsync(
+//                 item ,
+//             FileSystem.documentDirectory + 'download.jpg'
+//         )
+//         .then(({ uri }) => {
+//             Alert.alert(
+//             "App",
+//             uri
+//             );
+//         this.setState({uri: uri});
+//         })
+//         .catch(error => {
+//         Alert.alert(
+//         "App",
+//         error
+//         );
+//         console.error(error);
+//     });
+//     }
+  renderImage() {
+      console.log(this.state.ResultshowFile)
+    if (this.state.ResultshowFile) {
+        return this.state.ResultshowFile.map((item, index) => 
+        <View key={index}>
+         {/* <TouchableOpacity onPress={() => this.download(item)}>
+            <Text style={{ marginLeft : 15 , color : '#777', fontSize: 13 }}>{item}</Text>
+        </TouchableOpacity> */}
+            <Image 
+                source={{ uri: 'http://10.66.13.208:8000'+item }}
+                style={{width: 350, height: 300}}
+            />
+        </View>
+        );
+    }
+  }
+  SentDataConfirm(){
+        Actions.pop()
+  }
+  _pickImg = async () => {
+    let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      base64: true,
+      allowsEditing: false,
+      aspect: [4, 3],
+    });
+    // console.log('pickerResult',pickerResult)
+    this.setState({
+      pickerResult,
+      showMe:false
+    });
+    let collection={}
+    collection.id = this.props.DetailSubDoc.id
+    collection.user = this.props.DetailSubDoc.advisor_id
+    // collection.file = this.state.pickDocument
+    collection.image = this.state.pickerResult
     console.log('--SENT--',collection);
     // Actions.DetailAddDoc();
 
@@ -32,24 +116,19 @@ class RealDetailAddSubDoc extends React.Component{
     method: 'POST', 
     body: JSON.stringify(collection),
     headers:{
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json' ,
         Authorization : `Token ${this.props.token}`,
     }
+    }).then(res => res.json())
+    .then((responseData) => {
+            console.log('IMAGE', responseData)
+            this.setState({ 
+                uploadImage : responseData.file,
+             })
+             console.log('IMAGE2', this.state.uploadImage)
     })
-  }
-  _pickImg = async () => {
-    let pickerResult = await ImagePicker.launchImageLibraryAsync({
-      base64: false,
-      allowsEditing: false,
-      aspect: [4, 3],
-    });
-    console.log(pickerResult)
-    this.setState({
-      pickerResult,
-      showMe:false
-    });
   };
+
   _pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({});
     alert('ทำการเพิ่มไฟล์เรียบร้อยแล้ว');
@@ -83,6 +162,7 @@ class RealDetailAddSubDoc extends React.Component{
     let { pickerResult } = this.state;
     let imageUri = pickerResult ? `data:image/jpg;base64,${pickerResult.base64}` : null;
     imageUri && console.log({uri: imageUri.slice(0, 100)});
+    // const images = this.state.uploadImage.uri
     return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
             <View style={{ height: '100%' }}>
@@ -128,7 +208,7 @@ class RealDetailAddSubDoc extends React.Component{
                     <View style={{alignItems:'center'}}>
                     <View style={{ flexDirection: 'row' }}>
                     <LinearGradient colors={['#87daf3', '#a69beb']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonSelectFile}>
-                        <TouchableOpacity onPress={() => this._pickDocument()}>
+                        <TouchableOpacity onPress={() => this._pickImg()}>
                         <Ionicons name="ios-image" size={20} style={{ color:'#fff' , marginTop: 5 , marginLeft: 7 }} />
                         </TouchableOpacity>
                     </LinearGradient>
@@ -151,7 +231,15 @@ class RealDetailAddSubDoc extends React.Component{
 
                     <View style={{alignItems:'center'}}>
                     <View style={Styles.ContainerDocFile}>
-                    <Text style={{ marginLeft : 15 , color : '#777', fontSize: 15 }}>{this.state.filename}</Text>
+                    <Text style={{ marginLeft : 15 , color : '#777', fontSize: 15 }}></Text>
+                    {/* <Image style={{ width: 50, height: 50 }} source={{ uri: images }} /> */}
+                    <ScrollView style={{ height : 90 }}>
+                    { this.renderImage() }
+                        <Image 
+                            source={{uri: this.state.uploadImage}}
+                            style={{width: 350, height: 300}}
+                        />
+                    </ScrollView>
                     </View>
                     <LinearGradient colors={['#90ed9c', '#04d11f']} start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}} style={Styles.ButtonChosen}>
                         <TouchableOpacity onPress={() => this.SentDataConfirm()}>

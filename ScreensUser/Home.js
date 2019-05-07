@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Image, View, Dimensions , Text , ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Image, View, Dimensions , Text , ScrollView, TouchableOpacity, TextInput,Alert } from 'react-native';
 import Carousel from 'react-native-banner-carousel';
-import { LinearGradient } from 'expo';
+import Expo ,{ LinearGradient, Permissions, Notifications }  from 'expo';
 import { Ionicons } from 'react-native-vector-icons'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux';
@@ -25,6 +25,39 @@ class App extends React.Component {
             dataSource: {},
     }    
 }
+async setNoticeToken(token){
+    let collection={}
+    collection.expo_token=token
+    try{
+        var url = 'http://10.66.13.208:8000/notification/upload_expo_token/' ;
+
+        await fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(collection),
+        headers:{
+            'Content-Type': 'application/json' ,
+            Authorization : `Token ${this.props.token}`,
+        }
+        })
+    }catch(err){
+        Alert.alert('Try Again');
+    }
+}
+  componentWillMount(){
+    this.getToken();
+  }
+    async getToken() {
+    let notificationStatus;
+    await Permissions.askAsync(Permissions.LOCATION)
+    .then(notificationResponse =>{
+      notificationStatus = notificationResponse.status;
+    })
+    if (notificationStatus === 'granted') {
+          const token = await Notifications.getExpoPushTokenAsync();
+          this.setNoticeToken(token)
+          console.log('Our token',token);
+        } 
+    }
 CollectData(val){
     this.props.DataAdvisorAction(val)
     console.log(val)
