@@ -75,7 +75,7 @@ renderText() {
 }
 renderStatus(val){
     console.log('OK' , val)
-    if(val.status == 'complete'){
+    if(val.status === 'completed'){
         return <Text style={{ marginLeft : 15 , color : '#45e353' , fontWeight: 'bold', fontSize: 15 }}>Status : เสร็จเรียบร้อย</Text> 
     }
     else{
@@ -83,6 +83,9 @@ renderStatus(val){
     }
   }
   _onRefresh(){
+    this.setState({
+        refreshing: true
+    }); 
     let collection={}
     collection.id=this.props.DetailDoc.id
     console.log(collection);
@@ -99,7 +102,8 @@ renderStatus(val){
     }).then(res => res.json())
     .then((responseData) => {
         this.setState({
-            Data: responseData
+            Data: responseData,
+            refreshing: false
         }); 
         console.log('OK' ,responseData )
       })
@@ -159,7 +163,7 @@ renderStatus(val){
                             refreshControl={
                             <RefreshControl
                                 refreshing={this.state.refreshing}
-                                onRefresh={this._onRefresh()}
+                                onRefresh={() =>this._onRefresh()}
                             />
                             }
                         >

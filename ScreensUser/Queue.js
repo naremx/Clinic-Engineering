@@ -93,6 +93,10 @@ class Queue extends React.Component{
         }
     }
     _onRefresh(){
+        console.log('EIEI')
+        this.setState({
+            refreshing: true
+        }); 
         var url = 'http://10.66.13.208:8000/history/Usshowhistory/' ;
     
         fetch(url, {
@@ -105,13 +109,16 @@ class Queue extends React.Component{
         }).then(res => res.json())
         .then((responseData) => {
             this.setState({
-                selectedDate: responseData
+                selectedDate: responseData,
+                refreshing: false
             }); 
             console.log('OK' ,responseData )
           })
-    
         .then(response => console.log('Success:', JSON.stringify(response)))
         .catch(error => console.error('Error:', error));
+        this.setState({
+            refreshing: false
+        }); 
     }
     render(){
         return(
@@ -121,7 +128,7 @@ class Queue extends React.Component{
                         refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
-                            onRefresh={this._onRefresh()}
+                            onRefresh={() => this._onRefresh()}
                         />
                         }
                     >
