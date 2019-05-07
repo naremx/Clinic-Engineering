@@ -41,3 +41,39 @@ class AdShowHistorySerializer(serializers.ModelSerializer):
         queue = Queue.objects.get(id=obj.id)
         return queue.date_time.date()
 
+class AdminEditQueueSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source='user.first_name')
+    name = serializers.CharField(source='name.first_name')
+    date_time = serializers.SerializerMethodField('get_date')
+    available = serializers.SerializerMethodField('get_time')
+    class Meta:
+        model = Queue
+        fields = '__all__'
+
+    def get_time(self, obj):
+        time = Queue.objects.get(id=obj.id)
+        free_time = str(time.available.free_time.start_time) + '-' + str(time.available.free_time.end_time)
+        return free_time
+
+    def get_date(self, obj):
+        queue = Queue.objects.get(id=obj.id)
+        return queue.date_time.date()
+
+class AdminShowQueueSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source='user.first_name')
+    name = serializers.CharField(source='name.first_name')
+    date_time = serializers.SerializerMethodField('get_date')
+    available = serializers.SerializerMethodField('get_time')
+    class Meta:
+        model = QueueAd
+        fields = '__all__'
+
+    def get_time(self,obj):
+        time = QueueAd.objects.get(id=obj.id)
+        free_time = str(time.available.free_time.start_time)+'-'+str(time.available.free_time.end_time)
+        return free_time
+
+    def get_date(self,obj):
+        queue = QueueAd.objects.get(id=obj.id)
+        return queue.date_time.date()
+
