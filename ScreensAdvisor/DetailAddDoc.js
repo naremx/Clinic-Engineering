@@ -156,7 +156,7 @@ renderStatus(val){
                     </View>
 
 
-                    <View style={{height : 250}}>
+                    {/* <View style={{height : 250}}>
                         <ScrollView style={{ marginTop : 20 , height : 280 }}
                             refreshControl={
                             <RefreshControl
@@ -165,6 +165,14 @@ renderStatus(val){
                             />
                             }
                         >
+                        <View style={{alignItems:'center'}}>
+                            { this.renderText() }
+                        </View>
+                        </ScrollView>
+                    </View> */}
+                   <View style={{height : 250}}>
+                        <ScrollView style={{ marginTop : 20 , height : 280 }}>
+                            
                         <View style={{alignItems:'center'}}>
                             { this.renderText() }
                         </View>

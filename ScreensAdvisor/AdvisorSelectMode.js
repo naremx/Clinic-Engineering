@@ -1,10 +1,44 @@
 import React from 'react';
 import { StyleSheet,View,TouchableOpacity,Image } from 'react-native';
-import { LinearGradient,Constants } from 'expo';
+import Expo ,{ LinearGradient, Permissions, Notifications , Constants }  from 'expo';
 import { Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux';
 
 
-export default class AdvisorSelectMode extends React.Component{
+class AdvisorSelectMode extends React.Component{
+  async setNoticeToken(token){
+    let collection={}
+    collection.expo_token=token
+    try{
+        var url = 'http://10.66.13.208:8000/notification/upload_expo_token/' ;
+
+        await fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(collection),
+        headers:{
+            'Content-Type': 'application/json' ,
+            Authorization : `Token ${this.props.token}`,
+        }
+        })
+    }catch(err){
+        Alert.alert('Try Again');
+    }
+}
+  componentWillMount(){
+    this.getToken();
+  }
+    async getToken() {
+    let notificationStatus;
+    await Permissions.askAsync(Permissions.LOCATION)
+    .then(notificationResponse =>{
+      notificationStatus = notificationResponse.status;
+    })
+    if (notificationStatus === 'granted') {
+          const token = await Notifications.getExpoPushTokenAsync();
+          this.setNoticeToken(token)
+          console.log('Our token',token);
+        } 
+    }
    render(){  
     return(
         <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
@@ -45,3 +79,12 @@ const Styles = StyleSheet.create({
       elevation: 6,
     },
 });
+
+
+
+const mapStateToProps = ({ LoginUser_Reducer}) => {
+  const { token,role,data } = LoginUser_Reducer;
+      return { token,role,data };
+}
+
+export default connect(mapStateToProps)(AdvisorSelectMode);
