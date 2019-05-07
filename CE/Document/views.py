@@ -115,6 +115,22 @@ class getsubdocument(APIView):
             return Response(serializers.data)
 
 class file(APIView):
-    def post(self, request):
 
-        return Response(serializers.data)
+    def post(self, request):
+        from django.shortcuts import render
+        import base64
+        from django.conf import settings
+        from django.core.files.base import ContentFile
+        file = request.data['image']
+        print(file)
+        super_file = SuperFile.objects.create(
+            user=User.objects.get(id=request.data['user']),
+            subdoc=SubDoc.objects.get(id=request.data['id']),
+        )
+        file_name = file['uri'].split('/')[-1]
+        super_file.file.save(file_name,ContentFile(base64.b64decode(file['base64'])),save=True)
+        serializers = FileSerializer(super_file,context={'request':request})
+    # return render(request, 'core/simple_upload.html')
+        return Response(serializers.data,status=status.HTTP_200_OK)
+        # return Response(serializers.data)
+

@@ -13,12 +13,12 @@ class DocumentSerializer(serializers.ModelSerializer):
 
 
 class SubDocumentSerializer(serializers.ModelSerializer):
-
+    advisor_id = serializers.IntegerField(source='doc.queue.name.user.id')
     doc = serializers.CharField(source='doc.id')
     user = serializers.CharField(source='user.id')
     class Meta:
         model = SubDoc
-        fields = ('topic','description','user','name','doc','id','status')
+        fields = ('topic','description','user','name','doc','id','status','advisor_id')
 
 class FileSerializer(serializers.ModelSerializer):
     subdoc=serializers.CharField(source='subdoc.id')
