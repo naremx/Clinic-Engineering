@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'Editprofile',
     'Showdetail',
     'Document',
+    'notification',
 ]
 
 MIDDLEWARE = [
