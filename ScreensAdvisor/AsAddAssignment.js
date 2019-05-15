@@ -33,7 +33,6 @@ submit(){
   collection.description=this.state.description
   collection.start_date=this.state.start_date
   collection.end_date=this.state.end_date
-  console.log('KIKI',collection);
 
   Actions.AdSelectModeDoc();
 

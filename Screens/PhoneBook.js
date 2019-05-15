@@ -29,7 +29,6 @@ class PhoneBook extends React.Component{
         })
       .then(res => {
         this.setState({ dataSource : res.data});
-        console.log('DATAAA' , res)
       })
     }
     catch(err){
@@ -41,7 +40,6 @@ sentDataSearch(){
   let collection={}
   collection=this.state.search
 
-  console.log(collection);
 
   var url = 'http://35.198.249.38:8000/Search/search/' ;
 
@@ -54,7 +52,6 @@ sentDataSearch(){
     }
   }).then(res => res.json())
   .then((responseData) => {
-    console.log('RESULTSEARCH' , responseData)
     this.props.UserSearchAction(responseData)
     Actions.HomeResultSearch();
   })
@@ -101,7 +98,6 @@ updateValue(text , field){
 }
 CollectData(val){
   this.props.DataAdvisorAction(val)
-  console.log(val)
   Actions.DetailAdvisorPhoneBook();
   }
 

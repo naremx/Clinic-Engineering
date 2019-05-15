@@ -106,6 +106,9 @@ renderStatus(val){
         }); 
         console.log('OK' ,responseData )
       })
+      this.setState({
+        refreshing: false
+    }); 
 
   }
    render(){  

@@ -33,7 +33,6 @@ constructor(props) {
             this.setState({
               DataSource: responseData
             }); 
-            console.log('OK22222' ,this.state.DataSource )
 
             const resultData = this.state.DataSource.reduce((arr,item) =>{
                 if( item.expertise){
@@ -41,7 +40,6 @@ constructor(props) {
                 }
                 return arr
                   }, [])
-                  console.log('--Result9999--', resultData)
 
             this.setState({
                 ResultData : resultData

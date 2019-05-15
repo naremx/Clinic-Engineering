@@ -17,7 +17,6 @@ class ModalCardSelectFile extends React.Component {
         alert('ทำการเพิ่มไฟล์เรียบร้อยแล้ว');
 
         this.setState({ showMe:false })
-        console.log('_pickDocument',result);
     }
     
     _pickImg = async () => {
@@ -26,7 +25,6 @@ class ModalCardSelectFile extends React.Component {
         allowsEditing: false,
         aspect: [4, 3],
       });
-      console.log(pickerResult)
       this.setState({
         pickerResult,
         showMe:false

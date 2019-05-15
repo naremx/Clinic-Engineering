@@ -125,7 +125,6 @@ export default class ModalCardRegister extends React.Component {
       collection.password=this.state.password,
       collection.username=this.state.username,
       collection.user_type=this.state.user_type,
-      console.log(collection);
         // this.setState({ showMe:false })
 
         var url = 'http://35.198.249.38:8000/Account/Usregister/' ;
@@ -176,7 +175,6 @@ export default class ModalCardRegister extends React.Component {
   }
   
   render() {
-      console.log(this.state.visible)
       return(
         <View style={Styles.container}>
         <Modal visible={this.state.showMe} onRequestClose ={()=>console.warn("this is close")} transparent animationType='fade'>

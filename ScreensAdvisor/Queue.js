@@ -32,13 +32,17 @@ _onRefresh(){
   .then(res => res.json())
   .then((responseData) => {
       this.setState({
-          selectedDate: responseData
+          selectedDate: responseData,
+          refreshing: false
       }); 
       console.log('OK' ,responseData )
     })
 
   .then(response => console.log('Success:', JSON.stringify(response)))
   .catch(error => console.error('Error:', error));
+  this.setState({
+    refreshing: false
+}); 
 }
   componentDidMount() {
     var url = 'http://35.198.249.38:8000/history/Adshowhistory/' ;

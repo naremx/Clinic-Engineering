@@ -25,7 +25,6 @@ class Search extends React.Component{
         })
       .then(res => {
         this.setState({ dataSource : res.data});
-        console.log('--CHECK1--' , this.state.dataSource)
       })
     }
     catch(err){
@@ -43,7 +42,6 @@ class Search extends React.Component{
     let collection={}
     collection=this.state.search
 
-    console.log(collection);
 
     var url = 'http://35.198.249.38:8000/Search/search/' ;
 

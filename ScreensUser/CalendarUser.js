@@ -33,7 +33,6 @@ constructor(props) {
             this.setState({
                 selectedDate: responseData
             });
-            console.log('KK',responseData)
             const resultDate = this.state.selectedDate.reduce((arr,item) =>{
                 if( item.free_date){
                     arr.push(item.free_date);

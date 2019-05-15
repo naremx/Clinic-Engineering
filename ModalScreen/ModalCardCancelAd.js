@@ -21,7 +21,6 @@ class ModalCardCancelAd extends React.Component {
         collection.id = this.props.AdDateTimeDetail.id
         collection.decision = '0'
 
-        console.log(collection);
         Actions.pop();
 
         var url = 'http://35.198.249.38:8000/queue/confirm/' ;

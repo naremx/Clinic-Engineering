@@ -28,7 +28,6 @@ class CalendarUserTime extends React.Component{
     }
     }).then(res => res.json())
     .then((responseData) => {
-      console.log('--CHECK--' , responseData)
         this.setState({
             selectedDate: responseData
         });        
@@ -71,7 +70,6 @@ TopicandDescription(){
   let collectionUserSelectTime={}
   collectionUserSelectTime.free_date = this.props.collectionDateTime.date,
   collectionUserSelectTime = this.state.selectedTime,
-  console.log('--Sent--' ,collectionUserSelectTime)
 
     this.props.UserSelectTimeAction(collectionUserSelectTime)
     Actions.AddQueue()

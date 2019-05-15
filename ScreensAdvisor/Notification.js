@@ -80,12 +80,17 @@ class Notification extends React.Component{
           }, [])
           console.log(output)
           this.setState({
-            ResultData: output
+            ResultData: output,
+            refreshing: false
+            
         }); 
         })
   
       .then(response => console.log('Success:', JSON.stringify(response)))
       .catch(error => console.error('Error:', error));
+      this.setState({
+        refreshing: false
+    }); 
       }
     renderText() {
         if (this.state.ResultData.length > 0) {

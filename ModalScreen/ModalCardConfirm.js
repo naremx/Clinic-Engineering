@@ -20,7 +20,6 @@ class ModalCardConfirm extends React.Component {
         collection.decision = '1'
         collection.id = this.props.AdDateTimeDetail.id
 
-        console.log(collection);
         Actions.pop();
 
         var url = 'http://35.198.249.38:8000/queue/confirm/' ;

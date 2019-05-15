@@ -93,7 +93,6 @@ class Queue extends React.Component{
         }
     }
     _onRefresh(){
-        console.log('EIEI')
         this.setState({
             refreshing: true
         }); 

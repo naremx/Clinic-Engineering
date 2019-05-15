@@ -113,7 +113,6 @@ async Register() {
   collection.password1=this.state.password1,
   collection.password2=this.state.password2,
   collection.user_type="Client"
-  console.log(collection);
 
   var url = 'http://10.66.4.239:8000/rest-auth/registration/'
 

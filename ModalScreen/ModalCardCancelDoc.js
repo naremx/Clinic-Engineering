@@ -21,7 +21,7 @@ class ModalCardCancelDoc extends React.Component {
         collection.id_doc = this.props.DetailDoc.id
         collection.id_queue = this.props.DetailDoc.queue
 
-        console.log(collection);
+
         Actions.Assignment();
 
         var url = 'http://35.198.249.38:8000/Document/deletedocument/' ;

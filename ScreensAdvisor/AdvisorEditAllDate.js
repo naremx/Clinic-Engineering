@@ -28,8 +28,6 @@ class AdvisorEditAllDate extends React.Component {
     let collection={}
         collection.free_date=this.state.DateArray,
         collection.time=this.state.selectedTime,
-
-    console.log('--SENT--',collection)
     Actions.AdvisorSelectMode()
 
     var url = 'http://35.198.249.38:8000/advisor/createavailable/' ;

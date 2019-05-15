@@ -14,7 +14,6 @@ class ModalCardCancel extends React.Component {
         }
     }
     componentDidMount() {
-            console.log('CHECK',this.props.UserDateTimeDetail )
       }
     SentDataCancle(date_time)
     {
@@ -23,7 +22,6 @@ class ModalCardCancel extends React.Component {
         collection.id = this.props.UserDateTimeDetail.id
         collection.name = this.props.UserDateTimeDetail.name
 
-        console.log(collection);
         Actions.pop();
 
         var url = 'http://35.198.249.38:8000/queue/deletequeue/' ;

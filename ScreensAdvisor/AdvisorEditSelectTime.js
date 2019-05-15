@@ -27,7 +27,6 @@ class AdvisorEditSelectTime extends React.Component{
     }
     }).then(res => res.json())
     .then((responseData) => {
-        console.log('--CHECK--',responseData)   
         this.setState({
             selectedDate: responseData
         });    
@@ -69,7 +68,6 @@ DeleteDate(){
   collection.free_date=this.props.SelectDate.date,
   collection.time=this.state.selectedTime,
 
-console.log('--SENT--',collection)
 Actions.AdvisorSelectMode()
 
 var url = 'http://35.198.249.38:8000/advisor/deleteavailable/' ;
@@ -86,7 +84,6 @@ headers:{
 }
 
   render(){
-    console.log('--selectedValue--',this.state.selectedValue)
     return(
       <LinearGradient colors ={['#87daf3','#a69beb']} style={{ paddingTop: Constants.statusBarHeight }}>
         <View style={Styles.Container}>

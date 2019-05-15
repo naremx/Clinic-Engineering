@@ -88,7 +88,6 @@ renderStatus(val){
     }); 
     let collection={}
     collection.id=this.props.DetailDoc.id
-    console.log(collection);
 
     var url = 'http://35.198.249.38:8000/Document/showsubdocument/' ;
 
@@ -110,6 +109,9 @@ renderStatus(val){
 
     .then(response => console.log('Success:', JSON.stringify(response)))
     .catch(error => console.error('Error:', error));
+    this.setState({
+        refreshing: false
+    }); 
   }
    render(){  
     return(

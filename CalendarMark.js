@@ -12,7 +12,6 @@ export default class PhoneBook extends React.Component{
     this.onDayPress = this.onDayPress.bind(this);
   }
   onDayPress(day) {
-    console.log(day)
     this.setState({
       selected: day.dateString
     });

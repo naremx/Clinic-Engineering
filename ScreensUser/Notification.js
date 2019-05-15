@@ -68,7 +68,8 @@ class Notification extends React.Component{
       }).then(res => res.json())
       .then((responseData) => {
           this.setState({
-              DataSource: responseData
+              DataSource: responseData,
+              refreshing: false
           }); 
           var output = this.state.DataSource.reduce(function (acc, item) {
             if( item.status == 'accepted' ){
@@ -79,9 +80,9 @@ class Notification extends React.Component{
             }
             return acc
           }, [])
-          console.log(output)
           this.setState({
-            ResultData: output
+            ResultData: output,
+            refreshing: false
         }); 
         })
   

@@ -29,8 +29,7 @@ class AdvisorEditSelectDate extends React.Component{
         .then((responseData) => {
             this.setState({
                 selectedDate: responseData
-            });
-            console.log('--CHECK--',this.state.selectedDate)           
+            });         
             const resultDate = this.state.selectedDate.reduce((arr,item) =>{
                 if( item.free_date){
                     arr.push(item.free_date);
