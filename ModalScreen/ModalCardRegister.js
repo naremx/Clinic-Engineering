@@ -125,7 +125,7 @@ export default class ModalCardRegister extends React.Component {
       collection.password=this.state.password,
       collection.username=this.state.username,
       collection.user_type=this.state.user_type,
-        // this.setState({ showMe:false })
+        this.setState({ showMe:false })
 
         var url = 'http://35.198.249.38:8000/Account/Usregister/' ;
   
